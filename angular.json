@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1, 
+  "version": 1,
   "newProjectRoot": "projects",
   "projects": {
     "Quimobasicos": {
@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "Quimobasicos"
+    }
+  },
+  "defaultProject": "Quimobasicos",
+  "cli": {
+    "analytics": "b2f33423-ffa0-4d9d-b47f-c0a4bfcaabb1"
+  }
 }
