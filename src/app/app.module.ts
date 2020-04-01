@@ -8,6 +8,14 @@ import { AdminHomeComponent } from './components/admin/admin-home/admin-home.com
 import { UsersComponent } from './components/admin/users/users.component';
 import { AddUserComponent } from './components/admin/add-user/add-user.component';
 import { UserComponent } from './components/admin/user/user.component';
+import { AddTankComponent } from './tank/add-tank/add-tank.component';
+import { UpdateTankComponent } from './components/tank/update-tank/update-tank.component';
+import { ExitTankComponent } from './components/tank/exit-tank/exit-tank.component';
+import { TankComponent } from './components/tank/tank.component';
+import { SupervisorHomeComponent } from './components/supervisor/supervisor-home/supervisor-home.component';
+import { OperatorHomeComponent } from './components/operator/operator-home/operator-home.component';
+import { ReportsComponent } from './components/reports/reports.component';
+import { InventoryComponent } from './components/reports/inventory/inventory.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +24,15 @@ import { UserComponent } from './components/admin/user/user.component';
     AdminHomeComponent,
     UsersComponent,
     AddUserComponent,
-    UserComponent
+    UserComponent,
+    AddTankComponent,
+    UpdateTankComponent,
+    ExitTankComponent,
+    TankComponent,
+    SupervisorHomeComponent,
+    OperatorHomeComponent,
+    ReportsComponent,
+    InventoryComponent
   ],
   imports: [
     BrowserModule,
