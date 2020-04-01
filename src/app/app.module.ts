@@ -8,7 +8,7 @@ import { AdminHomeComponent } from './components/admin/admin-home/admin-home.com
 import { UsersComponent } from './components/admin/users/users.component';
 import { AddUserComponent } from './components/admin/add-user/add-user.component';
 import { UserComponent } from './components/admin/user/user.component';
-import { AddTankComponent } from './tank/add-tank/add-tank.component';
+import { AddTankComponent } from './components/tank/add-tank/add-tank.component';
 import { UpdateTankComponent } from './components/tank/update-tank/update-tank.component';
 import { ExitTankComponent } from './components/tank/exit-tank/exit-tank.component';
 import { TankComponent } from './components/tank/tank.component';
