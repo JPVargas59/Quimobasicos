@@ -10,11 +10,12 @@ import { UpdateTankComponent } from './components/tank/update-tank/update-tank.c
 import { ExitTankComponent } from './components/tank/exit-tank/exit-tank.component';
 import { TankComponent } from './components/tank/tank.component';
 import { SupervisorHomeComponent } from './components/supervisor/supervisor-home/supervisor-home.component'
-import { OperatorHomeComponent } from './components/operator/operator-home/operator-home.component' 
+import { OperatorHomeComponent } from './components/operator/operator-home/operator-home.component'
 import { InventoryComponent } from './components/reports/inventory/inventory.component';
 import { ReportsComponent } from './components/reports/reports.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'admin', children: [
       { path: '', component: AdminHomeComponent },
@@ -31,7 +32,6 @@ const routes: Routes = [
       { path: 'tank/:id/exit', component: ExitTankComponent },
       { path: 'reports', component: ReportsComponent },
     ]},
-    
   { path: 'operator', children: [
       { path: '', component: OperatorHomeComponent },
       { path: 'reports/inventory', component: InventoryComponent },
