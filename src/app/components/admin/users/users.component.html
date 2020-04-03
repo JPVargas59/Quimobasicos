@@ -1,3 +1,22 @@
-<br>
-<br><br><br>
-<p>users works!</p>
+<h3 class="ui header">Usuarios</h3>
+
+<table class="ui table">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Correo</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td>
+        <a routerLink="/admin/user/{{user.nombre}}">
+          {{user.nombre}}
+        </a>
+      </td>
+      <th>{{user.correo}}</th>
+      <th><button class="ui fluid red button">Eliminar</button></th>
+    </tr>
+  </tbody>
+</table>
