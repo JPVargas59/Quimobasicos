@@ -17,29 +17,9 @@ import { ReportsComponent } from './components/reports/reports.component';
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'admin', children: [
-      { path: '', component: AdminHomeComponent },
-      { path: 'users', component: UsersComponent },
-      { path: 'users/add', component: AddUserComponent },
-      { path: 'user/:id', component: UserComponent },
-    ]},
-  { path: 'supervisor', children: [
-      { path: '', component: SupervisorHomeComponent },
-      { path: 'reports/inventory', component: InventoryComponent },
-      { path: 'tanks/add', component: AddTankComponent },
-      { path: 'tank/:id', component: TankComponent },
-      { path: 'tank/:id/update', component: UpdateTankComponent },
-      { path: 'tank/:id/exit', component: ExitTankComponent },
-      { path: 'reports', component: ReportsComponent },
-    ]},
-  { path: 'operator', children: [
-      { path: '', component: OperatorHomeComponent },
-      { path: 'reports/inventory', component: InventoryComponent },
-      { path: 'tanks/add', component: AddTankComponent },
-      { path: 'tank/:id', component: TankComponent },
-      { path: 'tank/:id/update', component: UpdateTankComponent },
-      { path: 'tank/:id/exit', component: ExitTankComponent },
-    ]},
+  { path: 'admin', loadChildren: () => import('./modules/admin/admin.module').then(m => m.AdminModule) },
+  { path: 'supervisor', loadChildren: () => import('./modules/supervisor/supervisor.module').then(m => m.SupervisorModule) },
+  { path: 'operator', loadChildren: () => import('./modules/operator/operator.module').then(m => m.OperatorModule) }
 ];
 
 @NgModule({

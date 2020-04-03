@@ -16,6 +16,7 @@ import { SupervisorHomeComponent } from './components/supervisor/supervisor-home
 import { OperatorHomeComponent } from './components/operator/operator-home/operator-home.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { InventoryComponent } from './components/reports/inventory/inventory.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { InventoryComponent } from './components/reports/inventory/inventory.com
     SupervisorHomeComponent,
     OperatorHomeComponent,
     ReportsComponent,
-    InventoryComponent
+    InventoryComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
