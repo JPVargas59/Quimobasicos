@@ -17,6 +17,7 @@ import { OperatorHomeComponent } from './components/operator/operator-home/opera
 import { ReportsComponent } from './components/reports/reports.component';
 import { InventoryComponent } from './components/reports/inventory/inventory.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { AdminLandingComponent } from './components/admin/admin-landing/admin-landing.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     OperatorHomeComponent,
     ReportsComponent,
     InventoryComponent,
-    NavbarComponent
+    NavbarComponent,
+    AdminLandingComponent
   ],
   imports: [
     BrowserModule,

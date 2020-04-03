@@ -5,13 +5,14 @@ import { AdminHomeComponent } from 'src/app/components/admin/admin-home/admin-ho
 import { UsersComponent } from 'src/app/components/admin/users/users.component';
 import { AddUserComponent } from 'src/app/components/admin/add-user/add-user.component';
 import { UserComponent } from 'src/app/components/admin/user/user.component';
+import { AdminLandingComponent } from 'src/app/components/admin/admin-landing/admin-landing.component';
 
 
 const routes: Routes = [
   { path: '',
     component: AdminHomeComponent,
     children: [
-      { path: '', component: UsersComponent},
+      { path: '', component: AdminLandingComponent},
       { path: 'users', component: UsersComponent },
       { path: 'users/add', component: AddUserComponent },
       { path: 'user/:id', component: UserComponent }
