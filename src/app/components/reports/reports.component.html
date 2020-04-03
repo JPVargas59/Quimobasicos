@@ -1,1 +1,25 @@
-<p>reports works!</p>
+<h3 class="ui header">Reportes</h3>
+
+<table class="ui table">
+  <thead>
+  <tr>
+    <th>Tipo</th>
+    <th>Acciones</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let report of reports">
+    <td>
+      <a routerLink="/supervisor/report/{{report.nombre}}">
+        {{report.nombre}}
+      </a>
+    </td>
+    <th>
+      <div class="ui two buttons">
+        <button class="ui red button">Eliminar</button>
+        <button class="ui blue button" routerLink="{{report.nombre}}">Ver</button>
+      </div>
+    </th>
+  </tr>
+  </tbody>
+</table>

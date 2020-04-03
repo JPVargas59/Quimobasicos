@@ -7,6 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReportsComponent implements OnInit {
 
+  reports = [
+    {nombre: 'Inventario'},
+    {nombre: 'Tanques en planta'},
+    {nombre: 'Tanques '}
+  ];
+
   constructor() { }
 
   ngOnInit(): void {

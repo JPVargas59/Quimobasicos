@@ -1,14 +1,12 @@
 <div class="ui basic segment">
-    <div class="ui secondary pointing menu">
-        <a routerLink="" class="item">Home</a>
-        <a routerlink="/reports" class="item">Reportes</a>
-      <a href="/Tank" class="item" >Tanks</a>
-    </div>
+  <div class="ui secondary pointing menu">
+    <a routerLink="/supervisor" class="item">Inicio</a>
+    <a routerLink="/supervisor/reports/inventory" class="item">Tanques</a>
+    <a routerLink="/supervisor/reports" class="item">Reportes</a>
+
   </div>
-  
-  <h3 class="title">Supervisor</h3>
-  
-  <div class="ui container">
-    <router-outlet></router-outlet>
-  </div>
-  
+</div>
+
+<div class="ui container">
+  <router-outlet></router-outlet>
+</div>

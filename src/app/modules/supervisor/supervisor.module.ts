@@ -8,11 +8,13 @@ import { TankComponent } from 'src/app/components/tank/tank.component';
 import { UpdateTankComponent } from 'src/app/components/tank/update-tank/update-tank.component';
 import { ExitTankComponent } from 'src/app/components/tank/exit-tank/exit-tank.component';
 import { ReportsComponent } from 'src/app/components/reports/reports.component';
+import {SupervisorLandingComponent} from '../../components/supervisor/supervisor-landing/supervisor-landing.component';
 
-const routes:Routes = [
-    { path: '', 
+const routes: Routes = [
+    { path: '',
     component: SupervisorHomeComponent,
     children: [
+      { path: '', component: SupervisorLandingComponent},
       { path: 'reports/inventory', component: InventoryComponent },
       { path: 'tanks/add', component: AddTankComponent },
       { path: 'tank/:id', component: TankComponent },

@@ -1,0 +1,12 @@
+.pseudoBody {
+  background-color: #f9f9f9;
+}
+.pseudoBody > .grid {
+  height: 100vh;
+}
+.image {
+  margin-top: -100px;
+}
+.column {
+  max-width: 450px;
+}

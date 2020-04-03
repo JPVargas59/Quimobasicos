@@ -19,6 +19,7 @@ import { InventoryComponent } from './components/reports/inventory/inventory.com
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { AdminLandingComponent } from './components/admin/admin-landing/admin-landing.component';
 import { OperatorLandingComponent } from './components/operator/operator-landing/operator-landing.component';
+import {SupervisorLandingComponent} from './components/supervisor/supervisor-landing/supervisor-landing.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { OperatorLandingComponent } from './components/operator/operator-landing
     InventoryComponent,
     NavbarComponent,
     AdminLandingComponent,
-    OperatorLandingComponent
+    OperatorLandingComponent,
+    SupervisorLandingComponent
   ],
   imports: [
     BrowserModule,

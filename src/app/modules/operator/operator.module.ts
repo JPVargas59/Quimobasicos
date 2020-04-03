@@ -9,8 +9,8 @@ import { UpdateTankComponent } from 'src/app/components/tank/update-tank/update-
 import { ExitTankComponent } from 'src/app/components/tank/exit-tank/exit-tank.component';
 import { OperatorLandingComponent } from 'src/app/components/operator/operator-landing/operator-landing.component';
 
-const routes:Routes = [
-  { path: '', 
+const routes: Routes = [
+  { path: '',
     component: OperatorHomeComponent,
     children: [
       { path: '', component: OperatorLandingComponent },
