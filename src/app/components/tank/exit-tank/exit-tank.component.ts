@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-exit-tank',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExitTankComponent implements OnInit {
 
-  constructor() { }
+  tank: string;
+  constructor(route: ActivatedRoute) { 
+    this.tank = route.snapshot.params.id;
+  }
 
   ngOnInit(): void {
   }

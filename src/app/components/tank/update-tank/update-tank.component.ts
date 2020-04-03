@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-update-tank',
@@ -6,8 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./update-tank.component.css']
 })
 export class UpdateTankComponent implements OnInit {
+  tank: string;
 
-  constructor() { }
+  constructor(route: ActivatedRoute) { 
+    this.tank = route.snapshot.params.id;
+  }
 
   ngOnInit(): void {
   }

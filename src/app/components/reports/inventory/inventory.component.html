@@ -1,1 +1,25 @@
-<p>inventory works!</p>
+<h3 class="ui header">Inventario de Tanques</h3>
+
+<table class="ui table">
+    <thead>
+      <tr class="ui table header">
+        <th>ID</th>
+        <th>Contenido</th>
+        <th>Fecha Registro</th>
+        <th>Última Ubicaicón</th>
+        <th>Estatus</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let tank of tanks">
+        <td>
+          <a routerLink="/operator/tank/{{tank.id}}">{{tank.id}}</a>
+        </td>
+        <td>{{tank.content}}</td>
+        <td>{{tank.registerDate}}</td>
+        <td>{{tank.location}}</td>
+        <td>{{tank.status}}</td>
+      </tr>
+    </tbody>
+  </table>
+  

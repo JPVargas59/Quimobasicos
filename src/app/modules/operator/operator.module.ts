@@ -7,12 +7,13 @@ import { AddTankComponent } from 'src/app/components/tank/add-tank/add-tank.comp
 import { TankComponent } from 'src/app/components/tank/tank.component';
 import { UpdateTankComponent } from 'src/app/components/tank/update-tank/update-tank.component';
 import { ExitTankComponent } from 'src/app/components/tank/exit-tank/exit-tank.component';
+import { OperatorLandingComponent } from 'src/app/components/operator/operator-landing/operator-landing.component';
 
 const routes:Routes = [
   { path: '', 
     component: OperatorHomeComponent,
     children: [
-      { path: '', component: OperatorHomeComponent },
+      { path: '', component: OperatorLandingComponent },
       { path: 'reports/inventory', component: InventoryComponent },
       { path: 'tanks/add', component: AddTankComponent },
       { path: 'tank/:id', component: TankComponent },
