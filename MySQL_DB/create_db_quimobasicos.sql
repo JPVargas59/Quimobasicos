@@ -91,3 +91,12 @@ CREATE TABLE TanqueEsta (
     FOREIGN KEY (idTanque) REFERENCES Tanque(idTanque),
     FOREIGN KEY (idLugar) REFERENCES Lugar(idLugar)
 );
+
+CREATE TABLE OperadoPor(
+	idTanque CHAR(10) NOT NULL,
+    idUsuario CHAR(10) NOT NULL,
+    fecha DATETIME,
+    PRIMARY KEY (idTanque, idUsuario),
+    FOREIGN KEY (idTanque) REFERENCES Tanque(idTanque),
+    FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario)
+);
