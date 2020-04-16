@@ -40,5 +40,4 @@ CREATE TABLE Mantenimiento(
 	FOREIGN KEY(idTanque) REFERENCES Tanque(idTanque)
 );
 
-CREATE TABLE 
 
