@@ -1,0 +1,17 @@
+{
+  "name": "quimobasicos",
+  "version": "1.0.0",
+  "description": "Back end de la web app de quimobásicos para el rastreo de tanques. API de GraphQL y Conexión a MySQL",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-graphql": "^0.9.0",
+    "graphql": "^14.4.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
