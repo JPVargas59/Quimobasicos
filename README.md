@@ -6,26 +6,28 @@
 
 #### Extensiones necesarias:
 
-- [esbenp.prettier-vscode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+-   [esbenp.prettier-vscode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 
 #### Pasos:
 
-1. Crear un directorio llamado `.vscode` y crear los siguientes archivos dentro.
-2. Crear `.prettierrc.json` con el siguiente contenido:
+1. Crear un directorio llamado `.vscode` y crear el siguiente archivo dentro.
+2. Crear `setting.json` con el siguiente contenido:
 
 ```json
 {
-  "trailingComma": "none",
-  "singleQuote": true,
-  "useTabs": true
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.formatOnSave": true
 }
 ```
 
-3. Crear `setting.json` con el siguiente contenido:
+3. Crear `.prettierrc.json` con el siguiente contenido en el directorio raíz:
 
 ```json
 {
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnSave": true
+	"trailingComma": "none",
+	"singleQuote": true,
+	"useTabs": true,
+	"tabWidth": 4,
+	"semi": true
 }
 ```
