@@ -34,7 +34,7 @@
 
 ### Pendientes 
 
-- [ ] Realizar schema de GraphQL
+- [x] Realizar schema de GraphQL
 - [ ] Obtener información de todos los tanques registrados
 - [ ] Dar de alta un tanque
 - [ ] Obtener los tanques de acuerdo a una caracteristica
