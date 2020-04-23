@@ -31,3 +31,16 @@
 	"semi": true
 }
 ```
+
+### Pendientes 
+
+- [ ] Realizar schema de GraphQL
+- [ ] Obtener información de todos los tanques registrados
+- [ ] Dar de alta un tanque
+- [ ] Obtener los tanques de acuerdo a una caracteristica
+- [ ] Obtener información de todos los materiales registrados
+- [ ] Dar de alta un materia
+- [ ] Obtener los tanques de acuerdo a su nombre o clave
+- [ ] Dar de alta un lugar
+- [ ] Obtener información de todos los lugares registrados
+- [ ] Obtener los lugares de acuerdo a su nombre o clave
