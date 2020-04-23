@@ -1,5 +1,5 @@
 const resolver = {
-	empleado: {
+	Empleado: {
 		__resolveType() {
 			return null;
 		}
