@@ -6,6 +6,7 @@ import { UsersComponent } from 'src/app/components/admin/users/users.component';
 import { AddUserComponent } from 'src/app/components/admin/add-user/add-user.component';
 import { UserComponent } from 'src/app/components/admin/user/user.component';
 import { AdminLandingComponent } from 'src/app/components/admin/admin-landing/admin-landing.component';
+import {LocationsComponent} from '../../components/admin/locations/locations.component';
 
 
 const routes: Routes = [
@@ -15,7 +16,8 @@ const routes: Routes = [
       { path: '', component: AdminLandingComponent},
       { path: 'users', component: UsersComponent },
       { path: 'users/add', component: AddUserComponent },
-      { path: 'user/:id', component: UserComponent }
+      { path: 'user/:id', component: UserComponent },
+      { path: 'locations', component: LocationsComponent}
     ]
   }
 ];
