@@ -1,27 +1,33 @@
-# Quimobasicos
+# Quimobásicos
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.5.
+## Setup opcional de VS Code
 
-## Development server
+### Prettier
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+#### Extensiones necesarias:
 
-## Code scaffolding
+-   [esbenp.prettier-vscode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+#### Pasos:
 
-## Build
+1. Crear un directorio llamado `.vscode` y crear el siguiente archivo dentro.
+2. Crear `setting.json` con el siguiente contenido:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+```json
+{
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.formatOnSave": true
+}
+```
 
-## Running unit tests
+3. Crear `.prettierrc.json` con el siguiente contenido en el directorio raíz:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+```json
+{
+	"trailingComma": "none",
+	"singleQuote": true,
+	"useTabs": true,
+	"tabWidth": 4,
+	"semi": true
+}
+```
