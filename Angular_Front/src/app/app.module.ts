@@ -21,6 +21,8 @@ import { AdminLandingComponent } from './components/admin/admin-landing/admin-la
 import { OperatorLandingComponent } from './components/operator/operator-landing/operator-landing.component';
 import { SupervisorLandingComponent } from './components/supervisor/supervisor-landing/supervisor-landing.component';
 import { LocationsComponent } from './components/admin/locations/locations.component';
+import { AddLocationComponent } from './components/admin/locations/add-location/add-location.component';
+import { UpdateLocationComponent } from './components/admin/locations/update-location/update-location.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { LocationsComponent } from './components/admin/locations/locations.compo
     AdminLandingComponent,
     OperatorLandingComponent,
     SupervisorLandingComponent,
-    LocationsComponent
+    LocationsComponent,
+    AddLocationComponent,
+    UpdateLocationComponent
   ],
   imports: [
     BrowserModule,
