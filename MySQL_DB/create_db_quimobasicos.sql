@@ -23,8 +23,8 @@ CREATE TABLE Tanque(
 	idTanque VARCHAR(10) NOT NULL,
 	calidad VARCHAR(128),
 	estadoValcula VARCHAR(128),
-	pesoActual INT UNSIGNED,
-	peso INT UNSIGNED,
+	pesoActual FLOAT UNSIGNED,
+	peso FLOAT UNSIGNED,
 	fechaEsperadaRetorno DATETIME,
 	idEtiqueta VARCHAR(10),
 	idContenido VARCHAR(10),
@@ -44,7 +44,8 @@ CREATE TABLE Mantenimiento(
 );
 
 CREATE TABLE Lugar (
-	idLugar CHAR(10) NOT NULL,
+    idLugar CHAR(10) NOT NULL,
+    nombre VARCHAR(20) NOT NULL,
     radio FLOAT,
     capacidadMaxima SMALLINT UNSIGNED,
     coordenadas POINT,
@@ -79,7 +80,7 @@ CREATE TABLE Usuario (
 );
 
 CREATE TABLE Operador (
-	operadorId int PRIMARY KEY REFERENCES Usuario(idUsuario),
+	operadorId CHAR(10) PRIMARY KEY REFERENCES Usuario(idUsuario),
     idSupervisor CHAR(10),
     FOREIGN KEY (idSupervisor) REFERENCES Usuario(idUsuario)
 );
@@ -100,3 +101,5 @@ CREATE TABLE OperadoPor(
     FOREIGN KEY (idTanque) REFERENCES Tanque(idTanque),
     FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario)
 );
+
+
