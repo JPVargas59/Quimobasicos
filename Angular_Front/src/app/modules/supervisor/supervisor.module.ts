@@ -9,6 +9,7 @@ import { UpdateTankComponent } from 'src/app/components/tank/update-tank/update-
 import { ExitTankComponent } from 'src/app/components/tank/exit-tank/exit-tank.component';
 import { ReportsComponent } from 'src/app/components/reports/reports.component';
 import {SupervisorLandingComponent} from '../../components/supervisor/supervisor-landing/supervisor-landing.component';
+import { SeeReportComponent } from 'src/app/components/reports/see-report/see-report.component';
 
 const routes: Routes = [
     { path: '',
@@ -20,7 +21,8 @@ const routes: Routes = [
       { path: 'tank/:id', component: TankComponent },
       { path: 'tank/:id/update', component: UpdateTankComponent },
       { path: 'tank/:id/exit', component: ExitTankComponent },
-      { path: 'reports', component: ReportsComponent }
+      { path: 'reports', component: ReportsComponent },
+      { path: 'reports/see-report', component: SeeReportComponent }
     ]
   }
 ];

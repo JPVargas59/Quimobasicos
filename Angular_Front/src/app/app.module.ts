@@ -23,6 +23,7 @@ import { SupervisorLandingComponent } from './components/supervisor/supervisor-l
 import { LocationsComponent } from './components/admin/locations/locations.component';
 import { AddLocationComponent } from './components/admin/locations/add-location/add-location.component';
 import { UpdateLocationComponent } from './components/admin/locations/update-location/update-location.component';
+import { SeeReportComponent } from './components/reports/see-report/see-report.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { UpdateLocationComponent } from './components/admin/locations/update-loc
     SupervisorLandingComponent,
     LocationsComponent,
     AddLocationComponent,
-    UpdateLocationComponent
+    UpdateLocationComponent,
+    SeeReportComponent
   ],
   imports: [
     BrowserModule,
