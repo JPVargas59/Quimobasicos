@@ -9,7 +9,7 @@ CREATE TABLE Contenido(
 );
 
 CREATE TABLE EtiquetaRFID(
-	idEtiqueta VARCHAR(10) NOT NULL,
+	idEtiqueta INT NOT NULL,
 	PRIMARY KEY(idEtiqueta)
 );
 
@@ -26,7 +26,7 @@ CREATE TABLE Tanque(
 	pesoActual FLOAT UNSIGNED,
 	peso FLOAT UNSIGNED,
 	fechaEsperadaRetorno DATETIME,
-	idEtiqueta VARCHAR(10),
+	idEtiqueta INT,
 	idContenido VARCHAR(10),
 	idDueno VARCHAR(10),
 	PRIMARY KEY(idTanque),
@@ -45,7 +45,7 @@ CREATE TABLE Mantenimiento(
 
 CREATE TABLE Lugar (
     idLugar CHAR(10) NOT NULL,
-    nombre VARCHAR(20) NOT NULL,
+    nombre VARCHAR(50) NOT NULL,
     radio FLOAT,
     capacidadMaxima SMALLINT UNSIGNED,
     coordenadas POINT,
@@ -55,7 +55,7 @@ CREATE TABLE Lugar (
 CREATE TABLE TanqueHaEstado (
 	idTanque CHAR(10) NOT NULL,
     idLugar CHAR(10) NOT NULL,
-    fecha DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    fecha DATETIME NOT NULL DEFAULT DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (idTanque, idLugar, fecha),
     FOREIGN KEY (idTanque) REFERENCES Tanque(idTanque),
     FOREIGN KEY (idLugar) REFERENCES Lugar(idLugar)
