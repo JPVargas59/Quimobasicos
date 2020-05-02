@@ -47,6 +47,6 @@
 
 To start graphql Apollo Server 
 ```
-cd Node_Back \
+cd Node_Back 
 npm run start:dev
 ```
