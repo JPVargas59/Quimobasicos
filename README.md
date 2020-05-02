@@ -44,3 +44,9 @@
 - [ ] Dar de alta un lugar
 - [ ] Obtener información de todos los lugares registrados
 - [ ] Obtener los lugares de acuerdo a su nombre o clave
+
+To start graphql Apollo Server 
+```
+cd Node_Back \
+npm run start:dev
+```
