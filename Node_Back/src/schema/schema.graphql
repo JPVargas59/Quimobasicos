@@ -1,7 +1,4 @@
-var { gql } = require('apollo-server-express');
-
-const schema = gql`
-	"Interfaces"
+"Interfaces"
 	interface Empleado {
 		idUsuario: ID
 		nobmres: String
@@ -16,6 +13,7 @@ const schema = gql`
 		id: ID!
 		nombre: String!
 	}
+
 	type Tanque {
 		idTanque: ID!
 		calidad: String
@@ -29,13 +27,16 @@ const schema = gql`
 		lugar: Lugar
 		haEstado: [HistorialTanque]
 	}
+
 	type etiquetarfid {
 		idEtiqueta: ID!
 	}
+
 	type Contenido {
 		idContenido: ID!
 		contenido: String!
 	}
+
 	type Lugar {
 		idLugar: ID!
 		radio: Float
@@ -43,6 +44,7 @@ const schema = gql`
 		coordenadas: String
 		tanques: [Tanque]
 	}
+
 	type Usuario implements Empleado {
 		idUsuario: ID
 		nobmres: String
@@ -51,6 +53,7 @@ const schema = gql`
 		genero: Int
 		correo: String
 	}
+
 	type Operador implements Empleado {
 		idUsuario: ID
 		nobmres: String
@@ -60,11 +63,13 @@ const schema = gql`
 		correo: String
 		supervisor: Usuario
 	}
+
 	type Operacion {
 		operador: Usuario
 		tanque: Tanque
 		fecha: String
 	}
+
 	type HistorialTanque {
 		tanque: Tanque
 		lugar: Lugar
@@ -73,8 +78,5 @@ const schema = gql`
 
 	"Queries"
 	type Query {
-		hello: String
+		hello : String
 	}
-`;
-
-exports.schema = schema;

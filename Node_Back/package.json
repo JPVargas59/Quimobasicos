@@ -2,19 +2,38 @@
 	"name": "quimobasicos",
 	"version": "1.0.0",
 	"description": "Back end de la web app de quimobásicos para el rastreo de tanques. API de GraphQL y Conexión a MySQL",
-	"main": "index.js",
+	"main": "build/server.js",
 	"dependencies": {
 		"apollo-server-express": "^2.12.0",
 		"body-parser": "^1.19.0",
+		"compression": "^1.7.4",
+		"cors": "^2.8.5",
 		"dotenv": "^8.2.0",
 		"express": "^4.17.1",
-		"graphql": "^14.4.1"
+		"graphql": "^14.6.0",
+		"graphql-import-node": "0.0.4",
+		"graphql-playground-middleware-express": "^1.7.14",
+		"graphql-tools": "^5.0.0",
+		"http": "0.0.1-security",
+		"ncp": "^2.0.0",
+		"typescript": "^3.8.3"
 	},
-	"devDependencies": {},
+	"devDependencies": {
+		"@types/compression": "^1.7.0",
+		"@types/cors": "^2.8.6",
+		"@types/express": "^4.17.6",
+		"@types/express-graphql": "^0.9.0",
+		"@types/graphql": "^14.5.0",
+		"@types/node": "^13.13.4",
+		"nodemon": "^2.0.3"
+	},
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"devstart": "nodemon index.js",
-		"start": "node index.js"
+		"start": "node build/server.js",
+		"build": "tsc -p . && ncp src/schema build/schema",
+		"start:dev": "npm run build:dev",
+		"build:dev": "nodemon 'src/server.ts' --exec 'ts-node' src/server.ts -e ts,graphql"
 	},
 	"author": "",
 	"license": "ISC"
