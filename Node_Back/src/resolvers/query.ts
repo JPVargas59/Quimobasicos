@@ -1,9 +1,9 @@
-import {IResolvers} from 'graphql-tools';
-const query : IResolvers = {
-    Query: {
-		hello() : string {
-            return 'HOLA MUNDO';
-        }
+import { IResolvers } from 'graphql-tools';
+const query: IResolvers = {
+	Query: {
+		hello(): string {
+			return 'HOLA MUNDO';
+		}
 	}
-}
+};
 export default query;
