@@ -19,7 +19,7 @@ INSERT INTO Dueno VALUES("YX","Ying Xi");
 INSERT INTO Dueno VALUES("FLORO","Floro PM");
 
 INSERT INTO Tanque VALUES
-    ("EURO5149661", "Buena", "Muy bueno", 50, 20.5, "2020-02-02 10:00:00", 1, "G-134A", "FLORO"), 
+    ("EURO514966", "Buena", "Muy bueno", 50, 20.5, "2020-02-02 10:00:00", 1, "G-134A", "FLORO"), 
     ("EURO514967", "Mala", "Muy mala", 60, 45.5, "2020-12-08 10:00:00", 1, "G-134A", "FLORO"),  
     ("NVVU100706", "Mala", "Mala", 60, 23.5, "2020-09-10 14:00:00", 1, "G-134A", "FLORO");
 
@@ -41,7 +41,7 @@ INSERT INTO Lugar VALUES("AMC","Almacen", 25.89,1500,ST_GeomFromText('POINT (22.
 INSERT INTO Lugar VALUES("ETD", "Entrada",5.573,2000,ST_GeomFromText('POINT (10.53456  55.53242)'));
 
 INSERT INTO TanqueEsta VALUES (
-	"NVVU1007063", "PT","2020-10-01"
+	"NVVU100706", "PT","2020-10-01"
 );
 INSERT INTO TanqueEsta VALUES (
 	"EURO514966", "AMC", "2020-10-01"
