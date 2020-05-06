@@ -22,7 +22,7 @@ CREATE TABLE Dueno(
 CREATE TABLE Tanque(
     idTanque VARCHAR(10) NOT NULL,
     calidad VARCHAR(128),
-    estadoValcula VARCHAR(128),
+    estadoValvula VARCHAR(128),
     pesoActual FLOAT,
     peso FLOAT,
     fechaEsperadaRetorno DATETIME,

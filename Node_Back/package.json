@@ -15,9 +15,11 @@
 		"graphql-iso-date": "^3.6.1",
 		"graphql-playground-middleware-express": "^1.7.14",
 		"graphql-tools": "^5.0.0",
+		"graphql-yoga": "^1.18.3",
 		"http": "0.0.1-security",
 		"mysql": "^2.18.1",
 		"ncp": "^2.0.0",
+		"serverless-mysql": "^1.5.4",
 		"typescript": "^3.8.3"
 	},
 	"devDependencies": {

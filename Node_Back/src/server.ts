@@ -10,7 +10,7 @@ import schema from './schema';
 import expressPlayGround from 'graphql-playground-middleware-express';
 import query from './resolvers/query';
 
-const Port = 5200;
+const Port = 5201;
 const app = express();
 app.use('*', cors());
 app.use(compression());
@@ -22,14 +22,15 @@ const server = new ApolloServer({
 
 server.applyMiddleware({ app });
 
-var connection = mysql.createConnection({
-	host: 'localhost',
-	user: process.env.DBUSER,
-	password: process.env.DBPASSWORD,
-	database: 'quimobasicos'
-});
+// var connection = mysql.createConnection({
+// 	host: '192.168.64.2',
+// 	port: 3306,
+// 	user: 'xampp',
+// 	password: '',
+// 	database: 'quimobasicos'
+// });
 
-connection.connect();
+// connection.connect();
 
 app.get(
 	'/',
@@ -45,11 +46,11 @@ httpServer.listen(
 	},
 	() => {
 		console.log(`Servidor listo http://localhost:${Port}`);
-		connection.query('SELECT * FROM Lugar', (error, results, fields) => {
-			if (error) {
-				throw error;
-			}
-			console.log(results);
-		});
+		// connection.query('SELECT * FROM Lugar', (error, results, fields) => {
+		// 	if (error) {
+		// 		throw error;
+		// 	}
+		// 	console.log(results);
+		// });
 	}
 );

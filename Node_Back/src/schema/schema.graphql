@@ -11,26 +11,38 @@ interface Empleado {
 }
 
 "Objetos"
+
+
+type Tanque {
+	"Identificador del Tanque"
+	idTanque: ID!
+	"Calidad del Tanque"
+	calidad: String
+	"Comentario del estado de la valvula"
+	estadoValvula: String
+	"Peso Actual del tanque"
+	pesoActual: Float
+	"Peso normal del tanque"
+	peso: Float
+	"Fecha esperada para el regreso del tanque"
+	fechaEsperadaRegreso: Date
+	"ID de la etiqueta asignada al tanque"
+	idEtiqueta: EtiquetaRFID
+	"Información del dueno"
+	dueno: Owner
+	"Contenido actual del tanque"
+	contenidoTanque: Contenido
+	"Lugar del tanque"
+	lugar: Lugar
+	"Historial del tanque"
+	haEstado: [HistorialTanque]
+}
 type Owner {
-	id: ID!
+	idDueno: ID!
 	nombre: String!
 }
 
-type Tanque {
-	idTanque: ID!
-	calidad: String
-	estadoValvula: String
-	pesoActual: Float
-	peso: Float
-	fechaEsperadaRegreso: Date
-	etiquetarfid: etiquetarfid
-	duenoTanque: Owner
-	contenidoTanque: Contenido
-	lugar: Lugar
-	haEstado: [HistorialTanque]
-}
-
-type etiquetarfid {
+type EtiquetaRFID {
 	idEtiqueta: ID!
 }
 
@@ -38,13 +50,27 @@ type Contenido {
 	idContenido: ID!
 	contenido: String!
 }
-
+"Lugar de donde se pueden ubicar los tanques"
 type Lugar {
+	"Identificador del Lugar"
 	idLugar: ID!
+	"Nombre del lugar"
+	lnombre : String!
+	"Radio del lugar"
 	radio: Float
+	"Capacidad maxima de ese lugar para guardar tanques"
 	capacidadMaxima: Int
-	coordenadas: String
+	"Coordenas del lugar, se descomponen en x y y"
+	coordenadas: Point
+	"Tanques en un lugar"
 	tanques: [Tanque]
+	"Fecha"
+	fecha : Date
+}
+"Coordenadas"
+type Point  {
+x : Float
+y : Float
 }
 
 type Usuario implements Empleado {
@@ -73,12 +99,12 @@ type Operacion {
 }
 
 type HistorialTanque {
-	tanque: Tanque
 	lugar: Lugar
 	fecha: Date
 }
 
 "Queries"
 type Query {
-	hello: String
+	"Lista de informacion de los Tanques"
+	myTanques : [Tanque]
 }

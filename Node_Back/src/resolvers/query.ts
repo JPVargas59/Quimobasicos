@@ -1,8 +1,8 @@
 import { IResolvers } from 'graphql-tools';
 const query: IResolvers = {
 	Query: {
-		hello(): string {
-			return 'HOLA MUNDO';
+		myTanques(): [any] {
+			return require("../data/asyncFunctionsMySQL").getTanques();
 		}
 	}
 };
