@@ -1,12 +1,12 @@
-const Client = require('serverless-mysql')
+const Client = require('serverless-mysql');
 var client = Client({
-    config: {
-        host: '192.168.64.2',
-        port: 3306,
-        database: 'quimobasicos',
-        user: 'xampp',
-        password: ''
-    }
+	config: {
+		host: process.env.DBHOST,
+		port: process.env.DBPORT,
+		database: process.env.DBSCHEMA,
+		user: process.env.DBUSER,
+		password: process.env.DBPASSWORD
+	}
 });
 
 export default client;
