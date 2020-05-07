@@ -1,14 +1,11 @@
-const dotenv = require('dotenv').config();
+require('dotenv').config();
 const express = require('express');
-const bodyParser = require('body-parser');
 const cors = require('cors');
 const compression = require('compression');
-import mysql from 'mysql';
 import { ApolloServer } from 'apollo-server-express';
 import { createServer } from 'http';
 import schema from './schema';
 import expressPlayGround from 'graphql-playground-middleware-express';
-import query from './resolvers/query';
 
 const Port = 5201;
 const app = express();
@@ -22,18 +19,7 @@ const server = new ApolloServer({
 
 server.applyMiddleware({ app });
 
-// var connection = mysql.createConnection({
-// 	host: '192.168.64.2',
-// 	port: 3306,
-// 	user: 'xampp',
-// 	password: '',
-// 	database: 'quimobasicos'
-// });
-
-// connection.connect();
-
-app.get(
-	'/',
+app.route('/').get(
 	expressPlayGround({
 		endpoint: '/graphql'
 	})
@@ -46,11 +32,5 @@ httpServer.listen(
 	},
 	() => {
 		console.log(`Servidor listo http://localhost:${Port}`);
-		// connection.query('SELECT * FROM Lugar', (error, results, fields) => {
-		// 	if (error) {
-		// 		throw error;
-		// 	}
-		// 	console.log(results);
-		// });
 	}
 );
