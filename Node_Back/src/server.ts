@@ -3,7 +3,6 @@ const express = require('express');
 const cors = require('cors');
 const compression = require('compression');
 import { ApolloServer } from 'apollo-server-express';
-import { createServer } from 'http';
 import schema from './schema';
 import expressPlayGround from 'graphql-playground-middleware-express';
 
@@ -25,12 +24,6 @@ app.route('/').get(
 	})
 );
 
-const httpServer = createServer(app);
-httpServer.listen(
-	{
-		port: Port
-	},
-	() => {
-		console.log(`Servidor listo http://localhost:${Port}`);
-	}
-);
+app.listen(Port, () => {
+	console.log(`Servidor listo http://localhost:${Port}`);
+});
