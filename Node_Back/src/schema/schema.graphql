@@ -2,7 +2,7 @@ scalar Date
 
 "Interfaces"
 interface Empleado {
-	idUsuario: ID
+	idUsuario: String
 	nobmres: String
 	apellidos: String
 	password: String
@@ -11,11 +11,9 @@ interface Empleado {
 }
 
 "Objetos"
-
-
 type Tanque {
 	"Identificador del Tanque"
-	idTanque: ID!
+	idTanque: String!
 	"Calidad del Tanque"
 	calidad: String
 	"Comentario del estado de la valvula"
@@ -38,24 +36,24 @@ type Tanque {
 	haEstado: [HistorialTanque]
 }
 type Owner {
-	idDueno: ID!
+	idDueno: String!
 	nombre: String!
 }
 
 type EtiquetaRFID {
-	idEtiqueta: ID!
+	idEtiqueta: String!
 }
 
 type Contenido {
-	idContenido: ID!
+	idContenido: String!
 	contenido: String!
 }
 "Lugar de donde se pueden ubicar los tanques"
 type Lugar {
 	"Identificador del Lugar"
-	idLugar: ID!
+	idLugar: String!
 	"Nombre del lugar"
-	lnombre : String!
+	lnombre: String!
 	"Radio del lugar"
 	radio: Float
 	"Capacidad maxima de ese lugar para guardar tanques"
@@ -65,16 +63,16 @@ type Lugar {
 	"Tanques en un lugar"
 	tanques: [Tanque]
 	"Fecha"
-	fecha : Date
+	fecha: Date
 }
 "Coordenadas"
-type Point  {
-x : Float
-y : Float
+type Point {
+	x: Float
+	y: Float
 }
 
 type Usuario implements Empleado {
-	idUsuario: ID
+	idUsuario: String
 	nobmres: String
 	apellidos: String
 	password: String
@@ -83,7 +81,7 @@ type Usuario implements Empleado {
 }
 
 type Operador implements Empleado {
-	idUsuario: ID
+	idUsuario: String
 	nobmres: String
 	apellidos: String
 	password: String
@@ -106,5 +104,5 @@ type HistorialTanque {
 "Queries"
 type Query {
 	"Lista de informacion de los Tanques"
-	myTanques : [Tanque]
+	myTanques: [Tanque]
 }
