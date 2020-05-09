@@ -32,10 +32,17 @@
 }
 ```
 
+To start graphql Apollo Server 
+```
+cd Node_Back 
+npm run start:dev
+```
+
+
 ### Pendientes 
 
 - [x] Realizar schema de GraphQL
-- [ ] Obtener información de todos los tanques registrados
+- [x] Obtener información de todos los tanques registrados
 - [ ] Dar de alta un tanque
 - [ ] Obtener los tanques de acuerdo a una caracteristica
 - [ ] Obtener información de todos los materiales registrados
@@ -45,8 +52,3 @@
 - [ ] Obtener información de todos los lugares registrados
 - [ ] Obtener los lugares de acuerdo a su nombre o clave
 
-To start graphql Apollo Server 
-```
-cd Node_Back 
-npm run start:dev
-```

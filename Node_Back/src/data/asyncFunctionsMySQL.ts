@@ -42,6 +42,84 @@ exports.getInfoLugar = async (idLugar : string) => {
     let resp = await common.getInfoLugar(client, idLugar);
     client.quit();
     console.log(JSON.parse(JSON.stringify(resp)));
-    console.log("/n");
     return JSON.parse(JSON.stringify(resp));
+}
+
+exports.getTanque = async (idTanque : string) => {
+    var resp = await common.getTanque(client, idTanque);
+    client.quit();
+    return resp;
+}
+
+exports.getLugares = async () => {
+    var resp = await common.getLugares(client);
+    client.quit();
+    return resp;
+}
+exports.getLugar = async(idLugar : string) => {
+    var resp = await common.getLugar(client, idLugar);
+    client.quit();
+    return resp;
+}
+
+exports.getUsuarios = async () => {
+    var resp = await common.getUsuarios(client);
+    client.quit();
+    return resp;
+}
+
+exports.getUsuario = async(idUsuario : string) => {
+    var resp = await common.getUsuario(client, idUsuario);
+    client.quit();
+    return resp;
+}
+exports.getContenidos = async () => {
+    var resp = await common.getContenidos(client);
+    client.quit();
+    return resp;
+}
+
+exports.getContenido = async(idContenido : string) => {
+    var resp = await common.getContenido(client, idContenido);
+    client.quit();
+    return resp;
+}
+
+exports.getOwners = async () => {
+    var resp = await common.getOwners(client);
+    client.quit();
+    return resp;
+}
+
+exports.getOwner = async (idOwner : string) => {
+    var resp = await common.getOwner(client, idOwner);
+    client.quit();
+    return resp;
+}
+exports.getEtiquetas = async () => {
+    var resp = await common.getEtiquetas(client);
+    client.quit();
+    return resp;
+}
+exports.getEtiqueta = async (idEtiqueta : string) => {
+    var resp = await common.getEtiqueta(client, idEtiqueta);
+    client.quit();
+    return resp;
+}
+exports.getHistorialPesoTanques = async () => {
+    var resp = await common.getHistorialPesoTanques(client);
+    client.quit();
+    return resp;
+}
+
+exports.getHistorialPesoTanque = async (idTanque : string) => {
+    var resp = await common.getHistorialPesoTanque(client, idTanque);
+    client.quit();
+    return resp;
+}
+
+exports.getHistorialUbicacionTanques = async () => {
+    var resp = await common.getHistorialUbicacionTanques(client);
+    client.quit();
+    return resp;
 }
