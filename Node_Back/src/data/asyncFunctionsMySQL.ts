@@ -126,9 +126,3 @@ exports.getHistorialUbicacionTanques = async () => {
 	client.quit();
 	return resp;
 };
-
-exports.setTanque = async (tanqueInput, idTanqueOriginal) => {
-	var resp = await common.setTanque(client, tanqueInput, idTanqueOriginal);
-	client.quit();
-	return resp;
-};

@@ -1,11 +1,10 @@
 import { IResolvers } from 'graphql-tools';
+import mysqlMutations = require('../data/asyncFunctionsMySQLMutations');
+
 const mutation: IResolvers = {
 	Mutation: {
 		setTanque(__: void, { input, idTanqueOriginal }): any {
-			return require('../data/asyncFunctionsMySQL').setTanque(
-				input,
-				idTanqueOriginal
-			);
+			return mysqlMutations.setTanque(input, idTanqueOriginal);
 		}
 	}
 };
