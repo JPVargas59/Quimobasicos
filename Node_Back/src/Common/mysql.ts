@@ -1,6 +1,3 @@
-import client from '../client';
-import query from '../resolvers/query';
-import type from '../resolvers/type';
 exports.getTanques = async (client) => {
 	var tanques = await client.query(`
     SELECT * FROM Tanque
