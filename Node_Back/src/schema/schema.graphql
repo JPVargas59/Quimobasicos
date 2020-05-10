@@ -99,14 +99,27 @@ type Operacion {
 type HistorialTanque {
 	lugar: Lugar
 	fecha: Date
-	idTanque : ID
+	idTanque: ID
 }
 
 "Historial de peso de tanques"
 type HistorialPeso {
 	peso: Float
 	fecha: Date
-	idTanque : ID
+	idTanque: ID
+}
+
+"Input para crear o actualizar tanque"
+input TanqueInput {
+	idTanque: String
+	calidad: String
+	estadoValvula: String
+	pesoActual: Float
+	peso: Float
+	fechaEsperadaRetorno: Date
+	idEtiqueta: Int
+	idContenido: String
+	idDueno: String
 }
 
 "Queries"
@@ -114,30 +127,38 @@ type Query {
 	"Lista de informacion de los Tanques"
 	tanques: [Tanque]
 	"Información del tanque seleccionado por id"
-	tanque(idTanque: ID!) : Tanque!
+	tanque(idTanque: ID!): Tanque!
 	"Información de los lugares registrados"
 	lugares: [Lugar]
 	"Información de un lugar seleccionado por id"
-	lugar(idLugar : ID!) : Lugar!
+	lugar(idLugar: ID!): Lugar!
 	"Lista de información de usuarios"
 	usuarios: [Usuario!]
 	"Informacion de un usuario seleccionado por id"
-	usuario(idUsuario : ID!) : Usuario!
+	usuario(idUsuario: ID!): Usuario!
 	"Lista de información de contenido"
-	contenidos : [Contenido!]
+	contenidos: [Contenido!]
 	"Información de un contenido por id"
-	contenido(idContenido : ID!) : Contenido!
+	contenido(idContenido: ID!): Contenido!
 	"Lista de dueños"
-	owners : [Owner!]
+	owners: [Owner!]
 	"Información de un dueño por id"
-	owner(idOwner : ID!) : Owner
+	owner(idOwner: ID!): Owner
 	"Lista de etiquetas RFID"
-	etiquetas : [EtiquetaRFID]
+	etiquetas: [EtiquetaRFID]
 	"Información de una etiqueta por ID"
-	etiqueta(idEtiqueta : ID!) : EtiquetaRFID
+	etiqueta(idEtiqueta: ID!): EtiquetaRFID
 	"Lista de historial de peso"
-	historialPesoTanques : [HistorialPeso!]
+	historialPesoTanques: [HistorialPeso!]
 	"Información de peso de tanques"
-	historialPesoTanque(idTanque : ID!) : HistorialPeso!
-	
+	historialPesoTanque(idTanque: ID!): HistorialPeso!
+}
+
+type Mutation {
+	"""
+	Mutación para modificar la información de un tanque.
+	TanqueInput es la nueva información del tanque.
+	idTanqueOriginal es el idTanque original en caso de que se quiera asignar un nuevo id al tanque.
+	"""
+	setTanque(input: TanqueInput, idTanqueOriginal: String): String
 }
