@@ -1,5 +1,5 @@
 import { IResolvers } from 'graphql-tools';
-import mysqlMutations = require('../data/asyncFunctionsMySQLMutations');
+import mysqlMutations = require('../data/asyncMySQLMutations');
 
 const mutation: IResolvers = {
 	Mutation: {

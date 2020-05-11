@@ -1,5 +1,5 @@
 var common = require('../Common/mysql');
-import client from './../client';
+import client from '../client';
 
 let mysqlMutations = {
 	async setTanque(tanqueInput, idTanqueOriginal) {

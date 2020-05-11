@@ -1,53 +1,48 @@
 import { IResolvers } from 'graphql-tools';
+import asyncFunctionsMySQLQueries = require('../data/asyncMySQLQueries');
 const query: IResolvers = {
 	Query: {
-		tanques(): [any] {
-			return require('../data/asyncFunctionsMySQL').getTanques();
+		tanques(): any {
+			return asyncFunctionsMySQLQueries.getTanques();
 		},
 		tanque(__: void, { idTanque }): any {
-			return require('../data/asyncFunctionsMySQL').getTanque(idTanque);
+			return asyncFunctionsMySQLQueries.getTanque(idTanque);
 		},
-		lugares(): [any] {
-			return require('../data/asyncFunctionsMySQL').getLugares();
+		lugares(): any {
+			return asyncFunctionsMySQLQueries.getLugares();
 		},
 		lugar(__: void, { idLugar }): any {
-			return require('../data/asyncFunctionsMySQL').getLugar(idLugar);
+			return asyncFunctionsMySQLQueries.getLugar(idLugar);
 		},
-		usuarios(): [any] {
-			return require('../data/asyncFunctionsMySQL').getUsuarios();
+		usuarios(): any {
+			return asyncFunctionsMySQLQueries.getUsuarios();
 		},
 		usuario(__: void, { idUsuario }): any {
-			return require('../data/asyncFunctionsMySQL').getUsuario(idUsuario);
+			return asyncFunctionsMySQLQueries.getUsuario(idUsuario);
 		},
-		contenidos(): [any] {
-			return require('../data/asyncFunctionsMySQL').getContenidos();
+		contenidos(): any {
+			return asyncFunctionsMySQLQueries.getContenidos();
 		},
 		contenido(__: void, { idContenido }): any {
-			return require('../data/asyncFunctionsMySQL').getContenido(
-				idContenido
-			);
+			return asyncFunctionsMySQLQueries.getContenido(idContenido);
 		},
-		owners(): [any] {
-			return require('../data/asyncFunctionsMySQL').getOwners();
+		owners(): any {
+			return asyncFunctionsMySQLQueries.getOwners();
 		},
 		owner(__: void, { idOwner }): any {
-			return require('../data/asyncFunctionsMySQL').getOwner(idOwner);
+			return asyncFunctionsMySQLQueries.getOwner(idOwner);
 		},
-		etiquetas(): [any] {
-			return require('../data/asyncFunctionsMySQL').getEtiquetas();
+		etiquetas(): any {
+			return asyncFunctionsMySQLQueries.getEtiquetas();
 		},
 		etiqueta(__: void, { idEtiqueta }): any {
-			return require('../data/asyncFunctionsMySQL').getEtiqueta(
-				idEtiqueta
-			);
+			return asyncFunctionsMySQLQueries.getEtiqueta(idEtiqueta);
 		},
-		historialPesoTanques(): [any] {
-			return require('../data/asyncFunctionsMySQL').getHistorialPesoTanques();
+		historialPesoTanques(): any {
+			return asyncFunctionsMySQLQueries.getHistorialPesoTanques();
 		},
 		historialPesoTanque(__: void, { idTanque }): any {
-			return require('../data/asyncFunctionsMySQL').getHistorialPesoTanque(
-				idTanque
-			);
+			return asyncFunctionsMySQLQueries.getHistorialPesoTanque(idTanque);
 		}
 	}
 };
