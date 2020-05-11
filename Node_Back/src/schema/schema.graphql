@@ -163,4 +163,6 @@ type Mutation {
 	setTanque(tanqueInput: TanqueInput, idTanqueOriginal: String!): String
 	"Mutación para crear un nuevo tanque"
 	createTanque(tanqueInput: TanqueInput!): String
+	"Mutación para eliminar un tanque cuyo ID no es llave foránea de ninguna otra tabla"
+	deleteTanque(idTanqueInput: String!): String
 }

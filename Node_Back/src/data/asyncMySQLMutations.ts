@@ -13,10 +13,14 @@ let mysqlMutations = {
 			tanqueInput,
 			idTanqueOriginal
 		);
-		quitClient(client, resp);
+		return quitClient(client, resp);
 	},
 	async createTanque(tanqueInput) {
 		var resp = await common.createTanque(client, tanqueInput);
+		return quitClient(client, resp);
+	},
+	async deleteTanque(idTanqueInput) {
+		var resp = await common.deleteTanque(client, idTanqueInput);
 		return quitClient(client, resp);
 	}
 };

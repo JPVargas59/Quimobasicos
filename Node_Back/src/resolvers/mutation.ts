@@ -8,6 +8,9 @@ const mutation: IResolvers = {
 		},
 		createTanque(__: void, { tanqueInput }): any {
 			return mysqlMutations.createTanque(tanqueInput);
+		},
+		deleteTanque(__: void, { idTanqueInput }): any {
+			return mysqlMutations.deleteTanque(idTanqueInput);
 		}
 	}
 };

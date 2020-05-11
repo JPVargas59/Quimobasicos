@@ -35,6 +35,24 @@ let mysqlMutations = {
 		} else {
 			return 'ID del Tanque ya existe';
 		}
+	},
+	async deleteTanque(client, idTanqueInput) {
+		if ((await checkTankExists(client, idTanqueInput)) == false) {
+			return 'El ID del tanque no existe';
+		} else {
+			let resp: String = 'Tanque eliminado';
+			await client
+				.query('DELETE FROM Tanque WHERE idTanque=?', idTanqueInput)
+				.catch((error) => {
+					console.log(error);
+					if (error.errno == 1451) {
+						resp = 'El tanque no puede ser eliminado';
+					} else {
+						resp = error.sqlMessage;
+					}
+				});
+			return resp;
+		}
 	}
 };
 export = mysqlMutations;
