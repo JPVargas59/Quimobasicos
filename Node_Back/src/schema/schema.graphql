@@ -163,6 +163,4 @@ type Mutation {
 	setTanque(tanqueInput: TanqueInput, idTanqueOriginal: String!): String
 	"Mutación para crear un nuevo tanque"
 	createTanque(tanqueInput: TanqueInput!): String
-	"Mutación para borrar un tanque"
-	deleteTanque(idTanqueInput: String!): String
 }
