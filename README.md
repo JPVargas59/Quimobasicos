@@ -32,23 +32,32 @@
 }
 ```
 
-To start graphql Apollo Server 
+To start graphql Apollo Server
+
 ```
-cd Node_Back 
+cd Node_Back
 npm run start:dev
 ```
 
+### Pendientes
 
-### Pendientes 
+#### GraphQL
 
-- [x] Realizar schema de GraphQL
-- [x] Obtener información de todos los tanques registrados
-- [ ] Dar de alta un tanque
-- [ ] Obtener los tanques de acuerdo a una caracteristica
-- [ ] Obtener información de todos los materiales registrados
-- [ ] Dar de alta un materia
-- [ ] Obtener los tanques de acuerdo a su nombre o clave
-- [ ] Dar de alta un lugar
-- [ ] Obtener información de todos los lugares registrados
-- [ ] Obtener los lugares de acuerdo a su nombre o clave
+-   [x] Realizar schema de GraphQL
 
+#### Queries
+
+-   [x] Obtener información de todos los tanques registrados
+-   [ ] Obtener los tanques de acuerdo a una caracteristica
+-   [ ] Obtener información de todos los materiales registrados
+-   [ ] Obtener los tanques de acuerdo a su nombre o clave
+-   [ ] Obtener información de todos los lugares registrados
+-   [ ] Obtener los lugares de acuerdo a su nombre o clave
+
+#### Mutations
+
+-   [x] Dar de alta un tanque
+-   [x] Modificar los datos de un tanque
+-   [x] Eliminar un tanque
+-   [ ] Dar de alta un materia
+-   [ ] Dar de alta un lugar
