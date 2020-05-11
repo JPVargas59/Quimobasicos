@@ -30,9 +30,9 @@ CREATE TABLE Tanque(
     idContenido VARCHAR(10),
     idDueno VARCHAR(10),
     PRIMARY KEY(idTanque),
-    FOREIGN KEY(idEtiqueta) REFERENCES EtiquetaRFID(idEtiqueta) ON UPDATE CASCADE ON DELETE CASCADE,
-    FOREIGN KEY(idContenido) REFERENCES Contenido(idContenido) ON UPDATE CASCADE ON DELETE CASCADE,
-    FOREIGN KEY(idDueno) REFERENCES Dueno(idDueno) ON UPDATE CASCADE ON DELETE CASCADE
+    FOREIGN KEY(idEtiqueta) REFERENCES EtiquetaRFID(idEtiqueta) ON UPDATE CASCADE,
+    FOREIGN KEY(idContenido) REFERENCES Contenido(idContenido) ON UPDATE CASCADE,
+    FOREIGN KEY(idDueno) REFERENCES Dueno(idDueno) ON UPDATE CASCADE
 );
 
 CREATE TABLE Mantenimiento(
@@ -40,7 +40,7 @@ CREATE TABLE Mantenimiento(
     fechaMantenimiento DATETIME,
     observaciones VARCHAR(512),
     PRIMARY KEY(idTanque, fechaMantenimiento),
-    FOREIGN KEY(idTanque) REFERENCES Tanque(idTanque) ON UPDATE CASCADE ON DELETE CASCADE
+    FOREIGN KEY(idTanque) REFERENCES Tanque(idTanque) ON UPDATE CASCADE
 );
 
 CREATE TABLE Lugar (
@@ -57,8 +57,8 @@ CREATE TABLE TanqueHaEstado (
 	idLugar CHAR(10) NOT NULL,
 	fecha DATETIME NOT NULL,
 	PRIMARY KEY (idTanque, idLugar, fecha),
-	FOREIGN KEY (idTanque) REFERENCES Tanque(idTanque) ON UPDATE CASCADE ON DELETE CASCADE,
-	FOREIGN KEY (idLugar) REFERENCES Lugar(idLugar) ON UPDATE CASCADE ON DELETE CASCADE
+	FOREIGN KEY (idTanque) REFERENCES Tanque(idTanque) ON UPDATE CASCADE,
+	FOREIGN KEY (idLugar) REFERENCES Lugar(idLugar) ON UPDATE CASCADE
 );
 
 CREATE TABLE HistorialPeso (
@@ -66,7 +66,7 @@ CREATE TABLE HistorialPeso (
 	fecha DATETIME,
 	peso FLOAT,
 	PRIMARY KEY (idTanque, fecha),
-	FOREIGN KEY (idTanque) REFERENCES Tanque(idTanque) ON UPDATE CASCADE ON DELETE CASCADE
+	FOREIGN KEY (idTanque) REFERENCES Tanque(idTanque) ON UPDATE CASCADE
 );
 
 CREATE TABLE Usuario (
@@ -80,9 +80,9 @@ CREATE TABLE Usuario (
 );
 
 CREATE TABLE Operador (
-    operadorId CHAR(10) PRIMARY KEY REFERENCES Usuario(idUsuario) ON UPDATE CASCADE ON DELETE CASCADE,
+    operadorId CHAR(10) PRIMARY KEY REFERENCES Usuario(idUsuario) ON UPDATE CASCADE,
 	idSupervisor CHAR(10),
-	FOREIGN KEY (idSupervisor) REFERENCES Usuario(idUsuario) ON UPDATE CASCADE ON DELETE CASCADE
+	FOREIGN KEY (idSupervisor) REFERENCES Usuario(idUsuario) ON UPDATE CASCADE
 );
 
 CREATE TABLE TanqueEsta (
@@ -90,8 +90,8 @@ CREATE TABLE TanqueEsta (
 	idLugar CHAR(10) NOT NULL,
 	fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (idTanque, idLugar),
-	FOREIGN KEY (idTanque) REFERENCES Tanque(idTanque) ON UPDATE CASCADE ON DELETE CASCADE,
-	FOREIGN KEY (idLugar) REFERENCES Lugar(idLugar) ON UPDATE CASCADE ON DELETE CASCADE
+	FOREIGN KEY (idTanque) REFERENCES Tanque(idTanque) ON UPDATE CASCADE,
+	FOREIGN KEY (idLugar) REFERENCES Lugar(idLugar) ON UPDATE CASCADE
 );
 
 CREATE TABLE OperadoPor(
@@ -99,6 +99,6 @@ CREATE TABLE OperadoPor(
 	idUsuario CHAR(10) NOT NULL,
 	fecha DATETIME,
 	PRIMARY KEY (idTanque, idUsuario),
-	FOREIGN KEY (idTanque) REFERENCES Tanque(idTanque) ON UPDATE CASCADE ON DELETE CASCADE,
-	FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario) ON UPDATE CASCADE ON DELETE CASCADE
+	FOREIGN KEY (idTanque) REFERENCES Tanque(idTanque) ON UPDATE CASCADE,
+	FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario) ON UPDATE CASCADE
 );
