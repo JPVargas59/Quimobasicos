@@ -1,4 +1,4 @@
-var common = require('../Common/mysql');
+var common = require('../Common/mysqlMutations');
 import client from '../client';
 
 let mysqlMutations = {
@@ -8,6 +8,11 @@ let mysqlMutations = {
 			tanqueInput,
 			idTanqueOriginal
 		);
+		client.quit();
+		return resp;
+	},
+	async createTanque(tanqueInput) {
+		var resp = await common.createTanque(client, tanqueInput);
 		client.quit();
 		return resp;
 	}

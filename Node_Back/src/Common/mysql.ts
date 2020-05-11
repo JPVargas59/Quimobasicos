@@ -244,24 +244,3 @@ exports.getHistorialUbicacionTanques = async (client) => {
 	}
 	return historialUbicaciones;
 };
-
-exports.setTanque = async (client, tanqueInput, idTanqueOriginal) => {
-	var checkTanque = await client.query(
-		'SELECT * FROM Tanque WHERE idTanque=?',
-		idTanqueOriginal
-	);
-	if (checkTanque.length == 0) {
-		return 'Tanque no encontrado';
-	} else {
-		var updateTanque = await client
-			.query('UPDATE Tanque SET ? WHERE idTanque=?', [
-				tanqueInput,
-				idTanqueOriginal
-			])
-			.catch((error) => {
-				console.log(error);
-				return error.sqlMessage;
-			});
-		return 'Tanque actualizado';
-	}
-};
