@@ -3,11 +3,7 @@ async function checkTankExists(client, idTanque) {
 		'SELECT * FROM Tanque WHERE idTanque=?',
 		idTanque
 	);
-	if (checkTanque.length == 0) {
-		return false;
-	} else {
-		return true;
-	}
+	return checkTanque.length == 0 ? false : true;
 }
 
 let mysqlMutations = {
@@ -38,6 +34,19 @@ let mysqlMutations = {
 			return 'Tanque creado';
 		} else {
 			return 'ID del Tanque ya existe';
+		}
+	},
+	async deleteTanque(client, idTanqueInput) {
+		if ((await checkTankExists(client, idTanqueInput)) == false) {
+			return 'El tanque no existe';
+		} else {
+			await client
+				.query('DELETE FROM Tanque WHERE idTanque=?', idTanqueInput)
+				.catch((error) => {
+					console.log(error);
+					return error.sqlMessage;
+				});
+			return 'Tanque eliminado';
 		}
 	}
 };

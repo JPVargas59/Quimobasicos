@@ -1,6 +1,11 @@
 var common = require('../Common/mysqlMutations');
 import client from '../client';
 
+function quitClient(client, resp) {
+	client.quit();
+	return resp;
+}
+
 let mysqlMutations = {
 	async setTanque(tanqueInput, idTanqueOriginal) {
 		var resp = await common.setTanque(
@@ -8,13 +13,15 @@ let mysqlMutations = {
 			tanqueInput,
 			idTanqueOriginal
 		);
-		client.quit();
-		return resp;
+		quitClient(client, resp);
 	},
 	async createTanque(tanqueInput) {
 		var resp = await common.createTanque(client, tanqueInput);
-		client.quit();
-		return resp;
+		return quitClient(client, resp);
+	},
+	async deleteTanque(idTanqueInput) {
+		var resp = await common.deleteTanque(client, idTanqueInput);
+		return quitClient(client, resp);
 	}
 };
 

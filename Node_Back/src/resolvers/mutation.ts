@@ -3,11 +3,14 @@ import mysqlMutations = require('../data/asyncMySQLMutations');
 
 const mutation: IResolvers = {
 	Mutation: {
-		setTanque(__: void, { input, idTanqueOriginal }): any {
-			return mysqlMutations.setTanque(input, idTanqueOriginal);
+		setTanque(__: void, { tanqueInput, idTanqueOriginal }): any {
+			return mysqlMutations.setTanque(tanqueInput, idTanqueOriginal);
 		},
-		createTanque(__: void, { input }): any {
-			return mysqlMutations.createTanque(input);
+		createTanque(__: void, { tanqueInput }): any {
+			return mysqlMutations.createTanque(tanqueInput);
+		},
+		deleteTanque(__: void, { idTanqueInput }): any {
+			return mysqlMutations.deleteTanque(idTanqueInput);
 		}
 	}
 };

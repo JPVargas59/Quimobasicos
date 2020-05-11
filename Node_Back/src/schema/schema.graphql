@@ -160,7 +160,9 @@ type Mutation {
 	TanqueInput es la nueva información del tanque.
 	idTanqueOriginal es el idTanque original en caso de que se quiera asignar un nuevo id al tanque.
 	"""
-	setTanque(input: TanqueInput, idTanqueOriginal: String!): String
+	setTanque(tanqueInput: TanqueInput, idTanqueOriginal: String!): String
 	"Mutación para crear un nuevo tanque"
-	createTanque(input: TanqueInput!): String
+	createTanque(tanqueInput: TanqueInput!): String
+	"Mutación para borrar un tanque"
+	deleteTanque(idTanqueInput: String!): String
 }
