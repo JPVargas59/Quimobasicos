@@ -11,6 +11,9 @@ const mutation: IResolvers = {
 		},
 		deleteTanque(__: void, { idTanqueInput }): any {
 			return mysqlMutations.deleteTanque(idTanqueInput);
+		},
+		setLugar(__: void, { lugarInput, idLugarOriginal }): any {
+			return mysqlMutations.setLugar(lugarInput, idLugarOriginal);
 		}
 	}
 };

@@ -122,6 +122,21 @@ input TanqueInput {
 	idDueno: String
 }
 
+"Input para crear o actualizar un lugar"
+input LugarInput {
+	idLugar: String
+	lnombre: String
+	radio: Float
+	capacidadMaxima: Int
+	coordenadas: PointInput
+}
+
+"Input para crear o modificar las coordenadas de un lugar"
+input PointInput {
+	x: Float
+	y: Float
+}
+
 "Queries"
 type Query {
 	"Lista de informacion de los Tanques"
@@ -160,9 +175,15 @@ type Mutation {
 	TanqueInput es la nueva información del tanque.
 	idTanqueOriginal es el idTanque original en caso de que se quiera asignar un nuevo id al tanque.
 	"""
-	setTanque(tanqueInput: TanqueInput, idTanqueOriginal: String!): String
+	setTanque(tanqueInput: TanqueInput!, idTanqueOriginal: String!): String
 	"Mutación para crear un nuevo tanque"
 	createTanque(tanqueInput: TanqueInput!): String
 	"Mutación para eliminar un tanque cuyo ID no es llave foránea de ninguna otra tabla"
 	deleteTanque(idTanqueInput: String!): String
+	"""
+	Mutación para modificar la información de un lugar.
+	LugarInput es la nueva información del lugar.
+	idLugarOriginal es el idLugar original en caso de que se quiera asignar un nuevo id al lugar.
+	"""
+	setLugar(lugarInput: LugarInput!, idLugarOriginal: String!): String
 }

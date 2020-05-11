@@ -22,6 +22,10 @@ let mysqlMutations = {
 	async deleteTanque(idTanqueInput) {
 		var resp = await common.deleteTanque(client, idTanqueInput);
 		return quitClient(client, resp);
+	},
+	async setLugar(lugarInput, idLugarOriginal) {
+		var resp = await common.setLugar(client, lugarInput, idLugarOriginal);
+		return quitClient(client, resp);
 	}
 };
 
