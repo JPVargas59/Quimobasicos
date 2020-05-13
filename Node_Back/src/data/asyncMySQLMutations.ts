@@ -7,14 +7,6 @@ function quitClient(client, resp) {
 }
 
 let mysqlMutations = {
-	async setTanque(tanqueInput, idTanqueOriginal) {
-		var resp = await common.setTanque(
-			client,
-			tanqueInput,
-			idTanqueOriginal
-		);
-		return quitClient(client, resp);
-	},
 	async createTanque(tanqueInput) {
 		var resp = await common.createTanque(client, tanqueInput);
 		return quitClient(client, resp);
@@ -23,8 +15,14 @@ let mysqlMutations = {
 		var resp = await common.deleteTanque(client, idTanqueInput);
 		return quitClient(client, resp);
 	},
-	async setLugar(lugarInput, idLugarOriginal) {
-		var resp = await common.setLugar(client, lugarInput, idLugarOriginal);
+	async setValor(input, idOriginal, table, mysqlId) {
+		let resp = await common.setValor(
+			client,
+			input,
+			idOriginal,
+			table,
+			mysqlId
+		);
 		return quitClient(client, resp);
 	}
 };

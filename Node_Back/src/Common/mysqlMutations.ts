@@ -8,23 +8,6 @@ async function checkExists(client, table, id, idQuery) {
 }
 
 let mysqlMutations = {
-	async setTanque(client, tanqueInput, idTanqueOriginal) {
-		if (await checkExists(client, 'Tanque', 'idTanque', idTanqueOriginal)) {
-			let resp = 'Tanque actualizado';
-			await client
-				.query('UPDATE Tanque SET ? WHERE idTanque=?', [
-					tanqueInput,
-					idTanqueOriginal
-				])
-				.catch((error) => {
-					console.log(error);
-					resp = error.sqlMessage;
-				});
-			return resp;
-		} else {
-			return 'Tanque no encontrado';
-		}
-	},
 	async createTanque(client, tanqueInput) {
 		if (
 			await checkExists(
@@ -64,13 +47,13 @@ let mysqlMutations = {
 			return 'El ID del tanque no existe';
 		}
 	},
-	async setLugar(client, lugarInput, idLugarOriginal) {
-		if (await checkExists(client, 'Lugar', 'idLugar', idLugarOriginal)) {
-			let resp = 'El lugar ha sido modificado';
+	async setValor(client, input, idOriginal, table, mysqlId) {
+		if (await checkExists(client, table, mysqlId, idOriginal)) {
+			let resp = `El valor de ${table} ha sido actualizado`;
 			await client
-				.query('UPDATE Lugar SET ? WHERE idLugar=?', [
-					lugarInput,
-					idLugarOriginal
+				.query(`UPDATE ${table} SET ? WHERE ${mysqlId}=?`, [
+					input,
+					idOriginal
 				])
 				.catch((error) => {
 					console.log(error);
@@ -78,7 +61,7 @@ let mysqlMutations = {
 				});
 			return resp;
 		} else {
-			return 'El ID del lugar no existe';
+			return `El ID de ${table} no existe`;
 		}
 	}
 };

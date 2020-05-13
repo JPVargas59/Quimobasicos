@@ -4,7 +4,12 @@ import mysqlMutations = require('../data/asyncMySQLMutations');
 const mutation: IResolvers = {
 	Mutation: {
 		setTanque(__: void, { tanqueInput, idTanqueOriginal }): any {
-			return mysqlMutations.setTanque(tanqueInput, idTanqueOriginal);
+			return mysqlMutations.setValor(
+				tanqueInput,
+				idTanqueOriginal,
+				'Tanque',
+				'idTanque'
+			);
 		},
 		createTanque(__: void, { tanqueInput }): any {
 			return mysqlMutations.createTanque(tanqueInput);
@@ -13,7 +18,12 @@ const mutation: IResolvers = {
 			return mysqlMutations.deleteTanque(idTanqueInput);
 		},
 		setLugar(__: void, { lugarInput, idLugarOriginal }): any {
-			return mysqlMutations.setLugar(lugarInput, idLugarOriginal);
+			return mysqlMutations.setValor(
+				lugarInput,
+				idLugarOriginal,
+				'Lugar',
+				'idLugar'
+			);
 		}
 	}
 };
