@@ -4,6 +4,7 @@
 	"description": "Back end de la web app de quimobásicos para el rastreo de tanques. API de GraphQL y Conexión a MySQL",
 	"main": "build/server.js",
 	"dependencies": {
+		"@angular/core": "^9.1.6",
 		"apollo-server-express": "^2.12.0",
 		"async-each": "^1.0.3",
 		"body-parser": "^1.19.0",

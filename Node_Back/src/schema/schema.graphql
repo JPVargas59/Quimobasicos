@@ -34,6 +34,8 @@ type Tanque {
 	lugar: Lugar
 	"Historial del tanque"
 	haEstado: [HistorialTanque]
+	"operaciones"
+	operaciones : [Operacion!]
 }
 type Owner {
 	idDueno: String!
@@ -81,7 +83,7 @@ type Usuario implements Empleado {
 }
 
 type Operador implements Empleado {
-	idUsuario: String
+	idUsuario: String!
 	nombre: String
 	apellidos: String
 	password: String
