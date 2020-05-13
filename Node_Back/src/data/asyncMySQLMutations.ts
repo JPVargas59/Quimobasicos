@@ -7,8 +7,8 @@ function quitClient(client, resp) {
 }
 
 let mysqlMutations = {
-	async createTanque(tanqueInput) {
-		var resp = await common.createTanque(client, tanqueInput);
+	async createValor(input, table, mysqlId) {
+		var resp = await common.createValor(client, input, table, mysqlId);
 		return quitClient(client, resp);
 	},
 	async deleteTanque(idTanqueInput) {

@@ -1,4 +1,4 @@
-import client from '../client';
+import mysql from 'mysql';
 async function checkExists(client, table, id, idQuery) {
 	var check = await client.query(
 		`SELECT * FROM ${table} WHERE ${id}=?`,
@@ -8,20 +8,37 @@ async function checkExists(client, table, id, idQuery) {
 }
 
 let mysqlMutations = {
-	async createTanque(client, tanqueInput) {
-		if (
-			await checkExists(
-				client,
-				'Tanque',
-				'idTanque',
-				tanqueInput.idTanque
-			)
-		) {
-			return 'ID del Tanque ya existe';
+	async createValor(client, input, table, mysqlId) {
+		if (await checkExists(client, table, mysqlId, input.id)) {
+			return `El ID de ${table} ya existe`;
 		} else {
-			let resp: String = 'Tanque creado';
+			let resp: String = `Instancia de ${table} creada`;
+			switch (table) {
+				case 'Tanque':
+					input.idTanque = input.id;
+					break;
+				case 'Lugar':
+					input.idLugar = input.id;
+					/*
+					El uso de mysql.raw() no es recomendado, porque hace que se ignore por completo la validación de inputs
+					y deja abierta la posibilidad de una inyección de SQL. En este caso, ya se validó desde GraphQL que
+					los valores de input.coordenadas.x y input.coordenadas.y son FLOATS.
+					*/
+					let coordenadas = mysql.raw(
+						`ST_GeomFromText('POINT (${input.coordenadas.x} ${input.coordenadas.y})')`
+					);
+					input.coordenadas = coordenadas;
+					break;
+				case 'Contenido':
+					input.idContenido = input.id;
+					break;
+				case 'Dueno':
+					input.idDueno = input.id;
+					break;
+			}
+			delete input.id;
 			await client
-				.query('INSERT INTO Tanque SET ?', tanqueInput)
+				.query(`INSERT INTO ${table} SET ?`, input)
 				.catch((error) => {
 					console.log(error);
 					resp = error.sqlMessage;

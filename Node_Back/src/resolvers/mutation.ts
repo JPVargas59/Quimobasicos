@@ -12,7 +12,11 @@ const mutation: IResolvers = {
 			);
 		},
 		createTanque(__: void, { tanqueInput }): any {
-			return mysqlMutations.createTanque(tanqueInput);
+			return mysqlMutations.createValor(
+				tanqueInput,
+				'Tanque',
+				'idTanque'
+			);
 		},
 		deleteTanque(__: void, { idTanqueInput }): any {
 			return mysqlMutations.deleteTanque(idTanqueInput);
@@ -23,6 +27,24 @@ const mutation: IResolvers = {
 				idLugarOriginal,
 				'Lugar',
 				'idLugar'
+			);
+		},
+		createLugar(__: void, { lugarInput }): any {
+			return mysqlMutations.createValor(lugarInput, 'Lugar', 'idLugar');
+		},
+		setContenido(__: void, { contenidoInput, idContenidoOriginal }): any {
+			return mysqlMutations.setValor(
+				contenidoInput,
+				idContenidoOriginal,
+				'Contenido',
+				'idContenido'
+			);
+		},
+		createContenido(__: void, { lugarInput }): any {
+			return mysqlMutations.createValor(
+				lugarInput,
+				'Contenido',
+				'idContenido'
 			);
 		}
 	}

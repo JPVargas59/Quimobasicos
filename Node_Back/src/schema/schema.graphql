@@ -111,7 +111,7 @@ type HistorialPeso {
 
 "Input para crear o actualizar tanque"
 input TanqueInput {
-	idTanque: String
+	id: String
 	calidad: String
 	estadoValvula: String
 	pesoActual: Float
@@ -124,7 +124,7 @@ input TanqueInput {
 
 "Input para crear o actualizar un lugar"
 input LugarInput {
-	idLugar: String
+	id: String
 	lnombre: String
 	radio: Float
 	capacidadMaxima: Int
@@ -135,6 +135,12 @@ input LugarInput {
 input PointInput {
 	x: Float
 	y: Float
+}
+
+"Input para crear o actualizar un contenido"
+input ContenidoInput {
+	idContenido: String
+	contenido: String
 }
 
 "Queries"
@@ -186,4 +192,17 @@ type Mutation {
 	idLugarOriginal es el idLugar original en caso de que se quiera asignar un nuevo id al lugar.
 	"""
 	setLugar(lugarInput: LugarInput!, idLugarOriginal: String!): String
+	"Mutación para crear un nuevo lugar"
+	createLugar(lugarInput: LugarInput!): String
+	"""
+	Mutación para modificar la información de un contenido.
+	ContenidoInput es la nueva información del contenido.
+	idContenidoOriginal es el idContenido original en caso de que se quiera asignar un nuevo id al contenido.
+	"""
+	setContenido(
+		contenidoInput: ContenidoInput!
+		idContenidoOriginal: String!
+	): String
+	"Mutación para crear un nuevo contenido"
+	createContenido(contenidoInput: ContenidoInput!): String
 }
