@@ -9,30 +9,32 @@ async function checkExists(client, table, id, idQuery) {
 }
 
 function modifyId(table, input) {
-	switch (table) {
-		case 'Tanque':
-			input.idTanque = input.id;
-			break;
-		case 'Lugar':
-			input.idLugar = input.id;
-			/*
-			El uso de mysql.raw() no es recomendado, porque hace que se ignore por completo la validación de inputs
-			y deja abierta la posibilidad de una inyección de SQL. En este caso, ya se validó desde GraphQL que
-			los valores de input.coordenadas.x y input.coordenadas.y son FLOATS.
-			*/
-			let coordenadas = mysql.raw(
-				`ST_GeomFromText('POINT (${input.coordenadas.x} ${input.coordenadas.y})')`
-			);
-			input.coordenadas = coordenadas;
-			break;
-		case 'Contenido':
-			input.idContenido = input.id;
-			break;
-		case 'Dueno':
-			input.idDueno = input.id;
-			break;
+	if (typeof input.id !== 'undefined') {
+		switch (table) {
+			case 'Tanque':
+				input.idTanque = input.id;
+				break;
+			case 'Lugar':
+				input.idLugar = input.id;
+				/*
+				El uso de mysql.raw() no es recomendado, porque hace que se ignore por completo la validación de inputs
+				y deja abierta la posibilidad de una inyección de SQL. En este caso, ya se validó desde GraphQL que
+				los valores de input.coordenadas.x y input.coordenadas.y son FLOATS.
+				*/
+				let coordenadas = mysql.raw(
+					`ST_GeomFromText('POINT (${input.coordenadas.x} ${input.coordenadas.y})')`
+				);
+				input.coordenadas = coordenadas;
+				break;
+			case 'Contenido':
+				input.idContenido = input.id;
+				break;
+			case 'Dueno':
+				input.idDueno = input.id;
+				break;
+		}
+		delete input.id;
 	}
-	delete input.id;
 	return input;
 }
 
