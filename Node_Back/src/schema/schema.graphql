@@ -139,7 +139,7 @@ input PointInput {
 
 "Input para crear o actualizar un contenido"
 input ContenidoInput {
-	idContenido: String
+	id: String
 	contenido: String
 }
 

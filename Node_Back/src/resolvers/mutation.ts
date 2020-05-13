@@ -40,9 +40,9 @@ const mutation: IResolvers = {
 				'idContenido'
 			);
 		},
-		createContenido(__: void, { lugarInput }): any {
+		createContenido(__: void, { contenidoInput }): any {
 			return mysqlMutations.createValor(
-				lugarInput,
+				contenidoInput,
 				'Contenido',
 				'idContenido'
 			);

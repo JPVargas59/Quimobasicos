@@ -8,36 +8,41 @@ async function checkExists(client, table, id, idQuery) {
 	return check.length == 0 ? false : true;
 }
 
+function modifyId(table, input) {
+	switch (table) {
+		case 'Tanque':
+			input.idTanque = input.id;
+			break;
+		case 'Lugar':
+			input.idLugar = input.id;
+			/*
+			El uso de mysql.raw() no es recomendado, porque hace que se ignore por completo la validación de inputs
+			y deja abierta la posibilidad de una inyección de SQL. En este caso, ya se validó desde GraphQL que
+			los valores de input.coordenadas.x y input.coordenadas.y son FLOATS.
+			*/
+			let coordenadas = mysql.raw(
+				`ST_GeomFromText('POINT (${input.coordenadas.x} ${input.coordenadas.y})')`
+			);
+			input.coordenadas = coordenadas;
+			break;
+		case 'Contenido':
+			input.idContenido = input.id;
+			break;
+		case 'Dueno':
+			input.idDueno = input.id;
+			break;
+	}
+	delete input.id;
+	return input;
+}
+
 let mysqlMutations = {
 	async createValor(client, input, table, mysqlId) {
 		if (await checkExists(client, table, mysqlId, input.id)) {
-			return `El ID de ${client.escape(table)} ya existe`;
+			return `El ID de {table} ya existe`;
 		} else {
-			let resp: String = `Instancia de ${client.escape(table)} creada`;
-			switch (table) {
-				case 'Tanque':
-					input.idTanque = input.id;
-					break;
-				case 'Lugar':
-					input.idLugar = input.id;
-					/*
-					El uso de mysql.raw() no es recomendado, porque hace que se ignore por completo la validación de inputs
-					y deja abierta la posibilidad de una inyección de SQL. En este caso, ya se validó desde GraphQL que
-					los valores de input.coordenadas.x y input.coordenadas.y son FLOATS.
-					*/
-					let coordenadas = mysql.raw(
-						`ST_GeomFromText('POINT (${input.coordenadas.x} ${input.coordenadas.y})')`
-					);
-					input.coordenadas = coordenadas;
-					break;
-				case 'Contenido':
-					input.idContenido = input.id;
-					break;
-				case 'Dueno':
-					input.idDueno = input.id;
-					break;
-			}
-			delete input.id;
+			let resp: String = `Instancia de ${table} creada`;
+			input = modifyId(table, input);
 			await client
 				.query(`INSERT INTO ?? SET ?`, [table, input])
 				.catch((error) => {
@@ -67,9 +72,8 @@ let mysqlMutations = {
 	},
 	async setValor(client, input, idOriginal, table, mysqlId) {
 		if (await checkExists(client, table, mysqlId, idOriginal)) {
-			let resp = `El valor de ${client.escape(
-				table
-			)} ha sido actualizado`;
+			input = modifyId(table, input);
+			let resp = `El valor de ${table} ha sido actualizado`;
 			await client
 				.query(`UPDATE ?? SET ? WHERE ??=?`, [
 					table,
