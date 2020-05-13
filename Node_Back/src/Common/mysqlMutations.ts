@@ -1,18 +1,19 @@
 import mysql from 'mysql';
 async function checkExists(client, table, id, idQuery) {
-	var check = await client.query(
-		`SELECT * FROM ${table} WHERE ${id}=?`,
-		idQuery
-	);
+	var check = await client
+		.query(`SELECT * FROM ?? WHERE ??=?`, [table, id, idQuery])
+		.catch((error) => {
+			console.log(error);
+		});
 	return check.length == 0 ? false : true;
 }
 
 let mysqlMutations = {
 	async createValor(client, input, table, mysqlId) {
 		if (await checkExists(client, table, mysqlId, input.id)) {
-			return `El ID de ${table} ya existe`;
+			return `El ID de ${client.escape(table)} ya existe`;
 		} else {
-			let resp: String = `Instancia de ${table} creada`;
+			let resp: String = `Instancia de ${client.escape(table)} creada`;
 			switch (table) {
 				case 'Tanque':
 					input.idTanque = input.id;
@@ -38,7 +39,7 @@ let mysqlMutations = {
 			}
 			delete input.id;
 			await client
-				.query(`INSERT INTO ${table} SET ?`, input)
+				.query(`INSERT INTO ?? SET ?`, [table, input])
 				.catch((error) => {
 					console.log(error);
 					resp = error.sqlMessage;
@@ -66,10 +67,14 @@ let mysqlMutations = {
 	},
 	async setValor(client, input, idOriginal, table, mysqlId) {
 		if (await checkExists(client, table, mysqlId, idOriginal)) {
-			let resp = `El valor de ${table} ha sido actualizado`;
+			let resp = `El valor de ${client.escape(
+				table
+			)} ha sido actualizado`;
 			await client
-				.query(`UPDATE ${table} SET ? WHERE ${mysqlId}=?`, [
+				.query(`UPDATE ?? SET ? WHERE ??=?`, [
+					table,
 					input,
+					mysqlId,
 					idOriginal
 				])
 				.catch((error) => {
