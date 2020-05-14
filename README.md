@@ -59,5 +59,23 @@ npm run start:dev
 -   [x] Dar de alta un tanque
 -   [x] Modificar los datos de un tanque
 -   [x] Eliminar un tanque
--   [ ] Dar de alta un materia
--   [ ] Dar de alta un lugar
+-   [x] Dar de alta un contenido
+-   [x] Modificar un contenido
+-   [x] Dar de alta un lugar
+-   [x] Modificar un lugar
+-   [ ] Dar de alta un dueño
+-   [ ] Modificar un dueño
+-   [ ] Dar de alta un mantenimiento
+-   [ ] Modificar un mantenimiento
+-   [ ] Dar de alta un operador
+-   [ ] Modificar un operador
+-   [ ] Dar de alta usuario
+-   [ ] Modificar un usuario
+-   [ ] Dar de alta una operación
+-   [ ] Modificar una operación
+-   [ ] Dar de alta una etiqueta
+-   [ ] Modificar una etiqueta
+-   [ ] Dar de alta un tanqueEsta
+-   [ ] Modificar un tanqueEsta
+-   [ ] Dar de alta un tanqueHaEstado
+-   [ ] Modificar un tanqueHaEstado
