@@ -143,6 +143,12 @@ input ContenidoInput {
 	contenido: String
 }
 
+"Input para crear o actualizar un dueno"
+input DuenoInput {
+	id: String
+	nombre: String
+}
+
 "Queries"
 type Query {
 	"Lista de informacion de los Tanques"
@@ -205,4 +211,12 @@ type Mutation {
 	): String
 	"Mutación para crear un nuevo contenido"
 	createContenido(contenidoInput: ContenidoInput!): String
+	"""
+	Mutación para modificar la información de un dueno.
+	DuenoInput es la nueva información del dueno.
+	idDuenoOriginal es el idDueno original en caso de que se quiera asignar un nuevo id al dueno.
+	"""
+	setDueno(duenoInput: DuenoInput!, idDuenoOriginal: String!): String
+	"Mutación para crear un nuevo dueno"
+	createDueno(duenoInput: DuenoInput!): String
 }

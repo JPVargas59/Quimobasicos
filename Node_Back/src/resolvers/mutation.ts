@@ -46,6 +46,17 @@ const mutation: IResolvers = {
 				'Contenido',
 				'idContenido'
 			);
+		},
+		setDueno(__: void, { duenoInput, idDuenoOriginal }): any {
+			return mysqlMutations.setValor(
+				duenoInput,
+				idDuenoOriginal,
+				'Dueno',
+				'idDueno'
+			);
+		},
+		createDueno(__: void, { duenoInput }): any {
+			return mysqlMutations.createValor(duenoInput, 'Dueno', 'idDueno');
 		}
 	}
 };
