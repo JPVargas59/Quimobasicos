@@ -149,6 +149,18 @@ input DuenoInput {
 	nombre: String
 }
 
+"Input para crear o acutalizar un mantenimiento"
+input MantenimientoInput {
+	id: IdMantenimientoInput
+	observaciones: String
+}
+
+"Id para un mantenimiento"
+input IdMantenimientoInput {
+	idTanque: String
+	fechaMantenimiento: Date
+}
+
 "Queries"
 type Query {
 	"Lista de informacion de los Tanques"
@@ -219,4 +231,11 @@ type Mutation {
 	setDueno(duenoInput: DuenoInput!, idDuenoOriginal: String!): String
 	"Mutación para crear un nuevo dueno"
 	createDueno(duenoInput: DuenoInput!): String
+
+	setMantenimiento(
+		mantenimientoInput: MantenimientoInput!
+		idMantenimientoOriginal: IdMantenimientoInput!
+	): String
+
+	createMantenimiento(mantenimientoInput: MantenimientoInput!): String
 }

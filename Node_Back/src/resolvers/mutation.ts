@@ -6,17 +6,15 @@ const mutation: IResolvers = {
 		setTanque(__: void, { tanqueInput, idTanqueOriginal }): any {
 			return mysqlMutations.setValor(
 				tanqueInput,
-				idTanqueOriginal,
+				[idTanqueOriginal],
 				'Tanque',
-				'idTanque'
+				['idTanque']
 			);
 		},
 		createTanque(__: void, { tanqueInput }): any {
-			return mysqlMutations.createValor(
-				tanqueInput,
-				'Tanque',
+			return mysqlMutations.createValor(tanqueInput, 'Tanque', [
 				'idTanque'
-			);
+			]);
 		},
 		deleteTanque(__: void, { idTanqueInput }): any {
 			return mysqlMutations.deleteTanque(idTanqueInput);
@@ -24,39 +22,55 @@ const mutation: IResolvers = {
 		setLugar(__: void, { lugarInput, idLugarOriginal }): any {
 			return mysqlMutations.setValor(
 				lugarInput,
-				idLugarOriginal,
+				[idLugarOriginal],
 				'Lugar',
-				'idLugar'
+				['idLugar']
 			);
 		},
 		createLugar(__: void, { lugarInput }): any {
-			return mysqlMutations.createValor(lugarInput, 'Lugar', 'idLugar');
+			return mysqlMutations.createValor(lugarInput, 'Lugar', ['idLugar']);
 		},
 		setContenido(__: void, { contenidoInput, idContenidoOriginal }): any {
 			return mysqlMutations.setValor(
 				contenidoInput,
-				idContenidoOriginal,
+				[idContenidoOriginal],
 				'Contenido',
-				'idContenido'
+				['idContenido']
 			);
 		},
 		createContenido(__: void, { contenidoInput }): any {
-			return mysqlMutations.createValor(
-				contenidoInput,
-				'Contenido',
+			return mysqlMutations.createValor(contenidoInput, 'Contenido', [
 				'idContenido'
-			);
+			]);
 		},
 		setDueno(__: void, { duenoInput, idDuenoOriginal }): any {
 			return mysqlMutations.setValor(
 				duenoInput,
-				idDuenoOriginal,
+				[idDuenoOriginal],
 				'Dueno',
-				'idDueno'
+				['idDueno']
 			);
 		},
 		createDueno(__: void, { duenoInput }): any {
-			return mysqlMutations.createValor(duenoInput, 'Dueno', 'idDueno');
+			return mysqlMutations.createValor(duenoInput, 'Dueno', ['idDueno']);
+		},
+		setMantenimiento(
+			__: void,
+			{ mantenimientoInput, idMantenimientoOriginal }
+		): any {
+			return mysqlMutations.setValor(
+				mantenimientoInput,
+				idMantenimientoOriginal,
+				'Mantenimiento',
+				['idTanque', 'fechaMantenimiento']
+			);
+		},
+		createMantenimiento(__: void, { mantenimientoInput }): any {
+			return mysqlMutations.createValor(
+				mantenimientoInput,
+				'Mantenimiento',
+				['idTanque', 'fechaMantenimiento']
+			);
 		}
 	}
 };

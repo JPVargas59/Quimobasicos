@@ -65,8 +65,8 @@ npm run start:dev
 -   [x] Modificar un lugar
 -   [x] Dar de alta un dueño
 -   [x] Modificar un dueño
--   [ ] Dar de alta un mantenimiento
--   [ ] Modificar un mantenimiento
+-   [x] Dar de alta un mantenimiento
+-   [x] Modificar un mantenimiento
 -   [ ] Dar de alta un operador
 -   [ ] Modificar un operador
 -   [ ] Dar de alta usuario

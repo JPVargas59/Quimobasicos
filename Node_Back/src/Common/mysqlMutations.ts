@@ -1,11 +1,41 @@
 import mysql from 'mysql';
-async function checkExists(client, table, id, idQuery) {
-	var check = await client
-		.query(`SELECT * FROM ?? WHERE ??=?`, [table, id, idQuery])
-		.catch((error) => {
-			console.log(error);
-		});
+async function checkExists(
+	client,
+	table,
+	mysqlId = [String],
+	idQuery = [String]
+) {
+	var obj = {
+		queryString: `SELECT * FROM ?? WHERE`,
+		arr: [table],
+		mysqlId: mysqlId,
+		id: idQuery
+	};
+	//console.log('Antes');
+	//console.log(obj);
+	obj = parseObj(obj);
+	//console.log('Despues');
+	//console.log(obj);
+	var check = await client.query(obj.queryString, obj.arr).catch((error) => {
+		console.log(error);
+	});
 	return check.length == 0 ? false : true;
+}
+
+function parseObj(obj) {
+	//console.log(obj.mysqlId.length);
+	for (var i = 0; i < obj.mysqlId.length; i++) {
+		if (i == obj.id.length - 1) {
+			obj.queryString += `?? = ?`;
+		} else {
+			obj.queryString += `?? = ? AND`;
+		}
+		//console.log(i);
+		//console.log(obj.queryString);
+		obj.arr.push(obj.mysqlId[i]);
+		obj.arr.push(obj.id[i]);
+	}
+	return obj;
 }
 
 function modifyId(table, input) {
@@ -32,6 +62,9 @@ function modifyId(table, input) {
 			case 'Dueno':
 				input.idDueno = input.id;
 				break;
+			case 'Mantenimiento':
+				input.idTanque = input.id.idTanque;
+				input.fechaMantenimiento = input.id.fechaMantenimiento;
 		}
 		delete input.id;
 	}
@@ -40,7 +73,9 @@ function modifyId(table, input) {
 
 let mysqlMutations = {
 	async createValor(client, input, table, mysqlId) {
-		if (await checkExists(client, table, mysqlId, input.id)) {
+		if (
+			await checkExists(client, table, mysqlId, Object.values(input.id))
+		) {
 			return `El ID de {table} ya existe`;
 		} else {
 			let resp: String = `Instancia de ${table} creada`;
@@ -55,7 +90,14 @@ let mysqlMutations = {
 		}
 	},
 	async deleteTanque(client, idTanqueInput) {
-		if (await checkExists(client, 'Tanque', 'idTanque', idTanqueInput)) {
+		if (
+			await checkExists(
+				client,
+				'Tanque',
+				['idTanque'] as any,
+				idTanqueInput
+			)
+		) {
 			let resp: String = 'Tanque eliminado';
 			await client
 				.query('DELETE FROM Tanque WHERE idTanque=?', idTanqueInput)
@@ -73,20 +115,22 @@ let mysqlMutations = {
 		}
 	},
 	async setValor(client, input, idOriginal, table, mysqlId) {
-		if (await checkExists(client, table, mysqlId, idOriginal)) {
+		if (
+			await checkExists(client, table, mysqlId, Object.values(idOriginal))
+		) {
 			input = modifyId(table, input);
 			let resp = `El valor de ${table} ha sido actualizado`;
-			await client
-				.query(`UPDATE ?? SET ? WHERE ??=?`, [
-					table,
-					input,
-					mysqlId,
-					idOriginal
-				])
-				.catch((error) => {
-					console.log(error);
-					resp = error.sqlMessage;
-				});
+			var obj = {
+				queryString: `UPDATE ?? SET ? WHERE`,
+				arr: [table, input],
+				mysqlId: mysqlId,
+				id: idOriginal
+			};
+			obj = parseObj(obj);
+			await client.query(obj.queryString, obj.arr).catch((error) => {
+				console.log(error);
+				resp = error.sqlMessage;
+			});
 			return resp;
 		} else {
 			return `El ID de ${table} no existe`;
