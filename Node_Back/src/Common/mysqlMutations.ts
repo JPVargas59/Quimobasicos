@@ -1,21 +1,17 @@
 import mysql from 'mysql';
-async function checkExists(
-	client,
-	table,
-	mysqlId = [String],
-	idQuery = [String]
-) {
+import type from '../resolvers/type';
+async function checkExists(client, table, mysqlId, idQuery) {
 	var obj = {
 		queryString: `SELECT * FROM ?? WHERE`,
 		arr: [table],
 		mysqlId: mysqlId,
 		id: idQuery
 	};
-	//console.log('Antes');
-	//console.log(obj);
+	console.log('Antes');
+	console.log(obj);
 	obj = parseObj(obj);
-	//console.log('Despues');
-	//console.log(obj);
+	console.log('Despues');
+	console.log(obj);
 	var check = await client.query(obj.queryString, obj.arr).catch((error) => {
 		console.log(error);
 	});
@@ -26,9 +22,9 @@ function parseObj(obj) {
 	//console.log(obj.mysqlId.length);
 	for (var i = 0; i < obj.mysqlId.length; i++) {
 		if (i == obj.id.length - 1) {
-			obj.queryString += `?? = ?`;
+			obj.queryString += ` ?? = ?`;
 		} else {
-			obj.queryString += `?? = ? AND`;
+			obj.queryString += ` ?? = ? AND`;
 		}
 		//console.log(i);
 		//console.log(obj.queryString);
@@ -71,11 +67,19 @@ function modifyId(table, input) {
 	return input;
 }
 
+function validadteId(id) {
+	if (Array.isArray(id)) {
+		return id;
+	} else if (typeof id === 'string') {
+		return [id];
+	} else {
+		return Object.values(id);
+	}
+}
+
 let mysqlMutations = {
 	async createValor(client, input, table, mysqlId) {
-		if (
-			await checkExists(client, table, mysqlId, Object.values(input.id))
-		) {
+		if (await checkExists(client, table, mysqlId, validadteId(input.id))) {
 			return `El ID de {table} ya existe`;
 		} else {
 			let resp: String = `Instancia de ${table} creada`;
@@ -116,7 +120,7 @@ let mysqlMutations = {
 	},
 	async setValor(client, input, idOriginal, table, mysqlId) {
 		if (
-			await checkExists(client, table, mysqlId, Object.values(idOriginal))
+			await checkExists(client, table, mysqlId, validadteId(idOriginal))
 		) {
 			input = modifyId(table, input);
 			let resp = `El valor de ${table} ha sido actualizado`;

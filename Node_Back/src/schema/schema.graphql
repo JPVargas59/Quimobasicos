@@ -204,6 +204,7 @@ type Mutation {
 	createTanque(tanqueInput: TanqueInput!): String
 	"Mutación para eliminar un tanque cuyo ID no es llave foránea de ninguna otra tabla"
 	deleteTanque(idTanqueInput: String!): String
+
 	"""
 	Mutación para modificar la información de un lugar.
 	LugarInput es la nueva información del lugar.
@@ -212,6 +213,7 @@ type Mutation {
 	setLugar(lugarInput: LugarInput!, idLugarOriginal: String!): String
 	"Mutación para crear un nuevo lugar"
 	createLugar(lugarInput: LugarInput!): String
+
 	"""
 	Mutación para modificar la información de un contenido.
 	ContenidoInput es la nueva información del contenido.
@@ -223,6 +225,7 @@ type Mutation {
 	): String
 	"Mutación para crear un nuevo contenido"
 	createContenido(contenidoInput: ContenidoInput!): String
+
 	"""
 	Mutación para modificar la información de un dueno.
 	DuenoInput es la nueva información del dueno.
@@ -232,10 +235,16 @@ type Mutation {
 	"Mutación para crear un nuevo dueno"
 	createDueno(duenoInput: DuenoInput!): String
 
+	"""
+	Mutación para modificar la información de un mantenimiento.
+	MantenimientoInput es la nueva información del mantenimiento.
+	idMantenimientoOriginal son las columnas que forman la llave primaria original en caso de que se quiera asignar
+	una nueva llave primaria al mantenimiento.
+	"""
 	setMantenimiento(
 		mantenimientoInput: MantenimientoInput!
 		idMantenimientoOriginal: IdMantenimientoInput!
 	): String
-
+	"Mutación para crear un nuevo mantenimiento"
 	createMantenimiento(mantenimientoInput: MantenimientoInput!): String
 }
