@@ -7,11 +7,11 @@ async function checkExists(client, table, mysqlId, idQuery) {
 		mysqlId: mysqlId,
 		id: idQuery
 	};
-	console.log('Antes');
-	console.log(obj);
+	///console.log('Antes');
+	///console.log(obj);
 	obj = parseObj(obj);
-	console.log('Despues');
-	console.log(obj);
+	///console.log('Despues');
+	///console.log(obj);
 	var check = await client.query(obj.queryString, obj.arr).catch((error) => {
 		console.log(error);
 	});
@@ -47,10 +47,12 @@ function modifyId(table, input) {
 				y deja abierta la posibilidad de una inyección de SQL. En este caso, ya se validó desde GraphQL que
 				los valores de input.coordenadas.x y input.coordenadas.y son FLOATS.
 				*/
-				let coordenadas = mysql.raw(
-					`ST_GeomFromText('POINT (${input.coordenadas.x} ${input.coordenadas.y})')`
-				);
-				input.coordenadas = coordenadas;
+				if (typeof input.coordenadas !== 'undefined') {
+					let coordenadas = mysql.raw(
+						`ST_GeomFromText('POINT (${input.coordenadas.x} ${input.coordenadas.y})')`
+					);
+					input.coordenadas = coordenadas;
+				}
 				break;
 			case 'Contenido':
 				input.idContenido = input.id;
@@ -67,7 +69,7 @@ function modifyId(table, input) {
 	return input;
 }
 
-function validadteId(id) {
+function validateId(id) {
 	if (Array.isArray(id)) {
 		return id;
 	} else if (typeof id === 'string') {
@@ -79,7 +81,7 @@ function validadteId(id) {
 
 let mysqlMutations = {
 	async createValor(client, input, table, mysqlId) {
-		if (await checkExists(client, table, mysqlId, validadteId(input.id))) {
+		if (await checkExists(client, table, mysqlId, validateId(input.id))) {
 			return `El ID de {table} ya existe`;
 		} else {
 			let resp: String = `Instancia de ${table} creada`;
@@ -119,9 +121,8 @@ let mysqlMutations = {
 		}
 	},
 	async setValor(client, input, idOriginal, table, mysqlId) {
-		if (
-			await checkExists(client, table, mysqlId, validadteId(idOriginal))
-		) {
+		idOriginal = validateId(idOriginal);
+		if (await checkExists(client, table, mysqlId, idOriginal)) {
 			input = modifyId(table, input);
 			let resp = `El valor de ${table} ha sido actualizado`;
 			var obj = {
@@ -131,6 +132,7 @@ let mysqlMutations = {
 				id: idOriginal
 			};
 			obj = parseObj(obj);
+			//console.log(obj);
 			await client.query(obj.queryString, obj.arr).catch((error) => {
 				console.log(error);
 				resp = error.sqlMessage;
