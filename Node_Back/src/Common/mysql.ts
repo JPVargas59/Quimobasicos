@@ -262,5 +262,6 @@ exports.getUsuarioOperador = async (client, idOperador) => {
 	if (operador.length == 0) {
 		return null;
 	}
+	
 	return operador[0];
 };
