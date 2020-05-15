@@ -48,11 +48,19 @@ npm run start:dev
 #### Queries
 
 -   [x] Obtener información de todos los tanques registrados
--   [ ] Obtener los tanques de acuerdo a una caracteristica
--   [ ] Obtener información de todos los materiales registrados
--   [ ] Obtener los tanques de acuerdo a su nombre o clave
--   [ ] Obtener información de todos los lugares registrados
--   [ ] Obtener los lugares de acuerdo a su nombre o clave
+-   [x] Obtener los tanques de acuerdo a id
+-   [x] Obtener información de todos los materiales registrados
+-   [x] Obtener los duenos
+-   [x] Obtener los duenos por id
+-   [x] Obtener información de todos los lugares registrados
+-   [x] Obtener información lugares registrados por id
+-   [x] Obtener los contenidos
+-   [x] Obtener los contenidos por id
+-   [x] Obtener las etiquetas RFID
+-   [x] Obtener la etiqueta RFID por id
+-   [x] Obtener el historial de peso de tanques
+-   [x] Obtener el historial de peso de un tanque por id
+
 
 #### Mutations
 
