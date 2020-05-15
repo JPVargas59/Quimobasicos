@@ -1,0 +1,21 @@
+<h3 class="ui header">Lugares</h3>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam consequuntur cum cumque cupiditate dolorum eos error eum, excepturi facilis maiores nostrum nulla perspiciatis porro quas quis recusandae saepe sunt unde?</p>
+
+<table class="ui table">
+  <thead>
+  <tr>
+    <th>Nombre</th>
+    <th>Radio</th>
+    <th>Coordenadas</th>
+    <th>Capacidad</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let lugar of lugares">
+      <td>{{lugar.nombre}}</td>
+      <td>{{lugar.radio}} mts</td>
+      <td>({{lugar.coordenadas}})</td>
+      <td>{{lugar.capacidad}} tanques</td>
+    </tr>
+  </tbody>
+</table>

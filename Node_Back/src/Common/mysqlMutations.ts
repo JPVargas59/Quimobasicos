@@ -1,39 +1,145 @@
-async function checkTankExists(client, idTanque) {
-	var checkTanque = await client.query(
-		'SELECT * FROM Tanque WHERE idTanque=?',
-		idTanque
-	);
-	return checkTanque.length == 0 ? false : true;
+import mysql from 'mysql';
+import type from '../resolvers/type';
+async function checkExists(client, table, mysqlId, idQuery) {
+	var obj = {
+		queryString: `SELECT * FROM ?? WHERE`,
+		arr: [table],
+		mysqlId: mysqlId,
+		id: idQuery
+	};
+	///console.log('Antes');
+	///console.log(obj);
+	obj = parseObj(obj);
+	///console.log('Despues');
+	///console.log(obj);
+	var check = await client.query(obj.queryString, obj.arr).catch((error) => {
+		console.log(error);
+	});
+	return check.length == 0 ? false : true;
+}
+
+function parseObj(obj) {
+	//console.log(obj.mysqlId.length);
+	for (var i = 0; i < obj.mysqlId.length; i++) {
+		if (i == obj.id.length - 1) {
+			obj.queryString += ` ?? = ?`;
+		} else {
+			obj.queryString += ` ?? = ? AND`;
+		}
+		//console.log(i);
+		//console.log(obj.queryString);
+		obj.arr.push(obj.mysqlId[i]);
+		obj.arr.push(obj.id[i]);
+	}
+	return obj;
+}
+
+function modifyId(table, input) {
+	if (typeof input.id !== 'undefined') {
+		switch (table) {
+			case 'Tanque':
+				input.idTanque = input.id;
+				break;
+			case 'Lugar':
+				input.idLugar = input.id;
+				/*
+				El uso de mysql.raw() no es recomendado, porque hace que se ignore por completo la validación de inputs
+				y deja abierta la posibilidad de una inyección de SQL. En este caso, ya se validó desde GraphQL que
+				los valores de input.coordenadas.x y input.coordenadas.y son FLOATS.
+				*/
+				if (typeof input.coordenadas !== 'undefined') {
+					let coordenadas = mysql.raw(
+						`ST_GeomFromText('POINT (${input.coordenadas.x} ${input.coordenadas.y})')`
+					);
+					input.coordenadas = coordenadas;
+				}
+				break;
+			case 'Contenido':
+				input.idContenido = input.id;
+				break;
+			case 'Dueno':
+				input.idDueno = input.id;
+				break;
+			case 'Mantenimiento':
+				input.idTanque = input.id.idTanque;
+				input.fechaMantenimiento = input.id.fechaMantenimiento;
+		}
+		delete input.id;
+	}
+	return input;
+}
+
+function validateId(id) {
+	if (Array.isArray(id)) {
+		return id;
+	} else if (typeof id === 'string') {
+		return [id];
+	} else {
+		return Object.values(id);
+	}
 }
 
 let mysqlMutations = {
-	async setTanque(client, tanqueInput, idTanqueOriginal) {
-		if ((await checkTankExists(client, idTanqueOriginal)) == false) {
-			return 'Tanque no encontrado';
+	async createValor(client, input, table, mysqlId) {
+		if (await checkExists(client, table, mysqlId, validateId(input.id))) {
+			return `El ID de {table} ya existe`;
 		} else {
+			let resp: String = `Instancia de ${table} creada`;
+			input = modifyId(table, input);
 			await client
-				.query('UPDATE Tanque SET ? WHERE idTanque=?', [
-					tanqueInput,
-					idTanqueOriginal
-				])
+				.query(`INSERT INTO ?? SET ?`, [table, input])
 				.catch((error) => {
 					console.log(error);
-					return error.sqlMessage;
+					resp = error.sqlMessage;
 				});
-			return 'Tanque actualizado';
+			return resp;
 		}
 	},
-	async createTanque(client, tanqueInput) {
-		if ((await checkTankExists(client, tanqueInput.idTanque)) == false) {
+	async deleteTanque(client, idTanqueInput) {
+		if (
+			await checkExists(
+				client,
+				'Tanque',
+				['idTanque'] as any,
+				idTanqueInput
+			)
+		) {
+			let resp: String = 'Tanque eliminado';
 			await client
-				.query('INSERT INTO Tanque SET ?', tanqueInput)
+				.query('DELETE FROM Tanque WHERE idTanque=?', idTanqueInput)
 				.catch((error) => {
 					console.log(error);
-					return error.sqlMessage;
+					if (error.errno == 1451) {
+						resp = 'El tanque no puede ser eliminado';
+					} else {
+						resp = error.sqlMessage;
+					}
 				});
-			return 'Tanque creado';
+			return resp;
 		} else {
-			return 'ID del Tanque ya existe';
+			return 'El ID del tanque no existe';
+		}
+	},
+	async setValor(client, input, idOriginal, table, mysqlId) {
+		idOriginal = validateId(idOriginal);
+		if (await checkExists(client, table, mysqlId, idOriginal)) {
+			input = modifyId(table, input);
+			let resp = `El valor de ${table} ha sido actualizado`;
+			var obj = {
+				queryString: `UPDATE ?? SET ? WHERE`,
+				arr: [table, input],
+				mysqlId: mysqlId,
+				id: idOriginal
+			};
+			obj = parseObj(obj);
+			//console.log(obj);
+			await client.query(obj.queryString, obj.arr).catch((error) => {
+				console.log(error);
+				resp = error.sqlMessage;
+			});
+			return resp;
+		} else {
+			return `El ID de ${table} no existe`;
 		}
 	}
 };

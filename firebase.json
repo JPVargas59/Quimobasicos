@@ -1,0 +1,17 @@
+{
+  "hosting": {
+    "public": "dist/Quimobasicos",
+    "target": "quimobasicos",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

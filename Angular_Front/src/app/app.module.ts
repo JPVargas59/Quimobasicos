@@ -19,7 +19,11 @@ import { InventoryComponent } from './components/reports/inventory/inventory.com
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { AdminLandingComponent } from './components/admin/admin-landing/admin-landing.component';
 import { OperatorLandingComponent } from './components/operator/operator-landing/operator-landing.component';
-import {SupervisorLandingComponent} from './components/supervisor/supervisor-landing/supervisor-landing.component';
+import { SupervisorLandingComponent } from './components/supervisor/supervisor-landing/supervisor-landing.component';
+import { LocationsComponent } from './components/admin/locations/locations.component';
+import { AddLocationComponent } from './components/admin/locations/add-location/add-location.component';
+import { UpdateLocationComponent } from './components/admin/locations/update-location/update-location.component';
+import { SeeReportComponent } from './components/reports/see-report/see-report.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +44,11 @@ import {SupervisorLandingComponent} from './components/supervisor/supervisor-lan
     NavbarComponent,
     AdminLandingComponent,
     OperatorLandingComponent,
-    SupervisorLandingComponent
+    SupervisorLandingComponent,
+    LocationsComponent,
+    AddLocationComponent,
+    UpdateLocationComponent,
+    SeeReportComponent
   ],
   imports: [
     BrowserModule,
