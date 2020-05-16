@@ -9,6 +9,13 @@ import { AdminLandingComponent } from 'src/app/components/admin/admin-landing/ad
 import {LocationsComponent} from '../../components/admin/locations/locations.component';
 import { AddLocationComponent } from 'src/app/components/admin/locations/add-location/add-location.component';
 import { UpdateLocationComponent } from 'src/app/components/admin/locations/update-location/update-location.component';
+import { InventoryComponent } from 'src/app/components/reports/inventory/inventory.component';
+import { AddTankComponent } from 'src/app/components/tank/add-tank/add-tank.component';
+import { TankComponent } from 'src/app/components/tank/tank.component';
+import { UpdateTankComponent } from 'src/app/components/tank/update-tank/update-tank.component';
+import { ExitTankComponent } from 'src/app/components/tank/exit-tank/exit-tank.component';
+import { ReportsComponent } from 'src/app/components/reports/reports.component';
+import { SeeReportComponent } from 'src/app/components/reports/see-report/see-report.component';
 
 
 const routes: Routes = [
@@ -21,7 +28,15 @@ const routes: Routes = [
       { path: 'user/:id', component: UserComponent },
       { path: 'locations', component: LocationsComponent},
       { path: 'locations/add-location', component: AddLocationComponent},
-      { path: 'locations/update-location', component: UpdateLocationComponent}
+      { path: 'locations/update-location', component: UpdateLocationComponent},
+      
+      { path: 'reports/inventory', component: InventoryComponent },
+      { path: 'tanks/add', component: AddTankComponent },
+      { path: 'tank/:id', component: TankComponent },
+      { path: 'tank/:id/update', component: UpdateTankComponent },
+      { path: 'tank/:id/exit', component: ExitTankComponent },
+      { path: 'reports', component: ReportsComponent },
+      { path: 'reports/see-report', component: SeeReportComponent }
     ]
   }
 ];
