@@ -1,0 +1,17 @@
+.mainTitle{
+    border-radius: 0;
+    background-color: #00396F;
+}
+.ui.white.header{
+    color: #FFFFFF;
+    display: inline-block;
+    width: 100%;
+}
+.imageLogo{
+    height: 2em;
+    
+}
+.mainTitle-Image{
+    float: left;
+    position: absolute;
+}
