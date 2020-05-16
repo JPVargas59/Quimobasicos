@@ -175,6 +175,18 @@ input EtiquetaInput {
 	id: Int
 }
 
+"Input para crear o actualizar el historial del peso de un tanque"
+input HistorialPesoInput {
+	id: IdHistorialPeso
+	peso: Float
+}
+
+"Id para el historial de un peso"
+input IdHistorialPeso {
+	idTanque: String
+	fecha: Date
+}
+
 "Queries"
 type Query {
 	"Lista de informacion de los Tanques"
@@ -242,4 +254,10 @@ type Mutation {
 
 	setEtiqueta(etiquetaInput: EtiquetaInput!, idEtiquetaOriginal: Int!): String
 	createEtiqueta(etiquetaInput: EtiquetaInput!): String
+
+	setHistorialPeso(
+		historialPesoInput: HistorialPesoInput!
+		idHistorialPesoOriginal: IdHistorialPeso!
+	): String
+	createHistorialPeso(historialPesoInput: HistorialPesoInput!): String
 }

@@ -68,6 +68,11 @@ function modifyId(table, input) {
 				break;
 			case 'EtiquetaRFID':
 				input.idEtiqueta = input.id;
+				break;
+			case 'HistorialPeso':
+				input.idTanque = input.id.idTanque;
+				input.fecha = input.id.fecha;
+				break;
 		}
 		delete input.id;
 	}

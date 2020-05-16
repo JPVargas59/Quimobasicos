@@ -84,6 +84,24 @@ const mutation: IResolvers = {
 			return mysqlMutations.createValor(etiquetaInput, 'EtiquetaRFID', [
 				'idEtiqueta'
 			]);
+		},
+		setHistorialPeso(
+			__: void,
+			{ historialPesoInput, idHistorialPesoOriginal }
+		): any {
+			return mysqlMutations.setValor(
+				historialPesoInput,
+				idHistorialPesoOriginal,
+				'HistorialPeso',
+				['idTanque', 'fecha']
+			);
+		},
+		createHistorialPeso(__: void, { historialPesoInput }): any {
+			return mysqlMutations.createValor(
+				historialPesoInput,
+				'HistorialPeso',
+				['idTanque', 'fecha']
+			);
 		}
 	}
 };
