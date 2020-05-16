@@ -1,3 +1,4 @@
+import { async } from '@angular/core/testing';
 var common = require('../Common/mysql');
 import client from '../client';
 
@@ -114,6 +115,18 @@ let mysqlMutations = {
 		var resp = await common.getHistorialUbicacionTanques(client);
 		client.quit();
 		return resp;
+	},
+	async getOperacionesDelTanque(idTanque: string) {
+		var resp = await common.getOperacionesDelTanque(client, idTanque);
+		let arrayOperaciones = JSON.parse(JSON.stringify(resp));
+		for (let i = 0; i < arrayOperaciones.length; i++) {
+			arrayOperaciones[i]['operador'] = await common.getUsuarioOperador(
+				client,
+				arrayOperaciones[i].operador
+			);
+		}
+		client.quit();
+		return arrayOperaciones;
 	}
 };
 export = mysqlMutations;

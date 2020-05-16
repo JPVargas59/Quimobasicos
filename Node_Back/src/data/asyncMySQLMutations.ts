@@ -7,16 +7,22 @@ function quitClient(client, resp) {
 }
 
 let mysqlMutations = {
-	async setTanque(tanqueInput, idTanqueOriginal) {
-		var resp = await common.setTanque(
-			client,
-			tanqueInput,
-			idTanqueOriginal
-		);
-		quitClient(client, resp);
+	async createValor(input, table, mysqlId) {
+		var resp = await common.createValor(client, input, table, mysqlId);
+		return quitClient(client, resp);
 	},
-	async createTanque(tanqueInput) {
-		var resp = await common.createTanque(client, tanqueInput);
+	async deleteTanque(idTanqueInput) {
+		var resp = await common.deleteTanque(client, idTanqueInput);
+		return quitClient(client, resp);
+	},
+	async setValor(input, idOriginal, table, mysqlId) {
+		let resp = await common.setValor(
+			client,
+			input,
+			idOriginal,
+			table,
+			mysqlId
+		);
 		return quitClient(client, resp);
 	}
 };

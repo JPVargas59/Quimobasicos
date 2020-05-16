@@ -4,7 +4,15 @@ const cors = require('cors');
 const compression = require('compression');
 import { ApolloServer } from 'apollo-server-express';
 import schema from './schema';
+import depthLimit from 'graphql-depth-limit';
 import expressPlayGround from 'graphql-playground-middleware-express';
+import { createComplexityLimitRule } from 'graphql-validation-complexity';
+          
+const ComplexityLimitRule = createComplexityLimitRule(1000, {
+	scalarCost: 1,
+	objectCost: 10, // Default is 0.
+	listFactor: 20, // Default is 10.
+  });
 
 const Port = 5201;
 const app = express();
@@ -13,6 +21,7 @@ app.use(compression());
 
 const server = new ApolloServer({
 	schema,
+	validationRules: [ depthLimit(5), ComplexityLimitRule ],
 	introspection: true
 });
 

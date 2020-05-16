@@ -16,6 +16,9 @@ const type: IResolvers = {
 		},
 		lugar: (parent) => {
 			return asyncFunctions.getLugarTanque(parent.idTanque);
+		},
+		operaciones: (parent) => {
+			return asyncFunctions.getOperacionesDelTanque(parent.idTanque);
 		}
 	}
 };
