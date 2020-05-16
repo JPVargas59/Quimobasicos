@@ -71,6 +71,19 @@ const mutation: IResolvers = {
 				'Mantenimiento',
 				['idTanque', 'fechaMantenimiento']
 			);
+		},
+		setEtiqueta(__: void, { etiquetaInput, idEtiquetaOriginal }): any {
+			return mysqlMutations.setValor(
+				etiquetaInput,
+				idEtiquetaOriginal,
+				'EtiquetaRFID',
+				['idEtiqueta']
+			);
+		},
+		createEtiqueta(__: void, { etiquetaInput }): any {
+			return mysqlMutations.createValor(etiquetaInput, 'EtiquetaRFID', [
+				'idEtiqueta'
+			]);
 		}
 	}
 };
