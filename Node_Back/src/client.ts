@@ -1,11 +1,11 @@
 const Client = require('serverless-mysql');
 var client = Client({
 	config: {
-		host: 'localhost',
-		port: '3306',
-		database: 'quimobasicos',
-		user: 'root',
-		password: ''
+		host: process.env.DBHOST,
+		port: process.env.DBPORT,
+		database: process.env.DBSCHEMA,
+		user: process.env.DBUSER,
+		password: process.env.DBPASSWORD
 	}
 });
 
