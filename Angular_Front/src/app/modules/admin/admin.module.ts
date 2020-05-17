@@ -16,6 +16,13 @@ import { UpdateTankComponent } from 'src/app/components/tank/update-tank/update-
 import { ExitTankComponent } from 'src/app/components/tank/exit-tank/exit-tank.component';
 import { ReportsComponent } from 'src/app/components/reports/reports.component';
 import { SeeReportComponent } from 'src/app/components/reports/see-report/see-report.component';
+import { ContentsComponent } from 'src/app/components/admin/contents/contents.component';
+import { EditContentComponent } from 'src/app/components/admin/contents/edit-content/edit-content.component';
+import { OwnersComponent } from 'src/app/components/admin/owners/owners.component';
+import { EditOwnerComponent } from 'src/app/components/admin/owners/edit-owner/edit-owner.component';
+import { RfidTagsComponent } from 'src/app/components/admin/rfid-tags/rfid-tags.component';
+import { EditTagComponent } from 'src/app/components/admin/rfid-tags/edit-tag/edit-tag.component';
+
 
 
 const routes: Routes = [
@@ -36,7 +43,14 @@ const routes: Routes = [
       { path: 'tank/:id/update', component: UpdateTankComponent },
       { path: 'tank/:id/exit', component: ExitTankComponent },
       { path: 'reports', component: ReportsComponent },
-      { path: 'reports/see-report', component: SeeReportComponent }
+      { path: 'reports/see-report/:reportName', component: SeeReportComponent },
+
+      { path: 'contents', component: ContentsComponent },
+      { path: 'contents/edit/:contentId', component: EditContentComponent },
+      { path: 'owners', component: OwnersComponent },
+      { path: 'owners/edit/:ownerId', component: EditOwnerComponent },
+      { path: 'rfid-tags', component: RfidTagsComponent },
+      { path: 'rfid-tags/edit/:tagId', component: EditTagComponent },
     ]
   }
 ];

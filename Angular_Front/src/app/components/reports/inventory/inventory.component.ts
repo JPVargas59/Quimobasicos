@@ -9,14 +9,8 @@ import {Router} from '@angular/router';
  styleUrls: ['./inventory.component.css']
 })
 export class InventoryComponent implements OnInit {
- 
-  // TODO: Agregar a la llamada estos parametros faltantes (Fecha de Retorno y PesoActual)
- 
- tanks = [
-   { contenidoTanque: { contenido: "Cloro" }, idEtiqueta: { idEtiqueta: "1" }, idTanque: "EURO514966", lugar: {lnombre: "Almacen"}
-   }
- ];
-​​
+ ​
+  tanks = []
  
  constructor(
    private db: DatabaseService,
@@ -25,6 +19,7 @@ export class InventoryComponent implements OnInit {
  ) { }
  
  ngOnInit(): void {
+   
    this.db.getTanks().subscribe(result => {
      console.log(result);
      // @ts-ignore

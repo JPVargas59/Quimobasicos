@@ -15,9 +15,22 @@ export class DatabaseService {
   ) { }
 
   getTanks() {
-    
     const json = '{tanques{idTanque idEtiqueta{idEtiqueta} fechaEsperadaRegreso peso contenidoTanque{contenido} lugar{lnombre}}}';
     return this.http.get(`${this.homeURL}?query=${json}`);
   }
 
+  getContenidos() {
+    const json = '{contenidos {contenido}}';
+    return this.http.get(`${this.homeURL}?query=${json}`);
+  }
+
+  getDuenos(){
+    const json = '{owners {nombre}}';
+    return this.http.get(`${this.homeURL}?query=${json}`);
+  }
+
+  getEtiquetas(){
+    const json = '{etiquetas {idEtiqueta}}'
+    return this.http.get(`${this.homeURL}?query=${json}`);
+  }
 }

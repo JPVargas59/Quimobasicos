@@ -1,75 +1,42 @@
 <h3 class="ui header">Tanque: {{tank}}</h3>
 
+<!-- Información actual del tanque -->
 <table class="ui celled structured table">
   <thead>
-    <tr>
-      <th rowspan="2">Ubicación</th>
-      <th rowspan="2">Fecha</th>
-      <th rowspan="2">Ingreso/Egreso</th>
-      <th colspan="3">Información</th>
-    </tr>
-    <tr>
-      <th>Peso (Toneladas)</th>
-      <th>Contenido (litros)</th>
-      <th>Comentarios</th>
-    </tr>
+    <th>ID Tanque</th>
+    <th>Contenido</th>
+    <th>Dueño</th>
+    <th>Calidad</th>
+    <th>Estado Valvula</th>
+    <th>Peso Actual</th>
+    <th>Fecha Esperada Retorno</th>
   </thead>
   <tbody>
-    <tr>
-      <td>Patio</td>
-      <td>03/01/2020</td>
-      <td>Ingreso</td>
-      <td>120</td>
-      <td>8,000</td>
-      <td>Llegada a Planta</td>
-    </tr>
-    <tr>
-      <td>Patio</td>
-      <td>05/01/2020</td>
-      <td>Egreso</td>
-      <td>120</td>
-      <td>8,000</td>
-      <td>Se meuve a vaciado</td>
-    </tr>
-    <tr>
-      <td>Vaciado</td>
-      <td>05/01/2020</td>
-      <td>Ingreso</td>
-      <td>120</td>
-      <td>8,000</td>
-      <td>Ingreso a Vaciado</td>
-    </tr>
-    <tr>
-      <td>Vaciado</td>
-      <td>06/01/2020</td>
-      <td>Egreso</td>
-      <td>70</td>
-      <td>4,700</td>
-      <td>Se traslada a Mantenimeinto</td>
-    </tr>
-    <tr>
-      <td>Mantenimeinto</td>
-      <td>06/01/2020</td>
-      <td>Ingreso</td>
-      <td>70</td>
-      <td>4,700</td>
-      <td>Ingreso a Mantenimeinto por revisión de válvula</td>
-    </tr>
-    <tr>
-      <td>Mantenimeinto</td>
-      <td>06/01/2020</td>
-      <td>Egreso</td>
-      <td>70</td>
-      <td>4,700</td>
-      <td>Egreso de Mantenimeinto</td>
-    </tr>
-    <tr>
-      <td>Patio</td>
-      <td>06/01/2020</td>
-      <td>Ingreso</td>
-      <td>70</td>
-      <td>4,700</td>
-      <td>Se mueve en espera de llevarse a Vaciado</td>
+    <tr *ngFor="let tank of tanks">
+      <td>{{tank.idTanque}}</td>
+      <td>{{tank.contenido}}</td>
+      <td>{{tank.dueno}}</td>
+      <td>{{tank.calidad}}</td>
+      <td>{{tank.estadoValvula}}</td>
+      <td>{{tank.pesoActual}}</td>
+      <td>{{tank.fechaEsperadaRetorno}}</td>
+    </tr> 
+  </tbody>
+</table>
+<!-- Información por decir de historial del tanque -->
+<table class="ui celled structured table">
+  <thead>
+    <th>Fecha</th>
+    <th>Lugar</th>
+    <th>Peso</th>
+    <th>Operado por</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let historial of historial">
+      <td>{{historial.fecha}}</td>
+      <td>{{historial.lugar}}</td>
+      <td>{{historial.peso}}</td>
+      <td>{{historial.operador}}</td>
     </tr>
   </tbody>
 </table>

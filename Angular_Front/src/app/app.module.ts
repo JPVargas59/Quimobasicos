@@ -25,6 +25,12 @@ import { AddLocationComponent } from './components/admin/locations/add-location/
 import { UpdateLocationComponent } from './components/admin/locations/update-location/update-location.component';
 import { SeeReportComponent } from './components/reports/see-report/see-report.component';
 import {HttpClientModule} from '@angular/common/http';
+import { OwnersComponent } from './components/admin/owners/owners.component';
+import { EditOwnerComponent } from './components/admin/owners/edit-owner/edit-owner.component';
+import { ContentsComponent } from './components/admin/contents/contents.component';
+import { EditContentComponent } from './components/admin/contents/edit-content/edit-content.component';
+import { RfidTagsComponent } from './components/admin/rfid-tags/rfid-tags.component';
+import { EditTagComponent } from './components/admin/rfid-tags/edit-tag/edit-tag.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +55,13 @@ import {HttpClientModule} from '@angular/common/http';
     LocationsComponent,
     AddLocationComponent,
     UpdateLocationComponent,
-    SeeReportComponent
+    SeeReportComponent,
+    OwnersComponent,
+    EditOwnerComponent,
+    ContentsComponent,
+    EditContentComponent,
+    RfidTagsComponent,
+    EditTagComponent
   ],
   imports: [
     BrowserModule,
