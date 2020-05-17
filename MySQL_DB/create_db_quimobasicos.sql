@@ -98,7 +98,7 @@ CREATE TABLE OperadoPor(
     idTanque CHAR(10) NOT NULL,
 	idUsuario CHAR(10) NOT NULL,
 	fecha DATETIME,
-	PRIMARY KEY (idTanque, idUsuario),
+	PRIMARY KEY (idTanque, fecha),
 	FOREIGN KEY (idTanque) REFERENCES Tanque(idTanque) ON UPDATE CASCADE,
 	FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario) ON UPDATE CASCADE
 );
