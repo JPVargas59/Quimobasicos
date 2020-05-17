@@ -24,6 +24,7 @@ import { LocationsComponent } from './components/admin/locations/locations.compo
 import { AddLocationComponent } from './components/admin/locations/add-location/add-location.component';
 import { UpdateLocationComponent } from './components/admin/locations/update-location/update-location.component';
 import { SeeReportComponent } from './components/reports/see-report/see-report.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { SeeReportComponent } from './components/reports/see-report/see-report.c
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
