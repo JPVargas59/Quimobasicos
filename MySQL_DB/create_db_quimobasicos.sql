@@ -80,8 +80,10 @@ CREATE TABLE Usuario (
 );
 
 CREATE TABLE Operador (
-    operadorId CHAR(10) PRIMARY KEY REFERENCES Usuario(idUsuario) ON UPDATE CASCADE,
+    operadorId CHAR(10),
 	idSupervisor CHAR(10),
+    PRIMARY KEY (operadorId), 
+    FOREIGN KEY (operadorId) REFERENCES Usuario(idUsuario) ON UPDATE CASCADE,
 	FOREIGN KEY (idSupervisor) REFERENCES Usuario(idUsuario) ON UPDATE CASCADE
 );
 
