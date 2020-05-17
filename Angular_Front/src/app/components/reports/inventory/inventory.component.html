@@ -13,7 +13,7 @@
     <tbody>
       <tr *ngFor="let tank of tanks">
         <td>
-          <a routerLink="/operator/tank/{{tank.id}}">{{tank.id}}</a>
+          <a (click)="onTankSelection($event)" [id]="tank.idTanque">{{tank.idTanque}}</a>
         </td>
         <td>{{tank.content}}</td>
         <td>{{tank.registerDate}}</td>
@@ -22,4 +22,4 @@
       </tr>
     </tbody>
   </table>
-  
+

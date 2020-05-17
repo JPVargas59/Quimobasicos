@@ -23,9 +23,9 @@
           </div>
           <p>Iniciar sesión</p>
           <div class="ui three buttons">
-            <div class="ui large button" routerLink="/operator">Operador</div>
-            <div class="ui large primary button" routerLink="/supervisor">Supervisor</div>
-            <div class="ui large secondary button" routerLink="/admin">Admin</div>
+            <div class="ui large button" (click)="user.setType('operator')" routerLink="/operator">Operador</div>
+            <div class="ui large primary button" (click)="user.setType('supervisor')" routerLink="/supervisor">Supervisor</div>
+            <div class="ui large secondary button" (click)="user.setType('admin')" routerLink="/admin">Admin</div>
           </div>
 
 
