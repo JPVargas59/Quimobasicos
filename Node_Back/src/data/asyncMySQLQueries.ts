@@ -127,6 +127,33 @@ let mysqlMutations = {
 		}
 		client.quit();
 		return arrayOperaciones;
+	},
+	async getMantenimientoTanque(idTanque: string) {
+		var resp = await common.getMantenimientoTanque(client, idTanque);
+		let arrayMantemientos = JSON.parse(JSON.stringify(resp));
+
+		for (let i = 0; i < arrayMantemientos.length; i++) {
+			arrayMantemientos[i]['tanque'] = await common.getTanque(
+				client,
+				arrayMantemientos[i]['idTanque']
+			);
+		}
+		client.quit();
+		return arrayMantemientos;
+	},
+	async getHistorialMantenimimientosTanques() {
+		var resp = await common.getHistorialMantenimimientosTanques(client);
+		let arrayMantemientos = JSON.parse(JSON.stringify(resp));
+
+		for (let i = 0; i < arrayMantemientos.length; i++) {
+			arrayMantemientos[i]['tanque'] = await common.getTanque(
+				client,
+				arrayMantemientos[i]['idTanque']
+			);
+		}
+		client.quit();
+		return arrayMantemientos;
 	}
+
 };
 export = mysqlMutations;

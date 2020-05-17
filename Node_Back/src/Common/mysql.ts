@@ -246,9 +246,12 @@ exports.getHistorialUbicacionTanques = async (client) => {
 };
 
 exports.getOperacionesDelTanque = async (client, idTanque) => {
-	var operaciones = await client.query(`
+	var operaciones = await client.query(
+		`
     SELECT idUsuario as operador, fecha, idTanque as tanque FROM OperadoPor WHERE idTanque = ?
-    `, idTanque);
+    `,
+		idTanque
+	);
 	if (operaciones.length == 0) {
 		return null;
 	}
@@ -256,12 +259,38 @@ exports.getOperacionesDelTanque = async (client, idTanque) => {
 };
 
 exports.getUsuarioOperador = async (client, idOperador) => {
-	var operador = await client.query(`
+	var operador = await client.query(
+		`
     SELECT fName as nombre, lName as apellidos, idUsuario, genero, correo FROM Usuario JOIN Operador ON Operador.operadorId = Usuario.idUsuario WHERE Usuario.idUsuario = ?
-    `, idOperador);
+    `,
+		idOperador
+	);
 	if (operador.length == 0) {
 		return null;
 	}
-	
+
 	return operador[0];
+};
+
+exports.getMantenimientoTanque = async (client, idTanque) => {
+	var mantenimientos = await client.query(
+		`
+    SELECT idTanque, fechaMantenimiento, observaciones FROM Mantenimiento WHERE idTanque = ?
+    `,
+		idTanque
+	);
+	if (mantenimientos.length == 0) {
+		return null;
+	}
+
+	return mantenimientos;
+};
+exports.getHistorialMantenimimientosTanques = async (client) => {
+	var mantenimientos = await client.query(`
+    SELECT idTanque, fechaMantenimiento, observaciones FROM Mantenimiento
+    `);
+	if (mantenimientos.length == 0) {
+		return null;
+	}
+	return mantenimientos;
 };

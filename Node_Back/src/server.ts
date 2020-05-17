@@ -8,11 +8,7 @@ import depthLimit from 'graphql-depth-limit';
 import expressPlayGround from 'graphql-playground-middleware-express';
 import { createComplexityLimitRule } from 'graphql-validation-complexity';
           
-const ComplexityLimitRule = createComplexityLimitRule(1000, {
-	scalarCost: 1,
-	objectCost: 10, // Default is 0.
-	listFactor: 20, // Default is 10.
-  });
+const ComplexityLimitRule = createComplexityLimitRule(1000);
 
 const Port = 5201;
 const app = express();

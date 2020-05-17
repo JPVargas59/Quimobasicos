@@ -43,6 +43,12 @@ const query: IResolvers = {
 		},
 		historialPesoTanque(__: void, { idTanque }): any {
 			return asyncFunctionsMySQLQueries.getHistorialPesoTanque(idTanque);
+		},
+		historialMantenimientos() : any {
+			return asyncFunctionsMySQLQueries.getHistorialMantenimimientosTanques();
+		},
+		historialMantenimientoTanque(__: void, { idTanque }): any {
+			return asyncFunctionsMySQLQueries.getMantenimientoTanque(idTanque);
 		}
 	}
 };
