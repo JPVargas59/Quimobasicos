@@ -1,67 +1,59 @@
 <h2 class="ui title">Agrega un Usuario</h2>
 <br>
 <form class="ui form">
-    <h4 class="ui dividing header">Información Personal</h4>
+    <h4 class="ui dividing header">Información</h4>
     <div class="two fields">
-      <div class="field">
+      <div class="required field">
         <label>Nombre</label>
         <div class="two fields">
           <div class="field">
             <input type="text" name="first-name" placeholder="Nombre">
           </div>
-          <div class="field">
+          <div class="required field">
             <input type="text" name="last-name" placeholder="Apellidos">
           </div>
         </div>
       </div>
-    </div>
-    <div class="two fields">
-      <div class="field">
-        <label>Género</label>
-        <select class="ui search dropdown">
-          <option value="">Género...</option>
-          <option value="male">Masculino</option>
-          <option value="female">Femenino</option>
-          <option value="other">Otro</option>
-        </select>
+      <div class="required field">
+        <label>Correo</label>
+        <div class="field">
+          <input type="email" name="email" placeholder="correo">
+        </div>
       </div>
+
+    </div>
+    <div class="required field">
+      <label>Contraseña</label>
+      <div class="ui icon input">
+        <input type="password">
+        <i class="lock icon"></i>
+      </div>
+    </div>
+    <div class="grouped fields required field">
+      <label for="alone">¿Es operador?</label>
+      <div class="field">
+        <div class="ui radio checkbox checked">
+          <input type="radio" checked="" name="import">
+          <label>Sí</label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui radio checkbox">
+          <input type="radio" name="import">
+          <label>No</label>
+        </div>
+      </div>
+    </div>
+    <div class="field">
+      <label>Supervisor de este usuario</label>
+      <select class="ui search dropdown">
+        <option value="">Supervisor...</option>
+        <!-- TODDO: Agregar supervisor de graphql -->
+        <!-- <option *ngFor="let valor of supervisor" value="{{supervisor.nombre}}">{{supervisor.nombre}}</option> -->
+        <option value="Supervisor 1">Supervisor 1</option>
+      </select>
     </div>
 
-    <h4 class="ui dividing header">Información de la Cuenta</h4>
-    <div class="two fields">
-      <div class="required field">
-        <label>Username</label>
-        <div class="ui icon input">
-          <input type="text" placeholder="Username">
-          <i class="user icon"></i>
-        </div>
-      </div>
-      <div class="required field">
-        <label>Password</label>
-        <div class="ui icon input">
-          <input type="password">
-          <i class="lock icon"></i>
-        </div>
-      </div>
-    </div>
-     <h4 class="ui top attached header">Configuraciones de la Cuenta</h4>
-    <div class="ui bottom attached segment">
-      <div class="grouped fields">
-        <label for="alone">¿Dar permisos de supervisor?</label>
-        <div class="field">
-          <div class="ui radio checkbox checked">
-            <input type="radio" checked="" name="import">
-            <label>No</label>
-          </div>
-        </div>
-        <div class="field">
-          <div class="ui radio checkbox">
-            <input type="radio" name="import">
-            <label>Sí</label>
-          </div>
-        </div>
-      </div>
-    </div>
     <div class="ui error message">
       <div class="header">We noticed some issues</div>
     </div>

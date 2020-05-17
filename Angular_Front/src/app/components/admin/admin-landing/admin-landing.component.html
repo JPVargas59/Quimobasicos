@@ -1,93 +1,75 @@
 <h2 class="ui header center aligned">Bienvenido al inicio del Administrador</h2>
 
 <div class="ui placeholder segment">
-    <div class="ui two column stackable center aligned grid">
-      <div class="middle aligned row">
+    <div class="ui three column stackable center aligned grid">
         <div class="column">
-          <div class="ui icon header">
-            <i class="plus icon"></i>
-            Dar de Alta un Nuevo Tanque
-          </div>
-          <div class="field">
-            <div class="ui primary button" routerLink="/admin/tanks/add">
-              Registrar Tanque
+            <div class="ui icon header">
+                <i class="file alternate outline icon"></i>
+                Tanques
             </div>
-          </div>
+            <div class="two buttons">
+                <div class="ui primary button" routerLink="/admin/reports">Ver Reportes</div>
+                <br>
+                <div class="ui primary button" routerLink="/admin/reports/inventory">Ver Tanques</div>
+            </div>
         </div>
+        
         <div class="column">
-          <div class="ui icon header">
-            <i class="redo alternate icon"></i>
-            Actualizar Información de un Tanque
-          </div>
-        <div class="field">
-            <div class="ui search">
-              <div class="ui icon input">
-                <input type="text" class="prompt" placeholder="ID del Tanque">
+            <div class="ui icon header">
+                <i class="users icon"></i>
+                Usuarios
+            </div>
+            <div class="ui primary button" routerLink="/admin/users">Ver Usuarios</div>
+            <br>
+            <div class="ui primary button" routerLink="/admin/users/add">Agregar Usuario</div>
+        </div>
+
+        <div class="column">
+            <div class="ui icon header">
+                <i class="map marker alternate icon"></i>
+                Lugares
+            </div>
+            <div class="ui primary button" routerLink="/admin/locations">Ver Lugares</div>
+            <br>
+            <div class="ui primary button" routerLink="/admin/locations/update-location">Editar Lugares</div>
+        </div>
+    </div>
+</div>
+
+<div class="ui placeholder segment">
+    <div class="ui three column stackable center aligned grid">
+        <div class="column">
+            <div class="ui icon header">
+                <i class="plus icon"></i>
+                Tanques
+            </div>
+            <div class="field">
+                <div class="ui primary button" routerLink="/admin/tanks/add">Registrar Tanque</div>
+                <br>
+                <div class="ui primary button" routerLink="/admin/owners">Ver Dueños</div>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="ui icon header">
                 <i class="search icon"></i>
-              </div>
-              <div class="results"></div>
+                Tipos de Contenidos
+            </div>
+            <div class="ui primary button" routerLink="/admin/contents">
+                Ver Contendios
             </div>
         </div>
+
+        <div class="column">
+            <div class="ui icon header">
+                <i class="users icon"></i>
+                Etiquetas de RFID
+            </div>
+            <div class="ui primary button" routerLink="/admin/rfid-tags">
+                Ver Etiquetas
+            </div>
         </div>
-      </div>
+
     </div>
 </div>
-
-<div class="ui placeholder segment">
-    <div class="ui two column stackable center aligned grid">
-        <div class="middle aligned row">
-            <div class="column">
-                <div class="ui icon header">
-                    <i class="file alternate outline icon"></i>
-                    Tanques
-                </div>
-                <div class="two buttons">
-                    <div class="ui primary button" routerLink="/admin/reports">Ver Reportes</div>
-                    <br>
-                    <div class="ui primary button" routerLink="/admin/reports/inventory">Ver Inventario</div>
-                </div>
-            </div>
-            <div class="column">
-                <div class="ui icon header">
-                    <i class="map marker alternate icon"></i>
-                    Lugares
-                </div>
-                <div class="ui primary button" routerLink="/admin/locations">
-                    Ver Lugares
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="ui placeholder segment">
-    <div class="ui two column stackable center aligned grid">
-        <div class="middle aligned row">
-            <div class="column">
-                <div class="ui icon header">
-                    <i class="search icon"></i>
-                    Busca un Usuario
-                </div>
-                <div class="field">
-                    <div class="ui search">
-                        <div class="ui icon input">
-                            <input type="text" class="prompt" placeholder="Nombre de un usuario...">
-                            <i class="search icon"></i>
-                        </div>
-                        <div class="results"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="column">
-                <div class="ui icon header">
-                    <i class="users icon"></i>
-                    Agrega un Usuario
-                </div>
-                <div class="ui primary button" routerLink="/admin/users/add">
-                    Agregar
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<br>

@@ -22,7 +22,7 @@ const routes: Routes = [
       { path: 'tank/:id/update', component: UpdateTankComponent },
       { path: 'tank/:id/exit', component: ExitTankComponent },
       { path: 'reports', component: ReportsComponent },
-      { path: 'reports/see-report', component: SeeReportComponent }
+      { path: 'reports/see-report/:reportName', component: SeeReportComponent }
     ]
   }
 ];

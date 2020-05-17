@@ -10,14 +10,14 @@
   <tbody>
   <tr *ngFor="let report of reports">
     <td>
-      <a routerLink="/supervisor/report/{{report.nombre}}">
+      <a (click)="onReportSelection($event)" [id]="report.nombre">
         {{report.nombre}}
       </a>
     </td>
     <th>
       <div class="ui two buttons">
         <button class="ui red button">Eliminar</button>
-        <button class="ui blue button" routerLink="{{report.nombre}}">Ver</button>
+        <button class="ui blue button" (click)="onReportSelection($event)">Ver</button>
       </div>
     </th>
   </tr>

@@ -1,0 +1,14 @@
+<h3 class="ui header">Etiquetas</h3>
+
+<table class="ui table">
+    <thead>
+        <th>Número</th>
+    </thead>
+    <tbody>
+        <tr  *ngFor="let tag of tags">
+            <td>
+                <a (click)="onTagSelect($event)" [id]="tag.idEtiqueta">{{tag.idEtiqueta}}</a>
+              </td>
+        </tr>
+    </tbody>
+</table>

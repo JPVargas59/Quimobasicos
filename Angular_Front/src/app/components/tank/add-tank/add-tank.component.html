@@ -15,12 +15,7 @@
         <label>Contenido</label>
         <select class="ui search dropdown">
             <option value="">Contenido...</option>
-            <option value="GF">Genetron Flush</option>
-            <option value="G134a">Genetron 143a</option>
-            <option value="G134aECO">Genetron 134a ECO</option>
-            <option value="GMP39">Genetron MP39</option>
-            <option value="S1234yf">Solstice 1234yf</option>
-            <option value="G141b">Genetron 141b</option>
+            <option *ngFor="let valor of contenidos" value="{{valor.contenido}}">{{valor.contenido}}</option>
         </select>
       </div>
     </div>
@@ -29,9 +24,7 @@
         <label>Dueño del Tanque</label>
         <select class="ui search dropdown">
           <option value="">Dueño...</option>
-          <option value="E1">Empresa 1</option>
-          <option value="E2">Empresa 2</option>
-          <option value="E3">Empresa 3</option>
+          <option *ngFor="let valor of duenos" value="{{valor.nombre}}">{{valor.nombre}}</option>
         </select>
       </div>
       <div class="field">
@@ -45,27 +38,36 @@
     <h4 class="ui dividing header">Información de Ingreso</h4>
     <div class="two fields">
         <div class="field">
-            <label>Fecha de ingreso</label>
-            <div class="ui input">
-                <input type="date">
-            </div>
-        </div>
-        <div class="field">
             <label>Fecha esperada de retorno</label>
             <div class="ui input">
                 <input type="date">
             </div>
         </div>
-    </div>
-    <h4 class="ui top attached header">Comentarios adicionales</h4>
-    <div class="ui bottom attached segment">
         <div class="field">
-            <label>Comentarios</label>
-            <textarea></textarea>
-          </div>
+            <label>Calidad</label>
+            <div class="ui input">
+                <input type="text" placeholder="buena, mala...">
+            </div>
+        </div>
     </div>
+    <div class="two fields">
+      <div class="field">
+          <label>Peso</label>
+          <div class="ui input">
+              <input type="number">
+          </div>
+      </div>
+      <div class="field">
+          <label>Etiqueta de RFID Asignada</label>
+          <select class="ui search dropdown">
+            <option value="">etiqueta...</option>
+            <option *ngFor="let valor of etiquetas" value="{{valor.idEtiqueta}}">{{valor.idEtiqueta}}</option>
+          </select>
+      </div>
+  </div>
+    
     <div class="ui error message">
       <div class="header">We noticed some issues</div>
     </div>
-    <div class="ui submit button" routerLink="/operator/reports/inventory">Registrar</div>
+    <div class="ui submit button" (click)="onResgisterTank($event)">Registrar</div>
   </form>
