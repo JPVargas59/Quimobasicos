@@ -32,7 +32,18 @@
 }
 ```
 
-To start graphql Apollo Server
+## Configurar base de datos local
+
+* Crear archivo .env en Node_Back con los siguientes datos
+```
+DBUSER=password
+DBPASSWORD=usuario
+DBSCHEMA=quimobasicos
+DBPORT=3306
+DBHOST=localhost
+```
+
+## To start graphql Apollo Server
 
 ```
 cd Node_Back
@@ -75,15 +86,15 @@ npm run start:dev
 -   [x] Modificar un dueño
 -   [x] Dar de alta un mantenimiento
 -   [x] Modificar un mantenimiento
--   [ ] Dar de alta un operador
--   [ ] Modificar un operador
--   [ ] Dar de alta usuario
--   [ ] Modificar un usuario
--   [ ] Dar de alta una operación
--   [ ] Modificar una operación
--   [ ] Dar de alta una etiqueta
--   [ ] Modificar una etiqueta
--   [ ] Dar de alta un tanqueEsta
--   [ ] Modificar un tanqueEsta
--   [ ] Dar de alta un tanqueHaEstado
--   [ ] Modificar un tanqueHaEstado
+-   [x] Dar de alta un operador
+-   [x] Modificar un operador
+-   [x] Dar de alta usuario
+-   [x] Modificar un usuario
+-   [x] Dar de alta una operación
+-   [x] Modificar una operación
+-   [x] Dar de alta una etiqueta
+-   [x] Modificar una etiqueta
+-   [x] Dar de alta un tanqueEsta
+-   [x] Modificar un tanqueEsta
+-   [x] Dar de alta un tanqueHaEstado
+-   [x] Modificar un tanqueHaEstado
