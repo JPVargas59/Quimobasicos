@@ -1,1 +1,16 @@
-<p>owners works!</p>
+<h3 class="ui header">Dueños de los Tanques</h3>
+
+<table class="ui table">
+    <thead>
+        <th>ID Dueño</th>
+        <th>Nombre Dueño</th>
+    </thead>
+    <tbody>
+        <tr  *ngFor="let owner of owners">
+            <td>
+                <a (click)="onOwnerSelect($event)" [id]="owner.idDueno">{{owner.idDueno}}</a>
+              </td>
+            <td>{{owner.nombre}}</td>
+        </tr>
+    </tbody>
+</table>

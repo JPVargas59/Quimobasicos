@@ -20,12 +20,12 @@ export class DatabaseService {
   }
 
   getContenidos() {
-    const json = '{contenidos {contenido}}';
+    const json = '{contenidos {idContenido ,contenido}}';
     return this.http.get(`${this.homeURL}?query=${json}`);
   }
 
   getDuenos(){
-    const json = '{owners {nombre}}';
+    const json = '{owners {idDueno nombre}}';
     return this.http.get(`${this.homeURL}?query=${json}`);
   }
 

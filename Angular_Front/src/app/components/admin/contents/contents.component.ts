@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DatabaseService } from 'src/app/services/database.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-contents',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContentsComponent implements OnInit {
 
-  constructor() { }
+  contenidos: any;
+  constructor(
+    private db: DatabaseService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
+    this.db.getContenidos().subscribe(result => {
+      const contenidos = result as any;
+      this.contenidos = contenidos.data.contenidos;
+    })
+
   }
 
+  onContentSelect(event) {
+    const id = event.target.id;
+    this.router.navigateByUrl(`/admin/contents/edit/${id}`);
+  }
 }

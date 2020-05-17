@@ -1,1 +1,16 @@
-<p>contents works!</p>
+<h3 class="ui header">Contenidos de los Tanques</h3>
+
+<table class="ui table">
+    <thead>
+        <th>ID Contenidos</th>
+        <th>Nombre Contenidos</th>
+    </thead>
+    <tbody>
+        <tr  *ngFor="let contenido of contenidos">
+            <td>
+                <a (click)="onContentSelect($event)" [id]="contenido.idContenido">{{contenido.idContenido}}</a>
+              </td>
+            <td>{{contenido.contenido}}</td>
+        </tr>
+    </tbody>
+</table>

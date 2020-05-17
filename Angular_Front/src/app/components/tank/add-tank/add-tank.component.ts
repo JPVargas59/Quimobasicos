@@ -21,17 +21,20 @@ export class AddTankComponent implements OnInit {
 
   ngOnInit(): void {
     this.db.getContenidos().subscribe(result => {
-      this.contenidos = result.data.contenidos;
+      const contenidos = result as any;
+      this.contenidos = contenidos.data.contenidos;
     })
 
     this.db.getDuenos().subscribe(result => {
       console.log(result)
-      this.duenos = result.data.owners;
+      const duenos = result as any;
+      this.duenos = duenos.data.owners;
     })
 
     this.db.getEtiquetas().subscribe(result => {
       console.log(result)
-      this.etiquetas = result.data.etiquetas;
+      const etiquetas = result as any;
+      this.etiquetas = etiquetas.data.etiquetas;
     })
   }
 
