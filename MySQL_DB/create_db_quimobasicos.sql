@@ -80,8 +80,10 @@ CREATE TABLE Usuario (
 );
 
 CREATE TABLE Operador (
-    operadorId CHAR(10) PRIMARY KEY REFERENCES Usuario(idUsuario) ON UPDATE CASCADE,
+    operadorId CHAR(10),
 	idSupervisor CHAR(10),
+    PRIMARY KEY (operadorId), 
+    FOREIGN KEY (operadorId) REFERENCES Usuario(idUsuario) ON UPDATE CASCADE,
 	FOREIGN KEY (idSupervisor) REFERENCES Usuario(idUsuario) ON UPDATE CASCADE
 );
 
@@ -98,7 +100,7 @@ CREATE TABLE OperadoPor(
     idTanque CHAR(10) NOT NULL,
 	idUsuario CHAR(10) NOT NULL,
 	fecha DATETIME,
-	PRIMARY KEY (idTanque, idUsuario),
+	PRIMARY KEY (idTanque, fecha),
 	FOREIGN KEY (idTanque) REFERENCES Tanque(idTanque) ON UPDATE CASCADE,
 	FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario) ON UPDATE CASCADE
 );

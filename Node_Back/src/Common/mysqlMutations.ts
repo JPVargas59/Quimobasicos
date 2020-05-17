@@ -1,5 +1,4 @@
 import mysql from 'mysql';
-import type from '../resolvers/type';
 async function checkExists(client, table, mysqlId, idQuery) {
 	var obj = {
 		queryString: `SELECT * FROM ?? WHERE`,
@@ -7,11 +6,11 @@ async function checkExists(client, table, mysqlId, idQuery) {
 		mysqlId: mysqlId,
 		id: idQuery
 	};
-	///console.log('Antes');
-	///console.log(obj);
+	//console.log('Antes');
+	//console.log(obj);
 	obj = parseObj(obj);
-	///console.log('Despues');
-	///console.log(obj);
+	//console.log('Despues');
+	//console.log(obj);
 	var check = await client.query(obj.queryString, obj.arr).catch((error) => {
 		console.log(error);
 	});
@@ -19,6 +18,7 @@ async function checkExists(client, table, mysqlId, idQuery) {
 }
 
 function parseObj(obj) {
+	//console.log(obj);
 	//console.log(obj.mysqlId.length);
 	for (var i = 0; i < obj.mysqlId.length; i++) {
 		if (i == obj.id.length - 1) {
@@ -35,6 +35,7 @@ function parseObj(obj) {
 }
 
 function modifyId(table, input) {
+	//console.log(table);
 	if (typeof input.id !== 'undefined') {
 		switch (table) {
 			case 'Tanque':
@@ -61,8 +62,42 @@ function modifyId(table, input) {
 				input.idDueno = input.id;
 				break;
 			case 'Mantenimiento':
-				input.idTanque = input.id.idTanque;
-				input.fechaMantenimiento = input.id.fechaMantenimiento;
+				if (typeof input.id.idTanque !== 'undefined') {
+					input.idTanque = input.id.idTanque;
+				}
+				if (typeof input.id.fechaMantenimiento !== 'undefined') {
+					input.fechaMantenimiento = input.id.fechaMantenimiento;
+				}
+				break;
+			case 'EtiquetaRFID':
+				input.idEtiqueta = input.id;
+				break;
+			case 'OperadoPor':
+			case 'HistorialPeso':
+				if (typeof input.id.idTanque !== 'undefined') {
+					input.idTanque = input.id.idTanque;
+				}
+				if (typeof input.id.fecha !== 'undefined') {
+					input.fecha = input.id.fecha;
+				}
+				break;
+			case 'TanqueHaEstado':
+				if (typeof input.id.fecha !== 'undefined') {
+					input.fecha = input.id.fecha;
+				}
+			case 'TanqueEsta':
+				if (typeof input.id.idTanque !== 'undefined') {
+					input.idTanque = input.id.idTanque;
+				}
+				if (typeof input.id.idLugar !== 'undefined') {
+					input.idLugar = input.id.idLugar;
+				}
+				break;
+			case 'Operador':
+				input.operadorId = input.id;
+				break;
+			case 'Usuario':
+				input.idUsuario = input.id;
 		}
 		delete input.id;
 	}
@@ -70,9 +105,10 @@ function modifyId(table, input) {
 }
 
 function validateId(id) {
+	//console.log(typeof id);
 	if (Array.isArray(id)) {
 		return id;
-	} else if (typeof id === 'string') {
+	} else if (typeof id === 'string' || typeof id === 'number') {
 		return [id];
 	} else {
 		return Object.values(id);
@@ -123,7 +159,9 @@ let mysqlMutations = {
 	async setValor(client, input, idOriginal, table, mysqlId) {
 		idOriginal = validateId(idOriginal);
 		if (await checkExists(client, table, mysqlId, idOriginal)) {
+			//console.log(input);
 			input = modifyId(table, input);
+			//console.log(input);
 			let resp = `El valor de ${table} ha sido actualizado`;
 			var obj = {
 				queryString: `UPDATE ?? SET ? WHERE`,

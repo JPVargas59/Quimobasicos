@@ -71,6 +71,115 @@ const mutation: IResolvers = {
 				'Mantenimiento',
 				['idTanque', 'fechaMantenimiento']
 			);
+		},
+		setEtiqueta(__: void, { etiquetaInput, idEtiquetaOriginal }): any {
+			return mysqlMutations.setValor(
+				etiquetaInput,
+				idEtiquetaOriginal,
+				'EtiquetaRFID',
+				['idEtiqueta']
+			);
+		},
+		createEtiqueta(__: void, { etiquetaInput }): any {
+			return mysqlMutations.createValor(etiquetaInput, 'EtiquetaRFID', [
+				'idEtiqueta'
+			]);
+		},
+		setHistorialPeso(
+			__: void,
+			{ historialPesoInput, idHistorialPesoOriginal }
+		): any {
+			return mysqlMutations.setValor(
+				historialPesoInput,
+				idHistorialPesoOriginal,
+				'HistorialPeso',
+				['idTanque', 'fecha']
+			);
+		},
+		createHistorialPeso(__: void, { historialPesoInput }): any {
+			return mysqlMutations.createValor(
+				historialPesoInput,
+				'HistorialPeso',
+				['idTanque', 'fecha']
+			);
+		},
+		setOperadoPor(
+			__: void,
+			{ operadoPorInput, idOperadoPorOriginal }
+		): any {
+			return mysqlMutations.setValor(
+				operadoPorInput,
+				idOperadoPorOriginal,
+				'OperadoPor',
+				['idTanque', 'fecha']
+			);
+		},
+		createOperadoPor(__: void, { operadoPorInput }): any {
+			return mysqlMutations.createValor(operadoPorInput, 'OperadoPor', [
+				'idTanque',
+				'fecha'
+			]);
+		},
+		setTanqueEsta(
+			__: void,
+			{ tanqueEstaInput, idTanqueEstaOriginal }
+		): any {
+			return mysqlMutations.setValor(
+				tanqueEstaInput,
+				idTanqueEstaOriginal,
+				'TanqueEsta',
+				['idTanque', 'idLugar']
+			);
+		},
+		createTanqueEsta(__: void, { tanqueEstaInput }): any {
+			return mysqlMutations.createValor(tanqueEstaInput, 'TanqueEsta', [
+				'idTanque',
+				'idLugar'
+			]);
+		},
+		setTanqueHaEstado(
+			__: void,
+			{ tanqueHaEstadoInput, idTanqueHaEstadoOriginal }
+		): any {
+			return mysqlMutations.setValor(
+				tanqueHaEstadoInput,
+				idTanqueHaEstadoOriginal,
+				'TanqueHaEstado',
+				['idTanque', 'idLugar', 'fecha']
+			);
+		},
+		createTanqueHaEstado(__: void, { tanqueHaEstadoInput }): any {
+			return mysqlMutations.createValor(
+				tanqueHaEstadoInput,
+				'TanqueHaEstado',
+				['idTanque', 'idLugar', 'fecha']
+			);
+		},
+		setOperador(__: void, { operadorInput, idOperadorOriginal }): any {
+			return mysqlMutations.setValor(
+				operadorInput,
+				idOperadorOriginal,
+				'Operador',
+				['operadorId']
+			);
+		},
+		createOperador(__: void, { operadorInput }): any {
+			return mysqlMutations.createValor(operadorInput, 'Operador', [
+				'operadorId'
+			]);
+		},
+		setUsuario(__: void, { usuarioInput, idUsuarioOriginal }): any {
+			return mysqlMutations.setValor(
+				usuarioInput,
+				idUsuarioOriginal,
+				'Usuario',
+				['idUsuario']
+			);
+		},
+		createUsuario(__: void, { usuarioInput }): any {
+			return mysqlMutations.createValor(usuarioInput, 'Usuario', [
+				'idUsuario'
+			]);
 		}
 	}
 };

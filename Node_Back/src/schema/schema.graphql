@@ -158,7 +158,7 @@ input DuenoInput {
 	nombre: String
 }
 
-"Input para crear o acutalizar un mantenimiento"
+"Input para crear o actualizar un mantenimiento"
 input MantenimientoInput {
 	id: IdMantenimientoInput
 	observaciones: String
@@ -168,6 +168,75 @@ input MantenimientoInput {
 input IdMantenimientoInput {
 	idTanque: String
 	fechaMantenimiento: Date
+}
+
+"Input para crear o actualizar una etiqueta RFID"
+input EtiquetaInput {
+	id: Int
+}
+
+"Input para crear o actualizar el historial del peso de un tanque"
+input HistorialPesoInput {
+	id: IdHistorialPeso
+	peso: Float
+}
+
+"Id para el historial de un peso"
+input IdHistorialPeso {
+	idTanque: String
+	fecha: Date
+}
+
+"Input para crear o actualizar operaciones de un tanque"
+input OperadoPorInput {
+	id: IdOperadoPorInput
+	idUsuario: String
+}
+
+"Id para una operación"
+input IdOperadoPorInput {
+	idTanque: String
+	fecha: Date
+}
+
+"Input para la ubicación de un tanque"
+input TanqueEstaInput {
+	id: IdTanqueEsta
+	fecha: Date
+}
+
+"Id para una instancia de TanqueEsta"
+input IdTanqueEsta {
+	idTanque: String
+	idLugar: String
+}
+
+"Input para el historial de ubicaciones de un tanque"
+input TanqueHaEstadoInput {
+	id: IdTanqueHaEstado
+}
+
+"Id para el historial de ubicaciones de un tanque"
+input IdTanqueHaEstado {
+	idTanque: String
+	idLugar: String
+	fecha: Date
+}
+
+"Id de un operador"
+input OperadorInput {
+	id: String
+	idSupervisor: String
+}
+
+"Id de un usuario"
+input UsuarioInput {
+	id: String
+	fName: String
+	lName: String
+	contrasena: String
+	genero: Int
+	correo: String
 }
 
 "Queries"
@@ -208,58 +277,66 @@ type Query {
 	historialPesoTanque(idTanque: ID!): HistorialPeso!
 }
 
+"""
+set: toma como input las modificaciones que se quieren asignar a la instancia indicada por el id del input
+create: toma como input la instancia que se quiere crear en una tabla de la base de datos
+"""
 type Mutation {
-	"""
-	Mutación para modificar la información de un tanque.
-	TanqueInput es la nueva información del tanque.
-	idTanqueOriginal es el idTanque original en caso de que se quiera asignar un nuevo id al tanque.
-	"""
 	setTanque(tanqueInput: TanqueInput!, idTanqueOriginal: String!): String
-	"Mutación para crear un nuevo tanque"
 	createTanque(tanqueInput: TanqueInput!): String
-	"Mutación para eliminar un tanque cuyo ID no es llave foránea de ninguna otra tabla"
 	deleteTanque(idTanqueInput: String!): String
 
-	"""
-	Mutación para modificar la información de un lugar.
-	LugarInput es la nueva información del lugar.
-	idLugarOriginal es el idLugar original en caso de que se quiera asignar un nuevo id al lugar.
-	"""
 	setLugar(lugarInput: LugarInput!, idLugarOriginal: String!): String
-	"Mutación para crear un nuevo lugar"
 	createLugar(lugarInput: LugarInput!): String
 
-	"""
-	Mutación para modificar la información de un contenido.
-	ContenidoInput es la nueva información del contenido.
-	idContenidoOriginal es el idContenido original en caso de que se quiera asignar un nuevo id al contenido.
-	"""
 	setContenido(
 		contenidoInput: ContenidoInput!
 		idContenidoOriginal: String!
 	): String
-	"Mutación para crear un nuevo contenido"
 	createContenido(contenidoInput: ContenidoInput!): String
 
-	"""
-	Mutación para modificar la información de un dueno.
-	DuenoInput es la nueva información del dueno.
-	idDuenoOriginal es el idDueno original en caso de que se quiera asignar un nuevo id al dueno.
-	"""
 	setDueno(duenoInput: DuenoInput!, idDuenoOriginal: String!): String
-	"Mutación para crear un nuevo dueno"
 	createDueno(duenoInput: DuenoInput!): String
 
-	"""
-	Mutación para modificar la información de un mantenimiento.
-	MantenimientoInput es la nueva información del mantenimiento.
-	idMantenimientoOriginal son las columnas que forman la llave primaria original en caso de que se quiera asignar
-	una nueva llave primaria al mantenimiento.
-	"""
 	setMantenimiento(
 		mantenimientoInput: MantenimientoInput!
 		idMantenimientoOriginal: IdMantenimientoInput!
 	): String
-	"Mutación para crear un nuevo mantenimiento"
 	createMantenimiento(mantenimientoInput: MantenimientoInput!): String
+
+	setEtiqueta(etiquetaInput: EtiquetaInput!, idEtiquetaOriginal: Int!): String
+	createEtiqueta(etiquetaInput: EtiquetaInput!): String
+
+	setHistorialPeso(
+		historialPesoInput: HistorialPesoInput!
+		idHistorialPesoOriginal: IdHistorialPeso!
+	): String
+	createHistorialPeso(historialPesoInput: HistorialPesoInput!): String
+
+	setOperadoPor(
+		operadoPorInput: OperadoPorInput!
+		idOperadoPorOriginal: IdOperadoPorInput!
+	): String
+	createOperadoPor(operadoPorInput: OperadoPorInput!): String
+
+	setTanqueEsta(
+		tanqueEstaInput: TanqueEstaInput!
+		idTanqueEstaOriginal: IdTanqueEsta!
+	): String
+	createTanqueEsta(tanqueEstaInput: TanqueEstaInput): String
+
+	setTanqueHaEstado(
+		tanqueHaEstadoInput: TanqueHaEstadoInput!
+		idTanqueHaEstadoOriginal: IdTanqueHaEstado!
+	): String
+	createTanqueHaEstado(tanqueHaEstadoInput: TanqueHaEstadoInput!): String
+
+	setOperador(
+		operadorInput: OperadorInput!
+		idOperadorOriginal: String!
+	): String
+	createOperador(operadorInput: OperadorInput!): String
+
+	setUsuario(usuarioInput: UsuarioInput!, idUsuarioOriginal: String!): String
+	createUsuario(usuarioInput: UsuarioInput!): String
 }
