@@ -1,5 +1,4 @@
 import mysql from 'mysql';
-import type from '../resolvers/type';
 async function checkExists(client, table, mysqlId, idQuery) {
 	var obj = {
 		queryString: `SELECT * FROM ?? WHERE`,
@@ -74,6 +73,9 @@ function modifyId(table, input) {
 				input.idTanque = input.id.idTanque;
 				input.fecha = input.id.fecha;
 				break;
+			case 'TanqueEsta':
+				input.idTanque = input.id.idTanque;
+				input.idLugar = input.id.idLugar;
 		}
 		delete input.id;
 	}
@@ -135,9 +137,9 @@ let mysqlMutations = {
 	async setValor(client, input, idOriginal, table, mysqlId) {
 		idOriginal = validateId(idOriginal);
 		if (await checkExists(client, table, mysqlId, idOriginal)) {
-			console.log(input);
+			//console.log(input);
 			input = modifyId(table, input);
-			console.log(input);
+			//console.log(input);
 			let resp = `El valor de ${table} ha sido actualizado`;
 			var obj = {
 				queryString: `UPDATE ?? SET ? WHERE`,
@@ -146,7 +148,7 @@ let mysqlMutations = {
 				id: idOriginal
 			};
 			obj = parseObj(obj);
-			console.log(obj);
+			//console.log(obj);
 			await client.query(obj.queryString, obj.arr).catch((error) => {
 				console.log(error);
 				resp = error.sqlMessage;

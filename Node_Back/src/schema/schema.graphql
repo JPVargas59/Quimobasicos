@@ -199,6 +199,18 @@ input IdOperadoPorInput {
 	fecha: Date
 }
 
+"Input para la ubicación de un tanque"
+input TanqueEstaInput {
+	id: IdTanqueEsta
+	fecha: Date
+}
+
+"Id para una instancia de TanqueEsta"
+input IdTanqueEsta {
+	idTanque: String
+	idLugar: String
+}
+
 "Queries"
 type Query {
 	"Lista de informacion de los Tanques"
@@ -278,4 +290,10 @@ type Mutation {
 		idOperadoPorOriginal: IdOperadoPorInput!
 	): String
 	createOperadoPor(operadoPorInput: OperadoPorInput!): String
+
+	setTanqueEsta(
+		tanqueEstaInput: TanqueEstaInput!
+		idTanqueEstaOriginal: IdTanqueEsta!
+	): String
+	createTanqueEsta(tanqueEstaInput: TanqueEstaInput): String
 }

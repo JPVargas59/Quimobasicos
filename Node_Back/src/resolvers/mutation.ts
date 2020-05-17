@@ -119,6 +119,23 @@ const mutation: IResolvers = {
 				'idTanque',
 				'fecha'
 			]);
+		},
+		setTanqueEsta(
+			__: void,
+			{ tanqueEstaInput, idTanqueEstaOriginal }
+		): any {
+			return mysqlMutations.setValor(
+				tanqueEstaInput,
+				idTanqueEstaOriginal,
+				'TanqueEsta',
+				['idTanque', 'idLugar']
+			);
+		},
+		createTanqueEsta(__: void, { tanqueEstaInput }): any {
+			return mysqlMutations.createValor(tanqueEstaInput, 'TanqueEsta', [
+				'idTanque',
+				'idLugar'
+			]);
 		}
 	}
 };
