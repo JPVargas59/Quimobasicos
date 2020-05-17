@@ -102,6 +102,23 @@ const mutation: IResolvers = {
 				'HistorialPeso',
 				['idTanque', 'fecha']
 			);
+		},
+		setOperadoPor(
+			__: void,
+			{ operadoPorInput, idOperadoPorOriginal }
+		): any {
+			return mysqlMutations.setValor(
+				operadoPorInput,
+				idOperadoPorOriginal,
+				'OperadoPor',
+				['idTanque', 'fecha']
+			);
+		},
+		createOperadoPor(__: void, { operadoPorInput }): any {
+			return mysqlMutations.createValor(operadoPorInput, 'OperadoPor', [
+				'idTanque',
+				'fecha'
+			]);
 		}
 	}
 };

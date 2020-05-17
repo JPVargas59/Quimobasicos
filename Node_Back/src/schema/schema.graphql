@@ -187,6 +187,18 @@ input IdHistorialPeso {
 	fecha: Date
 }
 
+"Input para crear o actualizar operaciones de un tanque"
+input OperadoPorInput {
+	id: IdOperadoPorInput
+	idUsuario: String
+}
+
+"Id para una operación"
+input IdOperadoPorInput {
+	idTanque: String
+	fecha: Date
+}
+
 "Queries"
 type Query {
 	"Lista de informacion de los Tanques"
@@ -260,4 +272,10 @@ type Mutation {
 		idHistorialPesoOriginal: IdHistorialPeso!
 	): String
 	createHistorialPeso(historialPesoInput: HistorialPesoInput!): String
+
+	setOperadoPor(
+		operadoPorInput: OperadoPorInput!
+		idOperadoPorOriginal: IdOperadoPorInput!
+	): String
+	createOperadoPor(operadoPorInput: OperadoPorInput!): String
 }

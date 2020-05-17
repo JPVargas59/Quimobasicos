@@ -69,6 +69,7 @@ function modifyId(table, input) {
 			case 'EtiquetaRFID':
 				input.idEtiqueta = input.id;
 				break;
+			case 'OperadoPor':
 			case 'HistorialPeso':
 				input.idTanque = input.id.idTanque;
 				input.fecha = input.id.fecha;
@@ -134,9 +135,9 @@ let mysqlMutations = {
 	async setValor(client, input, idOriginal, table, mysqlId) {
 		idOriginal = validateId(idOriginal);
 		if (await checkExists(client, table, mysqlId, idOriginal)) {
-			//console.log(input);
+			console.log(input);
 			input = modifyId(table, input);
-			//console.log(input);
+			console.log(input);
 			let resp = `El valor de ${table} ha sido actualizado`;
 			var obj = {
 				queryString: `UPDATE ?? SET ? WHERE`,
@@ -145,7 +146,7 @@ let mysqlMutations = {
 				id: idOriginal
 			};
 			obj = parseObj(obj);
-			//console.log(obj);
+			console.log(obj);
 			await client.query(obj.queryString, obj.arr).catch((error) => {
 				console.log(error);
 				resp = error.sqlMessage;
