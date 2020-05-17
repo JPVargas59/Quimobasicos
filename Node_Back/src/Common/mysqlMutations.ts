@@ -62,20 +62,37 @@ function modifyId(table, input) {
 				input.idDueno = input.id;
 				break;
 			case 'Mantenimiento':
-				input.idTanque = input.id.idTanque;
-				input.fechaMantenimiento = input.id.fechaMantenimiento;
+				if (typeof input.id.idTanque !== 'undefined') {
+					input.idTanque = input.id.idTanque;
+				}
+				if (typeof input.id.fechaMantenimiento !== 'undefined') {
+					input.fechaMantenimiento = input.id.fechaMantenimiento;
+				}
 				break;
 			case 'EtiquetaRFID':
 				input.idEtiqueta = input.id;
 				break;
 			case 'OperadoPor':
 			case 'HistorialPeso':
-				input.idTanque = input.id.idTanque;
-				input.fecha = input.id.fecha;
+				if (typeof input.id.idTanque !== 'undefined') {
+					input.idTanque = input.id.idTanque;
+				}
+				if (typeof input.id.fecha !== 'undefined') {
+					input.fecha = input.id.fecha;
+				}
 				break;
+			case 'TanqueHaEstado':
+				if (typeof input.id.fecha !== 'undefined') {
+					input.fecha = input.id.fecha;
+				}
 			case 'TanqueEsta':
-				input.idTanque = input.id.idTanque;
-				input.idLugar = input.id.idLugar;
+				if (typeof input.id.idTanque !== 'undefined') {
+					input.idTanque = input.id.idTanque;
+				}
+				if (typeof input.id.idLugar !== 'undefined') {
+					input.idLugar = input.id.idLugar;
+				}
+				break;
 		}
 		delete input.id;
 	}

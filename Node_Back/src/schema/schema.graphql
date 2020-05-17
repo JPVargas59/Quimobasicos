@@ -211,6 +211,18 @@ input IdTanqueEsta {
 	idLugar: String
 }
 
+"Input para el historial de ubicaciones de un tanque"
+input TanqueHaEstadoInput {
+	id: IdTanqueHaEstado
+}
+
+"Id para el historial de ubicaciones de un tanque"
+input IdTanqueHaEstado {
+	idTanque: String
+	idLugar: String
+	fecha: Date
+}
+
 "Queries"
 type Query {
 	"Lista de informacion de los Tanques"
@@ -296,4 +308,10 @@ type Mutation {
 		idTanqueEstaOriginal: IdTanqueEsta!
 	): String
 	createTanqueEsta(tanqueEstaInput: TanqueEstaInput): String
+
+	setTanqueHaEstado(
+		tanqueHaEstadoInput: TanqueHaEstadoInput!
+		idTanqueHaEstadoOriginal: IdTanqueHaEstado!
+	): String
+	createTanqueHaEstado(tanqueHaEstadoInput: TanqueHaEstadoInput!): String
 }

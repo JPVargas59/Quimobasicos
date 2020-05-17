@@ -136,6 +136,24 @@ const mutation: IResolvers = {
 				'idTanque',
 				'idLugar'
 			]);
+		},
+		setTanqueHaEstado(
+			__: void,
+			{ tanqueHaEstadoInput, idTanqueHaEstadoOriginal }
+		): any {
+			return mysqlMutations.setValor(
+				tanqueHaEstadoInput,
+				idTanqueHaEstadoOriginal,
+				'TanqueHaEstado',
+				['idTanque', 'idLugar', 'fecha']
+			);
+		},
+		createTanqueHaEstado(__: void, { tanqueHaEstadoInput }): any {
+			return mysqlMutations.createValor(
+				tanqueHaEstadoInput,
+				'TanqueHaEstado',
+				['idTanque', 'idLugar', 'fecha']
+			);
 		}
 	}
 };
