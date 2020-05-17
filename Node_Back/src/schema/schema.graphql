@@ -223,6 +223,22 @@ input IdTanqueHaEstado {
 	fecha: Date
 }
 
+"Id de un operador"
+input OperadorInput {
+	id: String
+	idSupervisor: String
+}
+
+"Id de un usuario"
+input UsuarioInput {
+	id: String
+	fName: String
+	lName: String
+	contrasena: String
+	genero: Int
+	correo: String
+}
+
 "Queries"
 type Query {
 	"Lista de informacion de los Tanques"
@@ -314,4 +330,13 @@ type Mutation {
 		idTanqueHaEstadoOriginal: IdTanqueHaEstado!
 	): String
 	createTanqueHaEstado(tanqueHaEstadoInput: TanqueHaEstadoInput!): String
+
+	setOperador(
+		operadorInput: OperadorInput!
+		idOperadorOriginal: String!
+	): String
+	createOperador(operadorInput: OperadorInput!): String
+
+	setUsuario(usuarioInput: UsuarioInput!, idUsuarioOriginal: String!): String
+	createUsuario(usuarioInput: UsuarioInput!): String
 }

@@ -93,6 +93,11 @@ function modifyId(table, input) {
 					input.idLugar = input.id.idLugar;
 				}
 				break;
+			case 'Operador':
+				input.operadorId = input.id;
+				break;
+			case 'Usuario':
+				input.idUsuario = input.id;
 		}
 		delete input.id;
 	}

@@ -154,6 +154,32 @@ const mutation: IResolvers = {
 				'TanqueHaEstado',
 				['idTanque', 'idLugar', 'fecha']
 			);
+		},
+		setOperador(__: void, { operadorInput, idOperadorOriginal }): any {
+			return mysqlMutations.setValor(
+				operadorInput,
+				idOperadorOriginal,
+				'Operador',
+				['operadorId']
+			);
+		},
+		createOperador(__: void, { operadorInput }): any {
+			return mysqlMutations.createValor(operadorInput, 'Operador', [
+				'operadorId'
+			]);
+		},
+		setUsuario(__: void, { usuarioInput, idUsuarioOriginal }): any {
+			return mysqlMutations.setValor(
+				usuarioInput,
+				idUsuarioOriginal,
+				'Usuario',
+				['idUsuario']
+			);
+		},
+		createUsuario(__: void, { usuarioInput }): any {
+			return mysqlMutations.createValor(usuarioInput, 'Usuario', [
+				'idUsuario'
+			]);
 		}
 	}
 };
