@@ -45,6 +45,10 @@ type Tanque {
 	operaciones: [Operacion!]
 	"mantenimientos"
 	mantenimientos : [Mantenimiento]
+	"Observaciones"
+	observaciones : String
+	"Fecha de llegada"
+	fechaIngreso : Date
 }
 type Owner {
 	idDueno: String!
