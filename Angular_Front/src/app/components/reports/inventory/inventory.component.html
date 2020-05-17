@@ -1,25 +1,26 @@
 <h3 class="ui header">Inventario de Tanques</h3>
-
+ 
 <table class="ui table">
-    <thead>
-      <tr class="ui table header">
-        <th>ID</th>
-        <th>Contenido</th>
-        <th>Fecha Registro</th>
-        <th>Última Ubicaicón</th>
-        <th>Estatus</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let tank of tanks">
-        <td>
-          <a (click)="onTankSelection($event)" [id]="tank.idTanque">{{tank.idTanque}}</a>
-        </td>
-        <td>{{tank.content}}</td>
-        <td>{{tank.registerDate}}</td>
-        <td>{{tank.location}}</td>
-        <td>{{tank.status}}</td>
-      </tr>
-    </tbody>
-  </table>
-
+   <thead>
+     <tr class="ui table header">
+       <th>ID</th>
+       <th>Contenido</th>
+       <th>Fecha de Retorno</th>
+       <th>Última Ubicaicón</th>
+       <th>Peso Actual</th>
+       <th>ID Etiqueta RFID</th>
+     </tr>
+   </thead>
+   <tbody>
+     <tr *ngFor="let tank of tanks">
+       <td>
+         <a (click)="onTankSelection($event)" [id]="tank.idTanque">{{tank.idTanque}}</a>
+       </td>
+       <td>{{tank.contenidoTanque.contenido}}</td>
+       <td>{{tank.fecharetorno}}</td>
+       <td>{{tank.lugar.lnombre}}</td>
+       <td>{{tank.peso}}</td>
+       <td>{{tank.idEtiqueta.idEtiqueta}}</td>
+     </tr>
+   </tbody>
+ </table>

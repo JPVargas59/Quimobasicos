@@ -15,7 +15,8 @@ export class DatabaseService {
   ) { }
 
   getTanks() {
-    const json = '{tanques{idTanque idEtiqueta{idEtiqueta} contenidoTanque{contenido} lugar{lnombre}}}';
+    
+    const json = '{tanques{idTanque idEtiqueta{idEtiqueta} fechaEsperadaRegreso peso contenidoTanque{contenido} lugar{lnombre}}}';
     return this.http.get(`${this.homeURL}?query=${json}`);
   }
 
