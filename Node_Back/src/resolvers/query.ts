@@ -56,6 +56,9 @@ const query: IResolvers = {
 		operacionesTanque(__: void, { idTanque }): any {
 			return asyncFunctionsMySQLQueries.getOperacionesTanque(idTanque);
 		},
+		operadores() : any {
+			return asyncFunctionsMySQLQueries.getOperadores();
+		},
 	}
 };
 export default query;

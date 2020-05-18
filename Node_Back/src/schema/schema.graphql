@@ -225,6 +225,8 @@ type Query {
 	operaciones : [Operacion!]
 	"Operacion de un tanque"
 	operacionesTanque(idTanque : ID!) : [Operacion!]
+	"Operadores" 
+	operadores : [Operador]
 }
 
 type Mutation {

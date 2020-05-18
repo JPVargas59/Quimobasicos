@@ -315,3 +315,11 @@ exports.getOperacionesTanques = async (client) => {
 	}
 	return operaciones;
 }
+exports.getOperadores = async (client) => {
+	var operadores = await client.query(`
+	SELECT fName as nombre, lName as apellidos, idUsuario, genero, correo, idSupervisor FROM Usuario LEFT JOIN Operador ON Operador.operadorId = Usuario.idUsuario    `);
+	if (operadores.length == 0) {
+		return null;
+	}
+	return operadores;
+}
