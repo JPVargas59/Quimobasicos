@@ -1,3 +1,5 @@
+import client from "../client";
+
 exports.getTanques = async (client) => {
 	var tanques = await client.query(`
     SELECT * FROM Tanque
@@ -132,13 +134,13 @@ exports.getUsuarios = async (client) => {
 };
 
 exports.getUsuario = async (client, idUsuario) => {
+	
 	var usuario = await client.query(
 		`
-    SELECT fName as nombre, lName as apellidos, idUsuario, genero, correo  FROM Usuario
+    SELECT fName as nombre, lName as apellidos, idUsuario, genero, correo FROM Usuario
     WHERE idUsuario = ?`,
 		idUsuario
 	);
-	console.log("HOLAA",usuario);
 	if (usuario.length == 0) {
 		return null;
 	}
@@ -322,4 +324,23 @@ exports.getOperadores = async (client) => {
 		return null;
 	}
 	return operadores;
+}
+exports.getTanquesEnLugar = async(client, idLugar) => {
+	var tanques = await client.query(`
+	SELECT * FROM Tanque JOIN TanqueEsta ON Tanque.idTanque = TanqueEsta.idTanque WHERE idLugar = ?
+	`, idLugar);
+	if (tanques.length == 0) {
+		return null;
+	}
+	return tanques;
+}
+
+exports.getTanquesConContenido = async(client, idContenido) => {
+	var tanques = await client.query(`
+	SELECT * FROM Tanque WHERE idContenido = ?
+	`, idContenido);
+	if (tanques.length == 0) {
+		return null;
+	}
+	return tanques;
 }

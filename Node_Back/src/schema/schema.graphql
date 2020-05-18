@@ -67,6 +67,7 @@ type EtiquetaRFID {
 type Contenido {
 	idContenido: String!
 	contenido: String!
+	tanques : [Tanque]
 }
 "Lugar de donde se pueden ubicar los tanques"
 type Lugar {
