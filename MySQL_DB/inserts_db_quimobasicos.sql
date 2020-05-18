@@ -1,11 +1,11 @@
+USE quimobasicos;
+
 INSERT INTO Contenido VALUES ("G-134A", "Cloro");
 INSERT INTO Contenido VALUES ("G-404A", "Hipoclorito de sodio");
 INSERT INTO Contenido VALUES ("G-804A", "Sodio");
 INSERT INTO Contenido VALUES ("G-704A", "HFC");
 INSERT INTO Contenido VALUES ("G-454A", "RFC");
 INSERT INTO Contenido VALUES ("G-676B", "R-134A");
-
-
 
 INSERT INTO EtiquetaRFID VALUES(1);
 INSERT INTO EtiquetaRFID VALUES(2);
@@ -27,7 +27,6 @@ INSERT INTO Dueno VALUES("AndRo","Andres Rodriguez");
 INSERT INTO Dueno VALUES("JBes","Jorge Besnier");
 INSERT INTO Dueno VALUES("ARL","Alejandro Hernandez");
 
-
 INSERT INTO Tanque VALUES
     ("EURO514966", "Buena", "Muy bueno", 50, 20.5, "2020-02-02 10:00:00", 1, "G-134A", "ARL","2020-01-20 10:00:00", "Tanque comprado recientemente" ), 
     ("EURO514967", "Mala", "Muy mala", 60, 45.5, "2020-12-08 10:00:00", 1, "G-134A", "JBes", "2020-11-08 10:00:00", "Tanque comprado recientemente"),  
@@ -35,9 +34,6 @@ INSERT INTO Tanque VALUES
     ("NVVU100710", "Buena", "Media", 60, 23.5, "2020-09-11 10:00:00", 1, "G-804A", "AndRo", "2020-08-11 10:00:00", "Tanque comprado recientemente"),
 	("NVVU100711", "Buena", "Media", 60, 23.5, "2020-10-11 15:00:00", 1, "G-804A", "FLORO", "2020-09-11 15:00:00", "Tanque comprado recientemente"),
 	("EURO514970", "Buena", "Media", 60, 23.5, "2020-10-11 15:00:00", 1, "G-804A", "FLORO", "2020-09-11 15:00:00", "Tanque comprado recientemente");
-
-
-
 
 INSERT INTO Mantenimiento VALUES (
 	"EURO514966", "2019-08-02 10:00:00", "Se arregló la válvula"
@@ -68,8 +64,6 @@ INSERT INTO Lugar VALUES("PT2", "Patio secundario",665.3,2000,ST_GeomFromText('P
 INSERT INTO Lugar VALUES("ETDA2", "Entrada Anexo 2",56.573,2980,ST_GeomFromText('POINT (44.53456  55.53242)'));
 INSERT INTO Lugar VALUES("Zo1", "Zona 1",5.698,3000,ST_GeomFromText('POINT (90.53456  20.53242)'));
 INSERT INTO Lugar VALUES("ETDA3", "Entrada Trasera",5.6987,2698,ST_GeomFromText('POINT (15.4578  98.3651)'));
-
-
 
 INSERT INTO TanqueEsta VALUES (
 	"NVVU100706", "PT","2020-10-01"
