@@ -42,11 +42,22 @@ type Tanque {
 	"Historial del tanque"
 	haEstado: [HistorialTanque]
 	"operaciones"
-	operaciones: [Operacion!]
+	operaciones: [Operacion]
+	"mantenimientos"
+	mantenimientos : [Mantenimiento]
+	"Observaciones"
+	observaciones : String
+	"Fecha de llegada"
+	fechaIngreso : Date
 }
 type Owner {
 	idDueno: String!
 	nombre: String!
+}
+type Mantenimiento {
+	tanque : Tanque!
+	fechaMantenimiento : Date
+	observaciones : String
 }
 
 type EtiquetaRFID {
@@ -275,6 +286,16 @@ type Query {
 	historialPesoTanques: [HistorialPeso!]
 	"Información de peso de tanques"
 	historialPesoTanque(idTanque: ID!): HistorialPeso!
+	"Informacion de los mantenimientos de tanques"
+	historialMantenimientos : [Mantenimiento!]
+	"Información del mantenimiento de un tanque"
+	historialMantenimientoTanque(idTanque: ID!) : [Mantenimiento!]
+	"Operaciones tanques"
+	operaciones : [Operacion!]
+	"Operacion de un tanque"
+	operacionesTanque(idTanque : ID!) : [Operacion!]
+	"Operadores" 
+	operadores : [Operador]
 }
 
 """

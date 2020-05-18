@@ -17,8 +17,11 @@ const type: IResolvers = {
 		lugar: (parent) => {
 			return asyncFunctions.getLugarTanque(parent.idTanque);
 		},
+		mantenimientos: (parent) => {
+			return asyncFunctions.getMantenimientoTanque(parent.idTanque);
+		},
 		operaciones: (parent) => {
-			return asyncFunctions.getOperacionesDelTanque(parent.idTanque);
+			return asyncFunctions.getOperacionesTanque(parent.idTanque);
 		}
 	}
 };

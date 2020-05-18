@@ -29,6 +29,8 @@ CREATE TABLE Tanque(
     idEtiqueta INT,
     idContenido VARCHAR(10),
     idDueno VARCHAR(10),
+    fechaIngreso DATETIME,
+    observaciones VARCHAR(250),
     PRIMARY KEY(idTanque),
     FOREIGN KEY(idEtiqueta) REFERENCES EtiquetaRFID(idEtiqueta) ON UPDATE CASCADE,
     FOREIGN KEY(idContenido) REFERENCES Contenido(idContenido) ON UPDATE CASCADE,
@@ -104,3 +106,6 @@ CREATE TABLE OperadoPor(
 	FOREIGN KEY (idTanque) REFERENCES Tanque(idTanque) ON UPDATE CASCADE,
 	FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario) ON UPDATE CASCADE
 );
+
+CREATE TRIGGER `pasarAHaEstado` AFTER UPDATE ON `TanqueEsta` FOR EACH ROW INSERT INTO TanqueHaEstado VALUES ( OLD.idTanque, OLD.idLugar, OLD.fecha);
+CREATE TRIGGER `pasaPesoAHistorialPeso`  AFTER UPDATE ON `Tanque` FOR EACH ROW INSERT INTO HistorialPeso VALUES (OLD.idTanque, OLD.pesoActual, CURRENT_DATE());

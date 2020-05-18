@@ -43,7 +43,6 @@ let mysqlMutations = {
 	async getInfoLugar(idLugar: string) {
 		let resp = await common.getInfoLugar(client, idLugar);
 		client.quit();
-		console.log(JSON.parse(JSON.stringify(resp)));
 		return JSON.parse(JSON.stringify(resp));
 	},
 	async getTanque(idTanque: string) {
@@ -116,17 +115,100 @@ let mysqlMutations = {
 		client.quit();
 		return resp;
 	},
-	async getOperacionesDelTanque(idTanque: string) {
-		var resp = await common.getOperacionesDelTanque(client, idTanque);
-		let arrayOperaciones = JSON.parse(JSON.stringify(resp));
-		for (let i = 0; i < arrayOperaciones.length; i++) {
-			arrayOperaciones[i]['operador'] = await common.getUsuarioOperador(
+	async getMantenimientoTanque(idTanque: string) {
+		var resp = await common.getMantenimientoTanque(client, idTanque);
+		let arrayMantemientos = JSON.parse(JSON.stringify(resp));
+
+		for (let i = 0; i < arrayMantemientos.length; i++) {
+			arrayMantemientos[i]['tanque'] = await common.getTanque(
 				client,
-				arrayOperaciones[i].operador
+				arrayMantemientos[i]['idTanque']
 			);
 		}
 		client.quit();
+		return arrayMantemientos;
+	},
+	async getHistorialMantenimimientosTanques() {
+		var resp = await common.getHistorialMantenimimientosTanques(client);
+		let arrayMantemientos = JSON.parse(JSON.stringify(resp));
+
+		for (let i = 0; i < arrayMantemientos.length; i++) {
+			arrayMantemientos[i]['tanque'] = await common.getTanque(
+				client,
+				arrayMantemientos[i]['idTanque']
+			);
+		}
+		client.quit();
+		return arrayMantemientos;
+	},
+	async getOperacionesTanque(idTanque: string){
+		var resp = await common.getOperacionesTanque(client, idTanque);
+		let arrayOperaciones = JSON.parse(JSON.stringify(resp));
+		if(arrayOperaciones == null){
+			arrayOperaciones = [];
+		}else{
+			for (let i = 0; i < arrayOperaciones.length; i++) {
+				if(arrayOperaciones[i]['idTanque']){
+					arrayOperaciones[i]['tanque'] = await common.getTanque(
+						client,
+						arrayOperaciones[i]['idTanque']
+					);
+				}
+	
+				if(arrayOperaciones[i]['idUsuario']){
+					arrayOperaciones[i]["operador"] = await common.getUsuario(
+						client,
+						arrayOperaciones[i]['idUsuario']
+					);
+				}
+			}
+			
+		}
+		
+		client.quit();
 		return arrayOperaciones;
-	}
+	},
+	async getOperacionesTanques(){
+		var resp = await common.getOperacionesTanques(client);
+		let arrayOperaciones = JSON.parse(JSON.stringify(resp));
+		for (let i = 0; i < arrayOperaciones.length; i++) {
+			if(arrayOperaciones[i]['idTanque'] == null){
+				arrayOperaciones[i]['tanque'] = null;
+			}else{
+				arrayOperaciones[i]['tanque'] = await common.getTanque(
+					client,
+					arrayOperaciones[i]['idTanque']
+				);
+			}
+
+			if(arrayOperaciones[i]['idUsuario'] == null){
+				arrayOperaciones[i]["operador"] = null;
+			}else{
+				arrayOperaciones[i]["operador"] = await common.getUsuario(
+					client,
+					arrayOperaciones[i]['idUsuario']
+				);
+			}
+		}
+		client.quit();
+		return arrayOperaciones;
+	},
+	async getOperadores(){
+		var resp = await common.getOperadores(client);
+		let arrayOperadores = JSON.parse(JSON.stringify(resp));
+		for (let i = 0; i < arrayOperadores.length; i++) {
+			if(arrayOperadores[i]['idSupervisor'] == null){
+				arrayOperadores[i]['supervisor'] = [];
+			}else{
+				arrayOperadores[i]['supervisor'] = await common.getUsuario(
+					client,
+					arrayOperadores[i]['idSupervisor']
+				);
+			}
+		}
+		client.quit();
+		return arrayOperadores;
+	} 
+
 };
 export = mysqlMutations;
