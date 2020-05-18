@@ -44,21 +44,18 @@ const query: IResolvers = {
 		historialPesoTanque(__: void, { idTanque }): any {
 			return asyncFunctionsMySQLQueries.getHistorialPesoTanque(idTanque);
 		},
-		historialMantenimientos() : any {
+		historialMantenimientos(): any {
 			return asyncFunctionsMySQLQueries.getHistorialMantenimimientosTanques();
 		},
 		historialMantenimientoTanque(__: void, { idTanque }): any {
 			return asyncFunctionsMySQLQueries.getMantenimientoTanque(idTanque);
 		},
-		operaciones() : any {
+		operaciones(): any {
 			return asyncFunctionsMySQLQueries.getOperacionesTanques();
 		},
 		operacionesTanque(__: void, { idTanque }): any {
 			return asyncFunctionsMySQLQueries.getOperacionesTanque(idTanque);
-		},
-		operadores() : any {
-			return asyncFunctionsMySQLQueries.getOperadores();
-		},
+		}
 	}
 };
 export default query;

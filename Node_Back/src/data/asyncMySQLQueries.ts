@@ -141,50 +141,49 @@ let mysqlMutations = {
 		client.quit();
 		return arrayMantemientos;
 	},
-	async getOperacionesTanque(idTanque: string){
+	async getOperacionesTanque(idTanque: string) {
 		var resp = await common.getOperacionesTanque(client, idTanque);
 		let arrayOperaciones = JSON.parse(JSON.stringify(resp));
-		if(arrayOperaciones == null){
+		if (arrayOperaciones == null) {
 			arrayOperaciones = [];
-		}else{
+		} else {
 			for (let i = 0; i < arrayOperaciones.length; i++) {
-				if(arrayOperaciones[i]['idTanque']){
+				if (arrayOperaciones[i]['idTanque']) {
 					arrayOperaciones[i]['tanque'] = await common.getTanque(
 						client,
 						arrayOperaciones[i]['idTanque']
 					);
 				}
-	
-				if(arrayOperaciones[i]['idUsuario']){
-					arrayOperaciones[i]["operador"] = await common.getUsuario(
+
+				if (arrayOperaciones[i]['idUsuario']) {
+					arrayOperaciones[i]['operador'] = await common.getUsuario(
 						client,
 						arrayOperaciones[i]['idUsuario']
 					);
 				}
 			}
-			
 		}
-		
+
 		client.quit();
 		return arrayOperaciones;
 	},
-	async getOperacionesTanques(){
+	async getOperacionesTanques() {
 		var resp = await common.getOperacionesTanques(client);
 		let arrayOperaciones = JSON.parse(JSON.stringify(resp));
 		for (let i = 0; i < arrayOperaciones.length; i++) {
-			if(arrayOperaciones[i]['idTanque'] == null){
+			if (arrayOperaciones[i]['idTanque'] == null) {
 				arrayOperaciones[i]['tanque'] = null;
-			}else{
+			} else {
 				arrayOperaciones[i]['tanque'] = await common.getTanque(
 					client,
 					arrayOperaciones[i]['idTanque']
 				);
 			}
 
-			if(arrayOperaciones[i]['idUsuario'] == null){
-				arrayOperaciones[i]["operador"] = null;
-			}else{
-				arrayOperaciones[i]["operador"] = await common.getUsuario(
+			if (arrayOperaciones[i]['idUsuario'] == null) {
+				arrayOperaciones[i]['operador'] = null;
+			} else {
+				arrayOperaciones[i]['operador'] = await common.getUsuario(
 					client,
 					arrayOperaciones[i]['idUsuario']
 				);
@@ -192,23 +191,6 @@ let mysqlMutations = {
 		}
 		client.quit();
 		return arrayOperaciones;
-	},
-	async getOperadores(){
-		var resp = await common.getOperadores(client);
-		let arrayOperadores = JSON.parse(JSON.stringify(resp));
-		for (let i = 0; i < arrayOperadores.length; i++) {
-			if(arrayOperadores[i]['idSupervisor'] == null){
-				arrayOperadores[i]['supervisor'] = [];
-			}else{
-				arrayOperadores[i]['supervisor'] = await common.getUsuario(
-					client,
-					arrayOperadores[i]['idSupervisor']
-				);
-			}
-		}
-		client.quit();
-		return arrayOperadores;
-	} 
-
+	}
 };
 export = mysqlMutations;
