@@ -30,7 +30,7 @@ type Tanque {
 	"Peso normal del tanque"
 	peso: Float
 	"Fecha esperada para el regreso del tanque"
-	fechaEsperadaRegreso: Date
+	fechaEsperadaRetorno: Date
 	"ID de la etiqueta asignada al tanque"
 	idEtiqueta: EtiquetaRFID
 	"Información del dueno"
@@ -44,20 +44,20 @@ type Tanque {
 	"operaciones"
 	operaciones: [Operacion]
 	"mantenimientos"
-	mantenimientos : [Mantenimiento]
+	mantenimientos: [Mantenimiento]
 	"Observaciones"
-	observaciones : String
+	observaciones: String
 	"Fecha de llegada"
-	fechaIngreso : Date
+	fechaIngreso: Date
 }
 type Owner {
 	idDueno: String!
 	nombre: String!
 }
 type Mantenimiento {
-	tanque : Tanque!
-	fechaMantenimiento : Date
-	observaciones : String
+	tanque: Tanque!
+	fechaMantenimiento: Date
+	observaciones: String
 }
 
 type EtiquetaRFID {
@@ -140,6 +140,8 @@ input TanqueInput {
 	idEtiqueta: Int
 	idContenido: String
 	idDueno: String
+	fechaIngreso: Date
+	observaciones: String
 }
 
 "Input para crear o actualizar un lugar"
@@ -287,15 +289,15 @@ type Query {
 	"Información de peso de tanques"
 	historialPesoTanque(idTanque: ID!): HistorialPeso!
 	"Informacion de los mantenimientos de tanques"
-	historialMantenimientos : [Mantenimiento!]
+	historialMantenimientos: [Mantenimiento!]
 	"Información del mantenimiento de un tanque"
-	historialMantenimientoTanque(idTanque: ID!) : [Mantenimiento!]
+	historialMantenimientoTanque(idTanque: ID!): [Mantenimiento!]
 	"Operaciones tanques"
-	operaciones : [Operacion!]
+	operaciones: [Operacion!]
 	"Operacion de un tanque"
-	operacionesTanque(idTanque : ID!) : [Operacion!]
-	"Operadores" 
-	operadores : [Operador]
+	operacionesTanque(idTanque: ID!): [Operacion!]
+	"Operadores"
+	operadores: [Operador]
 }
 
 """
