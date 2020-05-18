@@ -1,14 +1,5 @@
 scalar Date
 
-"Interfaces"
-interface Empleado {
-	idUsuario: String
-	nombre: String
-	apellidos: String
-	password: String
-	genero: Int
-	correo: String
-}
 directive @rateLimit(
 	message: String
 	identityArgs: [String]
@@ -16,6 +7,12 @@ directive @rateLimit(
 	max: Int
 	window: String
 ) on FIELD_DEFINITION
+
+enum puestoUsuario {
+	Admin
+	Supervisor
+	Operador
+}
 
 "Objetos"
 type Tanque {
@@ -91,23 +88,14 @@ type Point {
 	y: Float
 }
 
-type Usuario implements Empleado {
+type Usuario {
 	idUsuario: String
 	nombre: String
 	apellidos: String
 	password: String
-	genero: Int
 	correo: String
-}
-
-type Operador implements Empleado {
-	idUsuario: String!
-	nombre: String
-	apellidos: String
-	password: String
-	genero: Int
-	correo: String
-	supervisor: Usuario
+	idSupervisor: String
+	puesto: puestoUsuario
 }
 
 type Operacion {
@@ -236,20 +224,15 @@ input IdTanqueHaEstado {
 	fecha: Date
 }
 
-"Id de un operador"
-input OperadorInput {
-	id: String
-	idSupervisor: String
-}
-
 "Id de un usuario"
 input UsuarioInput {
 	id: String
 	fName: String
 	lName: String
 	contrasena: String
-	genero: Int
 	correo: String
+	idSupervisor: String
+	puesto: puestoUsuario
 }
 
 "Queries"
@@ -296,8 +279,6 @@ type Query {
 	operaciones: [Operacion!]
 	"Operacion de un tanque"
 	operacionesTanque(idTanque: ID!): [Operacion!]
-	"Operadores"
-	operadores: [Operador]
 }
 
 """
@@ -353,12 +334,6 @@ type Mutation {
 		idTanqueHaEstadoOriginal: IdTanqueHaEstado!
 	): String
 	createTanqueHaEstado(tanqueHaEstadoInput: TanqueHaEstadoInput!): String
-
-	setOperador(
-		operadorInput: OperadorInput!
-		idOperadorOriginal: String!
-	): String
-	createOperador(operadorInput: OperadorInput!): String
 
 	setUsuario(usuarioInput: UsuarioInput!, idUsuarioOriginal: String!): String
 	createUsuario(usuarioInput: UsuarioInput!): String
