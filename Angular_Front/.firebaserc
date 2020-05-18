@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "semestre-i-iot"
+  },
+  "targets": {
+    "semestre-i-iot": {
+      "hosting": {
+        "quimobasicos": [
+          "quimobasicos"
+        ]
+      }
+    }
+  }
+}
