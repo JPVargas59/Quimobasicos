@@ -42,7 +42,7 @@ type Tanque {
 	"Historial del tanque"
 	haEstado: [HistorialTanque]
 	"operaciones"
-	operaciones: [Operacion!]
+	operaciones: [Operacion]
 	"mantenimientos"
 	mantenimientos : [Mantenimiento]
 	"Observaciones"
@@ -221,6 +221,10 @@ type Query {
 	historialMantenimientos : [Mantenimiento!]
 	"Información del mantenimiento de un tanque"
 	historialMantenimientoTanque(idTanque: ID!) : [Mantenimiento!]
+	"Operaciones tanques"
+	operaciones : [Operacion!]
+	"Operacion de un tanque"
+	operacionesTanque(idTanque : ID!) : [Operacion!]
 }
 
 type Mutation {

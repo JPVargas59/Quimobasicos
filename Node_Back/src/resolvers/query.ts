@@ -49,7 +49,13 @@ const query: IResolvers = {
 		},
 		historialMantenimientoTanque(__: void, { idTanque }): any {
 			return asyncFunctionsMySQLQueries.getMantenimientoTanque(idTanque);
-		}
+		},
+		operaciones() : any {
+			return asyncFunctionsMySQLQueries.getOperacionesTanques();
+		},
+		operacionesTanque(__: void, { idTanque }): any {
+			return asyncFunctionsMySQLQueries.getOperacionesTanque(idTanque);
+		},
 	}
 };
 export default query;

@@ -135,9 +135,10 @@ exports.getUsuario = async (client, idUsuario) => {
 	var usuario = await client.query(
 		`
     SELECT fName as nombre, lName as apellidos, idUsuario, genero, correo  FROM Usuario
-    WHERE idUsario = ?`,
+    WHERE idUsuario = ?`,
 		idUsuario
 	);
+	console.log("HOLAA",usuario);
 	if (usuario.length == 0) {
 		return null;
 	}
@@ -294,3 +295,23 @@ exports.getHistorialMantenimimientosTanques = async (client) => {
 	}
 	return mantenimientos;
 };
+exports.getOperacionesTanque = async (client, idTanque) => {
+	var operaciones = await client.query(`
+    SELECT idTanque, idUsuario, fecha FROM OperadoPor WHERE idTanque = ?
+	`, idTanque);
+	
+	if (operaciones.length == 0 ) {
+		return null;
+	}
+	return operaciones;
+};
+exports.getOperacionesTanques = async (client) => {
+	var operaciones = await client.query(`
+    SELECT idTanque, idUsuario, fecha FROM OperadoPor
+	`);
+	
+	if (operaciones.length == 0 ) {
+		return null;
+	}
+	return operaciones;
+}
