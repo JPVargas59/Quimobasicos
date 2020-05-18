@@ -107,5 +107,7 @@ CREATE TABLE OperadoPor(
 	FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario) ON UPDATE CASCADE
 );
 
-CREATE TRIGGER `pasarAHaEstado` AFTER UPDATE ON `TanqueEsta` FOR EACH ROW INSERT INTO TanqueHaEstado VALUES ( OLD.idTanque, OLD.idLugar, OLD.fecha);
-CREATE TRIGGER `pasaPesoAHistorialPeso`  AFTER UPDATE ON `Tanque` FOR EACH ROW INSERT INTO HistorialPeso VALUES (OLD.idTanque, OLD.pesoActual, CURRENT_DATE());
+CREATE TRIGGER `pasarAHaEstado` AFTER UPDATE ON `TanqueEsta` FOR EACH ROW INSERT INTO TanqueHaEstado VALUES ( NEW.idTanque, NEW.idLugar, NEW.fecha);
+CREATE TRIGGER `pasaPesoAHistorialPeso`  AFTER UPDATE ON `Tanque` FOR EACH ROW INSERT INTO HistorialPeso VALUES (NEW.idTanque, NEW.pesoActual, CURRENT_DATE());
+CREATE TRIGGER `nuevoHaEstado` AFTER INSERT ON `TanqueEsta` FOR EACH ROW INSERT INTO TanqueHaEstado VALUES ( NEW.idTanque, NEW.idLugar, NEW.fecha);
+CREATE TRIGGER `nuevoPesoAHistorialPeso`  AFTER INSERT ON `Tanque` FOR EACH ROW INSERT INTO HistorialPeso VALUES (NEW.idTanque, NEW.pesoActual, CURRENT_DATE());
