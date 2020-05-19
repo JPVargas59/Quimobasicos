@@ -20,11 +20,11 @@
       <td>{{tankInfo.dueno.nombre}}</td>
       <td>{{tankInfo.calidad}}</td>
       <td>{{tankInfo.estadoValvula}}</td>
-      <td>{{tankInfo.peso}}</td>
+      <td>{{tankInfo.pesoActual}}</td>
       <td>{{tankInfo.fechaIngreso | date}}</td>
       <td>{{tankInfo.fechaEsperadaRetorno | date}}</td>
       <td>{{tankInfo.observaciones}}</td>
-    </tr> 
+    </tr>
   </tbody>
 </table>
 <br>
@@ -70,4 +70,3 @@
     <div class="ui red button"  [routerLink]="exitAddress">Desvincular Etiqueta RFID</div>
   </div>
 </div>
-  

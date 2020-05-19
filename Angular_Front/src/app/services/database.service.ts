@@ -19,14 +19,15 @@ export class DatabaseService {
 
   getTank(idTanque) {
     const query = `{
-      tanque(idTanque:"${idTanque}"){ 
-      contenidoTanque {contenido} 
-      dueno {nombre} 
-      calidad 
-      estadoValvula 
-      peso 
-      fechaIngreso 
-      fechaEsperadaRetorno 
+      tanque(idTanque:"${idTanque}"){
+      contenidoTanque {contenido}
+      dueno {nombre}
+      calidad
+      estadoValvula
+      peso
+      pesoActual
+      fechaIngreso
+      fechaEsperadaRetorno
       observaciones}
     }`;
     return this.http.post(`${this.homeURL}`, {query});
@@ -39,7 +40,7 @@ export class DatabaseService {
 
   getTankLocations(idTanque) {
     // CORREGIR QUERIE
-    const query = `{ 
+    const query = `{
       historialPesoTanque (idTanque:"${idTanque}") {
          idTanque fecha peso}}`;
     return this.http.post(`${this.homeURL}`, {query});
@@ -56,6 +57,7 @@ export class DatabaseService {
       fechaEsperadaRetorno
       lugar {lnombre}
       peso
+      pesoActual
       idEtiqueta {
         idEtiqueta
       }
@@ -151,5 +153,12 @@ export class DatabaseService {
     return `${y}-${m < 10 ? '0' : ''}${m}-${d < 10 ? '0' : ''}${d}`;
   }
 
+  createUser(user: User) {
+    const query = `
+    mutation($user: UsuarioInput!) {
+      createUsuario(usuarioInput: $user)
+    }`;
+    return this.http.post(this.homeURL, {query, variables: {user}});
+  }
 }
 

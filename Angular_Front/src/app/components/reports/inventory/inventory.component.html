@@ -1,5 +1,5 @@
 <h3 class="ui header">Inventario de Tanques</h3>
- 
+
 <table class="ui table">
    <thead>
      <tr class="ui table header">
@@ -22,7 +22,7 @@
        <td>{{tank.fechaIngreso | date}}</td>
        <td>{{tank.fechaEsperadaRetorno | date}}</td>
        <td>{{tank.lugar ? tank.lugar.lnombre : '-'}}</td>
-       <td>{{tank.peso}}</td>
+       <td>{{tank.pesoActual}}</td>
        <td>{{tank.idEtiqueta.idEtiqueta ? tank.idEtiqueta.idEtiqueta : '#'}}</td>
        <td>{{tank.observaciones}}</td>
      </tr>
