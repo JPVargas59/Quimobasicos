@@ -1,16 +1,18 @@
-<h3 class="ui title">Registrar Nuevo Tanque</h3>
+<h3 class="ui title" *ngIf="id">Actualizar tanque {{id}}</h3>
+<h3 class="ui title" *ngIf="!id">Registrar Nuevo Tanque</h3>
+
 <br>
 <div class="ui error message" *ngIf="error">
   <div class="header">{{error}}</div>
 </div>
-<form class="ui form" #tanqueForm>
+<form class="ui form" #tanqueForm *ngIf="this.tanque">
     <h4 class="ui dividing header">Información del Tanque</h4>
     <div class="two fields">
       <div class="field">
         <label>ID</label>
         <div class="field">
           <div class="field">
-            <input type="text" name="id" required [(ngModel)]="tanque.id" placeholder="CA###">
+            <input [class.ui]="id" [class.disabled]="id" [class.input]="id" [readOnly]="id" type="text" name="id" required [(ngModel)]="tanque.id" placeholder="CA###">
           </div>
         </div>
       </div>
@@ -33,7 +35,7 @@
       <div class="field">
         <label>Contenido (Litros)</label>
         <div class="ui input">
-          <input type="text" placeholder="10,000" name="cantidad" required [(ngModel)]="tanque.pesoActual">
+          <input type="number" placeholder="10,000" name="cantidad" required [(ngModel)]="tanque.pesoActual">
         </div>
       </div>
     </div>
@@ -75,6 +77,16 @@
       </div>
   </div>
 
+  <div *ngIf="id" class="ui submit blue fluid button" (click)="onResgisterTank()">Actualizar info</div>
 
-    <div class="ui submit button" (click)="onResgisterTank(tanqueForm)">Registrar</div>
+
+  <div *ngIf="!id">
+    <div class="inline field">
+      <label for="redirigir">No redirigir al crear nuevo tanque</label>
+      <input id="redirigir" type="checkbox" tabindex="0" name="redirigir" [(ngModel)]="redirigir">
+    </div>
+    <br>
+    <div class="ui submit green fluid button" (click)="onResgisterTank()">Registrar</div>
+  </div>
+
   </form>

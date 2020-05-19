@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class UserService {
 
-  type: string;
+  type = 'admin';
 
   constructor() { }
 

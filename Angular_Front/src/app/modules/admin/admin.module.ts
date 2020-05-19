@@ -36,11 +36,11 @@ const routes: Routes = [
       { path: 'locations', component: LocationsComponent},
       { path: 'locations/add-location', component: AddLocationComponent},
       { path: 'locations/update-location', component: UpdateLocationComponent},
-      
+
       { path: 'reports/inventory', component: InventoryComponent },
       { path: 'tanks/add', component: AddTankComponent },
       { path: 'tank/:id', component: TankComponent },
-      { path: 'tank/:id/update', component: UpdateTankComponent },
+      { path: 'tank/:id/update', component: AddTankComponent },
       { path: 'tank/:id/exit', component: ExitTankComponent },
       { path: 'reports', component: ReportsComponent },
       { path: 'reports/see-report/:reportName', component: SeeReportComponent },

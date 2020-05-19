@@ -19,23 +19,62 @@ export class DatabaseService {
 
   getTank(idTanque) {
     const query = `{tanque(idTanque:"${idTanque}"){ contenidoTanque {contenido} dueno {nombre} calidad estadoValvula peso fechaIngreso fechaEsperadaRetorno observaciones}}`;
-    return this.http.post(`${this.homeURL}`,{query});
+    return this.http.post(`${this.homeURL}`, {query});
   }
 
-  getTankWeight(idTanque){
-    const query = `{ historialPesoTanque (idTanque:"${idTanque}") { idTanque fecha peso}}`
-    return this.http.post(`${this.homeURL}`,{query});
+  getTankWeight(idTanque) {
+    const query = `{ historialPesoTanque (idTanque:"${idTanque}") { idTanque fecha peso}}`;
+    return this.http.post(`${this.homeURL}`, {query});
   }
 
-  getTankLocations(idTanque){
+  getTankLocations(idTanque) {
     // CORREGIR QUERIE
-    const query = `{ historialPesoTanque (idTanque:"${idTanque}") { idTanque fecha peso}}`
-    return this.http.post(`${this.homeURL}`,{query});
+    const query = `{ historialPesoTanque (idTanque:"${idTanque}") { idTanque fecha peso}}`;
+    return this.http.post(`${this.homeURL}`, {query});
   }
 
   getTanks() {
-    const json = '{tanques {idTanque contenidoTanque {contenido} fechaIngreso  fechaEsperadaRetorno  lugar {lnombre} peso  idEtiqueta{idEtiqueta}  observaciones}}';
+    const json = `{
+    tanques {
+      idTanque
+      contenidoTanque {
+        contenido
+      }
+      fechaIngreso
+      fechaEsperadaRetorno
+      lugar {lnombre}
+      peso
+      idEtiqueta {
+        idEtiqueta
+      }
+      observaciones
+      }
+    }`;
     return this.http.get(`${this.homeURL}?query=${json}`);
+  }
+
+  getFullTank(id) {
+    const query = `{
+      tanque(idTanque: "${id}") {
+      id: idTanque
+      etiqueta: idEtiqueta {
+        id: idEtiqueta
+      }
+      dueno {
+        id: idDueno
+      }
+      fechaEsperadaRetorno
+      fechaIngreso
+      observaciones
+      peso
+      pesoActual
+      contenido: contenidoTanque {
+        id: idContenido
+      }
+      calidad
+    }
+  }`;
+    return this.http.post(`${this.homeURL}`, {query});
   }
 
   getContenidos() {
@@ -57,6 +96,23 @@ export class DatabaseService {
     const query = 'mutation($tank: TanqueInput!) {createTanque(tanqueInput: $tank)}';
     console.log({query, variables: {tank}});
     return this.http.post(this.homeURL, {query, variables: {tank}});
+  }
+
+  updateTank(tank: Tanque) {
+    const query = `
+    mutation($tanque: TanqueInput!, $id: String!) {
+      setTanque(tanqueInput: $tanque, idTanqueOriginal: $id)
+    }
+    `;
+    return this.http.post(this.homeURL, {query, variables: {tank, id: tank.id}});
+  }
+
+  dateToStringFormat(dateString: string) {
+    const date = new Date(dateString);
+    const d = date.getDate();
+    const m = date.getMonth() + 1;
+    const y = date.getFullYear();
+    return `${y}-${m < 10 ? '0' : ''}${m}-${d < 10 ? '0' : ''}${d}`;
   }
 }
 

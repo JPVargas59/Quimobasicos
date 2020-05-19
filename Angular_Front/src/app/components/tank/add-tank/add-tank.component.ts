@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DatabaseService } from 'src/app/services/database.service';
 import { UserService } from 'src/app/services/user.service';
-import { Router } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Tanque} from '../../../models/Tanque';
 import {FormGroup} from '@angular/forms';
 
@@ -17,14 +17,45 @@ export class AddTankComponent implements OnInit {
   etiquetas: any;
   tanque: Tanque;
   error: string;
+  id: string;
+  redirigir = false;
 
   constructor(
     private user: UserService,
     private db: DatabaseService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
+
+    this.id = this.route.snapshot.params.id;
+    if (this.id) {
+      this.db.getFullTank(this.id).subscribe(result => {
+        const res = result as any;
+        const tanque = res.data.tanque;
+        this.tanque = tanque;
+        this.tanque.idDueno = tanque.dueno.id;
+        this.tanque.idEtiqueta = tanque.etiqueta.id;
+        this.tanque.idContenido = tanque.contenido.id;
+        this.tanque.fechaEsperadaRetorno = this.db.dateToStringFormat(tanque.fechaEsperadaRetorno);
+        this.tanque.fechaIngreso = this.db.dateToStringFormat(tanque.fechaIngreso);
+        console.log(this.tanque);
+      });
+    } else {
+      this.tanque =  {
+        id: undefined,
+        calidad: undefined,
+        pesoActual: undefined,
+        idContenido: undefined,
+        idDueno: undefined,
+        fechaIngreso: undefined,
+        fechaEsperadaRetorno: undefined,
+        idEtiqueta: undefined,
+        peso: undefined
+      };
+    }
+
     this.db.getContenidos().subscribe(result => {
       const contenidos = result as any;
       this.contenidos = contenidos.data.contenidos;
@@ -42,43 +73,31 @@ export class AddTankComponent implements OnInit {
       this.etiquetas = etiquetas.data.etiquetas;
     });
 
-    /*this.tanque =  {
-      calidad: undefined,
-      cantidad: undefined,
-      contenido: undefined,
-      dueno: undefined,
-      etiqueta: undefined,
-      fechaIngreso: undefined,
-      fechaSalida: undefined,
-      id: undefined,
-      peso: undefined
-    };*/
-
-    this.tanque =  {
-      id: 'EURO514966',
-      calidad: 'buena',
-      pesoActual: 10,
-      idContenido: 'G-134A',
-      idDueno: 'ARL',
-      fechaIngreso: '2020-02-02T10:00:00.000Z',
-      fechaEsperadaRetorno: '2020-02-02T10:00:00.000Z',
-      idEtiqueta: 1,
-      peso: 100
-    };
   }
 
-  onResgisterTank(form: HTMLFormElement) {
+  onResgisterTank() {
     //  TODDO: POST de esta info
-    this.db.newTank(this.tanque).subscribe((result) => {
-      console.log(result);
-    });
-    if (form.valid) {
-
-      // const userType = this.user.getType();
-      // this.router.navigateByUrl(`/${userType}/reports/inventory`);
+    const { id, calidad, pesoActual, idContenido, idDueno, fechaIngreso, fechaEsperadaRetorno, idEtiqueta, peso } = this.tanque;
+    console.log(this.tanque);
+    if (id && calidad && peso && idContenido && idDueno && fechaEsperadaRetorno && fechaIngreso && idEtiqueta && pesoActual) {
+      this.tanque.fechaIngreso = new Date(fechaIngreso).toISOString();
+      this.tanque.fechaEsperadaRetorno = new Date(fechaEsperadaRetorno).toISOString();
+      this.tanque.idEtiqueta = parseInt(idEtiqueta, 10);
+      if (this.id) {
+        this.db.updateTank(this.tanque).subscribe((result) => {
+          console.log(result);
+        });
+      } else {
+        this.db.newTank(this.tanque).subscribe((result) => {
+          console.log(result);
+          if (!this.redirigir) {
+            const userType = this.user.getType();
+            this.router.navigateByUrl(`/${userType}/reports/inventory`);
+          }
+        });
+      }
     } else {
       this.error = 'Por favor llena todos los datos del tanque';
     }
   }
-
 }
