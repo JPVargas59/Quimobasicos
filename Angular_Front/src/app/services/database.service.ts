@@ -17,14 +17,25 @@ export class DatabaseService {
 
   }
 
-  getTanks() {
+  getTank(idTanque) {
+    const query = `{tanque(idTanque:"${idTanque}"){ contenidoTanque {contenido} dueno {nombre} calidad estadoValvula peso fechaIngreso fechaEsperadaRetorno observaciones}}`;
+    return this.http.post(`${this.homeURL}`,{query});
+  }
 
-    const query = '{tanques {idTanque idEtiqueta{idEtiqueta} fechaEsperadaRetorno peso contenidoTanque {contenido} lugar {lnombre}}}';
-    return this.http.post(`${this.homeURL}`, query, {
-      headers: {
-        'Content-Type': 'application/graphql'
-      }
-    });
+  getTankWeight(idTanque){
+    const query = `{ historialPesoTanque (idTanque:"${idTanque}") { idTanque fecha peso}}`
+    return this.http.post(`${this.homeURL}`,{query});
+  }
+
+  getTankLocations(idTanque){
+    // CORREGIR QUERIE
+    const query = `{ historialPesoTanque (idTanque:"${idTanque}") { idTanque fecha peso}}`
+    return this.http.post(`${this.homeURL}`,{query});
+  }
+
+  getTanks() {
+    const json = '{tanques {idTanque contenidoTanque {contenido} fechaIngreso  fechaEsperadaRetorno  lugar {lnombre} peso  idEtiqueta{idEtiqueta}  observaciones}}';
+    return this.http.get(`${this.homeURL}?query=${json}`);
   }
 
   getContenidos() {

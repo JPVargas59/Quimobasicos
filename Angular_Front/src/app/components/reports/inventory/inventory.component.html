@@ -5,10 +5,12 @@
      <tr class="ui table header">
        <th>ID</th>
        <th>Contenido</th>
+       <th>Fecha de Ingreso</th>
        <th>Fecha de Retorno</th>
-       <th>Última Ubicaicón</th>
+       <th>Última Ubicación</th>
        <th>Peso Actual</th>
        <th>ID Etiqueta RFID</th>
+       <th>Observaciones</th>
      </tr>
    </thead>
    <tbody>
@@ -16,11 +18,13 @@
        <td>
          <a (click)="onTankSelection($event)" [id]="tank.idTanque">{{tank.idTanque}}</a>
        </td>
-       <td>{{tank.contenidoTanque.contenido}}</td>
-       <td>{{tank.fechaEsperadaRetorno}}</td>
-       <td>{{tank.lugar.lnombre}}</td>
+       <td>{{tank.contenidoTanque.contenido ? tank.contenidoTanque.contenido : 'Indefinido'}}</td>
+       <td>{{tank.fechaIngreso | date}}</td>
+       <td>{{tank.fechaEsperadaRetorno | date}}</td>
+       <td>{{tank.lugar ? tank.lugar.lnombre : '-'}}</td>
        <td>{{tank.peso}}</td>
-       <td>{{tank.idEtiqueta.idEtiqueta}}</td>
+       <td>{{tank.idEtiqueta.idEtiqueta ? tank.idEtiqueta.idEtiqueta : '#'}}</td>
+       <td>{{tank.observaciones}}</td>
      </tr>
    </tbody>
  </table>

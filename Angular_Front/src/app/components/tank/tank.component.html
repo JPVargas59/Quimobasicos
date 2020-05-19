@@ -9,39 +9,60 @@
     <th>Calidad</th>
     <th>Estado Valvula</th>
     <th>Peso Actual</th>
+    <th>Fecha Ingreso</th>
     <th>Fecha Esperada Retorno</th>
+    <th>Observaciones</th>
   </thead>
   <tbody>
-    <!-- TODO: peticion de graphql
-    <tr *ngFor="let tank of tanks">
-      <td>{{tank.idTanque}}</td>
-      <td>{{tank.contenido}}</td>
-      <td>{{tank.dueno}}</td>
-      <td>{{tank.calidad}}</td>
-      <td>{{tank.estadoValvula}}</td>
-      <td>{{tank.pesoActual}}</td>
-      <td>{{tank.fechaEsperadaRetorno}}</td>
-    </tr>  -->
+    <tr>
+      <td>{{tank}}</td>
+      <td>{{tankInfo.contenidoTanque.contenido ? tankInfo.contenidoTanque.contenido : '-'}}</td>
+      <td>{{tankInfo.dueno.nombre}}</td>
+      <td>{{tankInfo.calidad}}</td>
+      <td>{{tankInfo.estadoValvula}}</td>
+      <td>{{tankInfo.peso}}</td>
+      <td>{{tankInfo.fechaIngreso | date}}</td>
+      <td>{{tankInfo.fechaEsperadaRetorno | date}}</td>
+      <td>{{tankInfo.observaciones}}</td>
+    </tr> 
   </tbody>
 </table>
+<br>
 <!-- Información por decir de historial del tanque -->
-<table class="ui celled structured table">
-  <thead>
-    <th>Fecha</th>
-    <th>Lugar</th>
-    <th>Peso</th>
-    <th>Operado por</th>
-  </thead>
-  <tbody>
-    <!-- TODO: peticion de graphql -->
-    <!-- <tr *ngFor="let historial of historial">
-      <td>{{historial.fecha}}</td>
-      <td>{{historial.lugar}}</td>
-      <td>{{historial.peso}}</td>
-      <td>{{historial.operador}}</td>
-    </tr> -->
-  </tbody>
-</table>
+<div class="ui two column stackable center aligned grid">
+  <div class="column">
+    <h4 class="ui header">Historial de Peso</h4>
+    <table class="column ui celled structured table">
+      <thead>
+        <th>Fecha</th>
+        <th>Peso</th>
+      </thead>
+      <tbody>
+        <!-- TODO: peticion de graphql Revisar cuando se actualice el servidor -->
+        <tr *ngFor="let value of tankWeight">
+          <td>{{value.fecha}}</td>
+          <td>{{value.peso}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="column">
+    <h4 class="ui header">Historial de Ubicaciones</h4>
+    <table class="column ui celled structured table">
+      <thead>
+        <th>Fecha</th>
+        <th>Lugar</th>
+      </thead>
+      <tbody>
+        <!-- TODO: peticion de graphql -->
+        <tr *ngFor="let location of locations">
+          <td>{{location.fecha}}</td>
+          <td>{{location.lugar}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
 <div class="ui segment center aligned">
   <div class="inline">
