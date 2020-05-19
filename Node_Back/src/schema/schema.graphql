@@ -141,6 +141,8 @@ input TanqueInput {
 	idEtiqueta: Int
 	idContenido: String
 	idDueno: String
+	observaciones : String
+	fechaIngreso : Date
 }
 
 "Input para crear o actualizar un lugar"
