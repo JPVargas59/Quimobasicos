@@ -33,14 +33,15 @@ const routes: Routes = [
       { path: 'users', component: UsersComponent },
       { path: 'users/add', component: AddUserComponent },
       { path: 'user/:id', component: UserComponent },
+      { path: 'user/:id/edit', component: AddUserComponent },
       { path: 'locations', component: LocationsComponent},
       { path: 'locations/add-location', component: AddLocationComponent},
       { path: 'locations/update-location', component: UpdateLocationComponent},
-      
+
       { path: 'reports/inventory', component: InventoryComponent },
       { path: 'tanks/add', component: AddTankComponent },
       { path: 'tank/:id', component: TankComponent },
-      { path: 'tank/:id/update', component: UpdateTankComponent },
+      { path: 'tank/:id/edit', component: AddTankComponent },
       { path: 'tank/:id/exit', component: ExitTankComponent },
       { path: 'reports', component: ReportsComponent },
       { path: 'reports/see-report/:reportName', component: SeeReportComponent },
@@ -48,9 +49,9 @@ const routes: Routes = [
       { path: 'contents', component: ContentsComponent },
       { path: 'contents/edit/:contentId', component: EditContentComponent },
       { path: 'owners', component: OwnersComponent },
-      { path: 'owners/edit/:ownerId', component: EditOwnerComponent },
+      { path: 'owners/:ownerId/edit', component: EditOwnerComponent },
       { path: 'rfid-tags', component: RfidTagsComponent },
-      { path: 'rfid-tags/edit', component: EditTagComponent },
+      { path: 'rfid-tags/:tagId/edit', component: EditTagComponent },
     ]
   }
 ];

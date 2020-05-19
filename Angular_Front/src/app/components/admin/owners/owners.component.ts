@@ -23,7 +23,7 @@ export class OwnersComponent implements OnInit {
   }
   onOwnerSelect(event) {
     const id = event.target.id;
-    this.router.navigateByUrl(`/admin/owners/edit/${id}`);
+    this.router.navigateByUrl(`/admin/owners/${id}/edit`);
   }
 
 }

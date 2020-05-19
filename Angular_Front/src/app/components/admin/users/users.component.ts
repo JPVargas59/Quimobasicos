@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DatabaseService } from 'src/app/services/database.service';
 
 @Component({
   selector: 'app-users',
@@ -8,16 +9,17 @@ import { Component, OnInit } from '@angular/core';
 
 export class UsersComponent implements OnInit {
 
-  users = [
-    {nombre: 'Raúl Castellanos', correo: 'raul@quimobasicos.com', telefono: 1234567891},
-    {nombre: 'Juan Pablo Vargas', correo: 'jp@quimobasicos.com', telefono: 1234567891},
-    {nombre: 'Alejandro Hernández', correo: 'alex@quimobasicos.com', telefono: 1234567891},
-    {nombre: 'David Luna', correo: 'david@quimobasicos.com', telefono: 1234567891},
-    {nombre: 'Luis Alberto Pérez', correo: 'luis@quimobasicos.com', telefono: 1234567891}
-  ];
+  users: any;
 
-  constructor() { }
+  constructor(
+    private db: DatabaseService
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.db.getUsuarios().subscribe(result =>{
+      const users = result as any;
+      this.users = users.data.usuarios;
+    })
+  }
 
 }

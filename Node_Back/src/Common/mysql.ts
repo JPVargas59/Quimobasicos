@@ -123,7 +123,7 @@ exports.getLugar = async (client, idLugar) => {
 
 exports.getUsuarios = async (client) => {
 	var usuarios = await client.query(`
-    SELECT fName as nombre, lName as apellidos, idUsuario, genero, correo  FROM Usuario
+    SELECT fName as nombre, lName as apellidos, idUsuario, correo, idSupervisor, puesto  FROM Usuario
     `);
 	if (usuarios.length == 0) {
 		return null;
@@ -134,11 +134,11 @@ exports.getUsuarios = async (client) => {
 exports.getUsuario = async (client, idUsuario) => {
 	var usuario = await client.query(
 		`
-    SELECT fName as nombre, lName as apellidos, idUsuario, genero, correo  FROM Usuario
+    SELECT fName as nombre, lName as apellidos, idUsuario, correo , idSupervisor, puesto FROM Usuario
     WHERE idUsuario = ?`,
 		idUsuario
 	);
-	console.log("HOLAA",usuario);
+	console.log('HOLAA', usuario);
 	if (usuario.length == 0) {
 		return null;
 	}
@@ -233,7 +233,7 @@ exports.getHistorialPesoTanque = async (client, idTanque) => {
 	if (historialPeso.length == 0) {
 		return null;
 	}
-	return historialPeso[0];
+	return historialPeso;
 };
 
 exports.getHistorialUbicacionTanques = async (client) => {
@@ -259,20 +259,6 @@ exports.getOperacionesDelTanque = async (client, idTanque) => {
 	return operaciones;
 };
 
-exports.getUsuarioOperador = async (client, idOperador) => {
-	var operador = await client.query(
-		`
-    SELECT fName as nombre, lName as apellidos, idUsuario, genero, correo FROM Usuario JOIN Operador ON Operador.operadorId = Usuario.idUsuario WHERE Usuario.idUsuario = ?
-    `,
-		idOperador
-	);
-	if (operador.length == 0) {
-		return null;
-	}
-
-	return operador[0];
-};
-
 exports.getMantenimientoTanque = async (client, idTanque) => {
 	var mantenimientos = await client.query(
 		`
@@ -296,11 +282,14 @@ exports.getHistorialMantenimimientosTanques = async (client) => {
 	return mantenimientos;
 };
 exports.getOperacionesTanque = async (client, idTanque) => {
-	var operaciones = await client.query(`
+	var operaciones = await client.query(
+		`
     SELECT idTanque, idUsuario, fecha FROM OperadoPor WHERE idTanque = ?
-	`, idTanque);
-	
-	if (operaciones.length == 0 ) {
+	`,
+		idTanque
+	);
+
+	if (operaciones.length == 0) {
 		return null;
 	}
 	return operaciones;
@@ -309,17 +298,9 @@ exports.getOperacionesTanques = async (client) => {
 	var operaciones = await client.query(`
     SELECT idTanque, idUsuario, fecha FROM OperadoPor
 	`);
-	
-	if (operaciones.length == 0 ) {
+
+	if (operaciones.length == 0) {
 		return null;
 	}
 	return operaciones;
-}
-exports.getOperadores = async (client) => {
-	var operadores = await client.query(`
-	SELECT fName as nombre, lName as apellidos, idUsuario, genero, correo, idSupervisor FROM Usuario LEFT JOIN Operador ON Operador.operadorId = Usuario.idUsuario    `);
-	if (operadores.length == 0) {
-		return null;
-	}
-	return operadores;
-}
+};

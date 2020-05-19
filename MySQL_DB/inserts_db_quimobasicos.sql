@@ -116,42 +116,36 @@ INSERT INTO Usuario VALUES (
     'Alejandro',
     'Hernandez Lopez',
     '4272e0482200e205890367fe6603b0159a5a2c11ff7607cbbc9dd219da41035e',
-    1,
-    'alexhdz@quimobasicos.com'
+    'alexhdz@quimobasicos.com',
+    null,
+    'Admin'
 );
 INSERT INTO Usuario VALUES (
     'OP000002',
     'Juan Pablo',
     'Vargas Rodriguez',
     'fef2d481e8454c1dc62e65ccd139153506c4c92ac44a4adefe736e07da6a1e73',
-    1,
-    'juanpablo.vr@quimobasicos.com'
+    'juanpablo.vr@quimobasicos.com',
+    null,
+    'Admin'
 );
 INSERT INTO Usuario VALUES (
     'OP000003',
     'Diana',
     'Loredo de Leon',
     'bde4fddbaed98a68fdb45670ba8917344605e490fa59c280091eb1307ac5b3c9',
-    2,
-    'diana.loredo@quimobasicos.com'
+    'diana.loredo@quimobasicos.com',
+    'OP000002',
+    'Supervisor'
 );
 INSERT INTO Usuario VALUES (
     'OP000004',
     'Yulisa',
     'Medina',
     '76549b827ec46e705fd03831813fa52172338f0dfcbd711ed44b81a96dac51c6',
-    2,
-    'yulisa.medina@quimobasicos.com'
-);
-
-INSERT INTO Operador VALUES (
-    'OP000002', 'OP000003'
-);
-INSERT INTO Operador VALUES (
-    'OP000001', 'OP000003'
-);
-INSERT INTO Operador VALUES (
-    'OP000004', 'OP000002'
+    'yulisa.medina@quimobasicos.com',
+    'OP000003',
+    'Operador'
 );
 
 INSERT INTO OperadoPor VALUES (

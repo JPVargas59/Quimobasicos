@@ -3,22 +3,24 @@
 <table class="ui table">
   <thead>
     <tr class="ui table header">
+      <th>ID Usuario</th>
       <th>Nombre</th>
+      <th>Apellido</th>
       <th>Correo</th>
-      <th>Telefono</th>
-      <th>Acciones</th>
+      <th>Acción</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let user of users">
       <td>
-        <a routerLink="/admin/user/{{user.nombre}}">
-          {{user.nombre}}
+        <a routerLink="/admin/user/{{user.nombre}}/edit">
+          {{user.idUsuario}}
         </a>
       </td>
+      <td>{{user.nombre}}</td>
+      <td>{{user.apellidos}}</td>
       <td>{{user.correo}}</td>
-      <td>{{user.telefono}}</td>
-      <td><button class="ui fluid red button">Eliminar</button></td>
+      <td><button class="ui fluid primary button" routerLink="/admin/user/{{user.nombre}}/edit">Editar</button></td>
     </tr>
   </tbody>
 </table>

@@ -23,6 +23,6 @@ export class RfidTagsComponent implements OnInit {
 
   onTagSelect(event){
     const id = event.target.id;
-    this.router.navigateByUrl(`/admin/rfid-tags/edit/${id}`);
+    this.router.navigateByUrl(`/admin/rfid-tags/${id}/edit`);
   }
 }

@@ -76,17 +76,11 @@ CREATE TABLE Usuario (
 	fName VARCHAR(64),
 	lName VARCHAR(64),
 	contrasena VARCHAR(128),
-	genero TINYINT UNSIGNED,
 	correo VARCHAR(128),
+    idSupervisor CHAR(10),
+    puesto ENUM('Admin', 'Supervisor', 'Operador'),
+    FOREIGN KEY (idSupervisor) REFERENCES Usuario(idUsuario) ON UPDATE CASCADE,
 	PRIMARY KEY (idUsuario)
-);
-
-CREATE TABLE Operador (
-    operadorId CHAR(10),
-	idSupervisor CHAR(10),
-    PRIMARY KEY (operadorId), 
-    FOREIGN KEY (operadorId) REFERENCES Usuario(idUsuario) ON UPDATE CASCADE,
-	FOREIGN KEY (idSupervisor) REFERENCES Usuario(idUsuario) ON UPDATE CASCADE
 );
 
 CREATE TABLE TanqueEsta (
