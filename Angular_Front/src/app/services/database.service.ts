@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {Tanque} from '../models/Tanque';
+import {User} from '../models/User';
 
 @Injectable({
   providedIn: 'root'
