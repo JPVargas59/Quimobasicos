@@ -15,7 +15,6 @@ export class DatabaseService {
   ) { }
 
   getTanks() {
-    
     const json = '{tanques {idTanque idEtiqueta{idEtiqueta} fechaEsperadaRetorno peso contenidoTanque {contenido} lugar {lnombre}}}';
     return this.http.get(`${this.homeURL}?query=${json}`);
   }
@@ -34,4 +33,15 @@ export class DatabaseService {
     const json = '{etiquetas {idEtiqueta}}'
     return this.http.get(`${this.homeURL}?query=${json}`);
   }
+
+  getLugares(){
+    const json = '{lugares{idLugar, lnombre, radio, capacidadMaxima}}'
+    return this.http.get(`${this.homeURL}?query=${json}`);
+  }
+
+  // postEtiqueta(){
+  //   const json = '{createEtiqueta(etiquetaInput:{id:15})}';
+  //   return this.http.post(`${this.homeURL}?query=${json}`);
+  // }
+
 }

@@ -50,7 +50,7 @@ const routes: Routes = [
       { path: 'owners', component: OwnersComponent },
       { path: 'owners/edit/:ownerId', component: EditOwnerComponent },
       { path: 'rfid-tags', component: RfidTagsComponent },
-      { path: 'rfid-tags/edit/:tagId', component: EditTagComponent },
+      { path: 'rfid-tags/edit', component: EditTagComponent },
     ]
   }
 ];

@@ -1,5 +1,69 @@
-<h3 class="ui title">Editar Lugares</h3>
-<p></p>
-<p></p>
-<div class="ui primary button" routerLink="/admin/locations">Guardar Cambios</div>
+<!-- <h3 class="ui title">Modificar un lugar</h3> -->
+
+<form class="ui form">
+    <h4 class="ui dividing header">Información del lugar</h4>
+
+    <div class="two fields">
+        
+        <div class="required field">
+            <label>Nombre</label>
+            <div class="field">
+              <input type="text" name="name">
+            </div>
+        </div>
+        
+        <div class="required field">
+          <label>ID</label>
+          <div class="field">
+            <input type="text" name="ID">
+          </div>
+        </div>
+  
+    </div>
+
+    <div class="two fields">
+        
+        <div class="required field">
+            <label>Radio</label>
+            <div class="field">
+              <input type="text" name="radio">
+            </div>
+        </div>
+        
+        <div class="required field">
+          <label>Capacidad</label>
+          <div class="field">
+            <input type="text" name="capacity">
+          </div>
+        </div>
+  
+    </div>
+
+
+    <h4 class="ui dividing header">Coordenadas del lugar</h4>
+    <div class="two fields">
+        <div class="two fields">
+            <div class="required field">
+                <label>X</label>
+                <div class="field">
+                  <input type="text" name="x">
+                </div>
+            </div>
+            
+            <div class="required field">
+              <label>Y</label>
+              <div class="field">
+                <input type="text" name="y">
+              </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="ui error message">
+      <div class="header">We noticed some issues</div>
+    </div>
+
+    <div class="ui submit button" routerLink="/admin/locations">Actualizar información</div>
+  </form>
 
