@@ -100,8 +100,8 @@ export class DatabaseService {
 
   updateTank(tank: Tanque) {
     const query = `
-    mutation($tanque: TanqueInput!, $id: String!) {
-      setTanque(tanqueInput: $tanque, idTanqueOriginal: $id)
+    mutation($tank: TanqueInput!, $id: String!) {
+      setTanque(tanqueInput: $tank, idTanqueOriginal: $id)
     }
     `;
     return this.http.post(this.homeURL, {query, variables: {tank, id: tank.id}});

@@ -34,12 +34,17 @@ export class AddTankComponent implements OnInit {
       this.db.getFullTank(this.id).subscribe(result => {
         const res = result as any;
         const tanque = res.data.tanque;
-        this.tanque = tanque;
-        this.tanque.idDueno = tanque.dueno.id;
-        this.tanque.idEtiqueta = tanque.etiqueta.id;
-        this.tanque.idContenido = tanque.contenido.id;
-        this.tanque.fechaEsperadaRetorno = this.db.dateToStringFormat(tanque.fechaEsperadaRetorno);
-        this.tanque.fechaIngreso = this.db.dateToStringFormat(tanque.fechaIngreso);
+        this.tanque =  {
+          id: tanque.id,
+          calidad: tanque.calidad,
+          pesoActual: tanque.pesoActual,
+          idContenido: tanque.contenido.id,
+          idDueno: tanque.dueno.id,
+          fechaIngreso: this.db.dateToStringFormat(tanque.fechaIngreso),
+          fechaEsperadaRetorno: this.db.dateToStringFormat(tanque.fechaEsperadaRetorno),
+          idEtiqueta: tanque.etiqueta.id,
+          peso: tanque.peso
+        };
         console.log(this.tanque);
       });
     } else {
@@ -86,6 +91,8 @@ export class AddTankComponent implements OnInit {
       if (this.id) {
         this.db.updateTank(this.tanque).subscribe((result) => {
           console.log(result);
+          const userType = this.user.getType();
+          this.router.navigateByUrl(`/${userType}/tank/${this.id}`);
         });
       } else {
         this.db.newTank(this.tanque).subscribe((result) => {
