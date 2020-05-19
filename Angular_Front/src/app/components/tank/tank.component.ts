@@ -26,7 +26,7 @@ export class TankComponent implements OnInit {
   ) {
     this.tank = route.snapshot.params.id;
     const userType = this.user.getType();
-    this.updateAddress  = '/'+ userType +'/tank/' + this.tank + '/update';
+    this.updateAddress  = '/'+ userType +'/tank/' + this.tank + '/edit';
     this.exitAddress = '/'+ userType +'/tank/' + this.tank + '/exit';
   }
 

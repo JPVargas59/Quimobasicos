@@ -18,7 +18,17 @@ export class DatabaseService {
   }
 
   getTank(idTanque) {
-    const query = `{tanque(idTanque:"${idTanque}"){ contenidoTanque {contenido} dueno {nombre} calidad estadoValvula peso fechaIngreso fechaEsperadaRetorno observaciones}}`;
+    const query = `{
+      tanque(idTanque:"${idTanque}"){ 
+      contenidoTanque {contenido} 
+      dueno {nombre} 
+      calidad 
+      estadoValvula 
+      peso 
+      fechaIngreso 
+      fechaEsperadaRetorno 
+      observaciones}
+    }`;
     return this.http.post(`${this.homeURL}`, {query});
   }
 
@@ -29,7 +39,9 @@ export class DatabaseService {
 
   getTankLocations(idTanque) {
     // CORREGIR QUERIE
-    const query = `{ historialPesoTanque (idTanque:"${idTanque}") { idTanque fecha peso}}`;
+    const query = `{ 
+      historialPesoTanque (idTanque:"${idTanque}") {
+         idTanque fecha peso}}`;
     return this.http.post(`${this.homeURL}`, {query});
   }
 
@@ -85,6 +97,18 @@ export class DatabaseService {
   getDuenos() {
     const json = '{owners {idDueno nombre}}';
     return this.http.get(`${this.homeURL}?query=${json}`);
+  }
+
+  getUsuarios() {
+    const query = `{
+      usuarios{
+        idUsuario
+        nombre
+        apellidos
+        correo
+      }
+    }`;
+    return this.http.post(`${this.homeURL}`, {query});
   }
 
   getEtiquetas() {
