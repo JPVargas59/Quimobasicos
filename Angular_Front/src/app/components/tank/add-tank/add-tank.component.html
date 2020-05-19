@@ -1,36 +1,39 @@
 <h3 class="ui title">Registrar Nuevo Tanque</h3>
 <br>
-<form class="ui form">
+<div class="ui error message" *ngIf="error">
+  <div class="header">{{error}}</div>
+</div>
+<form class="ui form" #tanqueForm>
     <h4 class="ui dividing header">Información del Tanque</h4>
     <div class="two fields">
       <div class="field">
         <label>ID</label>
         <div class="field">
           <div class="field">
-            <input type="text" name="first-name" placeholder="CA###">
+            <input type="text" name="id" required [(ngModel)]="tanque.id" placeholder="CA###">
           </div>
-        </div>        
+        </div>
       </div>
       <div class="field">
         <label>Contenido</label>
-        <select class="ui search dropdown">
+        <select class="ui search dropdown" name="contenido" required [(ngModel)]="tanque.idContenido">
             <option value="">Contenido...</option>
-            <option *ngFor="let valor of contenidos" value="{{valor.contenido}}">{{valor.contenido}}</option>
+            <option *ngFor="let valor of contenidos" value="{{valor.idContenido}}">{{valor.contenido}}</option>
         </select>
       </div>
     </div>
     <div class="two fields">
       <div class="field">
         <label>Dueño del Tanque</label>
-        <select class="ui search dropdown">
+        <select class="ui search dropdown" name="dueno" required [(ngModel)]="tanque.idDueno">
           <option value="">Dueño...</option>
-          <option *ngFor="let valor of duenos" value="{{valor.nombre}}">{{valor.nombre}}</option>
+          <option *ngFor="let valor of duenos" value="{{valor.idDueno}}">{{valor.nombre}}</option>
         </select>
       </div>
       <div class="field">
         <label>Contendio (Litros)</label>
         <div class="ui input">
-          <input type="text" placeholder="10,000">
+          <input type="text" placeholder="10,000" name="cantidad" required [(ngModel)]="tanque.pesoActual">
         </div>
       </div>
     </div>
@@ -38,15 +41,21 @@
     <h4 class="ui dividing header">Información de Ingreso</h4>
     <div class="two fields">
         <div class="field">
-            <label>Fecha esperada de retorno</label>
+            <label>Fecha de ingreso</label>
             <div class="ui input">
-                <input type="date">
+                <input type="date" name="fechaIngreso" required [(ngModel)]="tanque.fechaIngreso">
             </div>
         </div>
+      <div class="field">
+        <label>Fecha esperada de retorno</label>
+        <div class="ui input">
+          <input type="date" name="fechaRegreso" required [(ngModel)]="tanque.fechaEsperadaRetorno">
+        </div>
+      </div>
         <div class="field">
             <label>Calidad</label>
             <div class="ui input">
-                <input type="text" placeholder="buena, mala...">
+                <input type="text" placeholder="buena, mala..." name="calidad" required [(ngModel)]="tanque.calidad">
             </div>
         </div>
     </div>
@@ -54,20 +63,18 @@
       <div class="field">
           <label>Peso</label>
           <div class="ui input">
-              <input type="number">
+              <input type="number" name="peso" required [(ngModel)]="tanque.peso">
           </div>
       </div>
       <div class="field">
           <label>Etiqueta de RFID Asignada</label>
-          <select class="ui search dropdown">
+          <select class="ui search dropdown" name="etiqueta" required [(ngModel)]="tanque.idEtiqueta">
             <option value="">etiqueta...</option>
             <option *ngFor="let valor of etiquetas" value="{{valor.idEtiqueta}}">{{valor.idEtiqueta}}</option>
           </select>
       </div>
   </div>
-    
-    <div class="ui error message">
-      <div class="header">We noticed some issues</div>
-    </div>
-    <div class="ui submit button" (click)="onResgisterTank($event)">Registrar</div>
+
+
+    <div class="ui submit button" (click)="onResgisterTank(tanqueForm)">Registrar</div>
   </form>
