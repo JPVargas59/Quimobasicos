@@ -36,7 +36,7 @@ const routes: Routes = [
       { path: 'user/:id/edit', component: AddUserComponent },
       { path: 'locations', component: LocationsComponent},
       { path: 'locations/add-location', component: AddLocationComponent},
-      { path: 'locations/update-location', component: UpdateLocationComponent},
+      { path: 'locations/:location/edit', component: UpdateLocationComponent},
 
       { path: 'reports/inventory', component: InventoryComponent },
       { path: 'tanks/add', component: AddTankComponent },
@@ -51,6 +51,7 @@ const routes: Routes = [
       { path: 'owners', component: OwnersComponent },
       { path: 'owners/:ownerId/edit', component: EditOwnerComponent },
       { path: 'rfid-tags', component: RfidTagsComponent },
+      { path: 'rfid-tags/add', component: EditTagComponent },
       { path: 'rfid-tags/:tagId/edit', component: EditTagComponent },
     ]
   }

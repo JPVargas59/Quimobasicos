@@ -21,5 +21,4 @@ export class LocationsComponent implements OnInit {
       this.places = places.data.lugares;
     })
   }
-
 }

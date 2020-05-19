@@ -14,15 +14,16 @@
   </thead>
   <tbody>
     <tr  *ngFor="let place of places">
+      <td>
+        <a routerLink="/admin/locations/{{place.idLugar}}/edit">{{place.idLugar}}</a>
+      </td>
       <td>{{place.lnombre}}</td>
-      <td>{{place.idLugar}}</td>
       <td>{{place.radio}}</td>
       <td>{{place.coordenadas}}</td>
       <td>{{place.capacidadMaxima}}</td>
       <td>
         <div class="ui two buttons">
-          
-          <button class="ui blue button">Editar</button>
+          <button class="ui blue button" routerLink="/admin/locations/{{place.idLugar}}/edit">Editar</button>
           <button class="ui red button">Eliminar</button>
         </div> 
       </td>
