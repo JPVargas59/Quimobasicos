@@ -11,6 +11,10 @@ let mysqlMutations = {
 	async getLugaresHaEstadoTanque(id: string) {
 		var resp = await common.getHaEstadoTanque(client, id);
 		let arrayLugares = JSON.parse(JSON.stringify(resp));
+		if (arrayLugares == null) {
+			client.quit();
+			return null;
+		}
 		for (let i = 0; i < arrayLugares.length; i++) {
 			arrayLugares[i]['lugar'] = await common.getInfoLugar(
 				client,
