@@ -116,6 +116,18 @@ export class DatabaseService {
     return this.http.get(`${this.homeURL}?query=${json}`);
   }
 
+
+  getLugares(){
+    const json = '{lugares{idLugar, lnombre, radio, capacidadMaxima}}'
+    return this.http.get(`${this.homeURL}?query=${json}`);
+  }
+
+  // postEtiqueta(){
+  //   const json = '{createEtiqueta(etiquetaInput:{id:15})}';
+  //   return this.http.post(`${this.homeURL}?query=${json}`);
+  // }
+
+
   newTank(tank: Tanque) {
     const query = 'mutation($tank: TanqueInput!) {createTanque(tanqueInput: $tank)}';
     console.log({query, variables: {tank}});
@@ -138,5 +150,6 @@ export class DatabaseService {
     const y = date.getFullYear();
     return `${y}-${m < 10 ? '0' : ''}${m}-${d < 10 ? '0' : ''}${d}`;
   }
+
 }
 

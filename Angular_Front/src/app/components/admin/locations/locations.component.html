@@ -5,17 +5,27 @@
   <thead>
   <tr>
     <th>Nombre</th>
+    <th>ID</th>
     <th>Radio</th>
     <th>Coordenadas</th>
     <th>Capacidad</th>
+    <th></th>
   </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let lugar of lugares">
-      <td>{{lugar.nombre}}</td>
-      <td>{{lugar.radio}} mts</td>
-      <td>({{lugar.coordenadas}})</td>
-      <td>{{lugar.capacidad}} tanques</td>
+    <tr  *ngFor="let place of places">
+      <td>{{place.lnombre}}</td>
+      <td>{{place.idLugar}}</td>
+      <td>{{place.radio}}</td>
+      <td>{{place.coordenadas}}</td>
+      <td>{{place.capacidadMaxima}}</td>
+      <td>
+        <div class="ui two buttons">
+          
+          <button class="ui blue button">Editar</button>
+          <button class="ui red button">Eliminar</button>
+        </div> 
+      </td>
     </tr>
   </tbody>
 </table>

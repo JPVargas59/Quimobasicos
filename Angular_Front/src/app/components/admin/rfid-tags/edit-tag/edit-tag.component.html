@@ -1,1 +1,22 @@
-<p>edit-tag works!</p>
+<h2 class="ui title">Agrega una etiqueta RFID</h2>
+<br>
+<form class="ui form">
+    <h4 class="ui dividing header">Información</h4>
+    
+    <div class="required field">
+      <label>ID de la etiqueta</label>
+      <div class="field">
+        <input type="email" name="email" placeholder="ID">
+      </div>
+    </div>
+
+    <div class = "errorIDOcupado">
+        <p>El ID ya está ocupado</p>
+    </div>
+    <br>
+    <div class="ui error message">
+      <div class="header">We noticed some issues</div>
+    </div>
+    <div class="ui submit button" routerLink="/admin/rfid-tags">Registrar</div>
+    
+  </form>

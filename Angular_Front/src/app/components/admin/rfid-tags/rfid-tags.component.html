@@ -1,14 +1,19 @@
 <h3 class="ui header">Etiquetas</h3>
 
-<table class="ui table">
+<table class="ui table tablaRFIDTags">
     <thead>
         <th>Número</th>
+        <th>Eliminar etiqueta RFID</th>
     </thead>
     <tbody>
         <tr  *ngFor="let tag of tags">
             <td>
                 <a (click)="onTagSelect($event)" [id]="tag.idEtiqueta">{{tag.idEtiqueta}}</a>
-              </td>
+            </td>
+            <td>
+                <button class="negative ui button botonEliminarEtiquetaRFID">Eliminar</button>
+            </td>
         </tr>
     </tbody>
 </table>
+
