@@ -31,6 +31,7 @@ import { ContentsComponent } from './components/admin/contents/contents.componen
 import { EditContentComponent } from './components/admin/contents/edit-content/edit-content.component';
 import { RfidTagsComponent } from './components/admin/rfid-tags/rfid-tags.component';
 import { EditTagComponent } from './components/admin/rfid-tags/edit-tag/edit-tag.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { EditTagComponent } from './components/admin/rfid-tags/edit-tag/edit-tag
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

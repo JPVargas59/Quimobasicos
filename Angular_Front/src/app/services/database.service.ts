@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
+import {Tanque} from '../models/Tanque';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,9 @@ export class DatabaseService {
   constructor(
     private router: Router,
     private http: HttpClient
-  ) { }
+  ) {
+
+  }
 
   getTank(idTanque) {
     const query = `{tanque(idTanque:"${idTanque}"){ contenidoTanque {contenido} dueno {nombre} calidad estadoValvula peso fechaIngreso fechaEsperadaRetorno observaciones}}`;
@@ -40,13 +43,20 @@ export class DatabaseService {
     return this.http.get(`${this.homeURL}?query=${json}`);
   }
 
-  getDuenos(){
+  getDuenos() {
     const json = '{owners {idDueno nombre}}';
     return this.http.get(`${this.homeURL}?query=${json}`);
   }
 
-  getEtiquetas(){
-    const json = '{etiquetas {idEtiqueta}}'
+  getEtiquetas() {
+    const json = '{etiquetas {idEtiqueta}}';
     return this.http.get(`${this.homeURL}?query=${json}`);
   }
+
+  newTank(tank: Tanque) {
+    const query = 'mutation($tank: TanqueInput!) {createTanque(tanqueInput: $tank)}';
+    console.log({query, variables: {tank}});
+    return this.http.post(this.homeURL, {query, variables: {tank}});
+  }
 }
+
