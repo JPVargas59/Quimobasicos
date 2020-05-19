@@ -26,7 +26,7 @@ CREATE TABLE Tanque(
     pesoActual FLOAT,
     peso FLOAT,
     fechaEsperadaRetorno DATETIME,
-    idEtiqueta INT,
+    idEtiqueta INT UNIQUE,
     idContenido VARCHAR(10),
     idDueno VARCHAR(10),
     fechaIngreso DATETIME,
