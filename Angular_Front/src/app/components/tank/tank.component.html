@@ -31,13 +31,14 @@
 <!-- Información por decir de historial del tanque -->
 <div class="ui two column stackable center aligned grid">
   <div class="column">
+    <h4 class="ui header">Historial de Peso</h4>
     <table class="column ui celled structured table">
       <thead>
         <th>Fecha</th>
         <th>Peso</th>
       </thead>
       <tbody>
-        <!-- TODO: peticion de graphql -->
+        <!-- TODO: peticion de graphql Revisar cuando se actualice el servidor -->
         <tr *ngFor="let value of tankWeight">
           <td>{{value.fecha}}</td>
           <td>{{value.peso}}</td>
@@ -46,21 +47,18 @@
     </table>
   </div>
   <div class="column">
+    <h4 class="ui header">Historial de Ubicaciones</h4>
     <table class="column ui celled structured table">
       <thead>
         <th>Fecha</th>
         <th>Lugar</th>
-        <th>Peso</th>
-        <th>Operado por</th>
       </thead>
       <tbody>
         <!-- TODO: peticion de graphql -->
-        <!-- <tr *ngFor="let historial of historial">
-          <td>{{historial.fecha}}</td>
-          <td>{{historial.lugar}}</td>
-          <td>{{historial.peso}}</td>
-          <td>{{historial.operador}}</td>
-        </tr> -->
+        <tr *ngFor="let location of locations">
+          <td>{{location.fecha}}</td>
+          <td>{{location.lugar}}</td>
+        </tr>
       </tbody>
     </table>
   </div>

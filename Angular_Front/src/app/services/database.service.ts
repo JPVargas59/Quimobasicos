@@ -24,6 +24,12 @@ export class DatabaseService {
     return this.http.post(`${this.homeURL}`,{query});
   }
 
+  getTankLocations(idTanque){
+    // CORREGIR QUERIE
+    const query = `{ historialPesoTanque (idTanque:"${idTanque}") { idTanque fecha peso}}`
+    return this.http.post(`${this.homeURL}`,{query});
+  }
+
   getTanks() {
     const json = '{tanques {idTanque contenidoTanque {contenido} fechaIngreso  fechaEsperadaRetorno  lugar {lnombre} peso  idEtiqueta{idEtiqueta}  observaciones}}';
     return this.http.get(`${this.homeURL}?query=${json}`);

@@ -17,6 +17,7 @@ export class TankComponent implements OnInit {
   tanks: [];
   tankInfo: any;
   tankWeight: any;
+  locations: any;
   
   constructor(
     route: ActivatedRoute,
@@ -39,6 +40,12 @@ export class TankComponent implements OnInit {
       const tankWeight = result as any;
       this.tankWeight = tankWeight.data.historialPesoTanque;
       console.log(this.tankWeight)
+    })
+    this.db.getTankLocations(this.tank).subscribe(result => {
+      const locations = result as any;
+      // CHECAR LUGARES
+      this.locations = locations.data.lugares;
+      console.log(this.locations)
     })
   }
 }
