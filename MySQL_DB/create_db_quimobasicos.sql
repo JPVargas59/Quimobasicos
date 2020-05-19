@@ -87,7 +87,7 @@ CREATE TABLE TanqueEsta (
     idTanque CHAR(10) NOT NULL,
 	idLugar CHAR(10) NOT NULL,
 	fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
-	PRIMARY KEY (idTanque, idLugar),
+	PRIMARY KEY (idTanque),
 	FOREIGN KEY (idTanque) REFERENCES Tanque(idTanque) ON UPDATE CASCADE,
 	FOREIGN KEY (idLugar) REFERENCES Lugar(idLugar) ON UPDATE CASCADE
 );
