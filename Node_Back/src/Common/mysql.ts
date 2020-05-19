@@ -233,7 +233,7 @@ exports.getHistorialPesoTanque = async (client, idTanque) => {
 	if (historialPeso.length == 0) {
 		return null;
 	}
-	return historialPeso[0];
+	return historialPeso;
 };
 
 exports.getHistorialUbicacionTanques = async (client) => {
