@@ -118,7 +118,7 @@ function validateId(id) {
 let mysqlMutations = {
 	async createValor(client, input, table, mysqlId) {
 		if (await checkExists(client, table, mysqlId, validateId(input.id))) {
-			return `El ID de {table} ya existe`;
+			return `El ID de ${table} ya existe`;
 		} else {
 			let resp: String = `Instancia de ${table} creada`;
 			input = modifyId(table, input);
