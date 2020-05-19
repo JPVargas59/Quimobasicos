@@ -270,7 +270,7 @@ type Query {
 	"Lista de historial de peso"
 	historialPesoTanques: [HistorialPeso!]
 	"Información de peso de tanques"
-	historialPesoTanque(idTanque: ID!): HistorialPeso!
+	historialPesoTanque(idTanque: ID!): [HistorialPeso!]
 	"Informacion de los mantenimientos de tanques"
 	historialMantenimientos: [Mantenimiento!]
 	"Información del mantenimiento de un tanque"
