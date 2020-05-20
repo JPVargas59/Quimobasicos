@@ -29,11 +29,11 @@ INSERT INTO Dueno VALUES("ARL","Alejandro Hernandez");
 
 INSERT INTO Tanque VALUES
     ("EURO514966", "Buena", "Muy bueno", 50, 20.5, "2020-02-02 10:00:00", 1, "G-134A", "ARL","2020-01-20 10:00:00", "Tanque comprado recientemente" ), 
-    ("EURO514967", "Mala", "Muy mala", 60, 45.5, "2020-12-08 10:00:00", 1, "G-134A", "JBes", "2020-11-08 10:00:00", "Tanque comprado recientemente"),  
-    ("NVVU100706", "Mala", "Mala", 60, 23.5, "2020-09-10 14:00:00", 1, "G-804A", "FLORO", "2020-08-10 14:00:00", "Tanque comprado recientemente"),
-    ("NVVU100710", "Buena", "Media", 60, 23.5, "2020-09-11 10:00:00", 1, "G-804A", "AndRo", "2020-08-11 10:00:00", "Tanque comprado recientemente"),
-	("NVVU100711", "Buena", "Media", 60, 23.5, "2020-10-11 15:00:00", 1, "G-804A", "FLORO", "2020-09-11 15:00:00", "Tanque comprado recientemente"),
-	("EURO514970", "Buena", "Media", 60, 23.5, "2020-10-11 15:00:00", 1, "G-804A", "FLORO", "2020-09-11 15:00:00", "Tanque comprado recientemente");
+    ("EURO514967", "Mala", "Muy mala", 60, 45.5, "2020-12-08 10:00:00", 2, "G-134A", "JBes", "2020-11-08 10:00:00", "Tanque comprado recientemente"),  
+    ("NVVU100706", "Mala", "Mala", 60, 23.5, "2020-09-10 14:00:00", 3, "G-804A", "FLORO", "2020-08-10 14:00:00", "Tanque comprado recientemente"),
+    ("NVVU100710", "Buena", "Media", 60, 23.5, "2020-09-11 10:00:00", 4, "G-804A", "AndRo", "2020-08-11 10:00:00", "Tanque comprado recientemente"),
+	("NVVU100711", "Buena", "Media", 60, 23.5, "2020-10-11 15:00:00", 5, "G-804A", "FLORO", "2020-09-11 15:00:00", "Tanque comprado recientemente"),
+	("EURO514970", "Buena", "Media", 60, 23.5, "2020-10-11 15:00:00", 6, "G-804A", "FLORO", "2020-09-11 15:00:00", "Tanque comprado recientemente");
 
 INSERT INTO Mantenimiento VALUES (
 	"EURO514966", "2019-08-02 10:00:00", "Se arregló la válvula"
