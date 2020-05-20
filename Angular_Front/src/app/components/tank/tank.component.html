@@ -40,7 +40,7 @@
       <tbody>
         <!-- TODO: peticion de graphql Revisar cuando se actualice el servidor -->
         <tr *ngFor="let value of tankWeight">
-          <td>{{value.fecha}}</td>
+          <td>{{value.fecha | date}}</td>
           <td>{{value.peso}}</td>
         </tr>
       </tbody>
