@@ -44,7 +44,7 @@ export class TankComponent implements OnInit {
     this.db.getTankLocations(this.tank).subscribe(result => {
       const locations = result as any;
       // CHECAR LUGARES
-      this.locations = locations.data.lugares;
+      this.locations = locations.data.tanque.haEstado;
       console.log(this.locations)
     })
   }

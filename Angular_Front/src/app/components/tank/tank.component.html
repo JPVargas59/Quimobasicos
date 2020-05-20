@@ -56,8 +56,8 @@
       <tbody>
         <!-- TODO: peticion de graphql -->
         <tr *ngFor="let location of locations">
-          <td>{{location.fecha}}</td>
-          <td>{{location.lugar}}</td>
+          <td>{{location.fecha | date}}</td>
+          <td>{{location.lugar.lnombre}}</td>
         </tr>
       </tbody>
     </table>

@@ -40,10 +40,14 @@ export class DatabaseService {
   }
 
   getTankLocations(idTanque) {
-    // CORREGIR QUERIE
     const query = `{
-      historialPesoTanque (idTanque:"${idTanque}") {
-         idTanque fecha peso}}`;
+    tanque(idTanque:"${idTanque}"){
+      haEstado{
+        lugar {
+          lnombre
+        }
+        fecha
+        idTanque}}}`;
     return this.http.post(`${this.homeURL}`, {query});
   }
 
