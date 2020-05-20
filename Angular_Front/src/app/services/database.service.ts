@@ -120,8 +120,8 @@ export class DatabaseService {
   }
 
 
-  getLugares(){
-    const json = '{lugares{idLugar, lnombre, radio, capacidadMaxima}}'
+  getLugares() {
+    const json = '{lugares{idLugar, lnombre, radio, capacidadMaxima}}';
     return this.http.get(`${this.homeURL}?query=${json}`);
   }
 
