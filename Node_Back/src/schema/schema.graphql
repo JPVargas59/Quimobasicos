@@ -202,14 +202,9 @@ input IdOperadoPorInput {
 
 "Input para la ubicación de un tanque"
 input TanqueEstaInput {
-	id: IdTanqueEsta
-	fecha: Date
-}
-
-"Id para una instancia de TanqueEsta"
-input IdTanqueEsta {
-	idTanque: String
+	id: String
 	idLugar: String
+	fecha: Date
 }
 
 "Input para el historial de ubicaciones de un tanque"
@@ -325,7 +320,7 @@ type Mutation {
 
 	setTanqueEsta(
 		tanqueEstaInput: TanqueEstaInput!
-		idTanqueEstaOriginal: IdTanqueEsta!
+		idTanqueEstaOriginal: String!
 	): String
 	createTanqueEsta(tanqueEstaInput: TanqueEstaInput): String
 
