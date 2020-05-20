@@ -38,6 +38,7 @@ function modifyId(table, input) {
 	//console.log(table);
 	if (typeof input.id !== 'undefined') {
 		switch (table) {
+			case 'TanqueEsta':
 			case 'Tanque':
 				input.idTanque = input.id;
 				break;
@@ -85,9 +86,6 @@ function modifyId(table, input) {
 				if (typeof input.id.fecha !== 'undefined') {
 					input.fecha = input.id.fecha;
 				}
-			case 'TanqueEsta':
-				input.idTanque = input.id.idTanque;
-				break;
 			case 'Operador':
 				input.operadorId = input.id;
 				break;
