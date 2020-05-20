@@ -128,13 +128,12 @@ const mutation: IResolvers = {
 				tanqueEstaInput,
 				idTanqueEstaOriginal,
 				'TanqueEsta',
-				['idTanque', 'idLugar']
+				['idTanque']
 			);
 		},
 		createTanqueEsta(__: void, { tanqueEstaInput }): any {
 			return mysqlMutations.createValor(tanqueEstaInput, 'TanqueEsta', [
-				'idTanque',
-				'idLugar'
+				'idTanque'
 			]);
 		},
 		setTanqueHaEstado(
