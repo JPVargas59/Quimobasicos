@@ -24,6 +24,10 @@ let mysqlMutations = {
 			mysqlId
 		);
 		return quitClient(client, resp);
+	},
+	async cambiarContrasena(input) {
+		let resp = await common.cambiarContrasena(client, input);
+		return quitClient(client, resp);
 	}
 };
 

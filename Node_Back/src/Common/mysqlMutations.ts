@@ -1,4 +1,6 @@
 import mysql from 'mysql';
+let bcryptjs = require('bcryptjs');
+
 async function checkExists(client, table, mysqlId, idQuery) {
 	var obj = {
 		queryString: `SELECT * FROM ?? WHERE`,
@@ -34,7 +36,7 @@ function parseObj(obj) {
 	return obj;
 }
 
-function modifyId(table, input) {
+async function modifyId(table, input) {
 	//console.log(table);
 	if (typeof input.id !== 'undefined') {
 		switch (table) {
@@ -86,11 +88,15 @@ function modifyId(table, input) {
 				if (typeof input.id.fecha !== 'undefined') {
 					input.fecha = input.id.fecha;
 				}
-			case 'Operador':
-				input.operadorId = input.id;
-				break;
 			case 'Usuario':
 				input.idUsuario = input.id;
+				if (typeof input.contrasena !== 'undefined') {
+					let salt = await bcryptjs.genSalt(10);
+					input.contrasena = await bcryptjs.hash(
+						input.contrasena,
+						salt
+					);
+				}
 		}
 		delete input.id;
 	}
@@ -114,7 +120,7 @@ let mysqlMutations = {
 			return `El ID de ${table} ya existe`;
 		} else {
 			let resp: String = `Instancia de ${table} creada`;
-			input = modifyId(table, input);
+			input = await modifyId(table, input);
 			await client
 				.query(`INSERT INTO ?? SET ?`, [table, input])
 				.catch((error) => {
@@ -153,7 +159,7 @@ let mysqlMutations = {
 		idOriginal = validateId(idOriginal);
 		if (await checkExists(client, table, mysqlId, idOriginal)) {
 			//console.log(input);
-			input = modifyId(table, input);
+			input = await modifyId(table, input);
 			//console.log(input);
 			let resp = `El valor de ${table} ha sido actualizado`;
 			var obj = {
@@ -171,6 +177,43 @@ let mysqlMutations = {
 			return resp;
 		} else {
 			return `El ID de ${table} no existe`;
+		}
+	},
+	async cambiarContrasena(client, input) {
+		let user = await client.query('SELECT * FROM Usuario WHERE correo=?', [
+			input.correo
+		]);
+		if (user.length == 0) {
+			return `El usuario con el correo ${input.correo} no existe`;
+		} else {
+			user = user[0];
+			let check = await bcryptjs.compare(
+				input.contraAnterior,
+				user.contrasena
+			);
+			if (!check) {
+				return 'Contraseña equivocada';
+			} else {
+				let salt = await bcryptjs.genSalt(10);
+				input.nuevaContra = await bcryptjs.hash(
+					input.nuevaContra,
+					salt
+				);
+				let resp = '';
+				await client
+					.query('UPDATE Usuario SET contrasena=? WHERE correo=?', [
+						input.nuevaContra,
+						input.correo
+					])
+					.catch((error) => {
+						console.log(error);
+						resp = error.sqlMessage;
+					})
+					.then(() => {
+						resp = 'Contraseña actualizada exitosamente';
+					});
+				return resp;
+			}
 		}
 	}
 };

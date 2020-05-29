@@ -166,6 +166,9 @@ const mutation: IResolvers = {
 			return mysqlMutations.createValor(usuarioInput, 'Usuario', [
 				'idUsuario'
 			]);
+		},
+		cambiarContrasena(__: void, { contrasenaInput }): any {
+			return mysqlMutations.cambiarContrasena(contrasenaInput);
 		}
 	}
 };
