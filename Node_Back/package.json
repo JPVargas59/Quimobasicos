@@ -4,8 +4,8 @@
 	"description": "Back end de la web app de quimobásicos para el rastreo de tanques. API de GraphQL y Conexión a MySQL",
 	"main": "build/server.js",
 	"dependencies": {
-		"@angular/core": "^9.1.6",
 		"apollo-server-express": "^2.12.0",
+		"bcryptjs": "^2.4.3",
 		"body-parser": "^1.19.0",
 		"compression": "^1.7.4",
 		"cors": "^2.8.5",
@@ -20,6 +20,7 @@
 		"graphql-tools": "^5.0.0",
 		"graphql-validation-complexity": "^0.3.0",
 		"http": "0.0.1-security",
+		"jsonwebtoken": "^8.5.1",
 		"mysql": "^2.18.1",
 		"ncp": "^2.0.0",
 		"serverless-mysql": "^1.5.4",
