@@ -292,7 +292,8 @@ let mysqlMutations = {
 		if (checkDB.length == 0) {
 			return 'Token expirado';
 		} else {
-			let user = getUsuarioByCorreo(client, verification.correo);
+			let user = await getUsuarioByCorreo(client, verification.correo);
+			user = user[0];
 			let jwt_token = signJWT(user);
 			return jwt_token;
 		}
