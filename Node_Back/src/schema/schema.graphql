@@ -110,6 +110,12 @@ type HistorialTanque {
 	idTanque: ID
 }
 
+type OutputLogin {
+	refreshJWT: String!
+	jwt_token: String!
+	jwt_fechaExpiracion: Date!
+}
+
 "Historial de peso de tanques"
 type HistorialPeso {
 	peso: Float
@@ -351,4 +357,5 @@ type Mutation {
 	): String
 	createUsuario(usuarioInput: createUsuarioInput!): String
 	cambiarContrasena(contrasenaInput: ContrasenaInput!): String!
+	login(correo: String!, contrasena: String!): OutputLogin!
 }

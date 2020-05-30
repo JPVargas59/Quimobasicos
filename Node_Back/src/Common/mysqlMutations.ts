@@ -1,5 +1,8 @@
 import mysql from 'mysql';
 let bcryptjs = require('bcryptjs');
+let jwt = require('jsonwebtoken');
+let fsPromises = require('fs/promises');
+let path = require('path');
 
 async function checkExists(client, table, mysqlId, idQuery) {
 	var obj = {
@@ -17,6 +20,12 @@ async function checkExists(client, table, mysqlId, idQuery) {
 		console.log(error);
 	});
 	return check.length == 0 ? false : true;
+}
+async function getUsuarioByCorreo(client, correo) {
+	let user = await client.query('SELECT * FROM Usuario WHERE correo=?', [
+		correo
+	]);
+	return user;
 }
 
 function parseObj(obj) {
@@ -180,9 +189,7 @@ let mysqlMutations = {
 		}
 	},
 	async cambiarContrasena(client, input) {
-		let user = await client.query('SELECT * FROM Usuario WHERE correo=?', [
-			input.correo
-		]);
+		let user = await getUsuarioByCorreo(client, input.correo);
 		if (user.length == 0) {
 			return `El usuario con el correo ${input.correo} no existe`;
 		} else {
@@ -212,6 +219,46 @@ let mysqlMutations = {
 					.then(() => {
 						resp = 'Contraseña actualizada exitosamente';
 					});
+				return resp;
+			}
+		}
+	},
+	async login(client, correo, contrasena) {
+		let user = await getUsuarioByCorreo(client, correo);
+		if (user.length == 0) {
+			throw new Error(`El usuario con el correo ${correo} no existe`);
+		} else {
+			user = user[0];
+			let check = await bcryptjs.compare(contrasena, user.contrasena);
+			if (!check) {
+				throw new Error('Contraseña equivocada');
+			} else {
+				let serverkey = await fsPromises
+					.readFile(path.resolve(__dirname + '/../../server.key'))
+					.catch((error) => {
+						console.log(error);
+						throw new Error('Error interno');
+					});
+				const refreshJWT = jwt.sign({ id: user.idUsuario }, serverkey, {
+					expiresIn: '1d',
+					algorithm: 'RS256'
+				});
+				await client.query('UPDATE JWT SET jwt=? WHERE idUsuario=?', [
+					refreshJWT,
+					user.idUsuario
+				]);
+				const jwt_fechaExpiracion = new Date();
+				jwt_fechaExpiracion.setDate(jwt_fechaExpiracion.getDate() + 1);
+				const jwt_token = jwt.sign(
+					{ id: user.idUsuario, puesto: user.puesto },
+					serverkey,
+					{ expiresIn: '15m', algorithm: 'RS256' }
+				);
+				let resp = {
+					refreshJWT: refreshJWT,
+					jwt_fechaExpiracion: jwt_fechaExpiracion,
+					jwt_token: jwt_token
+				};
 				return resp;
 			}
 		}

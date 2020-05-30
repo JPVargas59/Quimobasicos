@@ -169,6 +169,9 @@ const mutation: IResolvers = {
 		},
 		cambiarContrasena(__: void, { contrasenaInput }): any {
 			return mysqlMutations.cambiarContrasena(contrasenaInput);
+		},
+		login(__: void, { correo, contrasena }): any {
+			return mysqlMutations.login(correo, contrasena);
 		}
 	}
 };
