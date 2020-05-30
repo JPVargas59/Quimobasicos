@@ -12,7 +12,7 @@ const query: IResolvers = {
 			return asyncFunctionsMySQLQueries.getLugares();
 		},
 		lugar(__: void, { idLugar }): any {
-			return asyncFunctionsMySQLQueries.getLugar(idLugar);
+			return asyncFunctionsMySQLQueries.getLugar(idLugar, null);
 		},
 		usuarios(): any {
 			return asyncFunctionsMySQLQueries.getUsuarios();
@@ -59,6 +59,9 @@ const query: IResolvers = {
 		operadores() : any {
 			return asyncFunctionsMySQLQueries.getOperadores();
 		},
+		tanquesHaEstadoEnFecha(__: void, { desde, hasta }): any {
+			return asyncFunctionsMySQLQueries.getHaEstadoEnFechas(desde, hasta);
+		}
 	}
 };
 export default query;

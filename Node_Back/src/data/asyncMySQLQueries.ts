@@ -49,8 +49,11 @@ let mysqlMutations = {
 		client.quit();
 		return resp;
 	},
-	async getLugar(idLugar: string) {
+	async getLugar(idLugar: string, fecha : any) {
 		var resp = await common.getLugar(client, idLugar);
+		if(resp["fecha"] == undefined || fecha != null){
+			resp["fecha"] = fecha;
+		}
 		client.quit();
 		return resp;
 	},
@@ -162,6 +165,12 @@ let mysqlMutations = {
 		}
 		
 		return resp;
+	},
+	async getHaEstadoEnFechas(desde : Date, hasta : string){
+		var resp = await common.getHaEstadoEnFechas(client, desde, hasta);
+		let arrayUbicaciones = JSON.parse(JSON.stringify(resp));
+		client.quit();
+		return arrayUbicaciones;
 	}
 };
 export = mysqlMutations;

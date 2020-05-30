@@ -55,8 +55,8 @@ const type: IResolvers = {
 	},
 	HistorialTanque : {
 		lugar : (parent) => {
-			let a = asyncFunctions.getLugar(parent.idLugar);
-			return asyncFunctions.getLugar(parent.idLugar);
+			let a = asyncFunctions.getLugar(parent.idLugar, parent.fecha);
+			return asyncFunctions.getLugar(parent.idLugar, parent.fecha);
 		}
 	}
 };
