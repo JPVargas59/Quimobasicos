@@ -358,4 +358,5 @@ type Mutation {
 	createUsuario(usuarioInput: createUsuarioInput!): String
 	cambiarContrasena(contrasenaInput: ContrasenaInput!): String!
 	login(correo: String!, contrasena: String!): OutputLogin!
+	refresh(refreshJWT: String!): String!
 }

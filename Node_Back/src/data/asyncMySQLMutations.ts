@@ -32,6 +32,10 @@ let mysqlMutations = {
 	async login(correo, contrasena) {
 		let resp = await common.login(client, correo, contrasena);
 		return quitClient(client, resp);
+	},
+	async refresh(refreshJWT) {
+		let resp = await common.refresh(client, refreshJWT);
+		return quitClient(client, resp);
 	}
 };
 

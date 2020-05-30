@@ -172,6 +172,9 @@ const mutation: IResolvers = {
 		},
 		login(__: void, { correo, contrasena }): any {
 			return mysqlMutations.login(correo, contrasena);
+		},
+		refresh(__: void, { refreshJWT }): any {
+			return mysqlMutations.refresh(refreshJWT);
 		}
 	}
 };

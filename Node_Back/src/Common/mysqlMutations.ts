@@ -28,6 +28,19 @@ async function getUsuarioByCorreo(client, correo) {
 	return user;
 }
 
+async function signJWT(user) {
+	let serverkey = await fsPromises
+		.readFile(path.resolve(__dirname + '/../../server.key'))
+		.catch((error) => {
+			console.log(error);
+			throw new Error('Error interno');
+		});
+	return jwt.sign({ id: user.idUsuario, puesto: user.puesto }, serverkey, {
+		expiresIn: '15m',
+		algorithm: 'RS256'
+	});
+}
+
 function parseObj(obj) {
 	//console.log(obj);
 	//console.log(obj.mysqlId.length);
@@ -239,21 +252,21 @@ let mysqlMutations = {
 						console.log(error);
 						throw new Error('Error interno');
 					});
-				const refreshJWT = jwt.sign({ id: user.idUsuario }, serverkey, {
-					expiresIn: '1d',
-					algorithm: 'RS256'
-				});
+				const refreshJWT = jwt.sign(
+					{ correo: user.correo },
+					serverkey,
+					{
+						expiresIn: '1d',
+						algorithm: 'RS256'
+					}
+				);
 				await client.query('UPDATE JWT SET jwt=? WHERE idUsuario=?', [
 					refreshJWT,
 					user.idUsuario
 				]);
 				const jwt_fechaExpiracion = new Date();
 				jwt_fechaExpiracion.setDate(jwt_fechaExpiracion.getDate() + 1);
-				const jwt_token = jwt.sign(
-					{ id: user.idUsuario, puesto: user.puesto },
-					serverkey,
-					{ expiresIn: '15m', algorithm: 'RS256' }
-				);
+				const jwt_token = signJWT(user);
 				let resp = {
 					refreshJWT: refreshJWT,
 					jwt_fechaExpiracion: jwt_fechaExpiracion,
@@ -261,6 +274,27 @@ let mysqlMutations = {
 				};
 				return resp;
 			}
+		}
+	},
+	async refresh(client, refreshJWT) {
+		let serverkeyPem = await fsPromises
+			.readFile(path.resolve(__dirname + '/../../server.key.pem'))
+			.catch((error) => {
+				console.log(error);
+				throw new Error('Error interno');
+			});
+		let verification = jwt.verify(refreshJWT, serverkeyPem, {
+			algorithms: ['RS256']
+		});
+		let checkDB = await client.query('SELECT * FROM JWT WHERE jwt=?', [
+			refreshJWT
+		]);
+		if (checkDB.length == 0) {
+			return 'Token expirado';
+		} else {
+			let user = getUsuarioByCorreo(client, verification.correo);
+			let jwt_token = signJWT(user);
+			return jwt_token;
 		}
 	}
 };
