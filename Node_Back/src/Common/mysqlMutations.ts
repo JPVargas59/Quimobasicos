@@ -1,7 +1,7 @@
 import mysql from 'mysql';
 let bcryptjs = require('bcryptjs');
 let jwt = require('jsonwebtoken');
-let fsPromises = require('fs/promises');
+let fsPromises = require('fs').promises;
 let path = require('path');
 
 async function checkExists(client, table, mysqlId, idQuery) {
@@ -22,9 +22,7 @@ async function checkExists(client, table, mysqlId, idQuery) {
 	return check.length == 0 ? false : true;
 }
 async function getUsuarioByCorreo(client, correo) {
-	let user = await client.query('SELECT * FROM Usuario WHERE correo=?', [
-		correo
-	]);
+	let user = await client.query('SELECT * FROM Usuario WHERE correo=?', [correo]);
 	return user;
 }
 
@@ -114,10 +112,7 @@ async function modifyId(table, input) {
 				input.idUsuario = input.id;
 				if (typeof input.contrasena !== 'undefined') {
 					let salt = await bcryptjs.genSalt(10);
-					input.contrasena = await bcryptjs.hash(
-						input.contrasena,
-						salt
-					);
+					input.contrasena = await bcryptjs.hash(input.contrasena, salt);
 				}
 		}
 		delete input.id;
@@ -143,24 +138,15 @@ let mysqlMutations = {
 		} else {
 			let resp: String = `Instancia de ${table} creada`;
 			input = await modifyId(table, input);
-			await client
-				.query(`INSERT INTO ?? SET ?`, [table, input])
-				.catch((error) => {
-					console.log(error);
-					resp = error.sqlMessage;
-				});
+			await client.query(`INSERT INTO ?? SET ?`, [table, input]).catch((error) => {
+				console.log(error);
+				resp = error.sqlMessage;
+			});
 			return resp;
 		}
 	},
 	async deleteTanque(client, idTanqueInput) {
-		if (
-			await checkExists(
-				client,
-				'Tanque',
-				['idTanque'] as any,
-				idTanqueInput
-			)
-		) {
+		if (await checkExists(client, 'Tanque', ['idTanque'] as any, idTanqueInput)) {
 			let resp: String = 'Tanque eliminado';
 			await client
 				.query('DELETE FROM Tanque WHERE idTanque=?', idTanqueInput)
@@ -207,18 +193,12 @@ let mysqlMutations = {
 			return `El usuario con el correo ${input.correo} no existe`;
 		} else {
 			user = user[0];
-			let check = await bcryptjs.compare(
-				input.contraAnterior,
-				user.contrasena
-			);
+			let check = await bcryptjs.compare(input.contraAnterior, user.contrasena);
 			if (!check) {
 				return 'Contraseña equivocada';
 			} else {
 				let salt = await bcryptjs.genSalt(10);
-				input.nuevaContra = await bcryptjs.hash(
-					input.nuevaContra,
-					salt
-				);
+				input.nuevaContra = await bcryptjs.hash(input.nuevaContra, salt);
 				let resp = '';
 				await client
 					.query('UPDATE Usuario SET contrasena=? WHERE correo=?', [
@@ -252,14 +232,10 @@ let mysqlMutations = {
 						console.log(error);
 						throw new Error('Error interno');
 					});
-				const refreshJWT = jwt.sign(
-					{ correo: user.correo },
-					serverkey,
-					{
-						expiresIn: '1d',
-						algorithm: 'RS256'
-					}
-				);
+				const refreshJWT = jwt.sign({ correo: user.correo }, serverkey, {
+					expiresIn: '1d',
+					algorithm: 'RS256'
+				});
 				await client.query('UPDATE JWT SET jwt=? WHERE idUsuario=?', [
 					refreshJWT,
 					user.idUsuario
@@ -286,9 +262,7 @@ let mysqlMutations = {
 		let verification = jwt.verify(refreshJWT, serverkeyPem, {
 			algorithms: ['RS256']
 		});
-		let checkDB = await client.query('SELECT * FROM JWT WHERE jwt=?', [
-			refreshJWT
-		]);
+		let checkDB = await client.query('SELECT * FROM JWT WHERE jwt=?', [refreshJWT]);
 		if (checkDB.length == 0) {
 			return 'Token expirado';
 		} else {
