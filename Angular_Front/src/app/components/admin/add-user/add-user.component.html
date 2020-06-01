@@ -9,7 +9,7 @@
         <label>Nombre</label>
         <div class="two fields">
           <div class="field">
-            <input type="text" name="nombre" id="nombre" placeholder="Nombre" [(ngModel)]="user.nombre">
+            <input type="text" name="nombre" placeholder="Nombre" [(ngModel)]="user.nombre">
           </div>
           <div class="required field">
             <input type="text" name="apellidos" [(ngModel)]="user.apellidos" placeholder="Apellidos">
@@ -52,8 +52,6 @@
       </select>
     </div>
 
-    <div class="ui error message">
-      <div class="header">We noticed some issues</div>
-    </div>
-    <div class="ui submit primary button" routerLink="/admin/users">Actualizar Información</div>
+    <div class="ui submit primary button" routerLink="/admin/users">Guardar</div>
+    
   </form>

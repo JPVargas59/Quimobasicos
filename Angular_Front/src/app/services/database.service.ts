@@ -179,6 +179,21 @@ export class DatabaseService {
     const json = '{lugares{idLugar, lnombre, radio, capacidadMaxima}}';
     return this.http.get(`${this.homeURL}?query=${json}`);
   }
+  getLugar(idLugar) {
+    const query=`{
+      lugar(idLugar:"${idLugar}"){
+        idLugar
+        lnombre
+        radio
+        capacidadMaxima
+        coordenadas{
+          x
+          y
+        }
+      }
+    }`;
+    return this.http.post(`${this.homeURL}`, {query})
+  }
 
   // postEtiqueta(){
   //   const json = '{createEtiqueta(etiquetaInput:{id:15})}';

@@ -1,69 +1,47 @@
-<!-- <h3 class="ui title">Modificar un lugar</h3> -->
+<h3 class="ui title" *ngIf="id">Modificar {{id}}</h3>
+<h3 class="ui title" *ngIf="!id">Agregar un Lugar</h3>
 
 <form class="ui form">
-    <h4 class="ui dividing header">Información del lugar</h4>
-
+  <h4 class="ui dividing header">Información del lugar</h4>
     <div class="two fields">
-        
         <div class="required field">
             <label>Nombre</label>
             <div class="field">
-              <input type="text" name="name">
+              <input type="text" name="lnombre" [(ngModel)]="lugar.lnombre">
             </div>
         </div>
-        
-        <div class="required field">
-          <label>ID</label>
-          <div class="field">
-            <input type="text" name="ID">
-          </div>
-        </div>
-  
     </div>
 
-    <div class="two fields">
-        
+    <div class="two fields"> 
         <div class="required field">
             <label>Radio</label>
             <div class="field">
-              <input type="text" name="radio">
+              <input type="text" name="radio" [(ngModel)]="lugar.radio">
             </div>
         </div>
-        
         <div class="required field">
           <label>Capacidad</label>
           <div class="field">
-            <input type="text" name="capacity">
+            <input type="text" name="capacidadMaxima" [(ngModel)]="lugar.capacidadMaxima">
           </div>
         </div>
-  
     </div>
-
-
     <h4 class="ui dividing header">Coordenadas del lugar</h4>
     <div class="two fields">
-        <div class="two fields">
-            <div class="required field">
-                <label>X</label>
-                <div class="field">
-                  <input type="text" name="x">
-                </div>
-            </div>
-            
-            <div class="required field">
-              <label>Y</label>
-              <div class="field">
-                <input type="text" name="y">
-              </div>
-            </div>
+        <div class="required field">
+          <label>X</label>
+          <div class="field">
+            <input type="text" name="x" [(ngModel)]="lugar.coordenadas.x">
+          </div>
+        </div>
+        <div class="required field">
+          <label>Y</label>
+          <div class="field">
+            <input type="text" name="y" [(ngModel)]="lugar.coordenadas.y">
+          </div>
         </div>
     </div>
 
-
-    <div class="ui error message">
-      <div class="header">We noticed some issues</div>
-    </div>
-
-    <div class="ui submit button" routerLink="/admin/locations">Actualizar información</div>
+    <div class="ui submit primary button" routerLink="/admin/locations">Guardar</div>
   </form>
 
