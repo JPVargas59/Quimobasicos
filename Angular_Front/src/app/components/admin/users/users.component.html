@@ -13,14 +13,14 @@
   <tbody>
     <tr *ngFor="let user of users">
       <td>
-        <a routerLink="/admin/user/{{user.nombre}}/edit">
+        <a routerLink="/admin/user/{{user.idUsuario}}/edit">
           {{user.idUsuario}}
         </a>
       </td>
       <td>{{user.nombre}}</td>
       <td>{{user.apellidos}}</td>
       <td>{{user.correo}}</td>
-      <td><button class="ui fluid primary button" routerLink="/admin/user/{{user.nombre}}/edit">Editar</button></td>
+      <td><button class="ui fluid primary button" routerLink="/admin/user/{{user.idUsuario}}/edit">Editar</button></td>
     </tr>
   </tbody>
 </table>

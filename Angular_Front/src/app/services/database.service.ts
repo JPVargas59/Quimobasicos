@@ -9,7 +9,8 @@ import {User} from '../models/User';
 })
 export class DatabaseService {
 
-  homeURL = 'http://18.219.108.70:5201/graphql';
+  // homeURL = 'http://18.219.108.70:5201/graphql';
+  homeURL = 'http://localhost:5201/graphql';
 
   constructor(
     private router: Router,
@@ -43,11 +44,49 @@ export class DatabaseService {
     const query = `{
     tanque(idTanque:"${idTanque}"){
       haEstado{
-        lugar {
-          lnombre
-        }
         fecha
-        idTanque}}}`;
+        lugar{
+          idLugar
+          lnombre
+          }
+        }
+      }
+    }`;
+    return this.http.post(`${this.homeURL}`, {query});
+  }
+
+  getExactInfoTank(idTanque) {
+    const query = `{
+      tanque(idTanque: "${idTanque}") {
+        haEstado {
+          fecha
+          lugar {
+            idLugar
+            lnombre
+          }
+        }
+    
+        contenidoTanque {
+          contenido
+        }
+        dueno {
+          nombre
+        }
+        calidad
+        estadoValvula
+        peso
+        pesoActual
+        fechaIngreso
+        fechaEsperadaRetorno
+        observaciones
+      }
+      historialPesoTanque(idTanque: "${idTanque}") {
+        fecha
+        peso
+      }
+    }
+    
+    `;
     return this.http.post(`${this.homeURL}`, {query});
   }
 
@@ -117,16 +156,43 @@ export class DatabaseService {
     }`;
     return this.http.post(`${this.homeURL}`, {query});
   }
+  getUser(idUser){
+    const query = `{
+      usuario(idUsuario:"${idUser}"){
+        idUsuario
+        nombre
+        apellidos
+        correo
+        password
+        idSupervisor
+        puesto
+    }}`;
+    return this.http.post(`${this.homeURL}`, {query})
+  }
 
   getEtiquetas() {
     const json = '{etiquetas {idEtiqueta}}';
     return this.http.get(`${this.homeURL}?query=${json}`);
   }
 
-
   getLugares() {
     const json = '{lugares{idLugar, lnombre, radio, capacidadMaxima}}';
     return this.http.get(`${this.homeURL}?query=${json}`);
+  }
+  getLugar(idLugar) {
+    const query=`{
+      lugar(idLugar:"${idLugar}"){
+        idLugar
+        lnombre
+        radio
+        capacidadMaxima
+        coordenadas{
+          x
+          y
+        }
+      }
+    }`;
+    return this.http.post(`${this.homeURL}`, {query})
   }
 
   // postEtiqueta(){

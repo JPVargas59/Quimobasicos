@@ -1,7 +1,9 @@
 export interface User {
-  id: string;
-  fName: string;
-  lName: string;
-  contrasena: string;
+  idUsuario: string;
+  nombre: string;
+  apellidos: string;
+  password: string;
   correo: string;
+  idSupervisor: string;
+  puesto: string;
 }
