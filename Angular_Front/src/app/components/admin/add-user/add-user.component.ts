@@ -11,7 +11,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class AddUserComponent implements OnInit {
 
   user: User;
-
+  id: string;
   constructor(
     private db: DatabaseService,
     private router: Router,
@@ -19,6 +19,7 @@ export class AddUserComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.id = this.route.snapshot.params.id;
 
   }
 

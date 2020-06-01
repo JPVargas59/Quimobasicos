@@ -1,4 +1,6 @@
-<h2 class="ui title">Agrega un Usuario</h2>
+<h2 class="ui title" *ngIf="id">Modificar Información de {{id}}</h2>
+<h3 class="ui title" *ngIf="!id">Agregar un Usuario</h3>
+
 <br>
 <form class="ui form">
     <h4 class="ui dividing header">Información</h4>
@@ -30,18 +32,14 @@
       </div>
     </div>
     <div class="grouped fields required field">
-      <label for="alone">¿Es operador?</label>
       <div class="field">
-        <div class="ui radio checkbox checked">
-          <input type="radio" checked="" name="import">
-          <label>Sí</label>
-        </div>
-      </div>
-      <div class="field">
-        <div class="ui radio checkbox">
-          <input type="radio" name="import">
-          <label>No</label>
-        </div>
+        <label>Puesto</label>
+        <select class="ui search dropdown">
+          <option value="">Puesto...</option>
+          <option value="Operador">Operador</option>
+          <option value="Supervisor">Supervisor</option>
+          <option value="Admin">Admin</option>
+        </select>
       </div>
     </div>
     <div class="field">

@@ -30,21 +30,14 @@ export class TankComponent implements OnInit {
     this.exitAddress = '/'+ userType +'/tank/' + this.tank + '/exit';
   }
 
-  // TODO: hacer llamada de getTank
+  
   ngOnInit(): void {
-    this.db.getTank(this.tank).subscribe(result => {
-      const tankInfo = result as any;
-      this.tankInfo = tankInfo.data.tanque;
-    })
-    this.db.getTankWeight(this.tank).subscribe(result => {
-      const tankWeight = result as any;
-      this.tankWeight = tankWeight.data.historialPesoTanque;
-      console.log(this.tankWeight)
-    })
-    this.db.getTankLocations(this.tank).subscribe(result => {
-      const locations = result as any;
-      this.locations = locations.data.tanque.haEstado;
-      console.log(this.locations)
+    this.db.getExactInfoTank(this.tank).subscribe(result =>{
+      const wholeInfoTank = result as any;
+      this.tankInfo = wholeInfoTank.data.tanque;
+      this.tankWeight = wholeInfoTank.data.historialPesoTanque;
+      this.locations = wholeInfoTank.data.tanque.haEstado;
+      console.log(result)
     })
   }
 }

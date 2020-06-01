@@ -14,15 +14,15 @@
     <th>Observaciones</th>
   </thead>
   <tbody>
-    <tr>
+    <tr *ngIf="tankInfo">
       <td>{{tank}}</td>
       <td>{{tankInfo.contenidoTanque.contenido ? tankInfo.contenidoTanque.contenido : '-'}}</td>
       <td>{{tankInfo.dueno.nombre}}</td>
       <td>{{tankInfo.calidad}}</td>
       <td>{{tankInfo.estadoValvula}}</td>
       <td>{{tankInfo.pesoActual}}</td>
-      <td>{{tankInfo.fechaIngreso | date}}</td>
-      <td>{{tankInfo.fechaEsperadaRetorno | date}}</td>
+      <td>{{tankInfo.fechaIngreso | date:'medium'}}</td>
+      <td>{{tankInfo.fechaEsperadaRetorno | date:'medium'}}</td>
       <td>{{tankInfo.observaciones}}</td>
     </tr>
   </tbody>
@@ -40,7 +40,7 @@
       <tbody>
         <!-- TODO: peticion de graphql Revisar cuando se actualice el servidor -->
         <tr *ngFor="let value of tankWeight">
-          <td>{{value.fecha | date}}</td>
+          <td>{{value.fecha | date:'medium'}}</td>
           <td>{{value.peso}}</td>
         </tr>
       </tbody>
@@ -53,10 +53,10 @@
         <th>Fecha</th>
         <th>Lugar</th>
       </thead>
-      <tbody>
+      <tbody *ngIf="locations">
         <!-- TODO: peticion de graphql -->
         <tr *ngFor="let location of locations">
-          <td>{{location.fecha | date}}</td>
+          <td>{{location.fecha | date:'medium'}}</td>
           <td>{{location.lugar.lnombre}}</td>
         </tr>
       </tbody>

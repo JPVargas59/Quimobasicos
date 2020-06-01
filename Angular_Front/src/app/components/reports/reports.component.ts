@@ -10,9 +10,9 @@ import { UserService } from 'src/app/services/user.service';
 export class ReportsComponent implements OnInit {
 
   reports = [
-    {nombre: 'Inventario'},
-    {nombre: 'Tanques en planta'},
-    {nombre: 'Tanques '}
+    {nombre: 'Inventario de Tanques'},
+    {nombre: 'Tanques por Lugar'},
+    {nombre: 'Tanques por contenido'}
   ];
 
   constructor(
@@ -27,7 +27,10 @@ export class ReportsComponent implements OnInit {
     console.log(event);
     const reportName = event.target.id;
     const userType = this.user.getType();
-    this.router.navigateByUrl(`/${userType}/reports/see-report/${reportName}`);
+    if (reportName == 'Inventario'){
+      this.router.navigateByUrl(`/${userType}/reports/inventory`)
+    }else{
+      this.router.navigateByUrl(`/${userType}/reports/see-report/${reportName}`);
+    }
   }
-
 }
