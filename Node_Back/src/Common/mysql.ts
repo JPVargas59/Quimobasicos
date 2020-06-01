@@ -121,10 +121,15 @@ exports.getLugar = async (client, idLugar) => {
 	return lugar[0];
 };
 
-exports.getUsuarios = async (client) => {
-	var usuarios = await client.query(`
-    SELECT fName as nombre, lName as apellidos, idUsuario, correo, idSupervisor, puesto  FROM Usuario
-    `);
+exports.getUsuarios = async (client, puestoUsuario) => {
+	let stringQuery =
+		'SELECT fName as nombre, lName as apellidos, idUsuario, correo, idSupervisor, puesto FROM Usuario';
+	let arrayQuery = [];
+	if (puestoUsuario) {
+		stringQuery += ' WHERE puesto=?';
+		arrayQuery += puestoUsuario;
+	}
+	var usuarios = await client.query(stringQuery, arrayQuery);
 	if (usuarios.length == 0) {
 		return null;
 	}
