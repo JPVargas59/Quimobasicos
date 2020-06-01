@@ -1,6 +1,6 @@
 exports.getTanques = async (client) => {
 	var tanques = await client.query(`
-    SELECT * FROM Tanque
+    SELECT * FROM Tanque ORDER BY idTanque
     `);
 	if (tanques.length == 0) {
 		return null;
@@ -11,7 +11,7 @@ exports.getTanques = async (client) => {
 exports.getHaEstadoTanque = async (client, parentID) => {
 	var lugares = await client.query(
 		`
-    SELECT * FROM TanqueHaEstado WHERE idTanque = ?
+    SELECT * FROM TanqueHaEstado WHERE idTanque = ? ORDER BY idTanque
     `,
 		parentID
 	);
@@ -62,7 +62,7 @@ exports.getContenidoTanque = async (client, idContenido) => {
 exports.getLugarTanque = async (client, idTanque) => {
 	var lugar = await client.query(
 		`
-    SELECT * FROM TanqueEsta JOIN Lugar ON TanqueEsta.idLugar = Lugar.idLugar WHERE idTanque = ?
+    SELECT * FROM TanqueEsta JOIN Lugar ON TanqueEsta.idLugar = Lugar.idLugar WHERE idTanque = ? ORDER BY TanqueEsta.idTanque
     `,
 		idTanque
 	);
@@ -88,7 +88,7 @@ exports.getInfoLugar = async (client, idLugar) => {
 exports.getTanque = async (client, idTanque) => {
 	var tanque = await client.query(
 		`
-    SELECT * FROM Tanque WHERE idTanque = ?
+    SELECT * FROM Tanque WHERE idTanque = ? ORDER BY idTanque
     `,
 		idTanque
 	);
@@ -138,7 +138,6 @@ exports.getUsuario = async (client, idUsuario) => {
     WHERE idUsuario = ?`,
 		idUsuario
 	);
-	console.log('HOLAA', usuario);
 	if (usuario.length == 0) {
 		return null;
 	}
@@ -262,7 +261,7 @@ exports.getOperacionesDelTanque = async (client, idTanque) => {
 exports.getMantenimientoTanque = async (client, idTanque) => {
 	var mantenimientos = await client.query(
 		`
-    SELECT idTanque, fechaMantenimiento, observaciones FROM Mantenimiento WHERE idTanque = ?
+    SELECT idTanque, fechaMantenimiento, observaciones FROM Mantenimiento WHERE idTanque = ? ORDER BY idTanque
     `,
 		idTanque
 	);
@@ -274,7 +273,7 @@ exports.getMantenimientoTanque = async (client, idTanque) => {
 };
 exports.getHistorialMantenimimientosTanques = async (client) => {
 	var mantenimientos = await client.query(`
-    SELECT idTanque, fechaMantenimiento, observaciones FROM Mantenimiento
+    SELECT idTanque, fechaMantenimiento, observaciones FROM Mantenimiento ORDER BY idTanque
     `);
 	if (mantenimientos.length == 0) {
 		return null;
@@ -284,7 +283,7 @@ exports.getHistorialMantenimimientosTanques = async (client) => {
 exports.getOperacionesTanque = async (client, idTanque) => {
 	var operaciones = await client.query(
 		`
-    SELECT idTanque, idUsuario, fecha FROM OperadoPor WHERE idTanque = ?
+    SELECT idTanque, idUsuario, fecha FROM OperadoPor WHERE idTanque = ? ORDER BY idTanque
 	`,
 		idTanque
 	);
@@ -303,4 +302,43 @@ exports.getOperacionesTanques = async (client) => {
 		return null;
 	}
 	return operaciones;
+};
+exports.getTanquesEnLugar = async (client, idLugar) => {
+	var tanques = await client.query(
+		`
+	SELECT * FROM Tanque JOIN TanqueEsta ON Tanque.idTanque = TanqueEsta.idTanque WHERE idLugar = ? ORDER BY Tanque.idTanque
+	`,
+		idLugar
+	);
+	if (tanques.length == 0) {
+		return null;
+	}
+	return tanques;
+};
+exports.getTanquesConContenido = async (client, idContenido) => {
+	var tanques = await client.query(
+		`
+	SELECT * FROM Tanque WHERE idContenido = ? ORDER BY idTanque
+	`,
+		idContenido
+	);
+	if (tanques.length == 0) {
+		return null;
+	}
+	return tanques;
+};
+exports.getHaEstadoEnFechas = async (client, desde, hasta) => {
+	let desdeString = desde.toISOString();
+	desdeString = desdeString.substring(0, desdeString.length - 14);
+	let hastaString = hasta.toISOString();
+	hastaString = hastaString.substring(0, hastaString.length - 14);
+	var ubicaciones = await client.query(
+		`
+    SELECT * FROM TanqueHaEstado WHERE fecha BETWEEN "${desdeString}" AND "${hastaString}";
+	`
+	);
+	if (ubicaciones.length == 0) {
+		return null;
+	}
+	return ubicaciones;
 };
