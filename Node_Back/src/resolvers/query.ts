@@ -2,59 +2,131 @@ import { IResolvers } from 'graphql-tools';
 import asyncFunctionsMySQLQueries = require('../data/asyncMySQLQueries');
 const query: IResolvers = {
 	Query: {
-		tanques(): any {
-			return asyncFunctionsMySQLQueries.getTanques();
+		tanques(_: void, __: void, { token }): any {
+			if (!token) {
+				throw new Error('Acceso no autorizado');
+			} else {
+				return asyncFunctionsMySQLQueries.getTanques();
+			}
 		},
-		tanque(__: void, { idTanque }): any {
-			return asyncFunctionsMySQLQueries.getTanque(idTanque);
+		tanque(__: void, { idTanque }, { token }): any {
+			if (!token) {
+				throw new Error('Acceso no autorizado');
+			} else {
+				return asyncFunctionsMySQLQueries.getTanque(idTanque);
+			}
 		},
-		lugares(): any {
-			return asyncFunctionsMySQLQueries.getLugares();
+		lugares(_: void, __: void, { token }): any {
+			if (!token) {
+				throw new Error('Acceso no autorizado');
+			} else {
+				return asyncFunctionsMySQLQueries.getLugares();
+			}
 		},
-		lugar(__: void, { idLugar }): any {
-			return asyncFunctionsMySQLQueries.getLugar(idLugar);
+		lugar(__: void, { idLugar }, { token }): any {
+			if (!token) {
+				throw new Error('Acceso no autorizado');
+			} else {
+				return asyncFunctionsMySQLQueries.getLugar(idLugar);
+			}
 		},
-		usuarios(): any {
-			return asyncFunctionsMySQLQueries.getUsuarios();
+		usuarios(_: void, __: void, { token }): any {
+			if (!token) {
+				throw new Error('Acceso no autorizado');
+			} else {
+				return asyncFunctionsMySQLQueries.getUsuarios();
+			}
 		},
-		usuario(__: void, { idUsuario }): any {
-			return asyncFunctionsMySQLQueries.getUsuario(idUsuario);
+		usuario(__: void, { idUsuario }, { token }): any {
+			if (!token) {
+				throw new Error('Acceso no autorizado');
+			} else {
+				return asyncFunctionsMySQLQueries.getUsuario(idUsuario);
+			}
 		},
-		contenidos(): any {
-			return asyncFunctionsMySQLQueries.getContenidos();
+		contenidos(_: void, __: void, { token }): any {
+			if (!token) {
+				throw new Error('Acceso no autorizado');
+			} else {
+				return asyncFunctionsMySQLQueries.getContenidos();
+			}
 		},
-		contenido(__: void, { idContenido }): any {
-			return asyncFunctionsMySQLQueries.getContenido(idContenido);
+		contenido(__: void, { idContenido }, { token }): any {
+			if (!token) {
+				throw new Error('Acceso no autorizado');
+			} else {
+				return asyncFunctionsMySQLQueries.getContenido(idContenido);
+			}
 		},
-		owners(): any {
-			return asyncFunctionsMySQLQueries.getOwners();
+		owners(_: void, __: void, { token }): any {
+			if (!token) {
+				throw new Error('Acceso no autorizado');
+			} else {
+				return asyncFunctionsMySQLQueries.getOwners();
+			}
 		},
-		owner(__: void, { idOwner }): any {
-			return asyncFunctionsMySQLQueries.getOwner(idOwner);
+		owner(__: void, { idOwner }, { token }): any {
+			if (!token) {
+				throw new Error('Acceso no autorizado');
+			} else {
+				return asyncFunctionsMySQLQueries.getOwner(idOwner);
+			}
 		},
-		etiquetas(): any {
-			return asyncFunctionsMySQLQueries.getEtiquetas();
+		etiquetas(_: void, __: void, { token }): any {
+			if (!token) {
+				throw new Error('Acceso no autorizado');
+			} else {
+				return asyncFunctionsMySQLQueries.getEtiquetas();
+			}
 		},
-		etiqueta(__: void, { idEtiqueta }): any {
-			return asyncFunctionsMySQLQueries.getEtiqueta(idEtiqueta);
+		etiqueta(__: void, { idEtiqueta }, { token }): any {
+			if (!token) {
+				throw new Error('Acceso no autorizado');
+			} else {
+				return asyncFunctionsMySQLQueries.getEtiqueta(idEtiqueta);
+			}
 		},
-		historialPesoTanques(): any {
-			return asyncFunctionsMySQLQueries.getHistorialPesoTanques();
+		historialPesoTanques(_: void, __: void, { token }): any {
+			if (!token) {
+				throw new Error('Acceso no autorizado');
+			} else {
+				return asyncFunctionsMySQLQueries.getHistorialPesoTanques();
+			}
 		},
-		historialPesoTanque(__: void, { idTanque }): any {
-			return asyncFunctionsMySQLQueries.getHistorialPesoTanque(idTanque);
+		historialPesoTanque(__: void, { idTanque }, { token }): any {
+			if (!token) {
+				throw new Error('Acceso no autorizado');
+			} else {
+				return asyncFunctionsMySQLQueries.getHistorialPesoTanque(idTanque);
+			}
 		},
-		historialMantenimientos(): any {
-			return asyncFunctionsMySQLQueries.getHistorialMantenimimientosTanques();
+		historialMantenimientos(_: void, __: void, { token }): any {
+			if (!token) {
+				throw new Error('Acceso no autorizado');
+			} else {
+				return asyncFunctionsMySQLQueries.getHistorialMantenimimientosTanques();
+			}
 		},
-		historialMantenimientoTanque(__: void, { idTanque }): any {
-			return asyncFunctionsMySQLQueries.getMantenimientoTanque(idTanque);
+		historialMantenimientoTanque(__: void, { idTanque }, { token }): any {
+			if (!token) {
+				throw new Error('Acceso no autorizado');
+			} else {
+				return asyncFunctionsMySQLQueries.getMantenimientoTanque(idTanque);
+			}
 		},
-		operaciones(): any {
-			return asyncFunctionsMySQLQueries.getOperacionesTanques();
+		operaciones(_: void, __: void, { token }): any {
+			if (!token) {
+				throw new Error('Acceso no autorizado');
+			} else {
+				return asyncFunctionsMySQLQueries.getOperacionesTanques();
+			}
 		},
-		operacionesTanque(__: void, { idTanque }): any {
-			return asyncFunctionsMySQLQueries.getOperacionesTanque(idTanque);
+		operacionesTanque(__: void, { idTanque }, { token }): any {
+			if (!token) {
+				throw new Error('Acceso no autorizado');
+			} else {
+				return asyncFunctionsMySQLQueries.getOperacionesTanque(idTanque);
+			}
 		}
 	}
 };

@@ -1,4 +1,3 @@
-import { async } from '@angular/core/testing';
 var common = require('../Common/mysql');
 import client from '../client';
 

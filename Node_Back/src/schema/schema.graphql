@@ -110,6 +110,12 @@ type HistorialTanque {
 	idTanque: ID
 }
 
+type OutputLogin {
+	refreshJWT: String!
+	jwt_token: String!
+	jwt_fechaExpiracion: Date!
+}
+
 "Historial de peso de tanques"
 type HistorialPeso {
 	peso: Float
@@ -220,7 +226,7 @@ input IdTanqueHaEstado {
 }
 
 "Id de un usuario"
-input UsuarioInput {
+input createUsuarioInput {
 	id: String
 	fName: String
 	lName: String
@@ -228,6 +234,21 @@ input UsuarioInput {
 	correo: String
 	idSupervisor: String
 	puesto: puestoUsuario
+}
+
+input setUsuarioInput {
+	id: String
+	fName: String
+	lName: String
+	correo: String
+	idSupervisor: String
+	puesto: puestoUsuario
+}
+
+input ContrasenaInput {
+	correo: String!
+	contraAnterior: String!
+	nuevaContra: String!
 }
 
 "Queries"
@@ -330,6 +351,12 @@ type Mutation {
 	): String
 	createTanqueHaEstado(tanqueHaEstadoInput: TanqueHaEstadoInput!): String
 
-	setUsuario(usuarioInput: UsuarioInput!, idUsuarioOriginal: String!): String
-	createUsuario(usuarioInput: UsuarioInput!): String
+	setUsuario(
+		usuarioInput: setUsuarioInput!
+		idUsuarioOriginal: String!
+	): String
+	createUsuario(usuarioInput: createUsuarioInput!): String
+	cambiarContrasena(contrasenaInput: ContrasenaInput!): String!
+	login(correo: String!, contrasena: String!): OutputLogin!
+	refresh(refreshJWT: String!): String!
 }

@@ -76,11 +76,18 @@ CREATE TABLE Usuario (
 	fName VARCHAR(64),
 	lName VARCHAR(64),
 	contrasena VARCHAR(128),
-	correo VARCHAR(128),
+	correo VARCHAR(128) UNIQUE,
     idSupervisor CHAR(10),
     puesto ENUM('Admin', 'Supervisor', 'Operador'),
     FOREIGN KEY (idSupervisor) REFERENCES Usuario(idUsuario) ON UPDATE CASCADE,
 	PRIMARY KEY (idUsuario)
+);
+
+CREATE TABLE JWT (
+    idUsuario CHAR(10) NOT NULL,
+    jwt TEXT UNIQUE,
+    PRIMARY KEY (idUsuario),
+    FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario) ON UPDATE CASCADE
 );
 
 CREATE TABLE TanqueEsta (
@@ -113,3 +120,4 @@ CREATE TRIGGER `pasaPesoAHistorialPeso`  AFTER UPDATE ON `Tanque`
 DELIMITER ;
 CREATE TRIGGER `nuevoHaEstado` AFTER INSERT ON `TanqueEsta` FOR EACH ROW INSERT INTO TanqueHaEstado VALUES ( NEW.idTanque, NEW.idLugar, NEW.fecha);
 CREATE TRIGGER `nuevoPesoAHistorialPeso` AFTER INSERT ON `Tanque` FOR EACH ROW INSERT INTO HistorialPeso VALUES (NEW.idTanque, NEW.fechaIngreso, NEW.pesoActual);
+CREATE TRIGGER `nuevoUsuarioJWT` AFTER INSERT ON `Usuario` FOR EACH ROW INSERT INTO JWT VALUES (NEW.idUsuario, NULL);

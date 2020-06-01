@@ -24,6 +24,18 @@ let mysqlMutations = {
 			mysqlId
 		);
 		return quitClient(client, resp);
+	},
+	async cambiarContrasena(input) {
+		let resp = await common.cambiarContrasena(client, input);
+		return quitClient(client, resp);
+	},
+	async login(correo, contrasena) {
+		let resp = await common.login(client, correo, contrasena);
+		return quitClient(client, resp);
+	},
+	async refresh(refreshJWT) {
+		let resp = await common.refresh(client, refreshJWT);
+		return quitClient(client, resp);
 	}
 };
 
