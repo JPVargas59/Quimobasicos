@@ -27,7 +27,7 @@ const query: IResolvers = {
 			if (!token) {
 				throw new Error('Acceso no autorizado');
 			} else {
-				return asyncFunctionsMySQLQueries.getLugar(idLugar);
+				return asyncFunctionsMySQLQueries.getLugar(idLugar, null);
 			}
 		},
 		usuarios(_: void, __: void, { token }): any {
@@ -127,6 +127,9 @@ const query: IResolvers = {
 			} else {
 				return asyncFunctionsMySQLQueries.getOperacionesTanque(idTanque);
 			}
+		},
+		tanquesHaEstadoEnFecha(__: void, { desde, hasta }): any {
+			return asyncFunctionsMySQLQueries.getHaEstadoEnFechas(desde, hasta);
 		}
 	}
 };

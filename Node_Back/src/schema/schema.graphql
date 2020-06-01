@@ -64,6 +64,7 @@ type EtiquetaRFID {
 type Contenido {
 	idContenido: String!
 	contenido: String!
+	tanques: [Tanque]
 }
 "Lugar de donde se pueden ubicar los tanques"
 type Lugar {
@@ -295,6 +296,8 @@ type Query {
 	operaciones: [Operacion!]
 	"Operacion de un tanque"
 	operacionesTanque(idTanque: ID!): [Operacion!]
+	"Lugares donde ha estado en diferentes tanques"
+	tanquesHaEstadoEnFecha(desde: Date, hasta: Date): [HistorialTanque]
 }
 
 """
@@ -309,10 +312,7 @@ type Mutation {
 	setLugar(lugarInput: LugarInput!, idLugarOriginal: String!): String
 	createLugar(lugarInput: LugarInput!): String
 
-	setContenido(
-		contenidoInput: ContenidoInput!
-		idContenidoOriginal: String!
-	): String
+	setContenido(contenidoInput: ContenidoInput!, idContenidoOriginal: String!): String
 	createContenido(contenidoInput: ContenidoInput!): String
 
 	setDueno(duenoInput: DuenoInput!, idDuenoOriginal: String!): String
@@ -339,10 +339,7 @@ type Mutation {
 	): String
 	createOperadoPor(operadoPorInput: OperadoPorInput!): String
 
-	setTanqueEsta(
-		tanqueEstaInput: TanqueEstaInput!
-		idTanqueEstaOriginal: String!
-	): String
+	setTanqueEsta(tanqueEstaInput: TanqueEstaInput!, idTanqueEstaOriginal: String!): String
 	createTanqueEsta(tanqueEstaInput: TanqueEstaInput): String
 
 	setTanqueHaEstado(
@@ -351,10 +348,7 @@ type Mutation {
 	): String
 	createTanqueHaEstado(tanqueHaEstadoInput: TanqueHaEstadoInput!): String
 
-	setUsuario(
-		usuarioInput: setUsuarioInput!
-		idUsuarioOriginal: String!
-	): String
+	setUsuario(usuarioInput: setUsuarioInput!, idUsuarioOriginal: String!): String
 	createUsuario(usuarioInput: createUsuarioInput!): String
 	cambiarContrasena(contrasenaInput: ContrasenaInput!): String!
 	login(correo: String!, contrasena: String!): OutputLogin!
