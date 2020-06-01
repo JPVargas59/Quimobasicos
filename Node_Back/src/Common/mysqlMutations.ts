@@ -33,7 +33,7 @@ async function signJWT(user) {
 			console.log(error);
 			throw new Error('Error interno');
 		});
-	return jwt.sign({ id: user.idUsuario, puesto: user.puesto }, serverkey, {
+	return jwt.sign({ id: user.idUsuario, puesto: user.puesto, correo: user.correo }, serverkey, {
 		expiresIn: '15m',
 		algorithm: 'RS256'
 	});
