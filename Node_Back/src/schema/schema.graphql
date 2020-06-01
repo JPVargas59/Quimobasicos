@@ -269,7 +269,7 @@ type Query {
 	"Información de un lugar seleccionado por id"
 	lugar(idLugar: ID!): Lugar!
 	"Lista de información de usuarios"
-	usuarios: [Usuario!]
+	usuarios(puesto: puestoUsuario): [Usuario!]
 	"Informacion de un usuario seleccionado por id"
 	usuario(idUsuario: ID!): Usuario!
 	"Lista de información de contenido"

@@ -30,11 +30,11 @@ const query: IResolvers = {
 				return asyncFunctionsMySQLQueries.getLugar(idLugar, null);
 			}
 		},
-		usuarios(_: void, __: void, { token }): any {
+		usuarios(_: void, { puesto }, { token }): any {
 			if (!token) {
 				throw new Error('Acceso no autorizado');
 			} else {
-				return asyncFunctionsMySQLQueries.getUsuarios();
+				return asyncFunctionsMySQLQueries.getUsuarios(puesto);
 			}
 		},
 		usuario(__: void, { idUsuario }, { token }): any {

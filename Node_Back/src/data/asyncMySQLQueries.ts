@@ -60,8 +60,8 @@ let mysqlMutations = {
 		client.quit();
 		return resp;
 	},
-	async getUsuarios() {
-		var resp = await common.getUsuarios(client);
+	async getUsuarios(puestoUsuario: string) {
+		var resp = await common.getUsuarios(client, puestoUsuario);
 		client.quit();
 		return resp;
 	},
