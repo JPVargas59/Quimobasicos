@@ -156,6 +156,19 @@ export class DatabaseService {
     }`;
     return this.http.post(`${this.homeURL}`, {query});
   }
+  getUser(idUser){
+    const query = `{
+      usuario(idUsuario:"${idUser}"){
+        idUsuario
+        nombre
+        apellidos
+        correo
+        password
+        idSupervisor
+        puesto
+    }}`;
+    return this.http.post(`${this.homeURL}`, {query})
+  }
 
   getEtiquetas() {
     const json = '{etiquetas {idEtiqueta}}';
@@ -166,10 +179,6 @@ export class DatabaseService {
     const json = '{lugares{idLugar, lnombre, radio, capacidadMaxima}}';
     return this.http.get(`${this.homeURL}?query=${json}`);
   }
-  // getIdUsuarios() {
-  //   const query = '{usuarios{idUsuario}}';
-  //   return this.http.post(`${this.homeURL}`, {query});
-  // }
 
   // postEtiqueta(){
   //   const json = '{createEtiqueta(etiquetaInput:{id:15})}';

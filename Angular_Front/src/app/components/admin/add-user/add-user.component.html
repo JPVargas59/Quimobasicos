@@ -9,17 +9,17 @@
         <label>Nombre</label>
         <div class="two fields">
           <div class="field">
-            <input type="text" name="first-name" placeholder="Nombre">
+            <input type="text" name="nombre" id="nombre" placeholder="Nombre" [(ngModel)]="user.nombre">
           </div>
           <div class="required field">
-            <input type="text" name="last-name" placeholder="Apellidos">
+            <input type="text" name="apellidos" [(ngModel)]="user.apellidos" placeholder="Apellidos">
           </div>
         </div>
       </div>
       <div class="required field">
         <label>Correo</label>
         <div class="field">
-          <input type="email" name="email" placeholder="correo">
+          <input type="email" name="email" placeholder="correo" [(ngModel)]="user.correo">
         </div>
       </div>
 
@@ -27,14 +27,14 @@
     <div class="required field">
       <label>Contraseña</label>
       <div class="ui icon input">
-        <input type="password">
+        <input type="password" [(ngModel)]="user.password">
         <i class="lock icon"></i>
       </div>
     </div>
     <div class="grouped fields required field">
       <div class="field">
         <label>Puesto</label>
-        <select class="ui search dropdown">
+        <select class="ui search dropdown" name="puesto" [(ngModel)]="user.puesto">
           <option value="">Puesto...</option>
           <option value="Operador">Operador</option>
           <option value="Supervisor">Supervisor</option>
@@ -42,9 +42,9 @@
         </select>
       </div>
     </div>
-    <div class="field">
+    <div class="field" *ngIf="user.puesto == 'Operador'">
       <label>Supervisor de este usuario</label>
-      <select class="ui search dropdown">
+      <select class="ui search dropdown"Operador [(ngModel)]="user.idSupervisor">
         <option value="">Supervisor...</option>
         <!-- TODDO: Agregar supervisor de graphql -->
         <!-- <option *ngFor="let valor of supervisor" value="{{supervisor.nombre}}">{{supervisor.nombre}}</option> -->
@@ -55,5 +55,5 @@
     <div class="ui error message">
       <div class="header">We noticed some issues</div>
     </div>
-    <div class="ui submit button" routerLink="/admin/users">Register</div>
+    <div class="ui submit primary button" routerLink="/admin/users">Actualizar Información</div>
   </form>
