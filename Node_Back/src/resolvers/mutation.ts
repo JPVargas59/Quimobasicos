@@ -232,12 +232,8 @@ const mutation: IResolvers = {
 		login(__: void, { correo, contrasena }): any {
 			return mysqlMutations.login(correo, contrasena);
 		},
-		refresh(__: void, { refreshJWT }, { token }): any {
-			if (!token) {
-				throw new Error('Acceso no autorizado');
-			} else {
-				return mysqlMutations.refresh(refreshJWT);
-			}
+		refresh(__: void, { refreshJWT }): any {
+			return mysqlMutations.refresh(refreshJWT);
 		}
 	}
 };
