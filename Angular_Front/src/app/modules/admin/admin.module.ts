@@ -49,6 +49,7 @@ const routes: Routes = [
       { path: 'contents', component: ContentsComponent },
       { path: 'contents/edit/:contentId', component: EditContentComponent },
       { path: 'owners', component: OwnersComponent },
+      { path: 'owners/add', component: EditOwnerComponent },
       { path: 'owners/:ownerId/edit', component: EditOwnerComponent },
       { path: 'rfid-tags', component: RfidTagsComponent },
       { path: 'rfid-tags/add', component: EditTagComponent },
