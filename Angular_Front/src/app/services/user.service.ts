@@ -58,7 +58,7 @@ export class UserService {
         console.log('decoded token', decodedToken);
         this.setType(decodedToken.payload.puesto);
         this.setUserId(decodedToken.payload.id);
-      });
+      })
   }
 
   logout() {

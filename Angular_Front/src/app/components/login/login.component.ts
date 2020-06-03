@@ -29,7 +29,9 @@ export class LoginComponent implements OnInit {
     if (this.usuario.contrasena && this.usuario.correo) {
       this.user.login(this.usuario.correo, this.usuario.contrasena).add(() => {
         console.log(this.user.getType(), this.user.getUserId());
-        this.router.navigateByUrl(this.user.getType().toLowerCase());
+        if (this.user.getType()) {
+          this.router.navigateByUrl(this.user.getType().toLowerCase());
+        }
       });
     }
   }
