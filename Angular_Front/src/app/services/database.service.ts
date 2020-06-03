@@ -135,8 +135,12 @@ export class DatabaseService {
   }
 
   getContenidos() {
-    const json = '{contenidos {idContenido ,contenido}}';
-    return this.http.get(`${this.homeURL}?query=${json}`);
+    const query = '{contenidos {idContenido ,contenido}}';
+    return this.http.post(`${this.homeURL}`, {query});
+  }
+  getContenido(id){
+    const query =`{contenido(idContenido:"${id}"){ idContenido contenido }}`
+    return this.http.post(`${this.homeURL}`, {query});
   }
 
   getDuenos() {

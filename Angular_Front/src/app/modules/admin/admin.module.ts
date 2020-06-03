@@ -47,6 +47,7 @@ const routes: Routes = [
       { path: 'reports/see-report/:reportName', component: SeeReportComponent },
 
       { path: 'contents', component: ContentsComponent },
+      { path: 'contents/add', component: EditContentComponent },
       { path: 'contents/edit/:contentId', component: EditContentComponent },
       { path: 'owners', component: OwnersComponent },
       { path: 'owners/add', component: EditOwnerComponent },

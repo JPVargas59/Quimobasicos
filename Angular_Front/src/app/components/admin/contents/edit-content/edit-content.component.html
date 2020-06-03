@@ -1,1 +1,20 @@
-<p>edit-content works!</p>
+<h3 class="ui title" *ngIf="id">Modificar {{id}}</h3>
+<h3 class="ui title" *ngIf="!id">Agregar un tipo de Contenido</h3>
+
+<form class="ui form">
+    <div class="two fields">
+      <div class="field required">
+        <label>ID del Contenido</label>
+        <div class="field">
+          <div class="field">
+            <input maxlength="10" type="text" name="idContenido" required [(ngModel)]="contenido.idContenido" placeholder="ID">
+          </div>
+        </div>
+      </div>
+      <div class="field required">
+        <label>Nombre</label>
+        <input maxlength="10" type="text" name="contenido" required [(ngModel)]="contenido.contenido" placeholder="Nombre">
+      </div>
+    </div>
+    <div class="ui submit primary button" routerLink="/admin/contents">Guardar</div>
+</form>

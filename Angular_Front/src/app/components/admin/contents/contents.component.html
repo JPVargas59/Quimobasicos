@@ -1,9 +1,20 @@
-<h3 class="ui header">Contenidos de los Tanques</h3>
+<div class="ui right aligned grid">
+    <div class="left floated left aligned six wide column">
+        <h3 class="ui header">Contenidos de los Tanques</h3>
+    </div>
+    <div class="right floated rigt aligned six wide column">
+        <div class="ui two buttons">
+            <button class="ui primary button" routerLink="/admin/contents/add">Añadir Contenido</button>
+        </div> 
+    </div>
+</div>
 
 <table class="ui table">
     <thead>
         <th>ID Contenidos</th>
         <th>Nombre Contenidos</th>
+        <th>Tanques</th>
+        <th>Acción</th>
     </thead>
     <tbody>
         <tr  *ngFor="let contenido of contenidos">
@@ -11,6 +22,14 @@
                 <a (click)="onContentSelect($event)" [id]="contenido.idContenido">{{contenido.idContenido}}</a>
               </td>
             <td>{{contenido.contenido}}</td>
+            <td># TODO</td>
+            <!-- TODO: query que regrese con número de tanques el contenido y agregarlo -->
+            <!-- <td>{{contenido.numTanques}}</td> -->
+            <td>
+                <div class="ui two buttons">
+                    <button class="ui blue button"(click)="onContentSelect($event)" [id]="contenido.idContenido">Editar</button>
+                </div> 
+            </td>
         </tr>
     </tbody>
 </table>
