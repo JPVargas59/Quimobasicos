@@ -121,7 +121,7 @@ INSERT INTO Usuario VALUES (
     'OP000002',
     'Juan Pablo',
     'Vargas Rodriguez',
-    'fef2d481e8454c1dc62e65ccd139153506c4c92ac44a4adefe736e07da6a1e73',
+    '$2a$10$mpXZrlIKDUOHWQ2Vb495Guww4WZXtf.46pO/aVzJ8vKLJo.xx4wsu',
     'juanpablo.vr@quimobasicos.com',
     null,
     'Admin'

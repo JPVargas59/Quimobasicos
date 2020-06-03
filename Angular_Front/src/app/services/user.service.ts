@@ -55,6 +55,7 @@ export class UserService {
         console.log(response);
         UserService.setSession(response.data.login.jwt_token, response.data.login.jwt_fechaExpiracion);
         const decodedToken = this.jwtDecode(response.data.login.jwt_token);
+        console.log('decoded token', decodedToken);
         this.setType(decodedToken.payload.puesto);
         this.setUserId(decodedToken.payload.id);
       });

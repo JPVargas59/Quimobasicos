@@ -85,7 +85,7 @@ CREATE TABLE Usuario (
 
 CREATE TABLE JWT (
     idUsuario CHAR(10) NOT NULL,
-    jwt TEXT UNIQUE,
+    jwt TEXT,
     PRIMARY KEY (idUsuario),
     FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario) ON UPDATE CASCADE
 );
