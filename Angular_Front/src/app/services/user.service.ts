@@ -52,13 +52,17 @@ export class UserService {
     return this.http.post(this.homeURL, {query, variables: {user, password}})
       .subscribe(res => {
         const response = res as any;
-        console.log(response);
-        UserService.setSession(response.data.login.jwt_token, response.data.login.jwt_fechaExpiracion);
-        const decodedToken = this.jwtDecode(response.data.login.jwt_token);
-        console.log('decoded token', decodedToken);
-        this.setType(decodedToken.payload.puesto);
-        this.setUserId(decodedToken.payload.id);
-      })
+        if (response) {
+          console.log('Response', response);
+          UserService.setSession(response.data.login.jwt_token, response.data.login.jwt_fechaExpiracion);
+          const decodedToken = this.jwtDecode(response.data.login.jwt_token);
+          console.log('decoded token', decodedToken);
+          this.setType(decodedToken.payload.puesto);
+          this.setUserId(decodedToken.payload.id);
+        } else {
+          console.log('El servidor no respondió');
+        }
+      });
   }
 
   logout() {
