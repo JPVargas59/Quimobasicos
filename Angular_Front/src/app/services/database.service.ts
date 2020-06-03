@@ -65,7 +65,7 @@ export class DatabaseService {
             lnombre
           }
         }
-    
+
         contenidoTanque {
           contenido
         }
@@ -85,7 +85,6 @@ export class DatabaseService {
         peso
       }
     }
-    
     `;
     return this.http.post(`${this.homeURL}`, {query});
   }
@@ -156,7 +155,7 @@ export class DatabaseService {
     }`;
     return this.http.post(`${this.homeURL}`, {query});
   }
-  getUser(idUser){
+  getUser(idUser) {
     const query = `{
       usuario(idUsuario:"${idUser}"){
         idUsuario
@@ -167,7 +166,7 @@ export class DatabaseService {
         idSupervisor
         puesto
     }}`;
-    return this.http.post(`${this.homeURL}`, {query})
+    return this.http.post(`${this.homeURL}`, {query});
   }
 
   getEtiquetas() {
@@ -180,7 +179,7 @@ export class DatabaseService {
     return this.http.get(`${this.homeURL}?query=${json}`);
   }
   getLugar(idLugar) {
-    const query=`{
+    const query = `{
       lugar(idLugar:"${idLugar}"){
         idLugar
         lnombre
@@ -192,13 +191,14 @@ export class DatabaseService {
         }
       }
     }`;
-    return this.http.post(`${this.homeURL}`, {query})
+    return this.http.post(`${this.homeURL}`, {query});
   }
 
   // postEtiqueta(){
   //   const json = '{createEtiqueta(etiquetaInput:{id:15})}';
   //   return this.http.post(`${this.homeURL}?query=${json}`);
   // }
+
 
 
   newTank(tank: Tanque) {

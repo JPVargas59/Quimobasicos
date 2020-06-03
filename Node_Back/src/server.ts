@@ -11,6 +11,7 @@ let jwt = require('jsonwebtoken');
 let fs = require('fs');
 let path = require('path');
 
+
 let checkToken = (token) => {
 	try {
 		if (token) {

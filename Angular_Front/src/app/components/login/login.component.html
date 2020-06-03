@@ -7,25 +7,26 @@
           Inicia sesión con tu cuenta
         </div>
       </h2>
-      <form class="ui large form">
+      <form class="ui large form" (ngSubmit)="onSubmit()">
         <div class="ui basic segment">
           <div class="field">
             <div class="ui left icon input">
               <i class="user icon"></i>
-              <input type="text" name="email" placeholder="E-mail address">
+              <input type="text" name="email" placeholder="E-mail address" [(ngModel)]="usuario.correo">
             </div>
           </div>
           <div class="field">
             <div class="ui left icon input">
               <i class="lock icon"></i>
-              <input type="password" name="password" placeholder="Password">
+              <input type="password" name="password" placeholder="Password" [(ngModel)]="usuario.contrasena">
             </div>
           </div>
           <p>Iniciar sesión</p>
+          <button class="ui fluid green button" type="submit" >Iniciar sesión</button>
           <div class="ui three buttons">
-            <div class="ui large button" (click)="user.setType('operator')" routerLink="/operator">Operador</div>
-            <div class="ui large primary button" (click)="user.setType('supervisor')" routerLink="/supervisor">Supervisor</div>
-            <div class="ui large secondary button" (click)="user.setType('admin')" routerLink="/admin">Admin</div>
+            <div class="ui large button" routerLink="/operator">Operador</div>
+            <div class="ui large primary button" routerLink="/supervisor">Supervisor</div>
+            <div class="ui large secondary button"  routerLink="/admin">Admin</div>
           </div>
 
 
