@@ -135,13 +135,21 @@ export class DatabaseService {
   }
 
   getContenidos() {
-    const json = '{contenidos {idContenido ,contenido}}';
-    return this.http.get(`${this.homeURL}?query=${json}`);
+    const query = '{contenidos {idContenido ,contenido}}';
+    return this.http.post(`${this.homeURL}`, {query});
+  }
+  getContenido(id){
+    const query =`{contenido(idContenido:"${id}"){ idContenido contenido }}`
+    return this.http.post(`${this.homeURL}`, {query});
   }
 
   getDuenos() {
     const json = '{owners {idDueno nombre}}';
     return this.http.get(`${this.homeURL}?query=${json}`);
+  }
+  getDueno(id) {
+    const query = `{owner(idOwner:"${id}") {idDueno nombre}}`;
+    return this.http.post(`${this.homeURL}`, {query});
   }
 
   getUsuarios() {
@@ -198,8 +206,6 @@ export class DatabaseService {
   //   const json = '{createEtiqueta(etiquetaInput:{id:15})}';
   //   return this.http.post(`${this.homeURL}?query=${json}`);
   // }
-
-
 
   newTank(tank: Tanque) {
     const query = 'mutation($tank: TanqueInput!) {createTanque(tanqueInput: $tank)}';

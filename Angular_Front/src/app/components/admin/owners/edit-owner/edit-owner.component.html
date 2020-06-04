@@ -1,1 +1,21 @@
-<p>edit-owner works!</p>
+<h3 class="ui title" *ngIf="id">Modificar {{id}}</h3>
+<h3 class="ui title" *ngIf="!id">Agregar un nuevo Dueño</h3>
+
+<form class="ui form">
+    <h4 class="ui dividing header">Información del Dueño</h4>
+    <div class="two fields">
+      <div class="field required">
+        <label>ID del Dueño</label>
+        <div class="field">
+          <div class="field">
+            <input maxlength="10" type="text" name="idDueno" required [(ngModel)]="owner.idDueno" placeholder="ID">
+          </div>
+        </div>
+      </div>
+      <div class="field required">
+        <label>Nombre</label>
+        <input maxlength="10" type="text" name="nombre" required [(ngModel)]="owner.nombre" placeholder="Nombre">
+      </div>
+    </div>
+    <div class="ui submit primary button" routerLink="/admin/owners">Guardar</div>
+</form>

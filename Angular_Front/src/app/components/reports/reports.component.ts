@@ -24,10 +24,9 @@ export class ReportsComponent implements OnInit {
   }
 
   onReportSelection(event) {
-    console.log(event);
     const reportName = event.target.id;
     const userType = this.user.getType();
-    if (reportName == 'Inventario'){
+    if (reportName == 'Inventario de Tanques'){
       this.router.navigateByUrl(`/${userType}/reports/inventory`)
     }else{
       this.router.navigateByUrl(`/${userType}/reports/see-report/${reportName}`);

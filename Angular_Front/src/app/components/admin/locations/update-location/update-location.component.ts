@@ -27,6 +27,5 @@ export class UpdateLocationComponent implements OnInit {
         this.lugar = res.data.lugar;
       })
     }
-  }a
-
+  }
 }
