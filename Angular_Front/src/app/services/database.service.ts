@@ -135,7 +135,7 @@ export class DatabaseService {
   }
 
   getContenidos() {
-    const query = '{contenidos {idContenido ,contenido}}';
+    const query = `{ contenidos{ idContenido contenido numTanques}}`;
     return this.http.post(`${this.homeURL}`, {query});
   }
   getContenido(id){
@@ -144,8 +144,8 @@ export class DatabaseService {
   }
 
   getDuenos() {
-    const json = '{owners {idDueno nombre}}';
-    return this.http.get(`${this.homeURL}?query=${json}`);
+    const query = `{ owners{ idDueno nombre numTanques }}`
+    return this.http.post(`${this.homeURL}`, {query});
   }
   getDueno(id) {
     const query = `{owner(idOwner:"${id}") {idDueno nombre}}`;

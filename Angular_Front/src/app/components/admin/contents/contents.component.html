@@ -22,9 +22,7 @@
                 <a (click)="onContentSelect($event)" [id]="contenido.idContenido">{{contenido.idContenido}}</a>
               </td>
             <td>{{contenido.contenido}}</td>
-            <td># TODO</td>
-            <!-- TODO: query que regrese con número de tanques el contenido y agregarlo -->
-            <!-- <td>{{contenido.numTanques}}</td> -->
+            <td>{{contenido.numTanques}}</td>
             <td>
                 <div class="ui two buttons">
                     <button class="ui blue button"(click)="onContentSelect($event)" [id]="contenido.idContenido">Editar</button>

@@ -20,9 +20,7 @@
         <tr  *ngFor="let owner of owners">
             <td><a (click)="onOwnerSelect($event)" [id]="owner.idDueno">{{owner.idDueno}}</a></td>
             <td>{{owner.nombre}}</td>
-            <!-- TODO: Esta pendiente hacer el querie y agregarlo -->
-            <!-- <td>{{numberofTanks}}</td> -->
-            <td># TODO</td>
+            <td>{{owner.numTanques}}</td>
             <td>
                 <div class="ui two buttons">
                     <button class="ui blue button" routerLink="/admin/owners/{{owner.idDueno}}/edit">Editar</button>
