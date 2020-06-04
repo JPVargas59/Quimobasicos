@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DatabaseService } from 'src/app/services/database.service';
-import { Owner } from 'src/app/models/owner';
+import { Owner } from 'src/app/models/Owner';
 
 @Component({
   selector: 'app-edit-owner',
@@ -23,7 +23,7 @@ export class EditOwnerComponent implements OnInit {
       this.db.getDueno(this.id).subscribe(res =>{
         const owner = res as any;
         this.owner = owner.data.owner;
-      })
+      });
     }
   }
 }
