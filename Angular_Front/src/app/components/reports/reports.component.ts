@@ -10,9 +10,9 @@ import { UserService } from 'src/app/services/user.service';
 export class ReportsComponent implements OnInit {
 
   reports = [
-    {nombre: 'Inventario de Tanques'},
-    {nombre: 'Tanques por Lugar'},
-    {nombre: 'Tanques por contenido'}
+    {nombre: 'Inventario de Tanques', route: 'inventory'},
+    {nombre: 'Tanques por Lugar', route: 'byLocation'},
+    {nombre: 'Tanques por contenido', route: 'byContent'}
   ];
 
   constructor(
@@ -23,16 +23,7 @@ export class ReportsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onReportSelection(reportName) {
-
-    const userType = this.user.getType();
-    switch (reportName) {
-      case 'Inventario de Tanques':
-        this.router.navigateByUrl(`/${userType}/reports/inventory`);
-        break;
-      case 'Tanques por Lugar':
-        this.router.navigateByUrl(`/${userType}/reports/see-report/byLocation`);
-        break;
-    }
+  onReportSelection(route) {
+    this.user.goTo(`reports/${route}`);
   }
 }

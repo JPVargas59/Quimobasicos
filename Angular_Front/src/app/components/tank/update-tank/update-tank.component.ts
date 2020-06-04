@@ -14,15 +14,14 @@ export class UpdateTankComponent implements OnInit {
     route: ActivatedRoute,
     private user: UserService,
     private router: Router
-  ) { 
+  ) {
     this.tank = route.snapshot.params.id;
   }
 
   ngOnInit(): void {
   }
-  onUpdateTank(event){
-    const userType = this.user.getType();
-    this.router.navigateByUrl(`/${userType}/reports/inventory`);
+  onUpdateTank(event) {
+    this.user.goTo('reports/inventory');
   }
 
 }

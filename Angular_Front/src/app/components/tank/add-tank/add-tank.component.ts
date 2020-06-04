@@ -91,15 +91,13 @@ export class AddTankComponent implements OnInit {
       if (this.id) {
         this.db.updateTank(this.tanque).subscribe((result) => {
           console.log(result);
-          const userType = this.user.getType();
-          this.router.navigateByUrl(`/${userType}/tank/${this.id}`);
+          this.user.goTo(`tank/${this.id}`);
         });
       } else {
         this.db.newTank(this.tanque).subscribe((result) => {
           console.log(result);
           if (!this.redirigir) {
-            const userType = this.user.getType();
-            this.router.navigateByUrl(`/${userType}/reports/inventory`);
+            this.user.goTo('reports/inventory');
           }
         });
       }

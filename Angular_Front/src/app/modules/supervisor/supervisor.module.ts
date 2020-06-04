@@ -11,6 +11,7 @@ import { ReportsComponent } from 'src/app/components/reports/reports.component';
 import {SupervisorLandingComponent} from '../../components/supervisor/supervisor-landing/supervisor-landing.component';
 import { SeeReportComponent } from 'src/app/components/reports/see-report/see-report.component';
 import {PorLugarComponent} from '../../components/reports/por-lugar/por-lugar.component';
+import {PorContenidoComponent} from '../../components/reports/por-contenido/por-contenido.component';
 
 const routes: Routes = [
     { path: '',
@@ -24,6 +25,7 @@ const routes: Routes = [
       { path: 'tank/:id/exit', component: ExitTankComponent },
       { path: 'reports', component: ReportsComponent },
       { path: 'reports/see-report/byLocation', component: PorLugarComponent },
+      { path: 'reports/byContent', component: PorContenidoComponent },
       { path: 'reports/see-report/:reportName', component: SeeReportComponent }
     ]
   }

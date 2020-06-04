@@ -41,7 +41,7 @@ export class UserService {
     return this.type;
   }
 
-  private setType(type:string) {
+  private setType(type: string) {
     this.type = type.toLowerCase();
   }
 
@@ -111,6 +111,10 @@ export class UserService {
 
   isLoggedOut() {
     return !this.isLoggedIn();
+  }
+
+  goTo(route) {
+    return this.router.navigateByUrl(`${this.getType()}/${route}`);
   }
 
   getExpiration() {

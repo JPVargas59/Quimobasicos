@@ -30,7 +30,6 @@ export class InventoryComponent implements OnInit {
 
  onTankSelection(event) {
    const id = event.target.id;
-   const userType = this.user.getType();
-   this.router.navigateByUrl(`/${userType}/tank/${id}`);
+   this.user.goTo(`tank/${id}`);
  }
 }

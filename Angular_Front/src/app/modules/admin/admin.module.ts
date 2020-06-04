@@ -23,6 +23,7 @@ import { EditOwnerComponent } from 'src/app/components/admin/owners/edit-owner/e
 import { RfidTagsComponent } from 'src/app/components/admin/rfid-tags/rfid-tags.component';
 import { EditTagComponent } from 'src/app/components/admin/rfid-tags/edit-tag/edit-tag.component';
 import {PorLugarComponent} from '../../components/reports/por-lugar/por-lugar.component';
+import {PorContenidoComponent} from '../../components/reports/por-contenido/por-contenido.component';
 
 
 
@@ -45,7 +46,8 @@ const routes: Routes = [
       { path: 'tank/:id/edit', component: AddTankComponent },
       { path: 'tank/:id/exit', component: ExitTankComponent },
       { path: 'reports', component: ReportsComponent },
-      { path: 'reports/see-report/byLocation', component: PorLugarComponent },
+      { path: 'reports/byLocation', component: PorLugarComponent },
+      { path: 'reports/byContent', component: PorContenidoComponent },
       { path: 'reports/see-report/:reportName', component: SeeReportComponent },
 
       { path: 'contents', component: ContentsComponent },
