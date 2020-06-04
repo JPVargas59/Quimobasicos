@@ -41,8 +41,8 @@ export class UserService {
     return this.type;
   }
 
-  private setType(type) {
-    this.type = type;
+  private setType(type:string) {
+    this.type = type.toLowerCase();
   }
 
   getUserId() {

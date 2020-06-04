@@ -1,16 +1,31 @@
-<h3 class="ui header">Dueños de los Tanques</h3>
+<div class="ui right aligned grid">
+    <div class="left floated left aligned six wide column">
+        <h3 class="ui header">Dueños de los Tanques</h3>
+    </div>
+    <div class="right floated rigt aligned six wide column">
+        <div class="ui two buttons">
+            <button class="ui primary button" routerLink="/admin/owners/add">Añadir Dueño</button>
+        </div> 
+    </div>
+</div>
 
 <table class="ui table">
     <thead>
         <th>ID Dueño</th>
         <th>Nombre Dueño</th>
+        <th>Número de Tanques</th>
+        <th>Acción</th>
     </thead>
     <tbody>
         <tr  *ngFor="let owner of owners">
-            <td>
-                <a (click)="onOwnerSelect($event)" [id]="owner.idDueno">{{owner.idDueno}}</a>
-              </td>
+            <td><a (click)="onOwnerSelect($event)" [id]="owner.idDueno">{{owner.idDueno}}</a></td>
             <td>{{owner.nombre}}</td>
+            <td>{{owner.numTanques}}</td>
+            <td>
+                <div class="ui two buttons">
+                    <button class="ui blue button" routerLink="/admin/owners/{{owner.idDueno}}/edit">Editar</button>
+                </div> 
+            </td>
         </tr>
     </tbody>
 </table>

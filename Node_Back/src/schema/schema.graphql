@@ -50,6 +50,7 @@ type Tanque {
 type Owner {
 	idDueno: String!
 	nombre: String!
+	numTanques: Int
 }
 type Mantenimiento {
 	tanque: Tanque!
@@ -65,6 +66,7 @@ type Contenido {
 	idContenido: String!
 	contenido: String!
 	tanques: [Tanque]
+	numTanques: Int
 }
 "Lugar de donde se pueden ubicar los tanques"
 type Lugar {
