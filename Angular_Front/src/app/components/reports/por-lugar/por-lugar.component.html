@@ -1,0 +1,42 @@
+<div *ngIf="!lugarEscogido">
+  <h1>Tanques por lugar</h1>
+  <p>Este reporte muestra la cantidad de tanques en cada lugar</p>
+  <table class="ui table fluid " *ngIf="lugares">
+    <thead>
+    <tr>
+      <th>Lugar</th>
+      <th>Cantidad tanques</th>
+      <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let lugar of lugares">
+      <td>{{lugar.lnombre}}</td>
+      <td>{{lugar.tanques ? lugar.tanques.length : '0'}} tanques</td>
+      <td><button class="ui button fluid" (click)="specificPlace(lugar.idLugar)">Ver detalles</button></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="lugarEscogido">
+  <h1>{{lugarEscogido.lnombre}}</h1>
+  <button class="ui primary button" (click)="lugarEscogido = undefined">Volver a tanques por lugar</button>
+  <table class="ui fluid table" *ngIf="lugarEscogido.tanques">
+    <thead>
+    <tr>
+      <th>ID Tanque</th>
+      <th>Contenido</th>
+      <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let tanque of lugarEscogido.tanques">
+      <td>{{tanque.idTanque}}</td>
+      <td>{{tanque.contenidoTanque.idContenido}}</td>
+      <td><button class="ui button fluid" (click)="selectTank(tanque.idTanque)">Ver detalles tanque</button></td>
+    </tr>
+    </tbody>
+  </table>
+  <pre>{{lugarEscogido | json}}</pre>
+</div>

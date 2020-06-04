@@ -23,13 +23,16 @@ export class ReportsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onReportSelection(event) {
-    const reportName = event.target.id;
+  onReportSelection(reportName) {
+
     const userType = this.user.getType();
-    if (reportName == 'Inventario de Tanques'){
-      this.router.navigateByUrl(`/${userType}/reports/inventory`)
-    }else{
-      this.router.navigateByUrl(`/${userType}/reports/see-report/${reportName}`);
+    switch (reportName) {
+      case 'Inventario de Tanques':
+        this.router.navigateByUrl(`/${userType}/reports/inventory`);
+        break;
+      case 'Tanques por Lugar':
+        this.router.navigateByUrl(`/${userType}/reports/see-report/byLocation`);
+        break;
     }
   }
 }

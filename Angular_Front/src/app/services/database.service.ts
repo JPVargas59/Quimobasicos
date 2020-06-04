@@ -222,6 +222,41 @@ export class DatabaseService {
     return this.http.post(this.homeURL, {query, variables: {tank, id: tank.id}});
   }
 
+  tanksPerPlace() {
+    const query = `
+      {
+        lugares {
+          idLugar
+          lnombre
+          capacidadMaxima
+          tanques {
+            idTanque
+          }
+        }
+      }
+    `;
+    return this.http.post(this.homeURL, {query});
+  }
+
+  tanksPerSpecificPlace(id) {
+    const query = `
+      {
+        lugar(idLugar: "${id}") {
+          idLugar
+          lnombre
+          capacidadMaxima
+          tanques {
+            idTanque
+            contenidoTanque {
+              idContenido
+            }
+          }
+        }
+      }
+    `;
+    return this.http.post(this.homeURL, {query});
+  }
+
   dateToStringFormat(dateString: string) {
     const date = new Date(dateString);
     const d = date.getDate();

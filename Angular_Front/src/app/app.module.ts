@@ -33,6 +33,7 @@ import { RfidTagsComponent } from './components/admin/rfid-tags/rfid-tags.compon
 import { EditTagComponent } from './components/admin/rfid-tags/edit-tag/edit-tag.component';
 import {FormsModule} from '@angular/forms';
 import {AuthInterceptor} from './services/user.service';
+import { PorLugarComponent } from './components/reports/por-lugar/por-lugar.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import {AuthInterceptor} from './services/user.service';
     ContentsComponent,
     EditContentComponent,
     RfidTagsComponent,
-    EditTagComponent
+    EditTagComponent,
+    PorLugarComponent
   ],
   imports: [
     BrowserModule,
