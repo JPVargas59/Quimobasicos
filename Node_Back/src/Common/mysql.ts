@@ -1,3 +1,9 @@
+async function asyncForEach(array, cb) {
+	for (let i = 0; i < array.length; i++) {
+		await cb(array[i], i, array);
+	}
+}
+
 exports.getTanques = async (client) => {
 	var tanques = await client.query(`
     SELECT * FROM Tanque ORDER BY idTanque
@@ -151,11 +157,18 @@ exports.getUsuario = async (client, idUsuario) => {
 
 exports.getContenidos = async (client) => {
 	var contenidos = await client.query(`
-    SELECT *  FROM Contenido
-    `);
+    SELECT * FROM Contenido
+	`);
 	if (contenidos.length == 0) {
 		return null;
 	}
+	await asyncForEach(contenidos, async (contenido) => {
+		let numTanques = await client.query(
+			'SELECT COUNT(idContenido) as numTanques FROM Tanque WHERE idContenido = ?',
+			contenido.idContenido
+		);
+		contenido.numTanques = numTanques[0].numTanques;
+	});
 	return contenidos;
 };
 
@@ -169,16 +182,30 @@ exports.getContenido = async (client, idContenido) => {
 	if (contenido.length == 0) {
 		return null;
 	}
+	await asyncForEach(contenido, async (contenido) => {
+		let numTanques = await client.query(
+			'SELECT COUNT(idContenido) as numTanques FROM Tanque WHERE idContenido = ?',
+			contenido.idContenido
+		);
+		contenido.numTanques = numTanques[0].numTanques;
+	});
 	return contenido[0];
 };
 
 exports.getOwners = async (client) => {
 	var owners = await client.query(`
     SELECT *  FROM Dueno
-    `);
+	`);
 	if (owners.length == 0) {
 		return null;
 	}
+	await asyncForEach(owners, async (owner) => {
+		let numTanques = await client.query(
+			'SELECT COUNT(idDueno) as numTanques FROM Tanque WHERE idDueno = ?',
+			owner.idDueno
+		);
+		owner.numTanques = numTanques[0].numTanques;
+	});
 	return owners;
 };
 
@@ -192,6 +219,13 @@ exports.getOwner = async (client, idOwner) => {
 	if (owner.length == 0) {
 		return null;
 	}
+	await asyncForEach(owner, async (owner) => {
+		let numTanques = await client.query(
+			'SELECT COUNT(idDueno) as numTanques FROM Tanque WHERE idDueno = ?',
+			owner.idDueno
+		);
+		owner.numTanques = numTanques[0].numTanques;
+	});
 	return owner[0];
 };
 
