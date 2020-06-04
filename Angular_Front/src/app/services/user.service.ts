@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import * as moment from 'moment';
 import {Observable} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,18 +11,30 @@ export class UserService {
 
 
   constructor(
-    private http: HttpClient
-  ) { }
+    private http: HttpClient,
+    private router: Router
+  ) {
+    if (this.isLoggedIn()) {
+      console.log('Logged in');
+      this.setRefreshTimer();
+    } else {
+      console.log('Not logged in');
+      this.router.navigateByUrl('/login');
+    }
+  }
 
   type;
   userId;
   homeURL = 'http://localhost:5201/graphql';
+  refreshToken;
 
-  private static setSession(token, expiration) {
+  private static setSession(token, expiration?) {
     const expiresAt = moment().add(expiration, 'second');
 
     localStorage.setItem('id_token', token);
-    localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()) );
+    if (expiration) {
+      localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()) );
+    }
   }
 
   getType() {
@@ -40,6 +53,25 @@ export class UserService {
     this.userId = userId;
   }
 
+  refreshJwtToken() {
+    const query = `
+      mutation($refresh: String!) {
+        refresh(refreshJWT: $refresh)
+      }
+    `;
+    console.log(this.refreshToken);
+    return this.http.post(this.homeURL, {query, variables: {refresh: this.refreshToken}});
+  }
+
+  setRefreshTimer() {
+    setInterval(() => {
+      this.refreshJwtToken().subscribe(res => {
+        console.log('Refreshed token', res);
+        UserService.setSession(this.refreshToken);
+      });
+    }, 840000);
+  }
+
   login(user: string, password: string ) {
     const query = `
       mutation($user: String!, $password: String!) {
@@ -51,12 +83,15 @@ export class UserService {
     `;
     return this.http.post(this.homeURL, {query, variables: {user, password}})
       .subscribe(res => {
+        console.log(user, password);
         const response = res as any;
-        if (response) {
+        if (response.data) {
           console.log('Response', response);
           UserService.setSession(response.data.login.jwt_token, response.data.login.jwt_fechaExpiracion);
           const decodedToken = this.jwtDecode(response.data.login.jwt_token);
           console.log('decoded token', decodedToken);
+          this.refreshToken = response.data.login.refreshJWT;
+          this.setRefreshTimer();
           this.setType(decodedToken.payload.puesto);
           this.setUserId(decodedToken.payload.id);
         } else {
