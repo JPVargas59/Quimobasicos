@@ -1,19 +1,18 @@
 <h3 class="ui header">Etiquetas</h3>
 
-<table class="ui table tablaRFIDTags">
+<table class="ui table">
     <thead>
-        <th>Número</th>
-        <th>Eliminar etiqueta RFID</th>
+        <th>Número de Etiqueta</th>
+        <th>Tanque Asociado</th>
+        <th>Acción</th>
     </thead>
     <tbody>
-        <tr  *ngFor="let tag of tags">
-            <td>
-                <a (click)="onTagSelect($event)" [id]="tag.idEtiqueta">{{tag.idEtiqueta}}</a>
-            </td>
-            <td>
-                <button class="negative ui button botonEliminarEtiquetaRFID">Eliminar</button>
-            </td>
+        <tr *ngFor="let tag of tags">
+            <td><a (click)="onTagSelect($event)" [id]="tag.idEtiqueta">{{tag.idEtiqueta}}</a></td>
+            <td (click)="selectTank(tag.idTanque)">{{tag.idTanque? tag.idTanque: 'Sin Asociar'}}</td>
+            <td><button class="ui button fluid">{{tag.idTanque? 'Desasociar': 'Asociar'}}</button></td>
         </tr>
     </tbody>
 </table>
 
+ 
