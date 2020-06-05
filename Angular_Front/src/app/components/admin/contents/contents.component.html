@@ -5,7 +5,7 @@
     <div class="right floated rigt aligned six wide column">
         <div class="ui two buttons">
             <button class="ui primary button" routerLink="/admin/contents/add">Añadir Contenido</button>
-        </div> 
+        </div>
     </div>
 </div>
 
@@ -25,8 +25,8 @@
             <td>{{contenido.numTanques}}</td>
             <td>
                 <div class="ui two buttons">
-                    <button class="ui blue button"(click)="onContentSelect($event)" [id]="contenido.idContenido">Editar</button>
-                </div> 
+                    <button class="ui blue button" (click)="onContentSelect($event)" [id]="contenido.idContenido">Editar</button>
+                </div>
             </td>
         </tr>
     </tbody>

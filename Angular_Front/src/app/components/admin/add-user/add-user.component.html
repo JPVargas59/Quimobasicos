@@ -2,39 +2,44 @@
 <h3 class="ui title" *ngIf="!id">Agregar un Usuario</h3>
 
 <br>
-<form class="ui form">
+<form class="ui form" (ngSubmit)="submit()">
     <h4 class="ui dividing header">Información</h4>
     <div class="two fields">
       <div class="required field">
         <label>Nombre</label>
         <div class="two fields">
           <div class="field">
-            <input type="text" name="nombre" placeholder="Nombre" [(ngModel)]="user.nombre">
+            <input type="text" name="nombre" placeholder="Nombre" [(ngModel)]="currentUser.nombre">
           </div>
           <div class="required field">
-            <input type="text" name="apellidos" [(ngModel)]="user.apellidos" placeholder="Apellidos">
+            <input type="text" name="apellidos" [(ngModel)]="currentUser.apellidos" placeholder="Apellidos">
           </div>
         </div>
       </div>
       <div class="required field">
         <label>Correo</label>
         <div class="field">
-          <input type="email" name="email" placeholder="correo" [(ngModel)]="user.correo">
+          <input type="email" name="email" placeholder="correo" [(ngModel)]="currentUser.correo">
         </div>
       </div>
-
+      <div class="required field">
+        <label>Id</label>
+        <div class="field">
+          <input type="text" name="idUsuario" placeholder="ID de usuario" [(ngModel)]="currentUser.idUsuario">
+        </div>
+      </div>
     </div>
-    <div class="required field">
+    <div class="required field" *ngIf="!id">
       <label>Contraseña</label>
       <div class="ui icon input">
-        <input type="password" [(ngModel)]="user.password">
+        <input type="password" [(ngModel)]="currentUser.password" name="password">
         <i class="lock icon"></i>
       </div>
     </div>
     <div class="grouped fields required field">
       <div class="field">
         <label>Puesto</label>
-        <select class="ui search dropdown" name="puesto" [(ngModel)]="user.puesto">
+        <select class="ui search dropdown" name="puesto" [(ngModel)]="currentUser.puesto">
           <option value="">Puesto...</option>
           <option value="Operador">Operador</option>
           <option value="Supervisor">Supervisor</option>
@@ -42,9 +47,9 @@
         </select>
       </div>
     </div>
-    <div class="field" *ngIf="user.puesto == 'Operador'">
+    <div class="field" *ngIf="currentUser.puesto == 'Operador'">
       <label>Supervisor de este usuario</label>
-      <select class="ui search dropdown"Operador [(ngModel)]="user.idSupervisor">
+      <select class="ui search dropdown" Operador name="supervisor" [(ngModel)]="currentUser.idSupervisor">
         <option value="">Supervisor...</option>
         <!-- TODDO: Agregar supervisor de graphql -->
         <!-- <option *ngFor="let valor of supervisor" value="{{supervisor.nombre}}">{{supervisor.nombre}}</option> -->
@@ -52,6 +57,6 @@
       </select>
     </div>
 
-    <div class="ui submit primary button" routerLink="/admin/users">Guardar</div>
-    
+    <div class="ui submit primary button" (click)="submit()">Guardar</div>
+
   </form>

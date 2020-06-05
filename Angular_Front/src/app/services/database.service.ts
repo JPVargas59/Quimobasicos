@@ -3,6 +3,8 @@ import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {Tanque} from '../models/Tanque';
 import {User} from '../models/User';
+import {Lugar} from '../models/Lugar';
+import {Contenido} from '../models/Contenido';
 
 @Injectable({
   providedIn: 'root'
@@ -286,6 +288,68 @@ export class DatabaseService {
         }
       }
     `;
+    return this.http.post(this.homeURL, {query});
+  }
+
+  createLugar(lugar: Lugar) {
+    const query = `
+    mutation {
+      createLugar(lugarInput : {
+        lnombre: "${lugar.lnombre}",
+        id: "${lugar.idLugar}",
+        radio: ${lugar.radio},
+        coordenadas: {
+          x: ${lugar.coordenadas.x},
+          y: ${lugar.coordenadas.y}
+        }
+        capacidadMaxima: ${lugar.capacidadMaxima}
+      })
+    }
+    `;
+    return this.http.post(this.homeURL, {query});
+  }
+
+  setLugar(lugar: Lugar, id: string) {
+    const query = `
+    mutation {
+      setLugar(lugarInput : {
+        lnombre: "${lugar.lnombre}",
+        id: "${lugar.idLugar}",
+        radio: ${lugar.radio},
+        coordenadas: {
+          x: ${lugar.coordenadas.x},
+          y: ${lugar.coordenadas.y}
+        }
+        capacidadMaxima: ${lugar.capacidadMaxima}
+      }, idLugarOriginal: "${id}")
+    }
+    `;
+    return this.http.post(this.homeURL, {query});
+  }
+
+  setContenido(contenido: Contenido, id: string) {
+    const query = `
+    mutation {
+      setContenido(contenidoInput: {
+        id: "${contenido.idContenido}",
+        contenido: "${contenido.contenido}"
+      }, idContenidoOriginal: "${id}")
+    }
+    `;
+    console.log(query);
+    return this.http.post(this.homeURL, {query});
+  }
+
+  createContenido(contenido: Contenido) {
+    const query = `
+    mutation {
+      createContenido(contenidoInput: {
+        id: "${contenido.idContenido}",
+        contenido: "${contenido.contenido}"
+      })
+    }
+    `;
+    console.log(query);
     return this.http.post(this.homeURL, {query});
   }
 

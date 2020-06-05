@@ -26,14 +26,14 @@
     <thead>
     <tr>
       <th>ID Tanque</th>
-      <th>Contenido</th>
+      <th>Lugar</th>
       <th>Acciones</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let tanque of contenidoEscogido.tanques">
       <td>{{tanque.idTanque}}</td>
-      <td>{{tanque.lugar.lnombre}}</td>
+      <td>{{tanque.lugar ? tanque.lugar.lnombre : 'Sin lugar en la base de datos'}}</td>
       <td><button class="ui button fluid" (click)="selectTank(tanque.idTanque)">Ver detalles tanque</button></td>
     </tr>
     </tbody>

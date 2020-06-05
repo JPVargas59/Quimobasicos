@@ -1,7 +1,7 @@
 <h3 class="ui title" *ngIf="id">Modificar {{id}}</h3>
 <h3 class="ui title" *ngIf="!id">Agregar un tipo de Contenido</h3>
 
-<form class="ui form">
+<form class="ui form" (ngSubmit)="submit()">
     <div class="two fields">
       <div class="field required">
         <label>ID del Contenido</label>
@@ -16,5 +16,5 @@
         <input maxlength="10" type="text" name="contenido" required [(ngModel)]="contenido.contenido" placeholder="Nombre">
       </div>
     </div>
-    <div class="ui submit primary button" routerLink="/admin/contents">Guardar</div>
+    <button class="ui submit primary button">Guardar</button>
 </form>
