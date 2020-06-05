@@ -271,6 +271,15 @@ let mysqlMutations = {
 			let jwt_token = signJWT(user);
 			return jwt_token;
 		}
+	},
+	async logout(client, idUsuario) {
+		await client
+			.query('UPDATE JWT SET jwt=null WHERE idUsuario=?', idUsuario)
+			.catch((error) => {
+				console.log(error);
+				throw new Error('Error interno. No se pudo cerrar la sesión');
+			});
+		return 'Sesión cerrada exitosamente.';
 	}
 };
 export = mysqlMutations;

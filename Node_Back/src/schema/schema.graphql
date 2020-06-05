@@ -60,6 +60,7 @@ type Mantenimiento {
 
 type EtiquetaRFID {
 	idEtiqueta: String!
+	idTanque: String
 }
 
 type Contenido {
@@ -355,4 +356,5 @@ type Mutation {
 	cambiarContrasena(contrasenaInput: ContrasenaInput!): String!
 	login(correo: String!, contrasena: String!): OutputLogin!
 	refresh(refreshJWT: String!): String!
+	logout(idUsuario: String!): String!
 }

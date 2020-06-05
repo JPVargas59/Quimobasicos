@@ -232,10 +232,21 @@ exports.getOwner = async (client, idOwner) => {
 exports.getEtiquetas = async (client) => {
 	var etiquetas = await client.query(`
     SELECT *  FROM EtiquetaRFID
-    `);
+	`);
 	if (etiquetas.length == 0) {
 		return null;
 	}
+	await asyncForEach(etiquetas, async (etiqueta) => {
+		let idTanque = await client.query(
+			'SELECT idTanque FROM Tanque WHERE idEtiqueta = ?',
+			etiqueta.idEtiqueta
+		);
+		if (idTanque.length == 0) {
+			etiqueta.idTanque = null;
+		} else {
+			etiqueta.idTanque = idTanque[0].idTanque;
+		}
+	});
 	return etiquetas;
 };
 
@@ -249,6 +260,17 @@ exports.getEtiqueta = async (client, idEtiqueta) => {
 	if (etiqueta.length == 0) {
 		return null;
 	}
+	await asyncForEach(etiqueta, async (etiqueta) => {
+		let idTanque = await client.query(
+			'SELECT idTanque FROM Tanque WHERE idEtiqueta = ?',
+			etiqueta.idEtiqueta
+		);
+		if (idTanque.length == 0) {
+			etiqueta.idTanque = null;
+		} else {
+			etiqueta.idTanque = idTanque[0].idTanque;
+		}
+	});
 	return etiqueta[0];
 };
 

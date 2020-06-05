@@ -16,13 +16,7 @@ let mysqlMutations = {
 		return quitClient(client, resp);
 	},
 	async setValor(input, idOriginal, table, mysqlId) {
-		let resp = await common.setValor(
-			client,
-			input,
-			idOriginal,
-			table,
-			mysqlId
-		);
+		let resp = await common.setValor(client, input, idOriginal, table, mysqlId);
 		return quitClient(client, resp);
 	},
 	async cambiarContrasena(input) {
@@ -35,6 +29,10 @@ let mysqlMutations = {
 	},
 	async refresh(refreshJWT) {
 		let resp = await common.refresh(client, refreshJWT);
+		return quitClient(client, resp);
+	},
+	async logout(idUsuario) {
+		let resp = await common.logout(client, idUsuario);
 		return quitClient(client, resp);
 	}
 };
