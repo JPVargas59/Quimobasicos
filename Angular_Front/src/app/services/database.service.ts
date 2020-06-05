@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {Tanque} from '../models/Tanque';
@@ -11,7 +11,6 @@ import {Contenido} from '../models/Contenido';
 })
 export class DatabaseService {
 
-  // homeURL = 'http://18.219.108.70:5201/graphql';
   homeURL = 'http://localhost:5201/graphql';
 
   constructor(
@@ -180,8 +179,18 @@ export class DatabaseService {
   }
 
   getEtiquetas() {
-    const json = '{etiquetas {idEtiqueta}}';
-    return this.http.get(`${this.homeURL}?query=${json}`);
+    const query = `{etiquetas{ idEtiqueta idTanque }}`;
+    return this.http.post(`${this.homeURL}`, {query});
+  }
+
+  setEtiqueta(idEtiqueta, idTanque){
+    const query = `mutation
+    {
+      setTanque(tanqueInput:{
+        idEtiqueta:${idEtiqueta}
+      }, idTanqueOriginal:"${idTanque}")
+    }`
+    return this.http.post(`${this.homeURL}`, {query});
   }
 
   getLugares() {
@@ -203,11 +212,6 @@ export class DatabaseService {
     }`;
     return this.http.post(`${this.homeURL}`, {query});
   }
-
-  // postEtiqueta(){
-  //   const json = '{createEtiqueta(etiquetaInput:{id:15})}';
-  //   return this.http.post(`${this.homeURL}?query=${json}`);
-  // }
 
   newTank(tank: Tanque) {
     const query = 'mutation($tank: TanqueInput!) {createTanque(tanqueInput: $tank)}';

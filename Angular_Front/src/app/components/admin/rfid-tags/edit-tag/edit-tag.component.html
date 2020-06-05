@@ -1,22 +1,21 @@
-<h2 class="ui title">Agrega una etiqueta RFID</h2>
-<br>
-<form class="ui form">
-    <h4 class="ui dividing header">Información</h4>
-    
-    <div class="required field">
-      <label>ID de la etiqueta</label>
-      <div class="field">
-        <input type="email" name="email" placeholder="ID">
+<h3 class="ui title">Agrega una etiqueta RFID</h3>
+  <form class="ui form">
+    <div class="two fields">
+      <div class="field required">
+        <label>ID Etiqueta</label>
+        <div class="field">
+          <div class="field">
+            <input type="number" name="idEtiqueta" required placeholder="#">
+          </div>
+        </div>
+      </div>
+      <div class="field required">
+        <label>Tanque a Asociar</label>
+        <select name="idTanque" id="idTanque">
+          <option value="null">No asociar</option>
+          <option *ngFor="" value="null">No asociar</option>
+        </select>
       </div>
     </div>
-
-    <div class = "errorIDOcupado">
-        <p>El ID ya está ocupado</p>
-    </div>
-    <br>
-    <div class="ui error message">
-      <div class="header">We noticed some issues</div>
-    </div>
-    <div class="ui submit button" routerLink="/admin/rfid-tags">Registrar</div>
-    
+    <button class="ui submit primary button">Guardar</button>
   </form>
