@@ -29,7 +29,7 @@ export class UserService {
   homeURL = 'http://localhost:5201/graphql';
   refreshToken;
 
-  private static setSession(token, expiration?) {
+  private static setSession(token, expiration) {
     const expiresAt = moment().add(expiration, 'second');
 
     localStorage.setItem('id_token', token);
@@ -39,10 +39,11 @@ export class UserService {
   }
 
   getType() {
-    return this.type;
+    return localStorage.getItem('user_type');
   }
 
   private setType(type: string) {
+    localStorage.setItem('user_type', type.toLowerCase());
     this.type = type.toLowerCase();
   }
 
@@ -68,7 +69,7 @@ export class UserService {
     setInterval(() => {
       this.refreshJwtToken().subscribe(res => {
         console.log('Refreshed token', res);
-        UserService.setSession(this.refreshToken);
+        UserService.setSession(this.refreshToken, undefined);
       });
     }, 840000);
   }
@@ -107,7 +108,7 @@ export class UserService {
   }
 
   public isLoggedIn() {
-    return moment().isBefore(this.getExpiration());
+    return moment().isAfter(this.getExpiration());
   }
 
   isLoggedOut() {

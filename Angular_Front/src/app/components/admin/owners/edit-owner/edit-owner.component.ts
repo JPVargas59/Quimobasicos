@@ -10,7 +10,10 @@ import { Owner } from 'src/app/models/Owner';
 })
 export class EditOwnerComponent implements OnInit {
   id: string;
-  owner: Owner;
+  owner: Owner = {
+    idDueno: undefined,
+    nombre: undefined
+  };
 
   constructor(
     private db: DatabaseService,
@@ -19,11 +22,32 @@ export class EditOwnerComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params.ownerId;
-    if(this.id) {
-      this.db.getDueno(this.id).subscribe(res =>{
+    if (this.id) {
+      this.db.getDueno(this.id).subscribe(res => {
         const owner = res as any;
         this.owner = owner.data.owner;
       });
     }
+  }
+
+  submit() {
+    /*if (this.id) {
+      this.user.setUser(this.currentUser, this.id).subscribe(res => {
+        const response = res as any;
+        if (response.data) {
+          this.router.navigateByUrl('admin/users');
+        }
+        console.log(res);
+      });
+    } else {
+      this.user.createUser(this.currentUser).subscribe(res => {
+        const response = res as any;
+        if (response.data) {
+          this.router.navigateByUrl('admin/users');
+        }
+        console.log(res);
+      });
+    }
+     */
   }
 }

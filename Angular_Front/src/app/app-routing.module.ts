@@ -13,13 +13,15 @@ import { SupervisorHomeComponent } from './components/supervisor/supervisor-home
 import { OperatorHomeComponent } from './components/operator/operator-home/operator-home.component';
 import { InventoryComponent } from './components/reports/inventory/inventory.component';
 import { ReportsComponent } from './components/reports/reports.component';
+import {AuthGuardGuard} from './guards/auth-guard.guard';
+import {AdminGuard} from './guards/admin.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'admin', loadChildren: () => import('./modules/admin/admin.module').then(m => m.AdminModule) },
-  { path: 'supervisor', loadChildren: () => import('./modules/supervisor/supervisor.module').then(m => m.SupervisorModule) },
-  { path: 'operator', loadChildren: () => import('./modules/operator/operator.module').then(m => m.OperatorModule) }
+  { path: 'admin', loadChildren: () => import('./modules/admin/admin.module').then(m => m.AdminModule), canLoad: [AuthGuardGuard, AdminGuard] },
+  { path: 'supervisor', loadChildren: () => import('./modules/supervisor/supervisor.module').then(m => m.SupervisorModule), canLoad: [AuthGuardGuard] },
+  { path: 'operator', loadChildren: () => import('./modules/operator/operator.module').then(m => m.OperatorModule), canLoad: [AuthGuardGuard] }
 ];
 
 @NgModule({
