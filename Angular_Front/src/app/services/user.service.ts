@@ -3,6 +3,7 @@ import {HttpClient, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '
 import * as moment from 'moment';
 import {Observable} from 'rxjs';
 import {Router} from '@angular/router';
+import {User} from '../models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -121,6 +122,44 @@ export class UserService {
     const expiration = localStorage.getItem('expires_at');
     const expiresAt = JSON.parse(expiration);
     return moment(expiresAt);
+  }
+
+  setUser(user: User) {
+    const query = `
+    mutation($usuarioInput: UsuarioInput, $idUsuarioOriginal: String) {
+      setUsuario(usuarioInput: $usuarioInput, idUsuarioOriginal: $idUsuarioOriginal)
+    }`;
+    return this.http.post(this.homeURL, {query, variables: {
+        userInput : {
+          correo: user.correo,
+          id: user.idUsuario,
+          fName: user.nombre,
+          lName: user.apellidos,
+          contrasena: user.password,
+          idSupervisor: user.idSupervisor,
+          puesto: user.puesto
+        }
+      }
+    });
+  }
+
+  createUser(user: User) {
+    const query = `
+    mutation($usuarioInput: UsuarioInput) {
+      createUsuario(usuarioInput: $usuarioInput)
+    }`;
+    return this.http.post(this.homeURL, {query, variables: {
+      userInput : {
+        correo: user.correo,
+        id: user.idUsuario,
+        fName: user.nombre,
+        lName: user.apellidos,
+        contrasena: user.password,
+        idSupervisor: user.idSupervisor,
+        puesto: user.puesto
+        }
+      }
+    });
   }
 
   private jwtDecode(t) {

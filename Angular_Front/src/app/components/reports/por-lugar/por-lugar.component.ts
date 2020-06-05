@@ -35,7 +35,7 @@ export class PorLugarComponent implements OnInit {
   }
 
   selectTank(id) {
-    this.router.navigateByUrl(`/${this.user.getType()}/tank/${id}`);
+    this.user.goTo(`tank/${id}`);
   }
 
 }

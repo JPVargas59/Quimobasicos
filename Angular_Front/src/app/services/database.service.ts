@@ -138,13 +138,13 @@ export class DatabaseService {
     const query = `{ contenidos{ idContenido contenido numTanques}}`;
     return this.http.post(`${this.homeURL}`, {query});
   }
-  getContenido(id){
-    const query =`{contenido(idContenido:"${id}"){ idContenido contenido }}`
+  getContenido(id) {
+    const query = `{contenido(idContenido:"${id}"){ idContenido contenido }}`;
     return this.http.post(`${this.homeURL}`, {query});
   }
 
   getDuenos() {
-    const query = `{ owners{ idDueno nombre numTanques }}`
+    const query = `{ owners{ idDueno nombre numTanques }}`;
     return this.http.post(`${this.homeURL}`, {query});
   }
   getDueno(id) {
@@ -251,6 +251,38 @@ export class DatabaseService {
               idContenido
             }
           }
+        }
+      }
+    `;
+    return this.http.post(this.homeURL, {query});
+  }
+
+  tanksPerContent() {
+    const query = `
+      {
+        contenidos {
+          tanques {
+            idTanque
+          }
+          idContenido
+          contenido
+        }
+      }
+    `;
+    return this.http.post(this.homeURL, {query});
+  }
+
+  tanksPerSpecificContent(id) {
+    const query = `
+      {
+        contenido(idContenido: "${id}") {
+          tanques {
+            idTanque
+            lugar {
+              lnombre
+            }
+          }
+          contenido
         }
       }
     `;

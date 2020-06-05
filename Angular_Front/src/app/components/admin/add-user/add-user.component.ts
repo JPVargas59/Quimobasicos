@@ -26,8 +26,10 @@ export class AddUserComponent implements OnInit {
         const res = result as any;
         this.user = res.data.usuario;
         console.log(this.user);
-      })
+      });
     }
   }
+
+
 
 }
