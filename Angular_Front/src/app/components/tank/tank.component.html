@@ -54,7 +54,6 @@
         <th>Lugar</th>
       </thead>
       <tbody *ngIf="locations">
-        <!-- TODO: peticion de graphql -->
         <tr *ngFor="let location of locations">
           <td>{{location.fecha | date:'medium'}}</td>
           <td>{{location.lugar.lnombre}}</td>
