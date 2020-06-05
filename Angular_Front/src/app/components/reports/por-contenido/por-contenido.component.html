@@ -1,1 +1,41 @@
-<p>por-contenido works!</p>
+<div *ngIf="!contenidoEscogido">
+  <h1>Tanques por contenido</h1>
+  <p>Este reporte muestra la cantidad de tanques en cada lugar</p>
+  <table class="ui table fluid " *ngIf="contenidos">
+    <thead>
+    <tr>
+      <th>Lugar</th>
+      <th>Cantidad tanques</th>
+      <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let contenido of contenidos">
+      <td>{{contenido.contenido}}</td>
+      <td>{{contenido.tanques ? contenido.tanques.length : '0'}} tanques</td>
+      <td><button class="ui button fluid" (click)="specificPlace(contenido.idContenido)">Ver detalles</button></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="contenidoEscogido">
+  <h1>Tanques de {{contenidoEscogido.contenido}}</h1>
+  <button class="ui primary button" (click)="contenidoEscogido = undefined">Volver a tanques por contenido</button>
+  <table class="ui fluid table" *ngIf="contenidoEscogido.tanques">
+    <thead>
+    <tr>
+      <th>ID Tanque</th>
+      <th>Contenido</th>
+      <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let tanque of contenidoEscogido.tanques">
+      <td>{{tanque.idTanque}}</td>
+      <td>{{tanque.lugar.lnombre}}</td>
+      <td><button class="ui button fluid" (click)="selectTank(tanque.idTanque)">Ver detalles tanque</button></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

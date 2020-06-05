@@ -18,12 +18,12 @@
        <td>
          <a (click)="onTankSelection($event)" [id]="tank.idTanque">{{tank.idTanque}}</a>
        </td>
-       <td>{{tank.contenidoTanque.contenido ? tank.contenidoTanque.contenido : 'Indefinido'}}</td>
+       <td>{{tank.contenidoTanque ? tank.contenidoTanque.contenido : 'Indefinido'}}</td>
        <td>{{tank.fechaIngreso | date}}</td>
        <td>{{tank.fechaEsperadaRetorno | date}}</td>
        <td>{{tank.lugar ? tank.lugar.lnombre : '-'}}</td>
        <td>{{tank.pesoActual}}</td>
-       <td>{{tank.idEtiqueta.idEtiqueta ? tank.idEtiqueta.idEtiqueta : '#'}}</td>
+       <td>{{tank.idEtiqueta ? tank.idEtiqueta.idEtiqueta : 'Sin etiqueta'}}</td>
        <td>{{tank.observaciones}}</td>
      </tr>
    </tbody>
