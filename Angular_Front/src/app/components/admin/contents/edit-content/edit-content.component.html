@@ -2,19 +2,19 @@
 <h3 class="ui title" *ngIf="!id">Agregar un tipo de Contenido</h3>
 
 <form class="ui form" (ngSubmit)="submit()">
-    <div class="two fields">
-      <div class="field required">
-        <label>ID del Contenido</label>
+  <div class="two fields">
+    <div class="field required">
+      <label>ID del Contenido</label>
+      <div class="field">
         <div class="field">
-          <div class="field">
-            <input maxlength="10" type="text" name="idContenido" required [(ngModel)]="contenido.idContenido" placeholder="ID">
-          </div>
+          <input maxlength="10" type="text" name="idContenido" required [(ngModel)]="contenido.idContenido" placeholder="ID">
         </div>
       </div>
-      <div class="field required">
-        <label>Nombre</label>
-        <input maxlength="10" type="text" name="contenido" required [(ngModel)]="contenido.contenido" placeholder="Nombre">
-      </div>
     </div>
-    <button class="ui submit primary button">Guardar</button>
+    <div class="field required">
+      <label>Nombre</label>
+      <input maxlength="10" type="text" name="contenido" required [(ngModel)]="contenido.contenido" placeholder="Nombre">
+    </div>
+  </div>
+  <button class="ui submit primary button">Guardar</button>
 </form>
