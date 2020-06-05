@@ -234,6 +234,14 @@ const mutation: IResolvers = {
 		},
 		refresh(__: void, { refreshJWT }): any {
 			return mysqlMutations.refresh(refreshJWT);
+		},
+		logout(__: void, { idUsuario }, { token }): any {
+			if (!token) {
+				1;
+				throw new Error('Acceso no autorizado');
+			} else {
+				return mysqlMutations.logout(idUsuario);
+			}
 		}
 	}
 };
