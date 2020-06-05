@@ -1,7 +1,7 @@
 <h3 class="ui title" *ngIf="id">Modificar {{id}}</h3>
 <h3 class="ui title" *ngIf="!id">Agregar un Lugar</h3>
 
-<form class="ui form">
+<form class="ui form" (ngSubmit)="submit()">
   <h4 class="ui dividing header">Información del lugar</h4>
     <div class="two fields">
         <div class="required field">
@@ -12,7 +12,7 @@
         </div>
     </div>
 
-    <div class="two fields"> 
+    <div class="two fields">
         <div class="required field">
             <label>Radio</label>
             <div class="field">
@@ -41,6 +41,6 @@
           </div>
         </div>
     </div>
-    <div class="ui submit primary button" routerLink="/admin/locations">Guardar</div>
+    <button class="ui submit primary button">Guardar</button>
   </form>
 

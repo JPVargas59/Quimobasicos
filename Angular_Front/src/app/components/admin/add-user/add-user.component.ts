@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {User} from '../../../models/User';
 import {DatabaseService} from '../../../services/database.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {UserService} from '../../../services/user.service';
+import {User} from '../../../models/User';
 
 
 @Component({
@@ -11,25 +12,50 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class AddUserComponent implements OnInit {
 
-  user: User;
   id: string;
+  currentUser: User = {
+    nombre: undefined,
+    apellidos: undefined,
+    password: undefined,
+    correo: undefined,
+    idUsuario: undefined
+  };
   constructor(
     private db: DatabaseService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private user: UserService
   ) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params.id;
-    if(this.id){
+    if (this.id) {
       this.db.getUser(this.id).subscribe(result => {
         const res = result as any;
-        this.user = res.data.usuario;
+        this.currentUser = res.data.usuario;
         console.log(this.user);
       });
     }
   }
 
-
+  submit() {
+    if (this.id) {
+      this.user.setUser(this.currentUser, this.id).subscribe(res => {
+        const response = res as any;
+        if (response.data) {
+          this.router.navigateByUrl('admin/users');
+        }
+        console.log(res);
+      });
+    } else {
+      this.user.createUser(this.currentUser).subscribe(res => {
+        const response = res as any;
+        if (response.data) {
+          this.router.navigateByUrl('admin/users');
+        }
+        console.log(res);
+      });
+    }
+  }
 
 }

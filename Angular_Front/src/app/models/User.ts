@@ -4,6 +4,6 @@ export interface User {
   apellidos: string;
   password: string;
   correo: string;
-  idSupervisor: string;
-  puesto: string;
+  idSupervisor?: string;
+  puesto?: string;
 }

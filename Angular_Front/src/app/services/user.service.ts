@@ -124,38 +124,37 @@ export class UserService {
     return moment(expiresAt);
   }
 
-  setUser(user: User) {
+  setUser(user: User, id) {
     const query = `
-    mutation($usuarioInput: UsuarioInput, $idUsuarioOriginal: String) {
+    mutation($usuarioInput: setUsuarioInput!, $idUsuarioOriginal: String!) {
       setUsuario(usuarioInput: $usuarioInput, idUsuarioOriginal: $idUsuarioOriginal)
     }`;
     return this.http.post(this.homeURL, {query, variables: {
-        userInput : {
+        usuarioInput : {
           correo: user.correo,
           id: user.idUsuario,
           fName: user.nombre,
           lName: user.apellidos,
-          contrasena: user.password,
-          idSupervisor: user.idSupervisor,
           puesto: user.puesto
-        }
+        },
+        idUsuarioOriginal: id
       }
     });
   }
 
   createUser(user: User) {
     const query = `
-    mutation($usuarioInput: UsuarioInput) {
+    mutation($usuarioInput: createUsuarioInput!) {
       createUsuario(usuarioInput: $usuarioInput)
     }`;
+    console.log(user);
     return this.http.post(this.homeURL, {query, variables: {
-      userInput : {
+        usuarioInput : {
         correo: user.correo,
         id: user.idUsuario,
         fName: user.nombre,
         lName: user.apellidos,
         contrasena: user.password,
-        idSupervisor: user.idSupervisor,
         puesto: user.puesto
         }
       }
@@ -181,7 +180,7 @@ export class AuthInterceptor implements HttpInterceptor {
     const idToken = localStorage.getItem('id_token');
 
     if (idToken) {
-      console.log('Making request with token', idToken);
+      // console.log('Making request with token', idToken);
       const cloned = req.clone({
         headers: req.headers.set('authorization', idToken)
       });

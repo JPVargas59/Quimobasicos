@@ -19,8 +19,7 @@ export class ContentsComponent implements OnInit {
     this.db.getContenidos().subscribe(result => {
       const contenidos = result as any;
       this.contenidos = contenidos.data.contenidos;
-    })
-
+    });
   }
 
   onContentSelect(event) {
