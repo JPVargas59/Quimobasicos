@@ -60,6 +60,7 @@ type Mantenimiento {
 
 type EtiquetaRFID {
 	idEtiqueta: String!
+	idTanque: String
 }
 
 type Contenido {
