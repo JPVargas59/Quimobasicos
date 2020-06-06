@@ -21,11 +21,11 @@ const routes: Routes = [
       { path: 'reports/inventory', component: InventoryComponent },
       { path: 'tanks/add', component: AddTankComponent },
       { path: 'tank/:id', component: TankComponent },
-      { path: 'tank/:id/update', component: UpdateTankComponent },
+      { path: 'tank/:id/edit', component: AddTankComponent },
       { path: 'tank/:id/exit', component: ExitTankComponent },
       { path: 'reports', component: ReportsComponent },
-      { path: 'reports/see-report/byLocation', component: PorLugarComponent },
       { path: 'reports/byContent', component: PorContenidoComponent },
+      { path: 'reports/byLocation', component: PorLugarComponent },
       { path: 'reports/see-report/:reportName', component: SeeReportComponent }
     ]
   }

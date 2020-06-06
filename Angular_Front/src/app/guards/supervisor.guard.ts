@@ -1,14 +1,24 @@
 import { Injectable } from '@angular/core';
-import { CanLoad, Route, UrlSegment, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { CanLoad, Route, UrlSegment, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { UserService } from '../services/user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SupervisorGuard implements CanLoad {
+  constructor(
+    private user: UserService,
+    private router: Router
+  ){}
   canLoad(
     route: Route,
     segments: UrlSegment[]): Observable<boolean> | Promise<boolean> | boolean {
-    return true;
+      if(this.user.getType() === 'supervisor'){
+        return true;
+      } else{
+        this.user.logout()
+        this.router.navigateByUrl('/login');
+      }
   }
 }

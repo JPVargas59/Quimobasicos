@@ -9,10 +9,14 @@
     <tbody>
         <tr *ngFor="let tag of tags">
             <td><a (click)="onTagSelect($event)" [id]="tag.idEtiqueta">{{tag.idEtiqueta}}</a></td>
-            <td (click)="selectTank(tag.idTanque)">{{tag.idTanque? tag.idTanque: 'Sin Asociar'}}</td>
-            <td><button class="ui button fluid">{{tag.idTanque? 'Desasociar': 'Asociar'}}</button></td>
+            <td>
+                <button (click)="selectTank(tag.idTanque)" [ngClass]="tag.idTanque ? 'ui button fluid':'ui disabled button fluid'">
+                    {{tag.idTanque? tag.idTanque: 'Sin Asociar'}}
+                </button>
+            </td>
+            <td><button [ngClass]="tag.idTanque ? 'ui red button fluid' : 'ui blue button fluid'">{{tag.idTanque? 'Desasociar': 'Asociar'}}</button></td>
         </tr>
     </tbody>
 </table>
-
+<br>
  
