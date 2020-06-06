@@ -4,6 +4,7 @@ import * as moment from 'moment';
 import {Observable} from 'rxjs';
 import {Router} from '@angular/router';
 import {User} from '../models/User';
+import {Owner} from '../models/Owner';
 
 @Injectable({
   providedIn: 'root'
@@ -124,6 +125,8 @@ export class UserService {
     const expiresAt = JSON.parse(expiration);
     return moment(expiresAt);
   }
+
+
 
   setUser(user: User, id) {
     const query = `

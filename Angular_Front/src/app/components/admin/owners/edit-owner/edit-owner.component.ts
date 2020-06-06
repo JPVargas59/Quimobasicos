@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { DatabaseService } from 'src/app/services/database.service';
 import { Owner } from 'src/app/models/Owner';
 
@@ -17,7 +17,8 @@ export class EditOwnerComponent implements OnInit {
 
   constructor(
     private db: DatabaseService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -31,23 +32,22 @@ export class EditOwnerComponent implements OnInit {
   }
 
   submit() {
-    /*if (this.id) {
-      this.user.setUser(this.currentUser, this.id).subscribe(res => {
+    if (this.id) {
+      this.db.setOwner(this.owner, this.id).subscribe(res => {
         const response = res as any;
-        if (response.data) {
-          this.router.navigateByUrl('admin/users');
-        }
         console.log(res);
+        if (response.data) {
+          this.router.navigateByUrl('admin/owners');
+        }
       });
     } else {
-      this.user.createUser(this.currentUser).subscribe(res => {
+      this.db.createOwner(this.owner).subscribe(res => {
         const response = res as any;
-        if (response.data) {
-          this.router.navigateByUrl('admin/users');
-        }
         console.log(res);
+        if (response.data) {
+          this.router.navigateByUrl('admin/owners');
+        }
       });
     }
-     */
   }
 }
