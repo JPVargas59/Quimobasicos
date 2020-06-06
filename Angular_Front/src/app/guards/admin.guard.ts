@@ -16,6 +16,7 @@ export class AdminGuard implements CanLoad {
     if (this.user.getType() === 'admin') {
       return true;
     } else {
+      this.user.logout()
       this.router.navigateByUrl('/login');
     }
   }

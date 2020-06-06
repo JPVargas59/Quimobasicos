@@ -15,12 +15,13 @@ import { InventoryComponent } from './components/reports/inventory/inventory.com
 import { ReportsComponent } from './components/reports/reports.component';
 import {AuthGuardGuard} from './guards/auth-guard.guard';
 import {AdminGuard} from './guards/admin.guard';
+import { SupervisorGuard } from './guards/supervisor.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'admin', loadChildren: () => import('./modules/admin/admin.module').then(m => m.AdminModule), canLoad: [AuthGuardGuard, AdminGuard] },
-  { path: 'supervisor', loadChildren: () => import('./modules/supervisor/supervisor.module').then(m => m.SupervisorModule), canLoad: [AuthGuardGuard] },
+  { path: 'supervisor', loadChildren: () => import('./modules/supervisor/supervisor.module').then(m => m.SupervisorModule), canLoad: [AuthGuardGuard, SupervisorGuard] },
   { path: 'operator', loadChildren: () => import('./modules/operator/operator.module').then(m => m.OperatorModule), canLoad: [AuthGuardGuard] }
 ];
 

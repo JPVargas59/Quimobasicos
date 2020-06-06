@@ -31,7 +31,7 @@ export class UserService {
 
   private static setSession(token, expiration) {
     const expiresAt = moment().add(expiration, 'second');
-
+    console.log(expiration);
     localStorage.setItem('id_token', token);
     if (expiration) {
       localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()) );
@@ -79,7 +79,8 @@ export class UserService {
       mutation($user: String!, $password: String!) {
         login(correo: $user, contrasena: $password) {
           jwt_token,
-          refreshJWT
+          refreshJWT,
+          jwt_fechaExpiracion
         }
       }
     `;
