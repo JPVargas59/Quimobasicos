@@ -90,8 +90,13 @@ let mysqlMutations = {
 		client.quit();
 		return resp;
 	},
-	async getEtiqueta(idEtiqueta: string) {
+	async getEtiqueta(idEtiqueta) {
 		var resp = await common.getEtiqueta(client, idEtiqueta);
+		client.quit();
+		return resp;
+	},
+	async getIdEtiqueta(idEtiqueta) {
+		var resp = await common.getIdEtiqueta(client, idEtiqueta);
 		client.quit();
 		return resp;
 	},

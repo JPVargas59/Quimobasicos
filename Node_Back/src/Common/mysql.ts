@@ -262,6 +262,16 @@ exports.getEtiqueta = async (client, idEtiqueta) => {
 	return etiqueta[0];
 };
 
+exports.getIdEtiqueta = async (client, idEtiqueta) => {
+	var etiqueta = await client.query(`SELECT * FROM EtiquetaRFID WHERE idEtiqueta = ?`, [
+		idEtiqueta
+	]);
+	if (etiqueta.length == 0) {
+		return null;
+	}
+	return etiqueta[0];
+};
+
 exports.getHistorialPesoTanques = async (client) => {
 	var historialPesos = await client.query(`
     SELECT *  FROM HistorialPeso

@@ -6,7 +6,7 @@ const type: IResolvers = {
 			return asyncFunctions.getLugaresHaEstadoTanque(parent.idTanque);
 		},
 		idEtiqueta: (parent) => {
-			return asyncFunctions.getEtiqueta(parent.idEtiqueta);
+			return asyncFunctions.getIdEtiqueta(parent.idEtiqueta);
 		},
 		dueno: (parent) => {
 			return asyncFunctions.getInfoDueno(parent.idDueno);
