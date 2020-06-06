@@ -4,9 +4,12 @@
       <h2 class="ui blue image header">
         <!--<img src="assets/images/logo.png" class="image">-->
         <div class="content">
-          Inicia sesión con tu cuenta
+          Inicia Sesión
         </div>
       </h2>
+      <div class="ui error message" *ngIf="error">
+        <div class="header">{{error}}</div>
+      </div>
       <form class="ui large form" (ngSubmit)="onSubmit()">
         <div class="ui basic segment">
           <div class="field">
@@ -21,19 +24,14 @@
               <input type="password" name="password" placeholder="Password" [(ngModel)]="usuario.contrasena">
             </div>
           </div>
-          <p>Iniciar sesión</p>
+          
           <button class="ui fluid green button" type="submit" >Iniciar sesión</button>
-          <div class="ui three buttons">
+          <!-- <div class="ui three buttons">
             <div class="ui large button" routerLink="/operator">Operador</div>
             <div class="ui large primary button" routerLink="/supervisor">Supervisor</div>
             <div class="ui large secondary button"  routerLink="/admin">Admin</div>
-          </div>
-
-
+          </div> -->
         </div>
-
-        <div class="ui error message"></div>
-
       </form>
     </div>
   </div>
