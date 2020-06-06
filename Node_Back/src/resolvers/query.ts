@@ -2,11 +2,11 @@ import { IResolvers } from 'graphql-tools';
 import asyncFunctionsMySQLQueries = require('../data/asyncMySQLQueries');
 const query: IResolvers = {
 	Query: {
-		tanques(_: void, __: void, { token }): any {
+		tanques(_: void, { idEtiqueta }, { token }): any {
 			if (!token) {
 				throw new Error('Acceso no autorizado');
 			} else {
-				return asyncFunctionsMySQLQueries.getTanques();
+				return asyncFunctionsMySQLQueries.getTanques(idEtiqueta);
 			}
 		},
 		tanque(__: void, { idTanque }, { token }): any {

@@ -2,8 +2,8 @@ var common = require('../Common/mysql');
 import client from '../client';
 
 let mysqlMutations = {
-	async getTanques() {
-		var resp = await common.getTanques(client);
+	async getTanques(idEtiqueta: string) {
+		var resp = await common.getTanques(client, idEtiqueta);
 		client.quit();
 		return resp;
 	},
@@ -16,11 +16,6 @@ let mysqlMutations = {
 		}
 		client.quit();
 		return arrayLugares;
-	},
-	async getIdEtiqueta(idEtiqueta: string) {
-		var resp = await common.getIdEtiqueta(client, idEtiqueta);
-		client.quit();
-		return resp;
 	},
 	async getInfoDueno(idDueno: string) {
 		var resp = await common.getInfoDueno(client, idDueno);
