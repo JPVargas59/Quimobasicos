@@ -107,6 +107,7 @@ export class UserService {
   logout() {
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
+    localStorage.removeItem('user_type');
   }
 
   public isLoggedIn() {
