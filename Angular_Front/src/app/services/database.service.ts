@@ -5,6 +5,7 @@ import {Tanque} from '../models/Tanque';
 import {User} from '../models/User';
 import {Lugar} from '../models/Lugar';
 import {Contenido} from '../models/Contenido';
+import {Owner} from '../models/Owner';
 
 @Injectable({
   providedIn: 'root'
@@ -330,6 +331,30 @@ export class DatabaseService {
     `;
     return this.http.post(this.homeURL, {query});
   }
+
+  setOwner(owner: Owner, id: string) {
+    const query = `
+      mutation {
+        setDueno(duenoInput: {
+          id: "${owner.idDueno}",
+          nombre: "${owner.nombre}"
+        }, idDuenoOriginal: "${id}")
+      }
+    `;
+    return this.http.post(this.homeURL, {query});
+  }
+
+  createOwner(owner: Owner) {
+    const query = `
+      mutation {
+        createDueno(duenoInput: {
+          id: "${owner.idDueno}",
+          nombre: "${owner.nombre}"
+        })
+      }
+    `;
+    return this.http.post(this.homeURL, {query});
+  };
 
   setContenido(contenido: Contenido, id: string) {
     const query = `

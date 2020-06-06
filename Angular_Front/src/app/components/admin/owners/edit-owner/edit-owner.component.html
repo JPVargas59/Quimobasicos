@@ -1,7 +1,7 @@
 <h3 class="ui title" *ngIf="id">Modificar {{id}}</h3>
 <h3 class="ui title" *ngIf="!id">Agregar un nuevo Dueño</h3>
 
-<form class="ui form">
+<form class="ui form" (ngSubmit)="submit()">
     <h4 class="ui dividing header">Información del Dueño</h4>
     <div class="two fields">
       <div class="field required">
@@ -17,5 +17,5 @@
         <input maxlength="10" type="text" name="nombre" required [(ngModel)]="owner.nombre" placeholder="Nombre">
       </div>
     </div>
-    <div class="ui submit primary button" routerLink="/admin/owners">Guardar</div>
+    <button class="ui submit primary button">Guardar</button>
 </form>
