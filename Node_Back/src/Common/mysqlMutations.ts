@@ -236,10 +236,10 @@ let mysqlMutations = {
 					expiresIn: '1d',
 					algorithm: 'RS256'
 				});
-				await client.query('UPDATE JWT SET jwt=? WHERE idUsuario=?', [
-					refreshJWT,
-					user.idUsuario
-				]);
+				await client.query(
+					'UPDATE JWT JOIN Usuario ON Usuario.idJWT = JWT.idJWT SET jwt=? WHERE idUsuario = ?',
+					[refreshJWT, user.idUsuario]
+				);
 				const jwt_fechaExpiracion = new Date();
 				jwt_fechaExpiracion.setDate(jwt_fechaExpiracion.getDate() + 1);
 				const jwt_token = signJWT(user);
@@ -274,7 +274,10 @@ let mysqlMutations = {
 	},
 	async logout(client, idUsuario) {
 		await client
-			.query('UPDATE JWT SET jwt=null WHERE idUsuario=?', idUsuario)
+			.query(
+				'UPDATE JWT JOIN Usuario ON Usuario.idJWT = JWT.idJWT SET jwt=null WHERE idUsuario=?',
+				idUsuario
+			)
 			.catch((error) => {
 				console.log(error);
 				throw new Error('Error interno. No se pudo cerrar la sesión');
