@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'admin', loadChildren: () => import('./modules/admin/admin.module').then(m => m.AdminModule), canLoad: [AuthGuardGuard, AdminGuard] },
   { path: 'supervisor', loadChildren: () => import('./modules/supervisor/supervisor.module').then(m => m.SupervisorModule), canLoad: [AuthGuardGuard, SupervisorGuard] },
-  { path: 'operator', loadChildren: () => import('./modules/operator/operator.module').then(m => m.OperatorModule), canLoad: [AuthGuardGuard, OperatorGuard] }
+  { path: 'operador', loadChildren: () => import('./modules/operator/operator.module').then(m => m.OperatorModule), canLoad: [AuthGuardGuard, OperatorGuard] }
 ];
 
 @NgModule({
