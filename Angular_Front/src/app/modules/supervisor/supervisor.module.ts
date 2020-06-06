@@ -24,8 +24,8 @@ const routes: Routes = [
       { path: 'tank/:id/edit', component: AddTankComponent },
       { path: 'tank/:id/exit', component: ExitTankComponent },
       { path: 'reports', component: ReportsComponent },
-      { path: 'reports/see-report/byLocation', component: PorLugarComponent },
       { path: 'reports/byContent', component: PorContenidoComponent },
+      { path: 'reports/byLocation', component: PorLugarComponent },
       { path: 'reports/see-report/:reportName', component: SeeReportComponent }
     ]
   }

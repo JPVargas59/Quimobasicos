@@ -10,9 +10,7 @@ export class SupervisorGuard implements CanLoad {
   constructor(
     private user: UserService,
     private router: Router
-  ){
-
-  }
+  ){}
   canLoad(
     route: Route,
     segments: UrlSegment[]): Observable<boolean> | Promise<boolean> | boolean {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-supervisor-home',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SupervisorHomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private user: UserService
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  logout(){
+    this.user.logout()
   }
 
 }
