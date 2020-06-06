@@ -1,4 +1,4 @@
-USE quimobasicos;
+    USE quimobasicos;
 
 INSERT INTO Contenido VALUES ("G-134A", "Cloro");
 INSERT INTO Contenido VALUES ("G-404A", "Hipoclorito de sodio");
@@ -115,7 +115,8 @@ INSERT INTO Usuario VALUES (
     '4272e0482200e205890367fe6603b0159a5a2c11ff7607cbbc9dd219da41035e',
     'alexhdz@quimobasicos.com',
     null,
-    'Admin'
+    'Admin',
+    null
 );
 INSERT INTO Usuario VALUES (
     'OP000002',
@@ -124,7 +125,8 @@ INSERT INTO Usuario VALUES (
     '$2a$10$mpXZrlIKDUOHWQ2Vb495Guww4WZXtf.46pO/aVzJ8vKLJo.xx4wsu',
     'juanpablo.vr@quimobasicos.com',
     null,
-    'Admin'
+    'Admin',
+    null
 );
 INSERT INTO Usuario VALUES (
     'OP000003',
@@ -133,7 +135,8 @@ INSERT INTO Usuario VALUES (
     'bde4fddbaed98a68fdb45670ba8917344605e490fa59c280091eb1307ac5b3c9',
     'diana.loredo@quimobasicos.com',
     'OP000002',
-    'Supervisor'
+    'Supervisor',
+    null
 );
 INSERT INTO Usuario VALUES (
     'OP000004',
@@ -142,7 +145,8 @@ INSERT INTO Usuario VALUES (
     '76549b827ec46e705fd03831813fa52172338f0dfcbd711ed44b81a96dac51c6',
     'yulisa.medina@quimobasicos.com',
     'OP000003',
-    'Operador'
+    'Operador',
+    null
 );
 
 INSERT INTO OperadoPor VALUES (
