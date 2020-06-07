@@ -114,8 +114,10 @@ async function modifyId(table, input) {
 					let salt = await bcryptjs.genSalt(10);
 					input.contrasena = await bcryptjs.hash(input.contrasena, salt);
 				}
+				break;
 			case 'LectorRFID':
 				input.idLector = input.id;
+				break;
 		}
 		delete input.id;
 	}

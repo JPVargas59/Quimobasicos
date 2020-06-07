@@ -8,9 +8,17 @@ async function asyncForEach(array, cb) {
 
 exports.getTanques = async (client, idEtiqueta) => {
 	let queryString = 'SELECT * FROM Tanque ';
-	if (idEtiqueta == null) {
-		queryString += 'WHERE idEtiqueta IS ?';
+	switch (typeof idEtiqueta) {
+		case 'number':
+			queryString += 'WHERE idEtiqueta = ?';
+			break;
+		case 'object':
+			if (idEtiqueta == null) {
+				queryString += 'WHERE idEtiqueta IS ?';
+			}
+			break;
 	}
+	console.log(typeof idEtiqueta);
 	console.log(idEtiqueta);
 	queryString += ' ORDER BY idTanque';
 	console.log(queryString);
