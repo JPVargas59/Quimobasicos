@@ -312,6 +312,8 @@ type Query {
 	operacionesTanque(idTanque: ID!): [Operacion!]
 	"Lugares donde ha estado en diferentes tanques"
 	tanquesHaEstadoEnFecha(desde: Date, hasta: Date): [HistorialTanque]
+
+	lectorRFID(idLector: String): [LectorRFID]
 }
 
 """

@@ -1,3 +1,5 @@
+import { type } from 'os';
+
 async function asyncForEach(array, cb) {
 	for (let i = 0; i < array.length; i++) {
 		await cb(array[i], i, array);
@@ -400,4 +402,21 @@ exports.getHaEstadoEnFechas = async (client, desde, hasta) => {
 		return null;
 	}
 	return ubicaciones;
+};
+
+exports.getValor = async (client, tabla, columnaId, idValor) => {
+	let queryString = `SELECT * FROM ??`;
+	let arrayQuery = [tabla];
+	if (typeof idValor !== 'undefined') {
+		queryString += ' WHERE ?? = ?';
+		arrayQuery.push(columnaId, idValor);
+	}
+	let ans = await client.query(queryString, arrayQuery).catch((error) => {
+		console.log(error);
+		throw new Error(error.sqlMessage);
+	});
+	if (ans.length == 0) {
+		return null;
+	}
+	return ans;
 };

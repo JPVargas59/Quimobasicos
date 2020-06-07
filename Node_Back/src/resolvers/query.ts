@@ -130,6 +130,13 @@ const query: IResolvers = {
 		},
 		tanquesHaEstadoEnFecha(__: void, { desde, hasta }): any {
 			return asyncFunctionsMySQLQueries.getHaEstadoEnFechas(desde, hasta);
+		},
+		lectorRFID(__: void, { idLector }, { token }): any {
+			if (!token) {
+				throw new Error('Acceso no autorizado');
+			} else {
+				return asyncFunctionsMySQLQueries.getValor('LectorRFID', 'idLector', idLector);
+			}
 		}
 	}
 };

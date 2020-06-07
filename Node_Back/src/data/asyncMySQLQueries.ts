@@ -1,6 +1,11 @@
 var common = require('../Common/mysql');
 import client from '../client';
 
+function quitClient(client, resp) {
+	client.quit();
+	return resp;
+}
+
 let mysqlMutations = {
 	async getTanques(idEtiqueta: string) {
 		var resp = await common.getTanques(client, idEtiqueta);
@@ -167,6 +172,10 @@ let mysqlMutations = {
 		let arrayUbicaciones = JSON.parse(JSON.stringify(resp));
 		client.quit();
 		return arrayUbicaciones;
+	},
+	async getValor(tabla, columnaId, idValor) {
+		let resp = await common.getValor(client, tabla, columnaId, idValor);
+		return quitClient(client, resp);
 	}
 };
 export = mysqlMutations;
