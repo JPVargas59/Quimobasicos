@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {UserService} from '../../../services/user.service';
 
 @Component({
   selector: 'app-operator-landing',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OperatorLandingComponent implements OnInit {
 
-  constructor() { }
+  search: string;
+  constructor(
+    private user: UserService
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  searchTank() {
+    if (this.search) {
+      this.user.goTo(`tank/${this.search}`);
+    }
   }
 
 }

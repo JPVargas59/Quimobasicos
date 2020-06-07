@@ -1,8 +1,9 @@
 <h3 class="ui header">Tanque: {{tank}}</h3>
 
-<!-- Información actual del tanque -->
-<table class="ui celled structured table">
-  <thead>
+<div *ngIf="tankInfo">
+  <!-- Información actual del tanque -->
+  <table class="ui celled structured table">
+    <thead>
     <th>ID Tanque</th>
     <th>Contenido</th>
     <th>Dueño</th>
@@ -12,8 +13,8 @@
     <th>Fecha Ingreso</th>
     <th>Fecha Esperada Retorno</th>
     <th>Observaciones</th>
-  </thead>
-  <tbody>
+    </thead>
+    <tbody>
     <tr *ngIf="tankInfo">
       <td>{{tank}}</td>
       <td>{{tankInfo.contenidoTanque.contenido ? tankInfo.contenidoTanque.contenido : '-'}}</td>
@@ -25,47 +26,52 @@
       <td>{{tankInfo.fechaEsperadaRetorno | date:'medium'}}</td>
       <td>{{tankInfo.observaciones}}</td>
     </tr>
-  </tbody>
-</table>
-<br>
-<!-- Información por decir de historial del tanque -->
-<div class="ui two column stackable center aligned grid">
-  <div class="column">
-    <h4 class="ui header">Historial de Peso</h4>
-    <table class="column ui celled structured table">
-      <thead>
+    </tbody>
+  </table>
+  <br>
+  <!-- Información por decir de historial del tanque -->
+  <div class="ui two column stackable center aligned grid">
+    <div class="column">
+      <h4 class="ui header">Historial de Peso</h4>
+      <table class="column ui celled structured table">
+        <thead>
         <th>Fecha</th>
         <th>Peso</th>
-      </thead>
-      <tbody>
+        </thead>
+        <tbody>
         <!-- TODO: peticion de graphql Revisar cuando se actualice el servidor -->
         <tr *ngFor="let value of tankWeight">
           <td>{{value.fecha | date:'medium'}}</td>
           <td>{{value.peso}}</td>
         </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="column">
-    <h4 class="ui header">Historial de Ubicaciones</h4>
-    <table class="column ui celled structured table">
-      <thead>
+        </tbody>
+      </table>
+    </div>
+    <div class="column">
+      <h4 class="ui header">Historial de Ubicaciones</h4>
+      <table class="column ui celled structured table">
+        <thead>
         <th>Fecha</th>
         <th>Lugar</th>
-      </thead>
-      <tbody *ngIf="locations">
+        </thead>
+        <tbody *ngIf="locations">
         <tr *ngFor="let location of locations">
           <td>{{location.fecha | date:'medium'}}</td>
           <td>{{location.lugar.lnombre}}</td>
         </tr>
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="ui segment center aligned">
+    <div class="inline">
+      <div class="ui primary button" [routerLink]="updateAddress">Modificar Información</div>
+      <div class="ui red button"  [routerLink]="exitAddress">Desvincular Etiqueta RFID</div>
+    </div>
   </div>
 </div>
 
-<div class="ui segment center aligned">
-  <div class="inline">
-    <div class="ui primary button" [routerLink]="updateAddress">Modificar Información</div>
-    <div class="ui red button"  [routerLink]="exitAddress">Desvincular Etiqueta RFID</div>
-  </div>
+<div *ngIf="!tankInfo">
+  <h1>No se ha encontrado un tanque con este ID</h1>
 </div>

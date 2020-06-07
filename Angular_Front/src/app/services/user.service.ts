@@ -151,7 +151,8 @@ export class UserService {
           id: user.idUsuario,
           fName: user.nombre,
           lName: user.apellidos,
-          puesto: user.puesto
+          puesto: user.puesto,
+          idSupervisor: user.idSupervisor
         },
         idUsuarioOriginal: id
       }

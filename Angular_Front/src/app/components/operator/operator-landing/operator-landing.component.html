@@ -28,15 +28,17 @@
                     <i class="redo alternate icon"></i>
                     Actualizar Información de un Tanque
                 </div>
+              <form (ngSubmit)="searchTank()">
                 <div class="field">
-                    <div class="ui search">
-                        <div class="ui icon input">
-                            <input type="text" class="prompt" placeholder="ID del Tanque">
-                            <i class="search icon"></i>
-                        </div>
-                        <div class="results"></div>
+                  <div class="ui search">
+                    <div class="ui icon input">
+                      <input type="text" class="prompt" placeholder="ID del Tanque" [(ngModel)]="search" name="search">
+                      <i class="search icon"></i>
                     </div>
+                    <div class="results"></div>
+                  </div>
                 </div>
+              </form>
             </div>
         </div>
     </div>

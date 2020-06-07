@@ -175,7 +175,14 @@ export class DatabaseService {
         password
         idSupervisor
         puesto
-    }}`;
+      },
+      usuarios {
+        idUsuario,
+        puesto,
+        nombre
+     }
+    }
+    `;
     return this.http.post(`${this.homeURL}`, {query});
   }
 
