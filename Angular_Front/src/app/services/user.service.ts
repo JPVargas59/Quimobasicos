@@ -5,12 +5,12 @@ import {Observable} from 'rxjs';
 import {Router} from '@angular/router';
 import {User} from '../models/User';
 import {Owner} from '../models/Owner';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-
 
   constructor(
     private http: HttpClient,
@@ -112,7 +112,9 @@ export class UserService {
   }
 
   logout() {
-    this.logoutDB();
+    this.logoutDB().subscribe(result => {
+      console.log('COSA: ',result);
+    });
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
     localStorage.removeItem('user_type');
