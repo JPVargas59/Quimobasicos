@@ -104,7 +104,15 @@ export class UserService {
       });
   }
 
+  logoutDB(){
+    const query = `mutation{
+      logout(idUsuario:"${this.getUserId()}")
+    }`
+    return this.http.post(this.homeURL, {query});
+  }
+
   logout() {
+    this.logoutDB();
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
     localStorage.removeItem('user_type');

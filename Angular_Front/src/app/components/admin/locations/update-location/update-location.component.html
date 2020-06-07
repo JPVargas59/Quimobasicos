@@ -5,11 +5,17 @@
   <h4 class="ui dividing header">Información del lugar</h4>
     <div class="two fields">
         <div class="required field">
-            <label>Nombre</label>
+            <label>ID del Lugar</label>
             <div class="field">
-              <input type="text" name="lnombre" [(ngModel)]="lugar.lnombre">
+              <input type="text" name="idLugar" [class.ui]="id" [class.disabled]="id" [class.input]="id" [readOnly]="id"  [(ngModel)]="lugar.idLugar">
             </div>
         </div>
+        <div class="required field">
+          <label>Nombre</label>
+          <div class="field">
+            <input type="text" name="lnombre" [(ngModel)]="lugar.lnombre">
+          </div>
+      </div>
     </div>
 
     <div class="two fields">
@@ -20,7 +26,7 @@
             </div>
         </div>
         <div class="required field">
-          <label>Capacidad</label>
+          <label>Capacidad Máxima</label>
           <div class="field">
             <input type="text" name="capacidadMaxima" [(ngModel)]="lugar.capacidadMaxima">
           </div>

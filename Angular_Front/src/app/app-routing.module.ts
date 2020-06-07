@@ -4,7 +4,6 @@ import {LoginComponent} from './components/login/login.component';
 import {AdminHomeComponent} from './components/admin/admin-home/admin-home.component';
 import { UsersComponent } from './components/admin/users/users.component';
 import { AddUserComponent } from './components/admin/add-user/add-user.component';
-import { UserComponent } from './components/admin/user/user.component';
 import { AddTankComponent } from './components/tank/add-tank/add-tank.component';
 import { UpdateTankComponent } from './components/tank/update-tank/update-tank.component';
 import { ExitTankComponent } from './components/tank/exit-tank/exit-tank.component';

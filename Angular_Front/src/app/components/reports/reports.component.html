@@ -10,7 +10,7 @@
   <tbody>
   <tr *ngFor="let report of reports">
     <td>
-      <a (click)="onReportSelection($event)" [id]="report.nombre">
+      <a (click)="onReportSelection(report.route)" [id]="report.nombre">
         {{report.nombre}}
       </a>
     </td>
