@@ -389,6 +389,59 @@ export class DatabaseService {
     return this.http.post(this.homeURL, {query});
   }
 
+  desvincularTanque(idTanque) {
+    const query = `
+
+        mutation {
+          setTanque(tanqueInput: {
+            idEtiqueta: null
+          }, idTanqueOriginal: "${idTanque}")
+        }
+
+    `;
+    return this.http.post(this.homeURL, {query});
+  }
+
+  vincularTanque(idTanque, idEtiqueta) {
+    const query = `
+
+        mutation {
+          setTanque(tanqueInput: {
+            idEtiqueta: ${idEtiqueta}
+          }, idTanqueOriginal: "${idTanque}")
+        }
+
+    `;
+    return this.http.post(this.homeURL, {query});
+  }
+
+  getTanquesSinEtiqueta() {
+    const query = `
+      {
+        tanques(idEtiqueta: null) {
+          idTanque
+        }
+        etiquetas {
+          idTanque
+          idEtiqueta
+        }
+      }
+    `;
+    return this.http.post(this.homeURL, {query});
+  }
+
+  createEtiqueta(idEtiqueta) {
+    const query = `
+    mutation {
+      createEtiqueta(etiquetaInput: {
+        id: ${idEtiqueta}
+      })
+    }
+    `;
+    return this.http.post(this.homeURL, {query});
+  }
+
+
   dateToStringFormat(dateString: string) {
     const date = new Date(dateString);
     const d = date.getDate();

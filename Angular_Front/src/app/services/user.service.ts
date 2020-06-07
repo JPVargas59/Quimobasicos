@@ -104,7 +104,7 @@ export class UserService {
       });
   }
 
-  logoutDB(){
+  logoutDB() {
     const query = `mutation{
       logout(idUsuario:"${this.getUserId()}")
     }`
@@ -112,12 +112,12 @@ export class UserService {
   }
 
   logout() {
-    this.logoutDB().subscribe(result => {
-      console.log('COSA: ',result);
+    this.logoutDB().subscribe(() => {
+      localStorage.removeItem('id_token');
+      localStorage.removeItem('expires_at');
+      localStorage.removeItem('user_type');
     });
-    localStorage.removeItem('id_token');
-    localStorage.removeItem('expires_at');
-    localStorage.removeItem('user_type');
+
   }
 
   public isLoggedIn() {

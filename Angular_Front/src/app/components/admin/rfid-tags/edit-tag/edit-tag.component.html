@@ -1,19 +1,23 @@
 <h3 class="ui title">Agrega una etiqueta RFID</h3>
-  <form class="ui form">
+  <form class="ui form" (ngSubmit)="vincularTanque()">
     <div class="two fields">
-      <div class="field required">
-        <label>ID Etiqueta</label>
-        <div class="field">
-          <div class="field">
-            <input type="number" name="idEtiqueta" required placeholder="#">
-          </div>
-        </div>
+      <div class="field required" *ngIf="idEtiqueta">
+        <label>Etiqueta a Asociar</label>
+        <select name="idEtiqueta" id="idEtiqueta" [(ngModel)]="idEtiqueta">
+          <option value="null">No asociar</option>
+          <option *ngFor="let etiqueta of etiquetas" [value]="etiqueta.idEtiqueta">{{etiqueta.idEtiqueta}}</option>
+        </select>
       </div>
+      <div class="field required" *ngIf="!idEtiqueta">
+        <label>Id Etiqueta nueva</label>
+        <input maxlength="10000" type="number" name="idEtiquetaNueva" [(ngModel)]="idEtiquetaNueva" placeholder="# etiqueta nueva">
+      </div>
+
       <div class="field required">
         <label>Tanque a Asociar</label>
-        <select name="idTanque" id="idTanque">
+        <select name="idTanque" id="idTanque" [(ngModel)]="idTanque">
           <option value="null">No asociar</option>
-          <option *ngFor="" value="null">No asociar</option>
+          <option *ngFor="let tanque of tanques" [value]="tanque.idTanque">{{tanque.idTanque}}</option>
         </select>
       </div>
     </div>

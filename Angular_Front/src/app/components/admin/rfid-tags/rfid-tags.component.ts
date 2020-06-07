@@ -17,21 +17,38 @@ export class RfidTagsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.loadEtiquetas();
+  }
+
+  loadEtiquetas() {
     this.db.getEtiquetas().subscribe(result => {
       const tags = result as any;
       this.tags = tags.data.etiquetas;
-    })
+    });
   }
 
-  onTagSelect(event){
+  onTagSelect(event) {
     const id = event.target.id;
     this.router.navigateByUrl(`/admin/rfid-tags/${id}/edit`);
   }
 
   selectTank(id) {
     console.log(id)
-    if(id){
+    if(id) {
       this.router.navigateByUrl(`/${this.user.getType()}/tank/${id}`);
+    }
+  }
+
+  onAction(tanque, etiqueta) {
+    if (tanque) {
+      const c = confirm(`¿Desvincular tanque ${tanque}`);
+      if (c) {
+        this.db.desvincularTanque(tanque).subscribe(() => {
+          this.loadEtiquetas();
+        });
+      }
+    } else {
+      this.user.goTo(`rfid-tags/${etiqueta}/edit`);
     }
   }
 }

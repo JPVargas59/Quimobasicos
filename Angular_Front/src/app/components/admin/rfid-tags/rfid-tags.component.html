@@ -22,9 +22,8 @@
                     {{tag.idTanque? tag.idTanque: 'Sin Asociar'}}
                 </button>
             </td>
-            <td><button [ngClass]="tag.idTanque ? 'ui red button fluid' : 'ui blue button fluid'">{{tag.idTanque? 'Desasociar': 'Asociar'}}</button></td>
+            <td><button (click)="onAction(tag.idTanque, tag.idEtiqueta)" [ngClass]="tag.idTanque ? 'ui red button fluid' : 'ui blue button fluid'">{{tag.idTanque? 'Desasociar': 'Asociar'}}</button></td>
         </tr>
     </tbody>
 </table>
 <br>
- 
