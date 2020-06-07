@@ -128,8 +128,12 @@ const query: IResolvers = {
 				return asyncFunctionsMySQLQueries.getOperacionesTanque(idTanque);
 			}
 		},
-		tanquesHaEstadoEnFecha(__: void, { desde, hasta }): any {
-			return asyncFunctionsMySQLQueries.getHaEstadoEnFechas(desde, hasta);
+		tanquesHaEstadoEnFecha(__: void, { desde, hasta }, { token }): any {
+			if (!token) {
+				throw new Error('Acceso no autorizado');
+			} else {
+				return asyncFunctionsMySQLQueries.getHaEstadoEnFechas(desde, hasta);
+			}
 		},
 		lectorRFID(__: void, { idLector }, { token }): any {
 			if (!token) {
