@@ -261,6 +261,27 @@ const mutation: IResolvers = {
 			} else {
 				return mysqlMutations.createValor(lectorRFIDInput, 'LectorRFID', ['idLector']);
 			}
+		},
+		genTokenLector(__: void, { idLector }, { token }): any {
+			if (!token) {
+				throw new Error('Acceso no autorizado');
+			} else {
+				return mysqlMutations.genTokenLector(idLector);
+			}
+		},
+		disableTokenLector(__: void, { idLector }, { token }): any {
+			if (!token) {
+				throw new Error('Acceso no autorizado');
+			} else {
+				return mysqlMutations.disableTokenLector(idLector);
+			}
+		},
+		verifyTokenLector(__: void, { jwt_lector }, { token }): any {
+			if (!token) {
+				throw new Error('Acceso no autorizado');
+			} else {
+				return mysqlMutations.verifyTokenLector(jwt_lector);
+			}
 		}
 	}
 };

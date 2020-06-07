@@ -285,6 +285,64 @@ let mysqlMutations = {
 				throw new Error('Error interno. No se pudo cerrar la sesión');
 			});
 		return 'Sesión cerrada exitosamente.';
+	},
+	async genTokenLector(client, idLector) {
+		if (!(await checkExists(client, 'LectorRFID', ['idLector'], [idLector]))) {
+			throw new Error(`El lector con id ${idLector} no existe`);
+		} else {
+			let serverkey = await fsPromises
+				.readFile(path.resolve(__dirname + '/../../server.key'))
+				.catch((error) => {
+					console.log(error);
+					throw new Error('Error interno');
+				});
+			const jwt_lector = jwt.sign({ idLector: idLector }, serverkey, {
+				expiresIn: '9999d',
+				algorithm: 'RS256'
+			});
+			await client
+				.query(
+					'UPDATE JWT JOIN LectorRFID ON LectorRFID.idJWT = JWT.idJWT SET jwt = ? WHERE idLector = ?',
+					[jwt_lector, idLector]
+				)
+				.catch((error) => {
+					console.log(error);
+					throw new Error(
+						`Error: El JWT del lector con id ${idLector} no pudo ser guardado en la base de datos.
+						${error.sqlMessage}`
+					);
+				});
+			return jwt_lector;
+		}
+	},
+	async disableTokenLector(client, idLector) {
+		if (!(await checkExists(client, 'LectorRFID', ['idLector'], [idLector]))) {
+			throw new Error(`El lector con id ${idLector} no existe`);
+		} else {
+			await client
+				.query(
+					'UPDATE JWT JOIN LectorRFID ON LectorRFID.idJWT = JWT.idJWT SET jwt = NULL WHERE idLector = ?',
+					[idLector]
+				)
+				.catch((error) => {
+					console.log(error);
+					throw new Error(`Error: No se pudo borrar el JWT del lector con id ${idLector}.
+				${error}`);
+				});
+			return `El token del lector con id ${idLector} ha sido deshabilitado`;
+		}
+	},
+	async verifyTokenLector(client, jwt_lector) {
+		if (typeof jwt_lector === 'undefined') {
+			return false;
+		}
+		let ans = await client
+			.query('SELECT * FROM JWT WHERE jwt = ?', [jwt_lector])
+			.catch((error) => {
+				console.log(error);
+				throw new Error(`No se pudo verificar el token del lector.\n${error.sqlMessage}`);
+			});
+		return ans.length == 0 ? false : true;
 	}
 };
 export = mysqlMutations;

@@ -373,4 +373,7 @@ type Mutation {
 
 	setLectorRFID(lectorRFIDInput: LectorRFIDInput!, idLectorRFIDOriginal: String!): String
 	createLectorRFID(lectorRFIDInput: LectorRFIDInput!): String
+	genTokenLector(idLector: String!): String
+	disableTokenLector(idLector: String!): String
+	verifyTokenLector(jwt_lector: String!): String
 }
