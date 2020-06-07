@@ -8,11 +8,14 @@ async function asyncForEach(array, cb) {
 
 exports.getTanques = async (client, idEtiqueta) => {
 	let queryString = 'SELECT * FROM Tanque ';
-	if (idEtiqueta != null) {
-		queryString += 'WHERE idEtiqueta = ?';
+	if (idEtiqueta == null) {
+		queryString += 'WHERE idEtiqueta IS ?';
 	}
+	console.log(idEtiqueta);
 	queryString += ' ORDER BY idTanque';
-	var tanques = await client.query(queryString, idEtiqueta);
+	console.log(queryString);
+	var tanques = await client.query(queryString, [idEtiqueta]);
+	console.log(tanques);
 	if (tanques.length == 0) {
 		return null;
 	}
