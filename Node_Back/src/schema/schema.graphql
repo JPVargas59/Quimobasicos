@@ -127,6 +127,12 @@ type HistorialPeso {
 	idTanque: ID
 }
 
+"Lector de RFID"
+type LectorRFID {
+	idLector: String
+	aliasDispositivo: String
+}
+
 "Input para crear o actualizar tanque"
 input TanqueInput {
 	id: String
@@ -255,11 +261,16 @@ input ContrasenaInput {
 	nuevaContra: String!
 }
 
+input LectorRFIDInput {
+	id: String
+	aliasDispositivo: String
+}
+
 "Queries"
 type Query {
 	"Lista de informacion de los Tanques"
 	# Limited to 10 requests every 60 seconds
-	tanques: [Tanque]
+	tanques(idEtiqueta: Int): [Tanque]
 		@rateLimit(
 			window: "60s"
 			max: 10
@@ -301,6 +312,8 @@ type Query {
 	operacionesTanque(idTanque: ID!): [Operacion!]
 	"Lugares donde ha estado en diferentes tanques"
 	tanquesHaEstadoEnFecha(desde: Date, hasta: Date): [HistorialTanque]
+
+	lectorRFID(idLector: String): [LectorRFID]
 }
 
 """
@@ -357,4 +370,10 @@ type Mutation {
 	login(correo: String!, contrasena: String!): OutputLogin!
 	refresh(refreshJWT: String!): String!
 	logout(idUsuario: String!): String!
+
+	setLectorRFID(lectorRFIDInput: LectorRFIDInput!, idLectorRFIDOriginal: String!): String
+	createLectorRFID(lectorRFIDInput: LectorRFIDInput!): String
+	genTokenLector(idLector: String!): String
+	disableTokenLector(idLector: String!): String
+	verifyTokenLector(jwt_lector: String!): String
 }

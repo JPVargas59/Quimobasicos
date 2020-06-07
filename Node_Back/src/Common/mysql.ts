@@ -1,17 +1,35 @@
+import { type } from 'os';
+
 async function asyncForEach(array, cb) {
 	for (let i = 0; i < array.length; i++) {
 		await cb(array[i], i, array);
 	}
 }
 
-exports.getTanques = async (client) => {
-	var tanques = await client.query(`
-    SELECT * FROM Tanque ORDER BY idTanque
-    `);
+exports.getTanques = async (client, idEtiqueta) => {
+	let queryString = 'SELECT * FROM Tanque ';
+	if (idEtiqueta != null) {
+		queryString += 'WHERE idEtiqueta = ?';
+	}
+	queryString += ' ORDER BY idTanque';
+	var tanques = await client.query(queryString, idEtiqueta);
 	if (tanques.length == 0) {
 		return null;
 	}
 	return tanques;
+};
+
+exports.getTanque = async (client, idTanque) => {
+	var tanque = await client.query(
+		`
+    SELECT * FROM Tanque WHERE idTanque = ? ORDER BY idTanque
+    `,
+		idTanque
+	);
+	if (tanque.length == 0) {
+		return null;
+	}
+	return tanque[0];
 };
 
 exports.getHaEstadoTanque = async (client, parentID) => {
@@ -25,18 +43,6 @@ exports.getHaEstadoTanque = async (client, parentID) => {
 		return null;
 	}
 	return lugares;
-};
-exports.getIdEtiqueta = async (client, idEtiqueta) => {
-	var idEtiqueta = await client.query(
-		`
-    SELECT * FROM EtiquetaRFID WHERE idEtiqueta = ?
-    `,
-		idEtiqueta
-	);
-	if (idEtiqueta.length == 0) {
-		return null;
-	}
-	return idEtiqueta[0];
 };
 
 exports.getInfoDueno = async (client, idOwner) => {
@@ -89,19 +95,6 @@ exports.getInfoLugar = async (client, idLugar) => {
 		return null;
 	}
 	return lugar[0];
-};
-
-exports.getTanque = async (client, idTanque) => {
-	var tanque = await client.query(
-		`
-    SELECT * FROM Tanque WHERE idTanque = ? ORDER BY idTanque
-    `,
-		idTanque
-	);
-	if (tanque.length == 0) {
-		return null;
-	}
-	return tanque[0];
 };
 
 exports.getLugares = async (client) => {
@@ -251,12 +244,9 @@ exports.getEtiquetas = async (client) => {
 };
 
 exports.getEtiqueta = async (client, idEtiqueta) => {
-	var etiqueta = await client.query(
-		`
-    SELECT * FROM EtiquetaRFID
-    WHERE idEtiqueta = ?`,
+	var etiqueta = await client.query(`SELECT * FROM EtiquetaRFID WHERE idEtiqueta = ?`, [
 		idEtiqueta
-	);
+	]);
 	if (etiqueta.length == 0) {
 		return null;
 	}
@@ -271,6 +261,16 @@ exports.getEtiqueta = async (client, idEtiqueta) => {
 			etiqueta.idTanque = idTanque[0].idTanque;
 		}
 	});
+	return etiqueta[0];
+};
+
+exports.getIdEtiqueta = async (client, idEtiqueta) => {
+	var etiqueta = await client.query(`SELECT * FROM EtiquetaRFID WHERE idEtiqueta = ?`, [
+		idEtiqueta
+	]);
+	if (etiqueta.length == 0) {
+		return null;
+	}
 	return etiqueta[0];
 };
 
@@ -402,4 +402,21 @@ exports.getHaEstadoEnFechas = async (client, desde, hasta) => {
 		return null;
 	}
 	return ubicaciones;
+};
+
+exports.getValor = async (client, tabla, columnaId, idValor) => {
+	let queryString = `SELECT * FROM ??`;
+	let arrayQuery = [tabla];
+	if (typeof idValor !== 'undefined') {
+		queryString += ' WHERE ?? = ?';
+		arrayQuery.push(columnaId, idValor);
+	}
+	let ans = await client.query(queryString, arrayQuery).catch((error) => {
+		console.log(error);
+		throw new Error(error.sqlMessage);
+	});
+	if (ans.length == 0) {
+		return null;
+	}
+	return ans;
 };

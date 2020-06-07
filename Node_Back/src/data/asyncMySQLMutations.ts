@@ -34,6 +34,18 @@ let mysqlMutations = {
 	async logout(idUsuario) {
 		let resp = await common.logout(client, idUsuario);
 		return quitClient(client, resp);
+	},
+	async genTokenLector(idLector) {
+		let resp = await common.genTokenLector(client, idLector);
+		return quitClient(client, resp);
+	},
+	async disableTokenLector(idLector) {
+		let resp = await common.disableTokenLector(client, idLector);
+		return quitClient(client, resp);
+	},
+	async verifyTokenLector(jwt_lector) {
+		let resp = await common.verifyTokenLector(client, jwt_lector);
+		return quitClient(client, resp);
 	}
 };
 

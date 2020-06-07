@@ -71,6 +71,12 @@ CREATE TABLE HistorialPeso (
 	FOREIGN KEY (idTanque) REFERENCES Tanque(idTanque) ON UPDATE CASCADE
 );
 
+CREATE TABLE JWT (
+    idJWT SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    jwt TEXT,
+    PRIMARY KEY (idJWT)
+);
+
 CREATE TABLE Usuario (
     idUsuario CHAR(10) NOT NULL,
 	fName VARCHAR(64),
@@ -79,15 +85,18 @@ CREATE TABLE Usuario (
 	correo VARCHAR(128) UNIQUE,
     idSupervisor CHAR(10),
     puesto ENUM('Admin', 'Supervisor', 'Operador'),
+    idJWT SMALLINT UNSIGNED,
+    FOREIGN KEY (idJWT) REFERENCES JWT(idJWT) ON UPDATE CASCADE,
     FOREIGN KEY (idSupervisor) REFERENCES Usuario(idUsuario) ON UPDATE CASCADE,
 	PRIMARY KEY (idUsuario)
 );
 
-CREATE TABLE JWT (
-    idUsuario CHAR(10) NOT NULL,
-    jwt TEXT,
-    PRIMARY KEY (idUsuario),
-    FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario) ON UPDATE CASCADE
+CREATE TABLE LectorRFID (
+    idLector CHAR(10) NOT NULL,
+    aliasDispositivo VARCHAR(64) NOT NULL,
+    idJWT SMALLINT UNSIGNED,
+    PRIMARY KEY (idLector),
+    FOREIGN KEY (idJWT) REFERENCES JWT(idJWT) ON UPDATE CASCADE
 );
 
 CREATE TABLE TanqueEsta (
@@ -110,7 +119,7 @@ CREATE TABLE OperadoPor(
 
 CREATE TRIGGER `pasarAHaEstado` AFTER UPDATE ON `TanqueEsta` FOR EACH ROW INSERT INTO TanqueHaEstado VALUES ( NEW.idTanque, NEW.idLugar, NEW.fecha);
 DELIMITER //
-CREATE TRIGGER `pasaPesoAHistorialPeso`  AFTER UPDATE ON `Tanque` 
+CREATE TRIGGER `pasaPesoAHistorialPeso` AFTER UPDATE ON `Tanque` 
     FOR EACH ROW 
     BEGIN
         IF NEW.pesoActual != OLD.pesoActual THEN
@@ -120,4 +129,19 @@ CREATE TRIGGER `pasaPesoAHistorialPeso`  AFTER UPDATE ON `Tanque`
 DELIMITER ;
 CREATE TRIGGER `nuevoHaEstado` AFTER INSERT ON `TanqueEsta` FOR EACH ROW INSERT INTO TanqueHaEstado VALUES ( NEW.idTanque, NEW.idLugar, NEW.fecha);
 CREATE TRIGGER `nuevoPesoAHistorialPeso` AFTER INSERT ON `Tanque` FOR EACH ROW INSERT INTO HistorialPeso VALUES (NEW.idTanque, NEW.fechaIngreso, NEW.pesoActual);
-CREATE TRIGGER `nuevoUsuarioJWT` AFTER INSERT ON `Usuario` FOR EACH ROW INSERT INTO JWT VALUES (NEW.idUsuario, NULL);
+DELIMITER //
+CREATE TRIGGER `nuevoUsuarioJWT` BEFORE INSERT ON `Usuario` 
+	FOR EACH ROW
+	BEGIN
+		INSERT INTO JWT(jwt) VALUES (NULL);
+		SET NEW.idJWT = (SELECT MAX(idJWT) FROM JWT);
+	END; //
+DELIMITER ;
+DELIMITER //
+CREATE TRIGGER `nuevoLectorRFIDJWT` BEFORE INSERT ON `LectorRFID` 
+	FOR EACH ROW 
+	BEGIN 
+		INSERT INTO JWT(jwt) VALUES (NULL);
+		SET NEW.idJWT = (SELECT MAX(idJWT) FROM JWT);
+	END; //
+DELIMITER ;

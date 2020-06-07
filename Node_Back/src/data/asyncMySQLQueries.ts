@@ -1,9 +1,14 @@
 var common = require('../Common/mysql');
 import client from '../client';
 
+function quitClient(client, resp) {
+	client.quit();
+	return resp;
+}
+
 let mysqlMutations = {
-	async getTanques() {
-		var resp = await common.getTanques(client);
+	async getTanques(idEtiqueta: string) {
+		var resp = await common.getTanques(client, idEtiqueta);
 		client.quit();
 		return resp;
 	},
@@ -16,11 +21,6 @@ let mysqlMutations = {
 		}
 		client.quit();
 		return arrayLugares;
-	},
-	async getIdEtiqueta(idEtiqueta: string) {
-		var resp = await common.getIdEtiqueta(client, idEtiqueta);
-		client.quit();
-		return resp;
 	},
 	async getInfoDueno(idDueno: string) {
 		var resp = await common.getInfoDueno(client, idDueno);
@@ -95,8 +95,13 @@ let mysqlMutations = {
 		client.quit();
 		return resp;
 	},
-	async getEtiqueta(idEtiqueta: string) {
+	async getEtiqueta(idEtiqueta) {
 		var resp = await common.getEtiqueta(client, idEtiqueta);
+		client.quit();
+		return resp;
+	},
+	async getIdEtiqueta(idEtiqueta) {
+		var resp = await common.getIdEtiqueta(client, idEtiqueta);
 		client.quit();
 		return resp;
 	},
@@ -167,6 +172,10 @@ let mysqlMutations = {
 		let arrayUbicaciones = JSON.parse(JSON.stringify(resp));
 		client.quit();
 		return arrayUbicaciones;
+	},
+	async getValor(tabla, columnaId, idValor) {
+		let resp = await common.getValor(client, tabla, columnaId, idValor);
+		return quitClient(client, resp);
 	}
 };
 export = mysqlMutations;
