@@ -7,7 +7,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AdminHomeComponent } from './components/admin/admin-home/admin-home.component';
 import { UsersComponent } from './components/admin/users/users.component';
 import { AddUserComponent } from './components/admin/add-user/add-user.component';
-import { UserComponent } from './components/admin/user/user.component';
+// import { UserComponent } from './components/admin/user/user.component';
 import { AddTankComponent } from './components/tank/add-tank/add-tank.component';
 import { UpdateTankComponent } from './components/tank/update-tank/update-tank.component';
 import { ExitTankComponent } from './components/tank/exit-tank/exit-tank.component';
@@ -21,7 +21,6 @@ import { AdminLandingComponent } from './components/admin/admin-landing/admin-la
 import { OperatorLandingComponent } from './components/operator/operator-landing/operator-landing.component';
 import { SupervisorLandingComponent } from './components/supervisor/supervisor-landing/supervisor-landing.component';
 import { LocationsComponent } from './components/admin/locations/locations.component';
-import { AddLocationComponent } from './components/admin/locations/add-location/add-location.component';
 import { UpdateLocationComponent } from './components/admin/locations/update-location/update-location.component';
 import { SeeReportComponent } from './components/reports/see-report/see-report.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
@@ -35,6 +34,7 @@ import {FormsModule} from '@angular/forms';
 import {AuthInterceptor} from './services/user.service';
 import { PorLugarComponent } from './components/reports/por-lugar/por-lugar.component';
 import { PorContenidoComponent } from './components/reports/por-contenido/por-contenido.component';
+import { userInfo } from 'os';
 
 @NgModule({
   declarations: [
@@ -43,7 +43,6 @@ import { PorContenidoComponent } from './components/reports/por-contenido/por-co
     AdminHomeComponent,
     UsersComponent,
     AddUserComponent,
-    UserComponent,
     AddTankComponent,
     UpdateTankComponent,
     ExitTankComponent,
@@ -57,7 +56,6 @@ import { PorContenidoComponent } from './components/reports/por-contenido/por-co
     OperatorLandingComponent,
     SupervisorLandingComponent,
     LocationsComponent,
-    AddLocationComponent,
     UpdateLocationComponent,
     SeeReportComponent,
     OwnersComponent,
