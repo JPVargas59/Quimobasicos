@@ -29,6 +29,7 @@ export class LectoresRfidComponent implements OnInit {
 
   generateToken(id) {
     this.db.genToken(id).subscribe((r) => {
+      console.log(r)
       const token = (r as any).data.genTokenLector;
       alert(`Token para lector: \n ${token}`);
     });
