@@ -34,6 +34,8 @@ import {FormsModule} from '@angular/forms';
 import {AuthInterceptor} from './services/user.service';
 import { PorLugarComponent } from './components/reports/por-lugar/por-lugar.component';
 import { PorContenidoComponent } from './components/reports/por-contenido/por-contenido.component';
+import { LectoresRfidComponent } from './components/admin/lectores-rfid/lectores-rfid.component';
+import { AddLectorRfidComponent } from './components/admin/lectores-rfid/add/add-lector-rfid.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +66,9 @@ import { PorContenidoComponent } from './components/reports/por-contenido/por-co
     RfidTagsComponent,
     EditTagComponent,
     PorLugarComponent,
-    PorContenidoComponent
+    PorContenidoComponent,
+    LectoresRfidComponent,
+    AddLectorRfidComponent
   ],
   imports: [
     BrowserModule,

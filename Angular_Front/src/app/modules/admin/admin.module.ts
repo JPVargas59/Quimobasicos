@@ -22,6 +22,8 @@ import { RfidTagsComponent } from 'src/app/components/admin/rfid-tags/rfid-tags.
 import { EditTagComponent } from 'src/app/components/admin/rfid-tags/edit-tag/edit-tag.component';
 import {PorLugarComponent} from '../../components/reports/por-lugar/por-lugar.component';
 import {PorContenidoComponent} from '../../components/reports/por-contenido/por-contenido.component';
+import {LectoresRfidComponent} from '../../components/admin/lectores-rfid/lectores-rfid.component';
+import {AddLectorRfidComponent} from '../../components/admin/lectores-rfid/add/add-lector-rfid.component';
 
 
 
@@ -53,6 +55,9 @@ const routes: Routes = [
       { path: 'owners', component: OwnersComponent },
       { path: 'owners/add', component: EditOwnerComponent },
       { path: 'owners/:ownerId/edit', component: EditOwnerComponent },
+      { path: 'rfid-readers', component: LectoresRfidComponent },
+      { path: 'rfid-readers/add', component: AddLectorRfidComponent },
+      { path: 'rfid-readers/:readerId', component: AddLectorRfidComponent },
       { path: 'rfid-tags', component: RfidTagsComponent },
       { path: 'rfid-tags/add', component: EditTagComponent },
       { path: 'rfid-tags/:tagId/edit', component: EditTagComponent },

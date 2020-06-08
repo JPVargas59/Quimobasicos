@@ -1,0 +1,30 @@
+<div class="ui right aligned grid">
+  <div class="left floated left aligned six wide column">
+    <h3 class="ui header">Lectores RFID</h3>
+  </div>
+  <div class="right floated rigt aligned six wide column">
+    <div class="ui two buttons">
+      <button class="ui primary button" routerLink="/admin/rfid-readers/add">Registrar Nuevo Lector</button>
+    </div>
+  </div>
+</div>
+<table class="ui table">
+  <thead>
+  <th>ID de lector</th>
+  <th>Alias</th>
+  <th>Acciones</th>
+  </thead>
+  <tbody>
+  <tr *ngFor="let lector of lectores">
+    <td><a [routerLink]="lector.idLector" [id]="lector.idLector">{{lector.idLector}}</a></td>
+    <td>{{lector.aliasDispositivo}}</td>
+    <td>
+      <div class="ui two buttons">
+        <div class="ui red button" (click)="disableToken(lector.idLector)">Borrar token de acceso</div>
+        <div class="ui green button" (click)="generateToken(lector.idLector)">Crear token de acceso</div>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<br>

@@ -191,13 +191,13 @@ export class DatabaseService {
     return this.http.post(`${this.homeURL}`, {query});
   }
 
-  setEtiqueta(idEtiqueta, idTanque){
+  setEtiqueta(idEtiqueta, idTanque) {
     const query = `mutation
     {
       setTanque(tanqueInput:{
         idEtiqueta:${idEtiqueta}
       }, idTanqueOriginal:"${idTanque}")
-    }`
+    }`;
     return this.http.post(`${this.homeURL}`, {query});
   }
 
@@ -361,7 +361,7 @@ export class DatabaseService {
       }
     `;
     return this.http.post(this.homeURL, {query});
-  };
+  }
 
   setContenido(contenido: Contenido, id: string) {
     const query = `
@@ -426,6 +426,72 @@ export class DatabaseService {
           idEtiqueta
         }
       }
+    `;
+    return this.http.post(this.homeURL, {query});
+  }
+
+  getLectoresRfid() {
+    const query = `
+      {
+        lectorRFID {
+          idLector
+          aliasDispositivo
+        }
+      }
+    `;
+    return this.http.post(this.homeURL, {query});
+  }
+
+  getLectorRfid(id: string) {
+    const query = `
+      {
+        lectorRFID(idLector: "${id}") {
+          idLector
+          aliasDispositivo
+        }
+      }
+    `;
+    return this.http.post(this.homeURL, {query});
+  }
+
+  genToken(id) {
+    const query = `
+      mutation {
+        genTokenLector(idLector: "L0001")
+      }
+    `;
+    return this.http.post(this.homeURL, {query});
+  }
+
+  disableToken(id) {
+    const query = `
+    mutation {
+      disableTokenLector(idLector: "${id}")
+    }
+    `;
+    return this.http.post(this.homeURL, {query});
+  }
+
+  createLectorRfid(lector) {
+    const query = `
+    mutation {
+      createLectorRFID(lectorRFIDInput: {
+        id: "${lector.idLector}",
+        aliasDispositivo: "${lector.alias}"
+      })
+    }
+    `;
+    return this.http.post(this.homeURL, {query});
+  }
+
+  setLectorRfid(lector, id: string) {
+    const query = `
+    mutation {
+      setLectorRFID(lectorRFIDInput: {
+        id: "${lector.idLector}",
+        aliasDispositivo: "${lector.alias}"
+      }, idLectorRFIDOriginal: "${id}")
+    }
     `;
     return this.http.post(this.homeURL, {query});
   }
