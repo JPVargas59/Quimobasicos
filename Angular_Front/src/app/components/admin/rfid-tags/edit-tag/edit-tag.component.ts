@@ -31,7 +31,7 @@ export class EditTagComponent implements OnInit {
       this.tanques = data.tanques;
       this.etiquetas = data.etiquetas.filter(e => e.idTanque == null);
       data.etiquetas.map(e => {
-        this.allEtiquetas.push(e.idEtiqueta);
+        this.allEtiquetas.push(parseInt(e.idEtiqueta, 10));
       });
       console.log(data, this.etiquetas, this.allEtiquetas);
     });
