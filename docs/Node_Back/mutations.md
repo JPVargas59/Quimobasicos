@@ -9,6 +9,12 @@
     -   [Resolvers](#resolvers)
         -   [Create](#create)
         -   [Set](#set)
+    -   [Conexión entre DB y GraphQL](#conexión-entre-db-y-graphql)
+        -   [Cliente](#cliente)
+        -   [Environment variables](#environment-variables)
+    -   [Manipulación de base de datos](#manipulación-de-base-de-datos)
+        -   [parseObj()](#parseobj)
+        -   [checkExists()](#checkexists)
 
 <!-- /code_chunk_output -->
 
@@ -119,3 +125,182 @@ La función `setValor()` toma como input lo siguiente:
 -   El segundo argumento que se toma es un arreglo con los datos que conforman la llave primaria de la entrada a actualizar.
 -   El tercer argumento es la tabla de la base de datos que se busca actualizar.
 -   El último argumento es un arreglo con las columnas que forman la llave primaria de la tabla en la base de datos.
+
+## Conexión entre DB y GraphQL
+
+Como se puede ver en los resolvers de cada mutación, hay una llamada a un archivo llamado `/Node_Back/src/data/asyncMySQLMutations.ts`. Este archivo, como su nombre lo indica, relaciona las mutaciones con la conexión a la base de datos en MySQL. Este archivo establece las conexiones que `/Node_Back/src/resolvers/mutations.ts` necesita para resolver las mutaciones que se hacen en el servidor de GraphQL.
+
+El código en este archivo tiene las dos funciones que se presentaron anteriormente `setValor()` y `createValor()`, pero además tiene funciones específicas que no pueden cumplirse con funciones genéricas, algunos ejemplos son hacer login, cambiar contraseñas, cerrar sesión, etc
+
+La estructura general del archivo (sin presentar las funciones más específicas) es la siguiente:
+
+```ts
+var common = require('../Common/mysqlMutations');
+import client from '../client';
+
+function quitClient(client, resp) {
+	client.quit();
+	return resp;
+}
+
+let mysqlMutations = {
+	async createValor(input, table, mysqlId) {
+		var resp = await common.createValor(client, input, table, mysqlId);
+		return quitClient(client, resp);
+	},
+	async setValor(input, idOriginal, table, mysqlId) {
+		let resp = await common.setValor(client, input, idOriginal, table, mysqlId);
+		return quitClient(client, resp);
+	}
+};
+```
+
+### Cliente
+
+El cliente que se pasa como argumento a todas las llamadas de las mutaciones de MySQL contiene los detalles para establecer una conexión a la base de datos. El código en `/Node_Back/src/client.ts` es el siguiente:
+
+```ts
+const Client = require('serverless-mysql');
+var client = Client({
+	config: {
+		host: process.env.DBHOST,
+		port: process.env.DBPORT,
+		database: process.env.DBSCHEMA,
+		user: process.env.DBUSER,
+		password: process.env.DBPASSWORD
+	}
+});
+
+export default client;
+```
+
+### Environment variables
+
+Por seguridad, y por facilidad de user el programa en distintos equipos, todas las credenciales del cliente se encuentran almacenadas en las environment variables del proceso que ejecuta el servidor de GraphQL.
+
+Para establecer estas variables hay que crear un archivo llamado `.env` en el directorio `/Node_Back`. La definición de las variables se hace de la siguiente manera:
+
+```
+DBUSER=aquiVaElUsuario
+DBPASSWORD=aquiVaLaContraseña
+DBSCHEMA=aquiVaElEsquema
+DBPORT=3306
+DBHOST=localhost
+```
+
+## Manipulación de base de datos
+
+Todas las llamadas directas a la base de datos se manejan en el archivo `/Node_Back/src/Common/mysqlMutations.ts`. La estructura de este archivo es la siguiente:
+
+```ts
+import mysql from 'mysql';
+let bcryptjs = require('bcryptjs');
+let jwt = require('jsonwebtoken');
+let fsPromises = require('fs').promises;
+let path = require('path');
+
+let mysqlMutations = {
+	async createValor(client, input, table, mysqlId) {
+		if (await checkExists(client, table, mysqlId, validateId(input.id))) {
+			return `El ID de ${table} ya existe`;
+		} else {
+			let resp: String = `Instancia de ${table} creada`;
+			input = await modifyId(table, input);
+			await client.query(`INSERT INTO ?? SET ?`, [table, input]).catch((error) => {
+				console.log(error);
+				resp = error.sqlMessage;
+			});
+			return resp;
+		}
+	},
+	async setValor(client, input, idOriginal, table, mysqlId) {
+		idOriginal = validateId(idOriginal);
+		if (await checkExists(client, table, mysqlId, idOriginal)) {
+			//console.log(input);
+			input = await modifyId(table, input);
+			//console.log(input);
+			let resp = `El valor de ${table} ha sido actualizado`;
+			var obj = {
+				queryString: `UPDATE ?? SET ? WHERE`,
+				arr: [table, input],
+				mysqlId: mysqlId,
+				id: idOriginal
+			};
+			obj = parseObj(obj);
+			//console.log(obj);
+			await client.query(obj.queryString, obj.arr).catch((error) => {
+				console.log(error);
+				resp = error.sqlMessage;
+			});
+			return resp;
+		} else {
+			return `El ID de ${table} no existe`;
+		}
+	}
+};
+export = mysqlMutations;
+```
+
+Este código es el que se usa para manipular todas las mutaciones de create y set para todos los tipos del esquema de GraphQL. Son dos funciones genéricas que cubren todos los casos para crear y modificar los datos dentro de la base de datos. Las dos funciones hacen llamadas a varias funciones locales del archivo, las cuales se presentan a continuación.
+
+### parseObj()
+
+Esta función de encarga de modificar un objeto que recibe para crear hacer queries a la base de datos. El código de la función es el siguiente:
+
+```ts
+function parseObj(obj) {
+	//console.log(obj);
+	//console.log(obj.mysqlId.length);
+	for (var i = 0; i < obj.mysqlId.length; i++) {
+		if (i == obj.id.length - 1) {
+			obj.queryString += ` ?? = ?`;
+		} else {
+			obj.queryString += ` ?? = ? AND`;
+		}
+		//console.log(i);
+		//console.log(obj.queryString);
+		obj.arr.push(obj.mysqlId[i]);
+		obj.arr.push(obj.id[i]);
+	}
+	return obj;
+}
+```
+
+Un ejemplo del tipo de input que puede recibir la función es el siguiente:
+
+```ts
+obj {
+  queryString: 'SELECT * FROM ?? WHERE',
+  arr: [ 'Lugar' ],
+  mysqlId: [ 'idLugar' ],
+  id: [ 'LUGAR1' ]
+}
+```
+
+La función simplemente acomoda un arreglo con los detalles que se usarán para hacer un query de SQL. En este caso, el resultado de la función sería el siguiente objeto
+
+```ts
+obj {
+  queryString: 'SELECT * FROM ?? WHERE ?? = ?',
+  arr: [ 'Lugar', 'idLugar', 'LUGAR1|' ],
+  mysqlId: [ 'idLugar' ],
+  id: [ 'LUGAR1|' ]
+}
+```
+
+La función se puede usar para poner los elementos finales cuando se quiere hacer un `SELECT` o un `UPDATE` de los datos. El objeto que se obtiene es usado para hacer un query a la base de datos con la siguiente estructura:
+
+```ts
+await client.query(obj.queryString, obj.arr);
+```
+
+Tomando el ejemplo del objeto anterior, la petición traducida a una declaración de SQL sería la siguiente:
+
+```sql
+SELECT * FROM Lugar WHERE idLugar = LUGAR1
+```
+
+Para más información del manejo de queries con las librerías de mysql:
+
+-   [npm mysql](https://www.npmjs.com/package/mysql)
+-   [npm serverless-mysql](https://www.npmjs.com/package/serverless-mysql)
