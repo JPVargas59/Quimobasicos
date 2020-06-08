@@ -1,4 +1,7 @@
 <h3 class="ui title">Agrega una etiqueta RFID</h3>
+<div class="ui error message" *ngIf="error">
+  <div class="header">{{error}}</div>
+</div>
   <form class="ui form" (ngSubmit)="vincularTanque()">
     <div class="two fields">
       <div class="field required" *ngIf="idEtiqueta">

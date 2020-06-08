@@ -11,8 +11,8 @@
 
 <table class="ui table">
     <thead>
-        <th>ID Contenidos</th>
-        <th>Nombre Contenidos</th>
+        <th>ID Contenido</th>
+        <th>Nombre Contenido</th>
         <th>Tanques</th>
         <th>Acción</th>
     </thead>
@@ -25,9 +25,10 @@
             <td>{{contenido.numTanques}}</td>
             <td>
                 <div class="ui two buttons">
-                    <button class="ui blue button" (click)="onContentSelect($event)" [id]="contenido.idContenido">Editar</button>
+                    <button class="ui blue button" (click)="onContentSelect($event)" [id]="contenido.idContenido">Editar Contenido</button>
                 </div>
             </td>
         </tr>
     </tbody>
 </table>
+<br>

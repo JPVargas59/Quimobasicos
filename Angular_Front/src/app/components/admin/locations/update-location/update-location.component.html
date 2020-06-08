@@ -1,19 +1,23 @@
 <h3 class="ui title" *ngIf="id">Modificar {{id}}</h3>
 <h3 class="ui title" *ngIf="!id">Agregar un Lugar</h3>
 
+<div class="ui error message" *ngIf="error">
+  <div class="header">{{error}}</div>
+</div>
+
 <form class="ui form" (ngSubmit)="submit()">
   <h4 class="ui dividing header">Información del lugar</h4>
     <div class="two fields">
         <div class="required field">
             <label>ID del Lugar</label>
             <div class="field">
-              <input type="text" name="idLugar" [class.ui]="id" [class.disabled]="id" [class.input]="id" [readOnly]="id"  [(ngModel)]="lugar.idLugar">
+              <input type="text" name="idLugar" maxlength="10" [class.ui]="id" [class.disabled]="id" [class.input]="id" [readOnly]="id"  [(ngModel)]="lugar.idLugar">
             </div>
         </div>
         <div class="required field">
           <label>Nombre</label>
           <div class="field">
-            <input type="text" name="lnombre" [(ngModel)]="lugar.lnombre">
+            <input type="text" maxlength="50"  name="lnombre" [(ngModel)]="lugar.lnombre">
           </div>
       </div>
     </div>
@@ -49,4 +53,3 @@
     </div>
     <button class="ui submit primary button">Guardar</button>
   </form>
-
