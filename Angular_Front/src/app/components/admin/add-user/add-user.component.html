@@ -1,6 +1,8 @@
 <h2 class="ui title" *ngIf="id">Modificar Información de {{id}}</h2>
 <h3 class="ui title" *ngIf="!id">Agregar un Usuario</h3>
-
+<div class="ui error message" *ngIf="error">
+  <div class="header">{{error}}</div>
+</div>
 <br>
 <form class="ui form" (ngSubmit)="submit()">
     <h4 class="ui dividing header">Información</h4>
@@ -9,23 +11,23 @@
         <label>Nombre</label>
         <div class="two fields">
           <div class="field">
-            <input type="text" name="nombre" placeholder="Nombre" [(ngModel)]="currentUser.nombre">
+            <input maxlength="50" type="text" name="nombre" placeholder="Nombre" [(ngModel)]="currentUser.nombre">
           </div>
           <div class="required field">
-            <input type="text" name="apellidos" [(ngModel)]="currentUser.apellidos" placeholder="Apellidos">
+            <input maxlength="50" type="text" name="apellidos" [(ngModel)]="currentUser.apellidos" placeholder="Apellidos">
           </div>
         </div>
       </div>
       <div class="required field">
         <label>Correo</label>
         <div class="field">
-          <input type="email" name="email" placeholder="correo" [(ngModel)]="currentUser.correo">
+          <input maxlength="50" type="email" name="email" placeholder="correo" [(ngModel)]="currentUser.correo">
         </div>
       </div>
       <div class="required field">
         <label>Id</label>
         <div class="field">
-          <input type="text" name="idUsuario" placeholder="ID de usuario" [(ngModel)]="currentUser.idUsuario">
+          <input maxlength="10" type="text" name="idUsuario" placeholder="ID de usuario" [(ngModel)]="currentUser.idUsuario">
         </div>
       </div>
     </div>
@@ -51,8 +53,6 @@
       <label>Supervisor de este usuario</label>
       <select class="ui search dropdown" Operador name="supervisor" [(ngModel)]="currentUser.idSupervisor">
         <option value="">Supervisor...</option>
-        <!-- TODDO: Agregar supervisor de graphql -->
-        <!-- <option *ngFor="let valor of supervisor" value="{{supervisor.nombre}}">{{supervisor.nombre}}</option> -->
         <option [value]="supervisor.idUsuario" *ngFor="let supervisor of supervisores">{{supervisor.nombre}}</option>
       </select>
     </div>
