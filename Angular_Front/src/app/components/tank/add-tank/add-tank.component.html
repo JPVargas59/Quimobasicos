@@ -72,7 +72,7 @@
           <label>Etiqueta de RFID Asignada</label>
           <select class="ui search dropdown" name="etiqueta" required [(ngModel)]="tanque.idEtiqueta">
             <option value="">etiqueta...</option>
-            <option *ngFor="let valor of etiquetas" value="{{valor.idEtiqueta}}">{{valor.idEtiqueta}}</option>
+            <option *ngFor="let valor of etiquetas" value="{{valor}}">{{valor}}</option>
           </select>
       </div>
   </div>

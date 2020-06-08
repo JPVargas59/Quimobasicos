@@ -15,10 +15,12 @@ export class AddTankComponent implements OnInit {
   contenidos: any;
   duenos: any;
   etiquetas: any;
+  tags= [];
   tanque: Tanque;
   error: string;
   id: string;
   redirigir = false;
+  allEtiquetas = [];
 
   constructor(
     private user: UserService,
@@ -28,12 +30,22 @@ export class AddTankComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.db.getTanquesSinEtiqueta().subscribe(tanques => {
+      console.log(tanques);
+      const data = (tanques as any).data;
+      data.etiquetas.map(e => {
+        if( e.idTanque == null) {
+          this.tags.push(e.idEtiqueta);
+        }
+      });
+    });
 
     this.id = this.route.snapshot.params.id;
     if (this.id) {
       this.db.getFullTank(this.id).subscribe(result => {
         const res = result as any;
         const tanque = res.data.tanque;
+        this.tags.push(tanque.etiqueta.id);
         this.tanque =  {
           id: tanque.id,
           calidad: tanque.calidad,
@@ -60,6 +72,8 @@ export class AddTankComponent implements OnInit {
         peso: undefined
       };
     }
+    console.log('etiquetas a mostrar',this.tags)
+    this.etiquetas = this.tags;
 
     this.db.getContenidos().subscribe(result => {
       const contenidos = result as any;
@@ -67,21 +81,12 @@ export class AddTankComponent implements OnInit {
     });
 
     this.db.getDuenos().subscribe(result => {
-      console.log(result);
       const duenos = result as any;
       this.duenos = duenos.data.owners;
     });
-
-    this.db.getEtiquetas().subscribe(result => {
-      console.log(result);
-      const etiquetas = result as any;
-      this.etiquetas = etiquetas.data.etiquetas;
-    });
-
   }
 
   onResgisterTank() {
-    //  TODDO: POST de esta info
     const { id, calidad, pesoActual, idContenido, idDueno, fechaIngreso, fechaEsperadaRetorno, idEtiqueta, peso } = this.tanque;
     console.log(this.tanque);
     if (id && calidad && peso && idContenido && idDueno && fechaEsperadaRetorno && fechaIngreso && idEtiqueta && pesoActual) {
