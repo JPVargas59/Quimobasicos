@@ -1,13 +1,29 @@
 <h2 class="ui header center aligned">Bienvenido al inicio del Operador</h2>
 
 <div class="ui placeholder segment">
-    <div class="ui icon header">
+  <div class="ui two column stackable center aligned grid">
+    <div class="column">
+      <div class="ui icon header">
         <i class="file alternate outline icon"></i>
-        Inventario de Tanques
+        Tanques
+      </div>
+      <div class="two buttons">
+        <div class="ui primary button" routerLink="/operador/reports/inventory">Ver Tanques</div>
+      </div>
     </div>
-    <div class="field">
-      <div class="ui primary button" routerLink="/operador/reports/inventory">Ver Inventario</div>
+
+    <div class="column">
+      <div class="ui icon header">
+          <i class="tags icon"></i>
+          Etiquetas de RFID
+      </div>
+      <div class="field">
+          <div class="ui two buttons">
+              <div class="ui primary button" routerLink="/operador/rfid-tags">Ver Etiquetas</div>
+          </div>
+      </div>
     </div>
+  </div>
 </div>
 <div class="ui placeholder segment">
     <div class="ui two column stackable center aligned grid">
