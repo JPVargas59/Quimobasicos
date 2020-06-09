@@ -1,14 +1,17 @@
 <h3 class="ui title" *ngIf="!idLector">Agrega una etiqueta RFID</h3>
 <h3 class="ui title" *ngIf="idLector">Edita {{idLector}}</h3>
+<div class="ui error message" *ngIf="error">
+  <div class="header">{{error}}</div>
+</div>
 <form class="ui form" (ngSubmit)="submit()">
   <div class="two fields">
     <div class="field required">
       <label>Id Lector</label>
-      <input type="text" name="idLector" [(ngModel)]="lector.idLector" placeholder="ID Lector">
+      <input maxlength="10" type="text" name="idLector" [(ngModel)]="lector.idLector" placeholder="ID Lector">
     </div>
     <div class="field required">
       <label>Alias lector</label>
-      <input type="text" name="alias" [(ngModel)]="lector.alias" placeholder="Alias lector">
+      <input  maxlength="64" type="text" name="alias" [(ngModel)]="lector.alias" placeholder="Alias lector">
     </div>
   </div>
   <button class="ui submit primary button">Guardar</button>

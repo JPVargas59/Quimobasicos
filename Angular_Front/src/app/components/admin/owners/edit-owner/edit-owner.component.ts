@@ -10,6 +10,7 @@ import { Owner } from 'src/app/models/Owner';
 })
 export class EditOwnerComponent implements OnInit {
   id: string;
+  error:string;
   owner: Owner = {
     idDueno: undefined,
     nombre: undefined
@@ -32,22 +33,27 @@ export class EditOwnerComponent implements OnInit {
   }
 
   submit() {
-    if (this.id) {
-      this.db.setOwner(this.owner, this.id).subscribe(res => {
-        const response = res as any;
-        console.log(res);
-        if (response.data) {
-          this.router.navigateByUrl('admin/owners');
-        }
-      });
-    } else {
-      this.db.createOwner(this.owner).subscribe(res => {
-        const response = res as any;
-        console.log(res);
-        if (response.data) {
-          this.router.navigateByUrl('admin/owners');
-        }
-      });
+    if(this.owner.idDueno && this.owner.nombre){
+      if (this.id) {
+        this.db.setOwner(this.owner, this.id).subscribe(res => {
+          const response = res as any;
+          console.log(res);
+          if (response.data) {
+            this.router.navigateByUrl('admin/owners');
+          }
+        });
+      } else {
+        this.db.createOwner(this.owner).subscribe(res => {
+          const response = res as any;
+          console.log(res);
+          if (response.data) {
+            this.router.navigateByUrl('admin/owners');
+          }
+        });
+      }
+    } else{
+      this.error = 'Por favor verifica los datos'
     }
   }
+    
 }

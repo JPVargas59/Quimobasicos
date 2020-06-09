@@ -21,6 +21,7 @@ export class AddUserComponent implements OnInit {
     idUsuario: undefined
   };
   supervisores: any;
+  error: string;
   constructor(
     private db: DatabaseService,
     private router: Router,
@@ -41,23 +42,28 @@ export class AddUserComponent implements OnInit {
   }
 
   submit() {
-    if (this.id) {
-      this.user.setUser(this.currentUser, this.id).subscribe(res => {
-        const response = res as any;
-        if (response.data) {
-          this.router.navigateByUrl('admin/users');
-        }
-        console.log(res);
-      });
-    } else {
-      this.user.createUser(this.currentUser).subscribe(res => {
-        const response = res as any;
-        if (response.data) {
-          this.router.navigateByUrl('admin/users');
-        }
-        console.log(res);
-      });
+    if(this.currentUser.apellidos && this.currentUser.correo && this.currentUser.idUsuario && this.currentUser.nombre && this.currentUser.password && this.currentUser.puesto) {
+      if (this.id) {
+        this.user.setUser(this.currentUser, this.id).subscribe(res => {
+          const response = res as any;
+          if (response.data) {
+            this.router.navigateByUrl('admin/users');
+          }
+          console.log(res);
+        });
+      } else {
+        this.user.createUser(this.currentUser).subscribe(res => {
+          const response = res as any;
+          if (response.data) {
+            this.router.navigateByUrl('admin/users');
+          }
+          console.log(res);
+        });
+      }
+    }else{
+      this.error = 'Por favor, verifica los datos'
     }
+    
   }
 
 }

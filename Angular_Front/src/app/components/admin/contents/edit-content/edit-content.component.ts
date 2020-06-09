@@ -14,6 +14,7 @@ export class EditContentComponent implements OnInit {
     contenido: undefined
   };
   id: string;
+  error: string;
   constructor(
     private db: DatabaseService,
     private route: ActivatedRoute,
@@ -31,23 +32,29 @@ export class EditContentComponent implements OnInit {
   }
 
   submit() {
-    if (this.id) {
-      this.db.setContenido(this.contenido, this.id).subscribe(res => {
-        const response = res as any;
-        if (response.data) {
-          this.router.navigateByUrl('admin/contents');
-        }
-        console.log(res);
-      });
-    } else {
-      this.db.createContenido(this.contenido).subscribe(res => {
-        const response = res as any;
-        if (response.data) {
-          this.router.navigateByUrl('admin/contents');
-        }
-        console.log(res);
-      });
+    if(this.contenido.idContenido && this.contenido.contenido) {
+      if (this.id) {
+        this.db.setContenido(this.contenido, this.id).subscribe(res => {
+          const response = res as any;
+          if (response.data) {
+            this.router.navigateByUrl('admin/contents');
+          }
+          console.log(res);
+        });
+      } else {
+        this.db.createContenido(this.contenido).subscribe(res => {
+          const response = res as any;
+          if (response.data) {
+            this.router.navigateByUrl('admin/contents');
+          }
+          console.log(res);
+        });
+      }
+    } else{
+      this.isError('Por favor verifica los datos')
     }
   }
-
+  isError(message){
+    this.error = message;
+  }
 }

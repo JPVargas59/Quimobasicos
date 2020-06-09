@@ -16,6 +16,7 @@ export class EditTagComponent implements OnInit {
   tanques: any;
   etiquetas: any;
   allEtiquetas = [];
+  error: string;
 
   constructor(
     private db: DatabaseService,
@@ -38,25 +39,27 @@ export class EditTagComponent implements OnInit {
   }
 
   vincularTanque() {
-    if (this.allEtiquetas.includes(this.idEtiquetaNueva)) {
-      alert('Esta etiqueta ya existe');
-      return;
+    if(this.idEtiqueta && this.idTanque) {
+      if (this.allEtiquetas.includes(this.idEtiquetaNueva)) {
+        alert('Esta etiqueta ya existe');
+        return;
+      }
+      if (this.idEtiqueta) {
+        this.db.vincularTanque(this.idTanque, this.idEtiqueta).subscribe(() => {
+          this.user.goTo('rfid-tags');
+        });
+      } else {
+        this.db.createEtiqueta(this.idEtiquetaNueva).subscribe(res => {
+          const data = (res as any).data;
+          if (data) {
+            this.db.vincularTanque(this.idTanque, this.idEtiquetaNueva).subscribe(() => {
+              this.user.goTo('rfid-tags');
+            });
+          }
+        });
+      }
+    }else {
+      this.error = 'Por favor, verifica los datos'
     }
-    if (this.idEtiqueta) {
-      this.db.vincularTanque(this.idTanque, this.idEtiqueta).subscribe(() => {
-        this.user.goTo('rfid-tags');
-      });
-    } else {
-      this.db.createEtiqueta(this.idEtiquetaNueva).subscribe(res => {
-        const data = (res as any).data;
-        if (data) {
-          this.db.vincularTanque(this.idTanque, this.idEtiquetaNueva).subscribe(() => {
-            this.user.goTo('rfid-tags');
-          });
-        }
-      });
-    }
-
   }
-
 }

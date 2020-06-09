@@ -1,6 +1,10 @@
 <h3 class="ui title" *ngIf="id">Modificar {{id}}</h3>
 <h3 class="ui title" *ngIf="!id">Agregar un tipo de Contenido</h3>
 
+<div class="ui error message" *ngIf="error">
+  <div class="header">{{error}}</div>
+</div>
+
 <form class="ui form" (ngSubmit)="submit()">
   <div class="two fields">
     <div class="field required">
@@ -13,7 +17,7 @@
     </div>
     <div class="field required">
       <label>Nombre</label>
-      <input maxlength="10" type="text" name="contenido" required [(ngModel)]="contenido.contenido" placeholder="Nombre">
+      <input maxlength="25" type="text" name="contenido" required [(ngModel)]="contenido.contenido" placeholder="Nombre">
     </div>
   </div>
   <button class="ui submit primary button">Guardar</button>

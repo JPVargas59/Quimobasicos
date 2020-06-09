@@ -22,6 +22,7 @@ export class UpdateLocationComponent implements OnInit {
     radio: undefined
   };
   id: string;
+  error: string;
 
   constructor(
     private db: DatabaseService,
@@ -40,22 +41,29 @@ export class UpdateLocationComponent implements OnInit {
   }
 
   submit() {
-    if (this.id) {
-      this.db.setLugar(this.lugar, this.id).subscribe(res => {
-        const response = res as any;
-        console.log(res);
-        if (response.data) {
-          this.router.navigateByUrl('admin/locations');
-        }
-      });
+    if(this.lugar.lnombre && this.lugar.idLugar &&this.lugar.capacidadMaxima && this.lugar.coordenadas.x && this.lugar.coordenadas.y && this.lugar.radio) {
+      if (this.id) {
+        this.db.setLugar(this.lugar, this.id).subscribe(res => {
+          const response = res as any;
+          console.log(res);
+          if (response.data) {
+            this.router.navigateByUrl('admin/locations');
+          }
+        })
+      } else {
+        this.db.createLugar(this.lugar).subscribe(res => {
+          const response = res as any;
+          console.log(res);
+          if (response.data) {
+            this.router.navigateByUrl('admin/locations');
+          }
+        });
+      }
     } else {
-      this.db.createLugar(this.lugar).subscribe(res => {
-        const response = res as any;
-        console.log(res);
-        if (response.data) {
-          this.router.navigateByUrl('admin/locations');
-        }
-      });
+      this.isError('Por favor verifica los datos.')
     }
+  }
+  isError(message){
+    this.error = message;
   }
 }

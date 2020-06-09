@@ -457,7 +457,7 @@ export class DatabaseService {
   genToken(id) {
     const query = `
       mutation {
-        genTokenLector(idLector: "L0001")
+        genTokenLector(idLector: "${id}")
       }
     `;
     return this.http.post(this.homeURL, {query});

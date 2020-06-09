@@ -10,6 +10,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class AddLectorRfidComponent implements OnInit {
 
   idLector: string;
+  error: string;
+  
   lector = {
     idLector: undefined,
     alias: undefined
@@ -34,16 +36,19 @@ export class AddLectorRfidComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.idLector, this.lector);
-    if (this.idLector) {
-      this.db.setLectorRfid(this.lector, this.idLector).subscribe(() => {
-        this.router.navigateByUrl('/admin/rfid-readers');
-      });
-    } else {
-      this.db.createLectorRfid(this.lector).subscribe(() => {
-        this.router.navigateByUrl('/admin/rfid-readers');
-      });
+    if(this.lector.idLector && this.lector.alias) {
+      console.log(this.idLector, this.lector);
+      if (this.idLector) {
+        this.db.setLectorRfid(this.lector, this.idLector).subscribe(() => {
+          this.router.navigateByUrl('/admin/rfid-readers');
+        });
+      } else {
+        this.db.createLectorRfid(this.lector).subscribe(() => {
+          this.router.navigateByUrl('/admin/rfid-readers');
+        });
+      }
+    }else {
+      this.error = 'Por favor verifica los datos'
     }
   }
-
 }
