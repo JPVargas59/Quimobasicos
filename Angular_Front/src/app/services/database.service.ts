@@ -6,13 +6,14 @@ import {User} from '../models/User';
 import {Lugar} from '../models/Lugar';
 import {Contenido} from '../models/Contenido';
 import {Owner} from '../models/Owner';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DatabaseService {
 
-  homeURL = 'http://localhost:5201/graphql';
+  homeURL = environment.homeURL;
 
   constructor(
     private router: Router,
