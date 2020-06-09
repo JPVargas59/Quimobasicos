@@ -52,7 +52,6 @@
     <div class="field" *ngIf="currentUser.puesto == 'Operador'">
       <label>Supervisor de este usuario</label>
       <select class="ui search dropdown" Operador name="supervisor" [(ngModel)]="currentUser.idSupervisor">
-        <option value="">Supervisor...</option>
         <option [value]="supervisor.idUsuario" *ngFor="let supervisor of supervisores">{{supervisor.nombre}}</option>
       </select>
     </div>

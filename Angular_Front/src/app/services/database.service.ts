@@ -162,6 +162,7 @@ export class DatabaseService {
         nombre
         apellidos
         correo
+        puesto
       }
     }`;
     return this.http.post(`${this.homeURL}`, {query});
