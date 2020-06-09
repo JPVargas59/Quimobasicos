@@ -173,7 +173,8 @@ export class UserService {
         fName: user.nombre,
         lName: user.apellidos,
         contrasena: user.password,
-        puesto: user.puesto
+        puesto: user.puesto,
+        idSupervisor: user.idSupervisor
         }
       }
     });
