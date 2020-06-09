@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import {User} from '../models/User';
 import {Owner} from '../models/Owner';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,7 @@ export class UserService {
 
   type;
   userId;
-  homeURL = 'http://localhost:5201/graphql';
+  homeURL = environment.homeURL;
   refreshToken;
 
   private static setSession(token, expiration) {
