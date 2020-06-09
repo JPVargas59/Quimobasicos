@@ -10,7 +10,7 @@
   <tbody>
   <tr *ngFor="let report of reports">
     <td>
-      <a (click)="onReportSelection(report.route)" [id]="report.nombre">
+      <a (click)="onReportSelection(report.route)" [id]="report.nombre" class="clicable">
         {{report.nombre}}
       </a>
     </td>
