@@ -2,3 +2,6 @@
 .ui.primary.button{
     background-color:  #00396F;
 }
+.clicable{
+    cursor: pointer;
+}

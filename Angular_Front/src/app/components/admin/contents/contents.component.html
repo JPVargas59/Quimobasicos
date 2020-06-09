@@ -19,7 +19,7 @@
     <tbody>
         <tr  *ngFor="let contenido of contenidos">
             <td>
-                <a (click)="onContentSelect($event)" [id]="contenido.idContenido">{{contenido.idContenido}}</a>
+                <a (click)="onContentSelect($event)" [id]="contenido.idContenido" class="clicable">{{contenido.idContenido}}</a>
               </td>
             <td>{{contenido.contenido}}</td>
             <td>{{contenido.numTanques}}</td>

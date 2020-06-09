@@ -25,7 +25,7 @@
    <tbody>
      <tr *ngFor="let tank of tanks">
        <td>
-         <a (click)="onTankSelection($event)" [id]="tank.idTanque">{{tank.idTanque}}</a>
+         <a (click)="onTankSelection($event)" [id]="tank.idTanque" class="clicable">{{tank.idTanque}}</a>
        </td>
        <td>{{tank.contenidoTanque ? tank.contenidoTanque.contenido : 'Indefinido'}}</td>
        <td>{{tank.fechaIngreso | date}}</td>

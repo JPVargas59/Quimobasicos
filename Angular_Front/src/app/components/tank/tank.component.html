@@ -38,12 +38,13 @@
         <th>Fecha</th>
         <th>Peso</th>
         </thead>
-        <tbody>
-        <!-- TODO: peticion de graphql Revisar cuando se actualice el servidor -->
-        <tr *ngFor="let value of tankWeight">
-          <td>{{value.fecha | date:'medium'}}</td>
-          <td>{{value.peso}}</td>
-        </tr>
+        <tbody >
+          <div class="tbodyScroll">
+            <tr *ngFor="let value of tankWeight">
+              <td>{{value.fecha | date:'medium'}}</td>
+              <td>{{value.peso}}</td>
+            </tr>
+          </div>
         </tbody>
       </table>
     </div>
@@ -54,7 +55,7 @@
         <th>Fecha</th>
         <th>Lugar</th>
         </thead>
-        <tbody *ngIf="locations">
+        <tbody *ngIf="locations" class="tbodyScroll">
         <tr *ngFor="let location of locations">
           <td>{{location.fecha | date:'medium'}}</td>
           <td>{{location.lugar.lnombre}}</td>
