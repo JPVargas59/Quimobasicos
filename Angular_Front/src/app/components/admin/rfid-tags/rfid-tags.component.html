@@ -4,7 +4,7 @@
     </div>
     <div class="right floated rigt aligned six wide column">
         <div class="ui two buttons">
-            <button class="ui primary button" routerLink="/admin/rfid-tags/add">Registrar Nueva Etiqueta</button>
+            <button class="ui primary button" (click)="goNewTag()">Registrar Nueva Etiqueta</button>
         </div>
     </div>
   </div>
@@ -16,13 +16,15 @@
     </thead>
     <tbody>
         <tr *ngFor="let tag of tags">
-            <td><a (click)="onTagSelect($event)" [id]="tag.idEtiqueta">{{tag.idEtiqueta}}</a></td>
+            <td>{{tag.idEtiqueta}}</td>
             <td>
                 <button (click)="selectTank(tag.idTanque)" [ngClass]="tag.idTanque ? 'ui button fluid':'ui disabled button fluid'">
                     {{tag.idTanque? tag.idTanque: 'Sin Asociar'}}
                 </button>
             </td>
-            <td><button (click)="onAction(tag.idTanque, tag.idEtiqueta)" [ngClass]="tag.idTanque ? 'ui red button fluid' : 'ui blue button fluid'">{{tag.idTanque? 'Desasociar': 'Asociar'}}</button></td>
+            <td>
+                <button (click)="onAction(tag.idTanque, tag.idEtiqueta)" [ngClass]="tag.idTanque ? 'ui red button fluid' : 'ui blue button fluid'">{{tag.idTanque? 'Desasociar': 'Asociar'}}</button>
+            </td>
         </tr>
     </tbody>
 </table>

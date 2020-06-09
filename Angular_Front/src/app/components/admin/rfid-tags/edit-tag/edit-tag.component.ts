@@ -39,7 +39,7 @@ export class EditTagComponent implements OnInit {
   }
 
   vincularTanque() {
-    if(this.idEtiqueta && this.idTanque) {
+    // if(this.idEtiqueta) {
       if (this.allEtiquetas.includes(this.idEtiquetaNueva)) {
         alert('Esta etiqueta ya existe');
         return;
@@ -58,8 +58,8 @@ export class EditTagComponent implements OnInit {
           }
         });
       }
-    }else {
-      this.error = 'Por favor, verifica los datos'
-    }
+    // }else {
+    //   this.error = 'Por favor, verifica los datos'
+    // }
   }
 }

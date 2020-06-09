@@ -29,7 +29,11 @@ export class RfidTagsComponent implements OnInit {
 
   onTagSelect(event) {
     const id = event.target.id;
-    this.router.navigateByUrl(`/admin/rfid-tags/${id}/edit`);
+    this.router.navigateByUrl(`/${this.user.getType()}/rfid-tags/${id}/edit`);
+  }
+
+  goNewTag(){
+    this.router.navigateByUrl(`/${this.user.getType()}/rfid-tags/add`);
   }
 
   selectTank(id) {

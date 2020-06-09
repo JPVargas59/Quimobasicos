@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {DatabaseService} from '../../../services/database.service';
+import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-lectores-rfid',
@@ -10,7 +12,10 @@ export class LectoresRfidComponent implements OnInit {
 
   lectores: any;
 
+
   constructor(
+    private user: UserService,
+    private router: Router,
     private db: DatabaseService
   ) { }
 
@@ -33,6 +38,9 @@ export class LectoresRfidComponent implements OnInit {
       const token = (r as any).data.genTokenLector;
       alert(`Token para lector: \n ${token}`);
     });
+  }
+  goToNewReader() {
+    this.router.navigateByUrl(`/${this.user.getType()}/rfid-readers/add`);
   }
 
 }
