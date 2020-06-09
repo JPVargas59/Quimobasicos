@@ -42,7 +42,7 @@ export class AddUserComponent implements OnInit {
   }
 
   submit() {
-    if(this.currentUser.apellidos && this.currentUser.correo && this.currentUser.idUsuario && this.currentUser.nombre && this.currentUser.password && this.currentUser.puesto) {
+    if(this.currentUser.apellidos && this.currentUser.correo && this.currentUser.idUsuario && this.currentUser.nombre && this.currentUser.puesto) {
       if (this.id) {
         this.user.setUser(this.currentUser, this.id).subscribe(res => {
           const response = res as any;
