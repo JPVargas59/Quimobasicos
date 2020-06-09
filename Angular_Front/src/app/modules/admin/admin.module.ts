@@ -60,7 +60,7 @@ const routes: Routes = [
       { path: 'rfid-readers/:readerId', component: AddLectorRfidComponent },
       { path: 'rfid-tags', component: RfidTagsComponent },
       { path: 'rfid-tags/add', component: EditTagComponent },
-      { path: 'rfid-tags/:tagId/edit', component: EditTagComponent },
+      { path: 'rfid-tags/:tagId/edit', component: EditTagComponent }
     ]
   }
 ];

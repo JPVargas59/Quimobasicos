@@ -32,4 +32,8 @@ export class InventoryComponent implements OnInit {
    const id = event.target.id;
    this.user.goTo(`tank/${id}`);
  }
+
+ goToAddTank() {
+  this.user.goTo(`tanks/add`);
+ }
 }

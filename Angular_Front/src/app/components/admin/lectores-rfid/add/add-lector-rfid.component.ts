@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {DatabaseService} from '../../../../services/database.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-add',
@@ -20,7 +21,8 @@ export class AddLectorRfidComponent implements OnInit {
   constructor(
     private db: DatabaseService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private user: UserService
   ) { }
 
   ngOnInit(): void {
@@ -40,11 +42,11 @@ export class AddLectorRfidComponent implements OnInit {
       console.log(this.idLector, this.lector);
       if (this.idLector) {
         this.db.setLectorRfid(this.lector, this.idLector).subscribe(() => {
-          this.router.navigateByUrl('/admin/rfid-readers');
+          this.router.navigateByUrl(`/${this.user.getType()}/rfid-readers`);
         });
       } else {
         this.db.createLectorRfid(this.lector).subscribe(() => {
-          this.router.navigateByUrl('/admin/rfid-readers');
+          this.router.navigateByUrl(`/${this.user.getType()}/rfid-readers`);
         });
       }
     }else {
