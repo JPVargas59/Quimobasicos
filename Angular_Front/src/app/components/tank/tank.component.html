@@ -65,14 +65,13 @@
     </div>
   </div>
 
-  <div class="ui segment center aligned">
+  <div class="ui basic segment center aligned">
     <div class="inline">
       <div class="ui primary button" [routerLink]="updateAddress">Modificar Información</div>
-      <div class="ui red button"  [routerLink]="exitAddress">Desvincular Etiqueta RFID</div>
     </div>
   </div>
 </div>
-
+<br>
 <div *ngIf="!tankInfo">
   <h1>No se ha encontrado un tanque con este ID</h1>
 </div>
