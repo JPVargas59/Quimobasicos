@@ -3,6 +3,7 @@ import asyncFunctionsMySQLQueries = require('../data/asyncMySQLQueries');
 const query: IResolvers = {
 	Query: {
 		tanques(_: void, { idEtiqueta }, { token }): any {
+			console.log(token);
 			if (!token || token.tipo != 'userToken') {
 				throw new Error('Acceso no autorizado');
 			} else {
@@ -45,28 +46,28 @@ const query: IResolvers = {
 			}
 		},
 		contenidos(_: void, __: void, { token }): any {
-			if (!token || token.tipo != 'userToken' || token.puesto == 'Operador') {
+			if (!token || token.tipo != 'userToken') {
 				throw new Error('Acceso no autorizado');
 			} else {
 				return asyncFunctionsMySQLQueries.getContenidos();
 			}
 		},
 		contenido(__: void, { idContenido }, { token }): any {
-			if (!token || token.tipo != 'userToken' || token.puesto == 'Operador') {
+			if (!token || token.tipo != 'userToken') {
 				throw new Error('Acceso no autorizado');
 			} else {
 				return asyncFunctionsMySQLQueries.getContenido(idContenido);
 			}
 		},
 		owners(_: void, __: void, { token }): any {
-			if (!token || token.tipo != 'userToken' || token.puesto != 'Admin') {
+			if (!token || token.tipo != 'userToken') {
 				throw new Error('Acceso no autorizado');
 			} else {
 				return asyncFunctionsMySQLQueries.getOwners();
 			}
 		},
 		owner(__: void, { idOwner }, { token }): any {
-			if (!token || token.tipo != 'userToken' || token.puesto != 'Admin') {
+			if (!token || token.tipo != 'userToken') {
 				throw new Error('Acceso no autorizado');
 			} else {
 				return asyncFunctionsMySQLQueries.getOwner(idOwner);
