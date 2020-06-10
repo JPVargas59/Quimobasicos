@@ -65,6 +65,13 @@ INSERT INTO Lugar VALUES("ETDA2", "Entrada Anexo 2",56.573,2980,ST_GeomFromText(
 INSERT INTO Lugar VALUES("Zo1", "Zona 1",5.698,3000,ST_GeomFromText('POINT (90.53456  20.53242)'));
 INSERT INTO Lugar VALUES("ETDA3", "Entrada Trasera",5.6987,2698,ST_GeomFromText('POINT (15.4578  98.3651)'));
 
+UPDATE TanqueEsta SET idLugar="AMC" WHERE idTanque="NVVU100706";
+UPDATE TanqueEsta SET idLugar="AMC" WHERE idTanque="EURO514966";
+UPDATE TanqueEsta SET idLugar="PT" WHERE idTanque="EURO514967";
+UPDATE TanqueEsta SET idLugar="Zo1" WHERE idTanque="NVVU100711";
+UPDATE TanqueEsta SET idLugar="Zo1" WHERE idTanque="NVVU100710";
+UPDATE TanqueEsta SET idLugar="Zo1" WHERE idTanque="EURO514970";
+
 INSERT INTO TanqueHaEstado VALUES (
 	"NVVU100706", "PT", "2020-02-08 10:20:00"
 );
