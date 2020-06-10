@@ -18,12 +18,12 @@ exports.getTanques = async (client, idEtiqueta) => {
 			}
 			break;
 	}
-	console.log(typeof idEtiqueta);
-	console.log(idEtiqueta);
+	//console.log(typeof idEtiqueta);
+	//console.log(idEtiqueta);
 	queryString += ' ORDER BY idTanque';
-	console.log(queryString);
+	//console.log(queryString);
 	var tanques = await client.query(queryString, [idEtiqueta]);
-	console.log(tanques);
+	//console.log(tanques);
 	if (tanques.length == 0) {
 		return null;
 	}
