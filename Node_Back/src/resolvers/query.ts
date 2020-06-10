@@ -18,14 +18,14 @@ const query: IResolvers = {
 			}
 		},
 		lugares(_: void, __: void, { token }): any {
-			if (!token || token.tipo != 'userToken' || token.puesto == 'Operador') {
+			if (!token || token.tipo != 'userToken') {
 				throw new Error('Acceso no autorizado');
 			} else {
 				return asyncFunctionsMySQLQueries.getLugares();
 			}
 		},
 		lugar(__: void, { idLugar }, { token }): any {
-			if (!token || token.tipo != 'userToken' || token.puesto == 'Operador') {
+			if (!token || token.tipo != 'userToken') {
 				throw new Error('Acceso no autorizado');
 			} else {
 				return asyncFunctionsMySQLQueries.getLugar(idLugar, null);
