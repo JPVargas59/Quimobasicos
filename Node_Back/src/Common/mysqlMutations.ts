@@ -33,10 +33,14 @@ async function signJWT(user) {
 			console.log(error);
 			throw new Error('Error interno');
 		});
-	return jwt.sign({ id: user.idUsuario, puesto: user.puesto, correo: user.correo }, serverkey, {
-		expiresIn: '15m',
-		algorithm: 'RS256'
-	});
+	return jwt.sign(
+		{ id: user.idUsuario, puesto: user.puesto, correo: user.correo, tipo: 'userToken' },
+		serverkey,
+		{
+			expiresIn: '15m',
+			algorithm: 'RS256'
+		}
+	);
 }
 
 function parseObj(obj) {
@@ -236,10 +240,14 @@ let mysqlMutations = {
 						console.log(error);
 						throw new Error('Error interno');
 					});
-				const refreshJWT = jwt.sign({ correo: user.correo }, serverkey, {
-					expiresIn: '1d',
-					algorithm: 'RS256'
-				});
+				const refreshJWT = jwt.sign(
+					{ correo: user.correo, tipo: 'refreshToken' },
+					serverkey,
+					{
+						expiresIn: '1d',
+						algorithm: 'RS256'
+					}
+				);
 				await client.query(
 					'UPDATE JWT JOIN Usuario ON Usuario.idJWT = JWT.idJWT SET jwt=? WHERE idUsuario = ?',
 					[refreshJWT, user.idUsuario]
@@ -298,7 +306,7 @@ let mysqlMutations = {
 					console.log(error);
 					throw new Error('Error interno');
 				});
-			const jwt_lector = jwt.sign({ idLector: idLector }, serverkey, {
+			const jwt_lector = jwt.sign({ idLector: idLector, tipo: 'lectorToken' }, serverkey, {
 				expiresIn: '9999d',
 				algorithm: 'RS256'
 			});
