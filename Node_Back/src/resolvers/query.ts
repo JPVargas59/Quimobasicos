@@ -3,7 +3,6 @@ import asyncFunctionsMySQLQueries = require('../data/asyncMySQLQueries');
 const query: IResolvers = {
 	Query: {
 		tanques(_: void, { idEtiqueta }, { token }): any {
-			console.log(token);
 			if (!token || token.tipo != 'userToken') {
 				throw new Error('Acceso no autorizado');
 			} else {
