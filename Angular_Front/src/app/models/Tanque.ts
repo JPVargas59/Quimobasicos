@@ -8,5 +8,6 @@ export interface Tanque {
   calidad: string;
   peso: number;
   idEtiqueta: any;
+  observaciones: string;
 }
 

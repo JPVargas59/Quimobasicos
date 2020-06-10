@@ -55,7 +55,8 @@ export class AddTankComponent implements OnInit {
           fechaIngreso: this.db.dateToStringFormat(tanque.fechaIngreso),
           fechaEsperadaRetorno: this.db.dateToStringFormat(tanque.fechaEsperadaRetorno),
           idEtiqueta: tanque.etiqueta.id,
-          peso: tanque.peso
+          peso: tanque.peso,
+          observaciones: tanque.observaciones
         };
         console.log(this.tanque);
       });
@@ -69,7 +70,8 @@ export class AddTankComponent implements OnInit {
         fechaIngreso: undefined,
         fechaEsperadaRetorno: undefined,
         idEtiqueta: undefined,
-        peso: undefined
+        peso: undefined,
+        observaciones: undefined
       };
     }
     console.log('etiquetas a mostrar',this.tags)
@@ -87,7 +89,7 @@ export class AddTankComponent implements OnInit {
   }
 
   onResgisterTank() {
-    const { id, calidad, pesoActual, idContenido, idDueno, fechaIngreso, fechaEsperadaRetorno, idEtiqueta, peso } = this.tanque;
+    const { id, calidad, pesoActual, idContenido, idDueno, fechaIngreso, fechaEsperadaRetorno, idEtiqueta, peso, observaciones } = this.tanque;
     console.log(this.tanque);
     if (id && calidad && peso && idContenido && idDueno && fechaEsperadaRetorno && fechaIngreso && idEtiqueta && pesoActual) {
       this.tanque.fechaIngreso = new Date(fechaIngreso).toISOString();

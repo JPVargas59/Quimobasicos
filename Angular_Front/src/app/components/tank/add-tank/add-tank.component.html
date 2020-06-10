@@ -77,6 +77,11 @@
       </div>
   </div>
 
+  <div class="field">
+    <label>Observaciones</label>
+    <input [(ngModel)]="tanque.observaciones" name="observaciones" type="text">
+  </div>
+
   <div *ngIf="id" class="ui submit blue fluid button" (click)="onResgisterTank()">Actualizar Información</div>
 
 
@@ -90,3 +95,4 @@
   </div>
 
   </form>
+  <br>
