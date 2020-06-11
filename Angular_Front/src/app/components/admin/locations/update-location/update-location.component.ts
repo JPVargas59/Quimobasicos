@@ -45,7 +45,7 @@ export class UpdateLocationComponent implements OnInit {
       if (this.id) {
         this.db.setLugar(this.lugar, this.id).subscribe(res => {
           const response = res as any;
-          console.log(res);
+          // console.log(res);
           if (response.data) {
             this.router.navigateByUrl('admin/locations');
           }
@@ -53,7 +53,7 @@ export class UpdateLocationComponent implements OnInit {
       } else {
         this.db.createLugar(this.lugar).subscribe(res => {
           const response = res as any;
-          console.log(res);
+          // console.log(res);
           if (response.data) {
             this.router.navigateByUrl('admin/locations');
           }

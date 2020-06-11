@@ -31,7 +31,7 @@ export class AddTankComponent implements OnInit {
 
   ngOnInit(): void {
     this.db.getTanquesSinEtiqueta().subscribe(tanques => {
-      console.log(tanques);
+      // console.log(tanques);
       const data = (tanques as any).data;
       data.etiquetas.map(e => {
         if( e.idTanque == null) {
@@ -58,7 +58,7 @@ export class AddTankComponent implements OnInit {
           peso: tanque.peso,
           observaciones: tanque.observaciones
         };
-        console.log(this.tanque);
+        // console.log(this.tanque);
       });
     } else {
       this.tanque =  {
@@ -74,7 +74,7 @@ export class AddTankComponent implements OnInit {
         observaciones: undefined
       };
     }
-    console.log('etiquetas a mostrar',this.tags)
+    // console.log('etiquetas a mostrar',this.tags)
     this.etiquetas = this.tags;
 
     this.db.getContenidos().subscribe(result => {
@@ -90,19 +90,19 @@ export class AddTankComponent implements OnInit {
 
   onResgisterTank() {
     const { id, calidad, pesoActual, idContenido, idDueno, fechaIngreso, fechaEsperadaRetorno, idEtiqueta, peso, observaciones } = this.tanque;
-    console.log(this.tanque);
+    // console.log(this.tanque);
     if (id && calidad && peso && idContenido && idDueno && fechaEsperadaRetorno && fechaIngreso && idEtiqueta && pesoActual) {
       this.tanque.fechaIngreso = new Date(fechaIngreso).toISOString();
       this.tanque.fechaEsperadaRetorno = new Date(fechaEsperadaRetorno).toISOString();
       this.tanque.idEtiqueta = parseInt(idEtiqueta, 10);
       if (this.id) {
         this.db.updateTank(this.tanque).subscribe((result) => {
-          console.log(result);
+          // console.log(result);
           this.user.goTo(`tank/${this.id}`);
         });
       } else {
         this.db.newTank(this.tanque).subscribe((result) => {
-          console.log(result);
+          // console.log(result);
           if (!this.redirigir) {
             this.user.goTo('reports/inventory');
           }

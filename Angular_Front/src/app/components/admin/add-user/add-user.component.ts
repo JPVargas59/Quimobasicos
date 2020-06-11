@@ -36,17 +36,16 @@ export class AddUserComponent implements OnInit {
         const res = result as any;
         this.currentUser = res.data.usuario;
         this.supervisores = res.data.usuarios.filter(u => u.puesto === 'Supervisor' || u.puesto === 'Admin');
-        console.log('result', result)
-        console.log(this.supervisores)
-        console.log(this.user);
+        // console.log('result', result)
+        // console.log(this.supervisores)
+        // console.log(this.user);
       });
     } else{
       this.db.getUsuarios().subscribe(result => {
         const res = result as any;
         this.supervisores = res.data.usuarios.filter(u => u.puesto === 'Supervisor' || u.puesto === 'Admin');
-        console.log(this.supervisores)
-      })
-      
+        // console.log(this.supervisores)
+      });
     }
   }
 
@@ -58,7 +57,7 @@ export class AddUserComponent implements OnInit {
           if (response.data) {
             this.router.navigateByUrl('admin/users');
           }
-          console.log(res);
+          // console.log(res);
         });
       } else {
         this.user.createUser(this.currentUser).subscribe(res => {
@@ -66,13 +65,13 @@ export class AddUserComponent implements OnInit {
           if (response.data) {
             this.router.navigateByUrl('admin/users');
           }
-          console.log(res);
+          // console.log(res);
         });
       }
-    }else{
+    } else {
       this.error = 'Por favor, verifica los datos'
     }
-    
+
   }
 
 }

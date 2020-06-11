@@ -22,7 +22,7 @@ export class LectoresRfidComponent implements OnInit {
   ngOnInit(): void {
     this.db.getLectoresRfid().subscribe(lectores => {
       this.lectores = (lectores as any).data.lectorRFID;
-      console.log(this.lectores);
+      // console.log(this.lectores);
     });
   }
 
@@ -34,7 +34,7 @@ export class LectoresRfidComponent implements OnInit {
 
   generateToken(id) {
     this.db.genToken(id).subscribe((r) => {
-      console.log(r);
+      // console.log(r);
       const token = (r as any).data.genTokenLector;
       alert(`Token para lector: \n ${token}`);
     });

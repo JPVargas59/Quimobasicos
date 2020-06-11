@@ -12,7 +12,7 @@ export class AddLectorRfidComponent implements OnInit {
 
   idLector: string;
   error: string;
-  
+
   lector = {
     idLector: undefined,
     alias: undefined
@@ -27,7 +27,7 @@ export class AddLectorRfidComponent implements OnInit {
 
   ngOnInit(): void {
     this.idLector = this.route.snapshot.params.readerId;
-    console.log(this.idLector, this.lector);
+    // console.log(this.idLector, this.lector);
     if (this.idLector) {
       this.db.getLectorRfid(this.idLector).subscribe(l => {
         const data = (l as any).data.lectorRFID[0];
@@ -39,7 +39,7 @@ export class AddLectorRfidComponent implements OnInit {
 
   submit() {
     if(this.lector.idLector && this.lector.alias) {
-      console.log(this.idLector, this.lector);
+      // console.log(this.idLector, this.lector);
       if (this.idLector) {
         this.db.setLectorRfid(this.lector, this.idLector).subscribe(() => {
           this.router.navigateByUrl(`/${this.user.getType()}/rfid-readers`);

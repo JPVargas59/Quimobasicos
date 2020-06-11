@@ -30,7 +30,7 @@ export class PorLugarComponent implements OnInit {
     this.db.tanksPerSpecificPlace(id).subscribe(res => {
       const response = res as any;
       this.lugarEscogido = response.data.lugar;
-      console.log(this.lugarEscogido);
+      // console.log(this.lugarEscogido);
     });
   }
 

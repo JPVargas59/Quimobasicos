@@ -225,7 +225,7 @@ export class DatabaseService {
 
   newTank(tank: Tanque) {
     const query = 'mutation($tank: TanqueInput!) {createTanque(tanqueInput: $tank)}';
-    console.log({query, variables: {tank}});
+    // console.log({query, variables: {tank}});
     return this.http.post(this.homeURL, {query, variables: {tank}});
   }
 
@@ -374,7 +374,7 @@ export class DatabaseService {
       }, idContenidoOriginal: "${id}")
     }
     `;
-    console.log(query);
+    // console.log(query);
     return this.http.post(this.homeURL, {query});
   }
 
@@ -387,7 +387,7 @@ export class DatabaseService {
       })
     }
     `;
-    console.log(query);
+    // console.log(query);
     return this.http.post(this.homeURL, {query});
   }
 
