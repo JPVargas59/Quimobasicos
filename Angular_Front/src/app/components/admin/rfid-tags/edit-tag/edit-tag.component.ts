@@ -27,14 +27,14 @@ export class EditTagComponent implements OnInit {
   ngOnInit(): void {
     this.idEtiqueta = this.route.snapshot.params.tagId;
     this.db.getTanquesSinEtiqueta().subscribe(tanques => {
-      console.log(tanques);
+      // console.log(tanques);
       const data = (tanques as any).data;
       this.tanques = data.tanques;
       this.etiquetas = data.etiquetas.filter(e => e.idTanque == null);
       data.etiquetas.map(e => {
         this.allEtiquetas.push(parseInt(e.idEtiqueta, 10));
       });
-      console.log(data, this.etiquetas, this.allEtiquetas);
+      // console.log(data, this.etiquetas, this.allEtiquetas);
     });
   }
 

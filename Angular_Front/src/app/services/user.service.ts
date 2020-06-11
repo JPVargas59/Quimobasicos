@@ -18,10 +18,10 @@ export class UserService {
     private router: Router
   ) {
     if (this.isLoggedIn()) {
-      console.log('Logged in');
+      // console.log('Logged in');
       this.setRefreshTimer();
     } else {
-      console.log('Not logged in');
+      // console.log('Not logged in');
       this.router.navigateByUrl('/login');
     }
   }
@@ -33,7 +33,7 @@ export class UserService {
 
   private static setSession(token, expiration) {
     const expiresAt = moment().add(expiration, 'second');
-    console.log(expiration);
+    // console.log(expiration);
     localStorage.setItem('id_token', token);
     if (expiration) {
       localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()) );
@@ -63,14 +63,14 @@ export class UserService {
         refresh(refreshJWT: $refresh)
       }
     `;
-    console.log(this.refreshToken);
+    // console.log(this.refreshToken);
     return this.http.post(this.homeURL, {query, variables: {refresh: this.refreshToken}});
   }
 
   setRefreshTimer() {
     setInterval(() => {
       this.refreshJwtToken().subscribe(res => {
-        console.log('Refreshed token', res);
+        // console.log('Refreshed token', res);
         UserService.setSession(this.refreshToken, undefined);
       });
     }, 840000);
@@ -88,19 +88,19 @@ export class UserService {
     `;
     return this.http.post(this.homeURL, {query, variables: {user, password}})
       .subscribe(res => {
-        console.log(user, password);
+        // console.log(user, password);
         const response = res as any;
         if (response.data) {
-          console.log('Response', response);
+          // console.log('Response', response);
           UserService.setSession(response.data.login.jwt_token, response.data.login.jwt_fechaExpiracion);
           const decodedToken = this.jwtDecode(response.data.login.jwt_token);
-          console.log('decoded token', decodedToken);
+          // console.log('decoded token', decodedToken);
           this.refreshToken = response.data.login.refreshJWT;
           this.setRefreshTimer();
           this.setType(decodedToken.payload.puesto);
           this.setUserId(decodedToken.payload.id);
         } else {
-          console.log('El servidor no respondió');
+          // console.log('El servidor no respondió');
         }
       });
   }
@@ -165,7 +165,7 @@ export class UserService {
     mutation($usuarioInput: createUsuarioInput!) {
       createUsuario(usuarioInput: $usuarioInput)
     }`;
-    console.log(user);
+    // console.log(user);
     return this.http.post(this.homeURL, {query, variables: {
         usuarioInput : {
         correo: user.correo,
@@ -199,7 +199,7 @@ export class AuthInterceptor implements HttpInterceptor {
     const idToken = localStorage.getItem('id_token');
 
     if (idToken) {
-      // console.log('Making request with token', idToken);
+      // // console.log('Making request with token', idToken);
       const cloned = req.clone({
         headers: req.headers.set('authorization', idToken)
       });

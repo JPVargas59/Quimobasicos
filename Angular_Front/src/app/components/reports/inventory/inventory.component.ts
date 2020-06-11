@@ -8,8 +8,7 @@ import {Router} from '@angular/router';
  templateUrl: './inventory.component.html',
  styleUrls: ['./inventory.component.css']
 })
-export class InventoryComponent implements OnInit {
- ​
+export class InventoryComponent implements OnInit {​
   tanks = [];
 
  constructor(
@@ -21,10 +20,10 @@ export class InventoryComponent implements OnInit {
  ngOnInit(): void {
 
    this.db.getTanks().subscribe(result => {
-     console.log(result);
+     // console.log(result);
      // @ts-ignore
      this.tanks = result.data.tanques;
-     console.log(this.tanks);
+     // console.log(this.tanks);
    });
  }
 

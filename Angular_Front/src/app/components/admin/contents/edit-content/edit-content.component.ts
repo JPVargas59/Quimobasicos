@@ -39,7 +39,7 @@ export class EditContentComponent implements OnInit {
           if (response.data) {
             this.router.navigateByUrl('admin/contents');
           }
-          console.log(res);
+          // console.log(res);
         });
       } else {
         this.db.createContenido(this.contenido).subscribe(res => {
@@ -47,7 +47,7 @@ export class EditContentComponent implements OnInit {
           if (response.data) {
             this.router.navigateByUrl('admin/contents');
           }
-          console.log(res);
+          // console.log(res);
         });
       }
     } else{

@@ -37,8 +37,8 @@ export class RfidTagsComponent implements OnInit {
   }
 
   selectTank(id) {
-    console.log(id)
-    if(id) {
+    // console.log(id)
+    if (id) {
       this.router.navigateByUrl(`/${this.user.getType()}/tank/${id}`);
     }
   }

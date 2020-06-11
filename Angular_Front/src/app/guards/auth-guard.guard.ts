@@ -13,7 +13,7 @@ export class AuthGuardGuard implements CanLoad {
   canLoad(
     route: Route,
     segments: UrlSegment[]): Observable<boolean> | Promise<boolean> | boolean {
-    console.log('Logged in?', this.user.isLoggedIn());
+    // console.log('Logged in?', this.user.isLoggedIn());
     return this.user.isLoggedIn();
   }
 }

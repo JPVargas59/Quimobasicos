@@ -38,7 +38,7 @@ export class TankComponent implements OnInit {
       this.tankInfo = wholeInfoTank.data.tanque;
       this.tankWeight = wholeInfoTank.data.historialPesoTanque;
       this.locations = wholeInfoTank.data.tanque.haEstado;
-      console.log(result);
+      // console.log(result);
     });
   }
 }

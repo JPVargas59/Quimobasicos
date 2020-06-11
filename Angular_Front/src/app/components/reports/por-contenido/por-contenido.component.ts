@@ -31,7 +31,7 @@ export class PorContenidoComponent implements OnInit {
     this.db.tanksPerSpecificContent(id).subscribe(res => {
       const response = res as any;
       this.contenidoEscogido = response.data.contenido;
-      console.log(this.contenidoEscogido);
+      // console.log(this.contenidoEscogido);
     });
   }
 
