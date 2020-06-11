@@ -11,7 +11,6 @@ let jwt = require('jsonwebtoken');
 let fs = require('fs');
 let path = require('path');
 
-
 let checkToken = (token) => {
 	try {
 		if (token) {
@@ -39,7 +38,8 @@ const server = new ApolloServer({
 		const tokenHeader = req.headers.authorization || '';
 		const token = checkToken(tokenHeader);
 		return {
-			token
+			token,
+			tokenHeader
 		};
 	}
 });

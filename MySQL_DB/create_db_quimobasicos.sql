@@ -101,7 +101,7 @@ CREATE TABLE LectorRFID (
 
 CREATE TABLE TanqueEsta (
     idTanque CHAR(10) NOT NULL,
-	idLugar CHAR(10) NOT NULL,
+	idLugar CHAR(10),
 	fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (idTanque),
 	FOREIGN KEY (idTanque) REFERENCES Tanque(idTanque) ON UPDATE CASCADE,
@@ -127,7 +127,16 @@ CREATE TRIGGER `pasaPesoAHistorialPeso` AFTER UPDATE ON `Tanque`
         END IF;
     END; //
 DELIMITER ;
-CREATE TRIGGER `nuevoHaEstado` AFTER INSERT ON `TanqueEsta` FOR EACH ROW INSERT INTO TanqueHaEstado VALUES ( NEW.idTanque, NEW.idLugar, NEW.fecha);
+CREATE TRIGGER `nuevoTanqueEsta` AFTER INSERT ON `Tanque` FOR EACH ROW INSERT INTO TanqueEsta (idTanque, idLugar) VALUES ( NEW.idTanque, NULL);
+DELIMITER //
+CREATE TRIGGER `nuevoHaEstado` AFTER INSERT ON `TanqueEsta` 
+    FOR EACH ROW 
+    BEGIN
+        IF NEW.idLugar IS NOT NULL THEN
+        	INSERT INTO TanqueHaEstado VALUES ( NEW.idTanque, NEW.idLugar, NEW.fecha);
+    	END IF;
+    END; //
+DELIMITER ;
 CREATE TRIGGER `nuevoPesoAHistorialPeso` AFTER INSERT ON `Tanque` FOR EACH ROW INSERT INTO HistorialPeso VALUES (NEW.idTanque, NEW.fechaIngreso, NEW.pesoActual);
 DELIMITER //
 CREATE TRIGGER `nuevoUsuarioJWT` BEFORE INSERT ON `Usuario` 
@@ -145,3 +154,14 @@ CREATE TRIGGER `nuevoLectorRFIDJWT` BEFORE INSERT ON `LectorRFID`
 		SET NEW.idJWT = (SELECT MAX(idJWT) FROM JWT);
 	END; //
 DELIMITER ;
+
+INSERT INTO Usuario VALUES (
+    'ADMIN',
+    'ADMIN',
+    'ADMIN',
+    '$2a$10$mpXZrlIKDUOHWQ2Vb495Guww4WZXtf.46pO/aVzJ8vKLJo.xx4wsu',
+    'admin@quimobasicos.com',
+    null,
+    'Admin',
+    null
+);
